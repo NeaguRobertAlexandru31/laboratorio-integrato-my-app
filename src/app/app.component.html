@@ -1,14 +1,3 @@
-<div class="lg:flex lg:flex-col lg:h-screen">
-    <!-- Navbar superiore -->
-    <app-navbar-top class="lg:block"></app-navbar-top>
-  
-    <!-- Contenitore delle navbar -->
-    <div class="lg:flex lg:flex-col lg:h-full lg:relative lg:order-last">
-      <!-- Contenuto principale -->
-      <router-outlet class="lg:flex-1"></router-outlet>
-  
-      <!-- Navbar inferiore -->
-      <app-navbar-down class="lg:block lg:absolute lg:bottom-0 lg:w-full"></app-navbar-down>
-    </div>
-  </div>
-  
+<app-navbar-top></app-navbar-top>
+<router-outlet></router-outlet>
+<app-navbar-down></app-navbar-down>
