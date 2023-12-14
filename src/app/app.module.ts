@@ -10,6 +10,8 @@ import { PartitePageComponent } from './partite-page/partite-page.component';
 import { ClassifichePageComponent } from './classifiche-page/classifiche-page.component';
 import { PreferitiPageComponent } from './preferiti-page/preferiti-page.component';
 import { NewsPageComponent } from './news-page/news-page.component';
+import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
+import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { NewsPageComponent } from './news-page/news-page.component';
     ClassifichePageComponent,
     PreferitiPageComponent,
     NewsPageComponent,
+    RisultatiPageComponent,
+    ProgrammatePageComponent,
   ],
   imports: [
     BrowserModule,
