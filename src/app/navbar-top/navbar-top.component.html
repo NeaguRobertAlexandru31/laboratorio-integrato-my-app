@@ -1,11 +1,13 @@
-<nav class="bg-gray-800 p-4">
-  <div class="container mx-auto flex justify-between">
+<nav class="orange p-1">
+  <div class="container mx-auto flex justify-between items-center">
     <!-- Logo -->
     <a routerLink="/partite/risultati" class="text-white text-2xl font-bold"> Logo </a>
     <img src="" alt="">
 
     <!-- Search bar -->
-    <app-search-bar></app-search-bar>
+    <div class="w-1/2 md:w-1/4 mx-auto">
+      <app-search-bar class="flex-1"></app-search-bar>
+    </div>
 
     <!-- Links -->
     <div class="flex space-x-4">
