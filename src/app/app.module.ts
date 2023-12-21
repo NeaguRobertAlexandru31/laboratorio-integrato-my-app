@@ -13,6 +13,8 @@ import { NewsPageComponent } from './news-page/news-page.component';
 import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OvestPageComponent } from './ovest-page/ovest-page.component';
+import { EstPageComponent } from './est-page/est-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewsPageComponent,
     RisultatiPageComponent,
     ProgrammatePageComponent,
+    OvestPageComponent,
+    EstPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
