@@ -6,9 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GameApiService {
-  
-  private apiUrl = 'assets/file.json'; // Sostituisci con l'URL effettivo del tuo servizio API
 
+  private apiUrl = 'assets/file.json'; 
   constructor(private http: HttpClient) {}
 
   getGames(): Observable<any[]> {

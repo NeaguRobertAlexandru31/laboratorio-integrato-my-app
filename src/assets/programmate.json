@@ -1,0 +1,304 @@
+[
+    {
+      "team1": "Los Angeles Lakers",
+      "team2": "Golden State Warriors",
+      "date": "2023-12-25",
+      "time": "20:00",
+      "location": "Staples Center, Los Angeles"
+    },
+    {
+      "team1": "Brooklyn Nets",
+      "team2": "Boston Celtics",
+      "date": "2023-12-28",
+      "time": "18:30",
+      "location": "Barclays Center, New York"
+    },
+    {
+      "team1": "Miami Heat",
+      "team2": "Philadelphia 76ers",
+      "date": "2023-12-30",
+      "time": "19:00",
+      "location": "American Airlines Arena, Miami"
+    },
+    {
+      "team1": "Dallas Mavericks",
+      "team2": "Houston Rockets",
+      "date": "2024-01-02",
+      "time": "20:30",
+      "location": "American Airlines Center, Dallas"
+    },
+    {
+      "team1": "Chicago Bulls",
+      "team2": "New York Knicks",
+      "date": "2024-01-04",
+      "time": "19:30",
+      "location": "United Center, Chicago"
+    },
+    {
+      "team1": "Toronto Raptors",
+      "team2": "Indiana Pacers",
+      "date": "2024-01-06",
+      "time": "20:00",
+      "location": "Scotiabank Arena, Toronto"
+    },
+    {
+      "team1": "Portland Trail Blazers",
+      "team2": "Denver Nuggets",
+      "date": "2024-01-09",
+      "time": "21:00",
+      "location": "Moda Center, Portland"
+    },
+    {
+      "team1": "Utah Jazz",
+      "team2": "Phoenix Suns",
+      "date": "2024-01-12",
+      "time": "20:30",
+      "location": "Vivint Arena, Salt Lake City"
+    },
+    {
+      "team1": "Orlando Magic",
+      "team2": "Atlanta Hawks",
+      "date": "2024-01-15",
+      "time": "19:00",
+      "location": "Amway Center, Orlando"
+    },
+    {
+      "team1": "San Antonio Spurs",
+      "team2": "Memphis Grizzlies",
+      "date": "2024-01-18",
+      "time": "20:00",
+      "location": "AT&T Center, San Antonio"
+    },
+    {
+      "team1": "Detroit Pistons",
+      "team2": "Washington Wizards",
+      "date": "2024-01-20",
+      "time": "18:00",
+      "location": "Little Caesars Arena, Detroit"
+    },
+    {
+      "team1": "Minnesota Timberwolves",
+      "team2": "New Orleans Pelicans",
+      "date": "2024-01-23",
+      "time": "19:30",
+      "location": "Target Center, Minneapolis"
+    },
+    {
+      "team1": "Charlotte Hornets",
+      "team2": "Cleveland Cavaliers",
+      "date": "2024-01-26",
+      "time": "19:00",
+      "location": "Spectrum Center, Charlotte"
+    },
+    {
+      "team1": "Oklahoma City Thunder",
+      "team2": "Sacramento Kings",
+      "date": "2024-01-29",
+      "time": "20:00",
+      "location": "Chesapeake Energy Arena, Oklahoma City"
+    },
+    {
+      "team1": "Milwaukee Bucks",
+      "team2": "Golden State Warriors",
+      "date": "2024-02-01",
+      "time": "20:30",
+      "location": "Fiserv Forum, Milwaukee"
+    },
+    {
+      "team1": "Philadelphia 76ers",
+      "team2": "Boston Celtics",
+      "date": "2024-02-04",
+      "time": "19:00",
+      "location": "Wells Fargo Center, Philadelphia"
+    },
+    {
+      "team1": "Indiana Pacers",
+      "team2": "Brooklyn Nets",
+      "date": "2024-02-07",
+      "time": "19:30",
+      "location": "Bankers Life Fieldhouse, Indianapolis"
+    },
+    {
+      "team1": "Houston Rockets",
+      "team2": "New Orleans Pelicans",
+      "date": "2024-02-10",
+      "time": "20:00",
+      "location": "Toyota Center, Houston"
+    },
+    {
+      "team1": "Atlanta Hawks",
+      "team2": "Chicago Bulls",
+      "date": "2024-02-13",
+      "time": "19:30",
+      "location": "State Farm Arena, Atlanta"
+    },
+    {
+      "team1": "Phoenix Suns",
+      "team2": "Dallas Mavericks",
+      "date": "2024-02-16",
+      "time": "20:30",
+      "location": "Footprint Center, Phoenix"
+    },
+    {
+      "team1": "Los Angeles Lakers",
+      "team2": "Memphis Grizzlies",
+      "date": "2024-02-19",
+      "time": "18:00",
+      "location": "Crypto.com Arena, Los Angeles"
+    },
+    {
+      "team1": "Miami Heat",
+      "team2": "Milwaukee Bucks",
+      "date": "2024-02-22",
+      "time": "19:30",
+      "location": "FTX Arena, Miami"
+    },
+    {
+      "team1": "New York Knicks",
+      "team2": "Orlando Magic",
+      "date": "2024-02-25",
+      "time": "19:00",
+      "location": "Madison Square Garden, New York"
+    },
+    {
+      "team1": "Golden State Warriors",
+      "team2": "Portland Trail Blazers",
+      "date": "2024-02-28",
+      "time": "19:30",
+      "location": "Chase Center, San Francisco"
+    },
+    {
+      "team1": "San Antonio Spurs",
+      "team2": "Toronto Raptors",
+      "date": "2024-03-02",
+      "time": "20:00",
+      "location": "AT&T Center, San Antonio"
+    },
+    {
+      "team1": "Charlotte Hornets",
+      "team2": "Cleveland Cavaliers",
+      "date": "2024-03-05",
+      "time": "19:00",
+      "location": "Spectrum Center, Charlotte"
+    },
+    {
+      "team1": "Denver Nuggets",
+      "team2": "Detroit Pistons",
+      "date": "2024-03-08",
+      "time": "20:30",
+      "location": "Ball Arena, Denver"
+    },
+    {
+      "team1": "Indiana Pacers",
+      "team2": "Los Angeles Clippers",
+      "date": "2024-03-11",
+      "time": "19:00",
+      "location": "Bankers Life Fieldhouse, Indianapolis"
+    },
+    {
+      "team1": "Houston Rockets",
+      "team2": "Milwaukee Bucks",
+      "date": "2024-03-14",
+      "time": "20:00",
+      "location": "Toyota Center, Houston"
+    },
+    {
+      "team1": "Minnesota Timberwolves",
+      "team2": "New Orleans Pelicans",
+      "date": "2024-03-17",
+      "time": "19:00",
+      "location": "Target Center, Minneapolis"
+    },
+    {
+      "team1": "Brooklyn Nets",
+      "team2": "New York Knicks",
+      "date": "2024-03-20",
+      "time": "19:30",
+      "location": "Barclays Center, New York"
+    },
+    {
+      "team1": "Atlanta Hawks",
+      "team2": "Orlando Magic",
+      "date": "2024-03-23",
+      "time": "19:30",
+      "location": "State Farm Arena, Atlanta"
+    },
+    {
+      "team1": "Phoenix Suns",
+      "team2": "Portland Trail Blazers",
+      "date": "2024-03-26",
+      "time": "19:00",
+      "location": "Footprint Center, Phoenix"
+    },
+    {
+      "team1": "Boston Celtics",
+      "team2": "Chicago Bulls",
+      "date": "2024-03-29",
+      "time": "20:00",
+      "location": "TD Garden, Boston"
+    },
+    {
+      "team1": "Los Angeles Lakers",
+      "team2": "Miami Heat",
+      "date": "2024-04-01",
+      "time": "18:30",
+      "location": "Crypto.com Arena, Los Angeles"
+    },
+    {
+      "team1": "Philadelphia 76ers",
+      "team2": "Toronto Raptors",
+      "date": "2024-04-04",
+      "time": "19:00",
+      "location": "Wells Fargo Center, Philadelphia"
+    },
+    {
+      "team1": "Dallas Mavericks",
+      "team2": "Denver Nuggets",
+      "date": "2024-04-07",
+      "time": "20:30",
+      "location": "American Airlines Center, Dallas"
+    },
+    {
+      "team1": "Golden State Warriors",
+      "team2": "Houston Rockets",
+      "date": "2024-04-10",
+      "time": "20:00",
+      "location": "Chase Center, San Francisco"
+    },
+    {
+      "team1": "Memphis Grizzlies",
+      "team2": "New Orleans Pelicans",
+      "date": "2024-04-13",
+      "time": "19:00",
+      "location": "FedExForum, Memphis"
+    },
+    {
+      "team1": "Indiana Pacers",
+      "team2": "Miami Heat",
+      "date": "2024-04-16",
+      "time": "19:30",
+      "location": "Bankers Life Fieldhouse, Indianapolis"
+    },
+    {
+      "team1": "Brooklyn Nets",
+      "team2": "Milwaukee Bucks",
+      "date": "2024-04-19",
+      "time": "19:00",
+      "location": "Barclays Center, New York"
+    },
+    {
+      "team1": "Los Angeles Clippers",
+      "team2": "Portland Trail Blazers",
+      "date": "2024-04-22",
+      "time": "20:00",
+      "location": "Staples Center, Los Angeles"
+    },
+    {
+      "team1": "Phoenix Suns",
+      "team2": "Utah Jazz",
+      "date": "2024-04-25",
+      "time": "21:30",
+      "location": "Footprint Center, Phoenix"
+    }
+  ]
+  
