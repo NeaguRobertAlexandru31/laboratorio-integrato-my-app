@@ -8,6 +8,7 @@ import { RisultatiPageComponent } from './risultati-page/risultati-page.componen
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
+import { ProfiloComponent } from './profilo/profilo.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'partite/programmate', component: ProgrammatePageComponent },
   { path: 'classifiche/ovest', component: OvestPageComponent },
   { path: 'classifiche/est', component: EstPageComponent },
+  { path: 'profilo', component: ProfiloComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 

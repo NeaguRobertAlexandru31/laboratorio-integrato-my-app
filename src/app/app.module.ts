@@ -15,6 +15,7 @@ import { ProgrammatePageComponent } from './programmate-page/programmate-page.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
+import { ProfiloComponent } from './profilo/profilo.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { EstPageComponent } from './est-page/est-page.component';
     ProgrammatePageComponent,
     OvestPageComponent,
     EstPageComponent,
+    ProfiloComponent,
   ],
   imports: [
     BrowserModule,
