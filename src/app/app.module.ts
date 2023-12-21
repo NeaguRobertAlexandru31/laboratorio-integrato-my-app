@@ -12,8 +12,9 @@ import { PreferitiPageComponent } from './preferiti-page/preferiti-page.componen
 import { NewsPageComponent } from './news-page/news-page.component';
 import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
-import { CalendarioComponent } from './calendario/calendario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OvestPageComponent } from './ovest-page/ovest-page.component';
+import { EstPageComponent } from './est-page/est-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewsPageComponent,
     RisultatiPageComponent,
     ProgrammatePageComponent,
-    CalendarioComponent,
+    OvestPageComponent,
+    EstPageComponent,
   ],
   imports: [
     BrowserModule,

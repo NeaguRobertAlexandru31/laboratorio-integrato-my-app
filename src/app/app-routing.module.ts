@@ -6,6 +6,8 @@ import { PreferitiPageComponent } from './preferiti-page/preferiti-page.componen
 import { NewsPageComponent } from './news-page/news-page.component';
 import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
+import { EstPageComponent } from './est-page/est-page.component';
+import { OvestPageComponent } from './ovest-page/ovest-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'news', component: NewsPageComponent },
   { path: 'partite/risultati', component: RisultatiPageComponent },
   { path: 'partite/programmate', component: ProgrammatePageComponent },
+  { path: 'classifiche/ovest', component: OvestPageComponent },
+  { path: 'classifiche/est', component: EstPageComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 
