@@ -12,7 +12,6 @@ import { PreferitiPageComponent } from './preferiti-page/preferiti-page.componen
 import { NewsPageComponent } from './news-page/news-page.component';
 import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
-import { CalendarioComponent } from './calendario/calendario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -27,14 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewsPageComponent,
     RisultatiPageComponent,
     ProgrammatePageComponent,
-    CalendarioComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
