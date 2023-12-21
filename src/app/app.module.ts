@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
 import { ProfiloComponent } from './profilo/profilo.component';
+import { GameApiService } from '../app/mock-api-service.service';
 
 @NgModule({
   declarations: [
@@ -35,10 +37,13 @@ import { ProfiloComponent } from './profilo/profilo.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    GameApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
