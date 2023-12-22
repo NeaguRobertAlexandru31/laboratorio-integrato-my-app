@@ -1,7 +1,54 @@
-<div class="flex">
-    <!-- Tab "Risultati" -->
-    <button routerLink="/classifiche/ovest" class="flex-1 py-2 px-4 text-center purple text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">Ovest</button>
-  
-    <!-- Tab "Programmate" -->
-    <button routerLink="/classifiche/est" class="flex-1 py-2 px-4 text-center purple text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">Est</button>
-  </div>
+<div class="flex-1">
+    <div class="flex flex-row">
+        <!-- First Column (col-6) -->
+        <div class="w-1/2 flex-1 py-2 px-4 text-center purple text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
+            <!-- Tab "Risultati" -->
+            <button routerLink="/classifiche/ovest" class="">Ovest</button>
+        </div>
+
+        <!-- Second Column (col-6) -->
+        <div class="w-1/2 flex-1 py-2 px-4 text-center purple text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
+            <!-- Tab "Programmate" -->
+            <button routerLink="/classifiche/est" class="">Est</button>
+        </div>
+    </div>
+
+
+    <!-- Inside est-page.component.html -->
+    <div class="container mx-auto mt-8 ">
+        <div class="flex justify-center ">
+            <div class="w-full md:w-1/2 lg:w-1/3 ">
+                <div class="flex flex-row ">
+                    <!-- Position and NameTeam in col-6 -->
+                    <div class="flex mb-4 ">
+                        <div class="w-1/2 ">
+                            <p class="text-center ">Position: </p>
+                        </div>
+                        <div class="w-1/2 ">
+                            <p class="text-center ">NameTeam: </p>
+                        </div>
+                    </div>
+
+                    <!-- Other four fields in col-6 -->
+                    <div class="flex ">
+                        <div class="w-1/3 ">
+                            <p class="text-center ">Game Played: </p>
+                        </div>
+                        <div class="w-1/3 ">
+                            <p class="text-center ">Win: </p>
+                        </div>
+                        <div class="w-1/3 ">
+                            <p class="text-center ">Lose: </p>
+                        </div>
+                        <div class="w-1/3 ">
+                            <p class="text-center ">Perc Win: </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
