@@ -9,6 +9,8 @@ import { ProgrammatePageComponent } from './programmate-page/programmate-page.co
 import { EstPageComponent } from './est-page/est-page.component';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
 import { ProfiloComponent } from './profilo/profilo.component';
+import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
+import { AccessoPageComponent } from './accesso-page/accesso-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'classifiche/ovest', component: OvestPageComponent },
   { path: 'classifiche/est', component: EstPageComponent },
   { path: 'profilo', component: ProfiloComponent },
+  { path: 'registrazione', component: RegistrazionePageComponent },
+  { path: 'accesso', component: AccessoPageComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 

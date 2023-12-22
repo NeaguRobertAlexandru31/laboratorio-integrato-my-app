@@ -18,6 +18,8 @@ import { OvestPageComponent } from './ovest-page/ovest-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
 import { ProfiloComponent } from './profilo/profilo.component';
 import { GameApiService } from '../app/mock-api-service.service';
+import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
+import { AccessoPageComponent } from './accesso-page/accesso-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { GameApiService } from '../app/mock-api-service.service';
     OvestPageComponent,
     EstPageComponent,
     ProfiloComponent,
+    RegistrazionePageComponent,
+    AccessoPageComponent,
   ],
   imports: [
     BrowserModule,
