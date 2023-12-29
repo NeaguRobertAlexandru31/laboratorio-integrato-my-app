@@ -52,4 +52,4 @@ import { AccessoPageComponent } from './accesso-page/accesso-page.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
