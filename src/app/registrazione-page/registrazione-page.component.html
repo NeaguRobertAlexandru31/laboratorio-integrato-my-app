@@ -1,5 +1,5 @@
 <div class="relative flex flex-col items-center">
-  <form class="mt-24">
+  <form *ngIf="FirstForm" class="mt-24" (ngSubmit)="showSecondForm()">
     <div class="relative mb-4">
       <h3 class="">Lieto di conoscerti...</h3>
       <input
@@ -25,12 +25,41 @@
         class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8D66B7]"
       ></span>
     </div>
-    <a
-      routerLink=""
+    <button
       type="submit"
       class="p-2 w-[300px] h-[35] rounded-[5px] border border-black text-center text-white text-base font-semibold font-Genera bg-[#8D66B7]"
     >
       Continua
-    </a>
+    </button>
+  </form>
+
+  <form *ngIf="SecondForm" class="mt-24" (ngSubmit)="submitFinalForm()">
+    <div class="relative mb-4">
+      <h3 class="">Registrati con la mail</h3>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Email"
+        class="p-2 w-[300px] h-[35] rounded-[5px] border-b border-[#8D66B7] text-neutral-500 text-opacity-60 text-xl font-light font-Poppins"
+      />
+      <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8D66B7]"></span>
+    </div>
+    <div class="relative mb-4">
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        class="p-2 w-[300px] h-[35] rounded-[5px] border-b border-[#8D66B7] text-neutral-500 text-opacity-60 text-xl font-light font-Poppins"
+      />
+      <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8D66B7]"></span>
+    </div>
+    <button
+      type="submit"
+      class="p-2 w-[300px] h-[35] rounded-[5px] border border-black text-center text-white text-base font-semibold font-Genera bg-[#8D66B7]"
+    >
+      Invia
+    </button>
   </form>
 </div>
