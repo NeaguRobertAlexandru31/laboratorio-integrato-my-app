@@ -19,54 +19,62 @@ export class EstPageComponent implements OnInit {
       gamePlayed: string,
       win: string,
       lose: string,
-      percWIn: string
+      percWIn: string,
+      diffPoints: string
     ): HTMLTableRowElement {
       const row = document.createElement('tr');
       row.classList.add('w-full', 'h-28', 'flex', 'justify-evenly');
 
       const cell1 = document.createElement('td');
-      cell1.classList.add('w-1/3', 'h-10', 'text-center');
+      cell1.classList.add('w-1/2', 'h-10', 'text-center');
       cell1.textContent = position;
       row.appendChild(cell1);
 
       const cell2 = document.createElement('td');
-      cell2.classList.add('w-1/3', 'h-10', 'text-center');
+      cell2.classList.add('w-1/2', 'h-10', 'text-center');
       cell2.textContent = nameTeam;
       row.appendChild(cell2);
 
       const cell3 = document.createElement('td');
-      cell3.classList.add('w-1/3', 'h-10', 'text-center');
+      cell3.classList.add('w-1/5', 'h-10', 'text-center');
       cell3.textContent = gamePlayed;
       row.appendChild(cell3);
 
       const cell4 = document.createElement('td');
-      cell1.classList.add('w-1/3', 'h-10', 'text-center');
-      cell1.textContent = win;
+      cell4.classList.add('w-1/5', 'h-10', 'text-center');
+      cell4.textContent = win;
       row.appendChild(cell4);
 
       const cell5 = document.createElement('td');
-      cell2.classList.add('w-1/3', 'h-10', 'text-center');
-      cell2.textContent = lose;
+      cell5.classList.add('w-1/5', 'h-10', 'text-center');
+      cell5.textContent = lose;
       row.appendChild(cell5);
 
       const cell6 = document.createElement('td');
-      cell3.classList.add('w-1/3', 'h-10', 'text-center');
-      cell3.textContent = percWIn;
+      cell6.classList.add('w-1/5', 'h-10', 'text-center');
+      cell6.textContent = percWIn;
       row.appendChild(cell6);
+
+      const cell7 = document.createElement('td');
+      cell7.classList.add('w-1/5', 'h-10', 'text-center');
+      cell7.textContent = diffPoints;
+      row.appendChild(cell7);
 
       return row;
     }
 
     const tableBody = document.getElementById('tableBody');
+    console.log(tableBody)
     if (tableBody) {
        for (let i = 0; i < 10; i++) {
          const newRow = createRow(
-          `N ${i+1}`,
-          `NameSquad ${i + 3}`,
-          `PG ${i + 4}`,
-          `WIN ${i + 5}`,
-          `LOSE ${i + 6}`,
-          `% ${i + 6}`,
+          `${i+1}`,
+          `${i + 3}`,
+          `${i + 4}`,
+          `${i + 5}`,
+          `${i + 6}`,
+          `${i + 6}`,
+          `${i + 6}`
          );
        tableBody.appendChild(newRow);
     }
