@@ -1,10 +1,29 @@
-<nav class="orange p-4 absolute md:relative bottom-0 w-full">
-    <!-- Links -->
-    <div class="flex justify-between space-x-4 ">
-      <a routerLink="/partite/risultati" class="text-white w-full text-center"> Partite </a>
-      <a routerLink="/classifiche" class="text-white w-full text-center"> Classifiche </a>
-      <a routerLink="/preferiti" class="text-white w-full text-center"> Preferiti </a>
-      <a routerLink="/news" class="text-white w-full text-center"> News </a>
-      <a routerLink="/more" class="text-white w-full text-center"> ... </a>
-    </div>
+<nav class="bg-white absolute md:relative bottom-0 w-full py-1 px-3">
+  <!-- Links -->
+  <div class="flex">
+    <a routerLink="/partite/risultati" class="text-white w-full text-center hover:font-bold">
+      <div class="text-hoops-purple flex flex-col items-center">
+        <img src="../../assets/img/icone-navbar-down/icone/Basketball.png" alt="">
+        <p>Partite</p>
+      </div>
+    </a>
+    <a routerLink="/classifiche" class="text-white w-full text-center hover:font-bold">
+      <div class="text-hoops-purple flex flex-col items-center">
+        <img src="../../assets/img/icone-navbar-down/icone/Trophy.png" alt="">
+        <p>Classifiche</p>
+      </div>
+    </a>
+    <a routerLink="/preferiti" class="text-white w-full text-center hover:font-bold">
+      <div class="text-hoops-purple flex flex-col items-center">
+        <img src="../../assets/img/icone-navbar-down/icone/Star.png" alt="">
+        <p>Preferiti</p>
+      </div>
+    </a>
+    <a routerLink="/news" class="text-white w-full text-center hover:font-bold">
+      <div class="text-hoops-purple flex flex-col items-center">
+        <img src="../../assets/img/icone-navbar-down/icone/News.png" alt="">
+        <p>News</p>
+      </div>
+    </a>
+  </div>
 </nav>

@@ -1,17 +1,23 @@
-<nav class="orange p-1">
-  <div class="container mx-auto flex justify-between items-center">
+<nav class="p-3">
+  <div class="container flex items-center">
     <!-- Logo -->
-    <a routerLink="/partite/risultati" class="text-white text-2xl font-bold"> Logo </a>
-<!--     <img src="../../assets/HoopsData_logo.svg" alt="" width="50" height="50">
+    <div class="w-fit">
+      <a routerLink="/partite/risultati">
+        <img class="w-fit h-fit" src="../../assets/img/Logo.png" width="50" height="50" alt="">
+      </a>
+    </div>
+    <!--     <img src="../../assets/HoopsData_logo.svg" alt="" width="50" height="50">
  -->
     <!-- Search bar -->
-    <div class="w-1/2 md:w-1/4 mx-auto">
-      <app-search-bar class="flex-1"></app-search-bar>
+    <div class="w-full flex justify-end px-5">
+      <app-search-bar></app-search-bar>
     </div>
 
     <!-- Links -->
-    <div class="flex space-x-4">
-      <a routerLink="/profilo" class="text-white hover:text-gray-300"> Profilo </a>
+    <div class="w-fit">
+      <a routerLink="/profilo" class="text-white hover:text-gray-300">
+        <img class="rounded-full" src="https://via.placeholder.com/50x50" width="50" height="50" alt="">
+      </a>
     </div>
   </div>
 </nav>
