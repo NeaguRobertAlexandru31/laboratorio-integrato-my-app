@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+//Pages
 import { PartitePageComponent } from './partite-page/partite-page.component';
 import { ClassifichePageComponent } from './classifiche-page/classifiche-page.component';
 import { PreferitiPageComponent } from './preferiti-page/preferiti-page.component';
@@ -8,12 +9,16 @@ import { RisultatiPageComponent } from './risultati-page/risultati-page.componen
 import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
+//Login
 import { ProfiloComponent } from './profilo/profilo.component';
 import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
 import { AccessoPageComponent } from './accesso-page/accesso-page.component';
+//Detail-pages
+import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
+  { path: 'partita', component: PartitaDetailPageComponent},
   { path: 'classifiche', component: ClassifichePageComponent },
   { path: 'preferiti', component: PreferitiPageComponent },
   { path: 'news', component: NewsPageComponent },

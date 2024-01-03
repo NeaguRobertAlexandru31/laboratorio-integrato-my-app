@@ -21,6 +21,8 @@ import { ProfiloComponent } from './profilo/profilo.component';
 import { GameApiService } from '../app/mock-api-service.service';
 import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
 import { AccessoPageComponent } from './accesso-page/accesso-page.component';
+//Detail-pages
+import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { AccessoPageComponent } from './accesso-page/accesso-page.component';
     ProfiloComponent,
     RegistrazionePageComponent,
     AccessoPageComponent,
+    //detail
+    PartitaDetailPageComponent,
   ],
   imports: [
     BrowserModule,
