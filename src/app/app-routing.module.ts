@@ -14,7 +14,7 @@ import { AccessoPageComponent } from './accesso-page/accesso-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
-  { path: 'classifiche', component: ClassifichePageComponent },
+  { path: 'classifiche', component: OvestPageComponent },
   { path: 'preferiti', component: PreferitiPageComponent },
   { path: 'news', component: NewsPageComponent },
   { path: 'partite/risultati', component: RisultatiPageComponent },
