@@ -2,7 +2,7 @@
 
 <table *ngIf="games && games.length" class="w-full border-none">
   <tbody class="text-center">
-    <tr *ngFor="let game of games" class="w-full flex p-6 bg-hoops-purple my-3 rounded-2xl">
+    <tr *ngFor="let game of games" class="w-full flex p-6 bg-hoops-primary my-3 rounded-2xl">
       <td class="w-full">
         <div class="flex flex-col items-center">
           <img [src]="game.logo_home" alt="Team A" class="h-16 w-fit mb-2">
@@ -13,7 +13,7 @@
         <p class="my-2">{{ game.start | date: 'HH:mm' }}</p>
         <p class="my-2 text-lg">{{ game.total_point_home }} - {{ game.total_points_visitors }}</p>
         <!-- Formattazione dell'ora -->
-        <a routerLink="/partita" class="bg-hoops-orange my-2 w-fit px-2 rounded-full"> Preview </a>
+        <a routerLink="/partita" class="bg-hoops-secondary my-2 w-fit px-2 rounded-full"> Preview </a>
       </td>
       <td class="w-full">
         <div class="flex flex-col items-center">
