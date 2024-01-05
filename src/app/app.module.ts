@@ -23,6 +23,10 @@ import { RegistrazionePageComponent } from './registrazione-page/registrazione-p
 import { AccessoPageComponent } from './accesso-page/accesso-page.component';
 //Detail-pages
 import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -50,10 +54,12 @@ import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [
-    GameApiService,
-  ],
-  bootstrap: [AppComponent]
+  providers: [GameApiService],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

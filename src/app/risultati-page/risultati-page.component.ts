@@ -8,6 +8,7 @@ import { GameApiService } from '../mock-api-service.service';
 })
 export class RisultatiPageComponent implements OnInit {
   games: any[] = [];
+  currentDate: Date = new Date(); 
 
   constructor(private gameApiService: GameApiService) {}
 
@@ -26,4 +27,6 @@ export class RisultatiPageComponent implements OnInit {
       }
     );
   }
+
+
 }
