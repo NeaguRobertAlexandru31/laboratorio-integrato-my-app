@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgrammateApiService } from '../programmate-api.service';
 
 @Component({
   selector: 'app-programmate-page',

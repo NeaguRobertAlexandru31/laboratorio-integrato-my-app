@@ -60,18 +60,23 @@ p{
   font-size: 18px;
 }
 
-.bg-hoops-purple{
+.bg-hoops-primary{
   background-color: #8D66B7;
 }
-.bg-hoops-orange{
+.bg-hoops-secondary{
   background-color: #E58C38;
 }
 
-.text-hoops-purple{
+.text-hoops-primary{
   color: #8D66B7;
 }
-.text-hoops-orange{
+.text-hoops-secondary{
   color: #E58C38;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+border-hoops-primary{
+  border-color: #8D66B7;
+}
+border-hoops-primary{
+  border-color: #E58C38;
+}

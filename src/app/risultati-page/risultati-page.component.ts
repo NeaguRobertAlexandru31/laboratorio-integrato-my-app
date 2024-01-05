@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { GameApiService } from '../mock-api-service.service';
+import { ActivatedRoute } from '@angular/router';
+import Nome from '../_models/nome.model';
+
+//Chiama API
+import { ApiService } from '../_service/api.service';
 
 @Component({
   selector: 'app-risultati-page',
@@ -7,25 +11,15 @@ import { GameApiService } from '../mock-api-service.service';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-  games: any[] = [];
+  nome: any[] = [];
   currentDate: Date = new Date;
 
-  constructor(private gameApiService: GameApiService) {}
+  constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
-    this.fetchGames();
-  }
-
-  fetchGames() {
-    this.gameApiService.getGames().subscribe(
-      (data: any[]) => {
-        this.games = data;
-        console.log('Dati dei giochi:', this.games);
-      },
-      (error: any) => {
-        console.error('Si è verificato un errore:', error);
-      }
-    );
+  ngOnInit(){
+    this.apiService.getAll().subscribe( (response) => { //esegue la chiamata a getMeteo
+      this.nome = response;
+    });
   }
 
   onDateChange(selectedDate: Date): void {
