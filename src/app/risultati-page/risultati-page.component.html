@@ -1,14 +1,10 @@
+<!-- Tabs -->
 <app-partite-page></app-partite-page>
 
-<mat-form-field class="w-full">
-  <div class="text-center">
-    <mat-label>{{currentDate | date: 'dd/MM/yyyy' }}</mat-label>
-  </div>
-  <input matInput [matDatepicker]="picker" class="hidden">
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+<!-- Calendario -->
+<app-calendar></app-calendar>
 
+<!-- Tabella -->
 <table *ngIf="games && games.length" class="w-full border-none">
   <tbody class="text-center">
     <tr *ngFor="let game of games" class="w-full flex p-6 bg-hoops-purple my-3 rounded-2xl">
@@ -34,6 +30,7 @@
   </tbody>
 </table>
 
+<!-- SE non ci sono partite -->
 <div *ngIf="!games || !games.length">
   <p>Nessun gioco disponibile al momento.</p>
 </div>

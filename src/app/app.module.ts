@@ -27,6 +27,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AccessoPageComponent,
     //detail
     PartitaDetailPageComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
   ],
   providers: [GameApiService],
   bootstrap: [AppComponent],
