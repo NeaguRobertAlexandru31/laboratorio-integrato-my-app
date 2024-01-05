@@ -5,9 +5,9 @@
 <app-calendar></app-calendar>
 
 <!-- Tabella -->
-<table *ngIf="games && games.length" class="w-full border-none">
+<table *ngIf="nome && nome.length" class="w-full border-none">
   <tbody class="text-center">
-    <tr *ngFor="let game of games" class="w-full flex p-6 bg-hoops-primary my-3 rounded-2xl">
+    <tr *ngFor="let game of nome" class="w-full flex p-6 bg-hoops-primary my-3 rounded-2xl">
       <td class="w-full">
         <div class="flex flex-col items-center">
           <img [src]="game.logo_home" alt="Team A" class="h-16 w-fit mb-2">
@@ -31,6 +31,6 @@
 </table>
 
 <!-- SE non ci sono partite -->
-<div *ngIf="!games || !games.length">
+<div *ngIf="!nome || !nome.length">
   <p>Nessun gioco disponibile al momento.</p>
 </div>

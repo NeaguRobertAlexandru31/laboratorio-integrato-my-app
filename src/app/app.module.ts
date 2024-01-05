@@ -18,16 +18,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OvestPageComponent } from './ovest-page/ovest-page.component';
 import { EstPageComponent } from './est-page/est-page.component';
 import { ProfiloComponent } from './profilo/profilo.component';
-import { GameApiService } from '../app/mock-api-service.service';
 import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
 import { AccessoPageComponent } from './accesso-page/accesso-page.component';
+//Providers
+import { ApiService } from './_service/api.service';
 //Detail-pages
 import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
@@ -63,7 +64,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatNativeDateModule,
     MatIconModule,
   ],
-  providers: [GameApiService],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
