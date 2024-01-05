@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Nome from '../_models/nome.model';
 
 //Chiama API
 import { ApiService } from '../_service/api.service';
