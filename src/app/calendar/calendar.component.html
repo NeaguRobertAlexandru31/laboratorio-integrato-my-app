@@ -1,0 +1,15 @@
+<mat-form-field class="w-full">
+  <div class="flex items-center justify-center">
+    <button mat-icon-button (click)="previousDay($event)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <mat-label (click)="openPicker()">{{
+      currentDate | date : "dd/MM/yyyy"
+    }}</mat-label>
+    <button mat-icon-button (click)="nextDay($event)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+  <input matInput [matDatepicker]="picker" class="hidden" readonly />
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

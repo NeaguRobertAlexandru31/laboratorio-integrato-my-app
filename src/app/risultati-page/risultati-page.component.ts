@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameApiService } from '../mock-api-service.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { GameApiService } from '../mock-api-service.service';
 })
 export class RisultatiPageComponent implements OnInit {
   games: any[] = [];
+  currentDate: Date = new Date;
 
   constructor(private gameApiService: GameApiService) {}
 
@@ -26,4 +27,10 @@ export class RisultatiPageComponent implements OnInit {
       }
     );
   }
+
+  onDateChange(selectedDate: Date): void {
+    this.currentDate = selectedDate;
+  }
+
+  
 }
