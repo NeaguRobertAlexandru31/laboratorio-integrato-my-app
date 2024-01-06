@@ -14,42 +14,63 @@
     </div>
   </div>
 
-  <!-- Inside est-page.component.html -->
-  <div class="container mx-auto ">
-    <table class="flex flex-1 w-full md:w-1/2 lg:w-full flex-row">
-      <thead class="w-full">
-        <tr class="flex flex-row justify-center items-center p-2 bg-hoops-primary">
+  <div class="container">
+    <table *ngIf="nome && nome.length" class="w-full text-center">
+      <thead class="text-white">
+        <tr class="w-full flex flex-row p-2 bg-hoops-primary">
           <!-- Position and NameTeam in col-6 -->
-          <th class="w-1/2 ">
-            <p class="text-center ">N</p>
+          <th class="w-2/12">
+            <p>N</p>
           </th>
-          <th class="w-1/2 ">
-            <!-- Logo Da Aggiungere -->
-            <div class="w-1/2"></div>
+          <th class="w-5/12">
             <!-- NameTeam  -->
-            <div class="w-1/2">
-              <p class="text-center ">Squadra</p>
-            </div>
+            <p>Classifica</p>
           </th>
           <!-- Other four fields in col-6 -->
-          <th class="w-1/5">
-            <p class="text-center">GP</p>
+          <th class="w-1/12">
+            <p>GP</p>
           </th>
-          <th class="w-1/5">
-            <p class="text-center">W</p>
+          <th class="w-1/12">
+            <p>W</p>
           </th>
-          <th class="w-1/5">
-            <p class="text-center">L</p>
+          <th class="w-1/12">
+            <p>L</p>
           </th>
-          <th class="w-1/5">
-            <p class="text-center">%</p>
+          <th class="w-1/12">
+            <p>%</p>
           </th>
-          <th class="w-1/5">
-            <p class="text-center">DP</p>
+          <th class="w-1/12">
+            <p>DP</p>
           </th>
         </tr>
       </thead>
-      <!-- <tbody id="tableBody"></tbody> -->
+
+      <tbody>
+        <tr *ngFor="let squadra of nome" class="w-full flex flex-row justify-center items-center p-2">
+          <td class="w-2/12">
+            <p>{{squadra.idTeam}}</p>
+          </td>
+          <td class="w-5/12 flex flex-row items-center">
+            <img class="w-fit h-auto" src="https://via.placeholder.com/30x30" alt="">
+            <p class="w-full p-classifica">{{squadra.nameTeam}}</p>
+          </td>
+          <td class="w-1/12">
+            <p>-</p>
+          </td>
+          <td class="w-1/12">
+            <p>-</p>
+          </td>
+          <td class="w-1/12">
+            <p>-</p>
+          </td>
+          <td class="w-1/12">
+            <p>-</p>
+          </td>
+          <td class="w-1/12">
+            <p>-</p>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
