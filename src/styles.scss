@@ -37,20 +37,9 @@ $my-app-theme: mat.define-light-theme((
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+html,body {
   height: 100%;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html,
-body {
-  height: 100%;
-}
-
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -63,6 +52,12 @@ p{
 .bg-hoops-primary{
   background-color: #8D66B7;
 }
+.bg-hoops-primary-10{
+  background-color: #8D66B71A;
+}
+.bg-hoops-primary-80{
+  background-color: #8d66b7cc;
+}
 .bg-hoops-secondary{
   background-color: #E58C38;
 }
@@ -74,9 +69,9 @@ p{
   color: #E58C38;
 }
 
-border-hoops-primary{
+.border-hoops-primary{
   border-color: #8D66B7;
 }
-border-hoops-primary{
+.border-hoops-primary{
   border-color: #E58C38;
 }

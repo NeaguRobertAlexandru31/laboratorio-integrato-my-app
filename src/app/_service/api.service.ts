@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 // Model
-import Nome from '../_models/nome.model';
+import Game from '../_models/game.model';
 
 @Injectable({
  providedIn: 'root',
@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get(this.baseUrl + 'team/all')
       .pipe(map((response:any) => {
         console.log(response);
-        return response as Nome[];
+        return response as Game[];
       }));
     };
 }
