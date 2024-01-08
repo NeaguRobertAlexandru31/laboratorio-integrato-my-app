@@ -10,14 +10,14 @@ import { ApiService } from '../_service/api.service';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-  nome: any[] = [];
+  games: any[] = [];
   currentDate: Date = new Date;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(){
-    this.apiService.getAll().subscribe( (response) => { //esegue la chiamata a getMeteo
-      this.nome = response;
+    this.apiService.getGames('2021-10-20').subscribe( (response) => { //esegue la chiamata a getMeteo
+      this.games = response;
     });
   }
 
