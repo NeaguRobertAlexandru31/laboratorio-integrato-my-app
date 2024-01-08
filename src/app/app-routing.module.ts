@@ -19,7 +19,7 @@ import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
   { path: 'partita', component: PartitaDetailPageComponent},
-  { path: 'classifiche', component: ClassifichePageComponent },
+  // { path: 'classifiche', component: ClassifichePageComponent }, sarebbe inutile tenerla ma in caso si vogliono fare modifiche future per la logica lo lascio commentato
   { path: 'preferiti', component: PreferitiPageComponent },
   { path: 'news', component: NewsPageComponent },
   { path: 'partite/risultati', component: RisultatiPageComponent },
