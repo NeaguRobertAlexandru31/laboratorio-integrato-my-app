@@ -16,7 +16,7 @@ export class RisultatiPageComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(){
-    this.apiService.getAll().subscribe( (response) => { //esegue la chiamata a getMeteo
+    this.apiService.getGames('2021-10-20').subscribe( (response) => { //esegue la chiamata a getMeteo
       this.games = response;
     });
   }

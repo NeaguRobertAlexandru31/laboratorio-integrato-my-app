@@ -23,4 +23,12 @@ export class ApiService {
         return response as Game[];
       }));
     };
+
+    getGames(date: string){
+      return this.http.get(this.baseUrl + 'home/gameday' + '/' + date)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as Game[];
+        }));
+      };
 }
