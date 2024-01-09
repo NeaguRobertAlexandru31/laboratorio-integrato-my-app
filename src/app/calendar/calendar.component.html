@@ -3,11 +3,11 @@
     <button mat-icon-button (click)="previousDay($event)" class="flex items-center justify-center w-10">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <mat-label (click)="openPicker()" class="flex-grow-0 mx-4">{{ currentDate | date : "dd/MM/yyyy" }}</mat-label>
+    <mat-label (click)="openPicker()" class="flex-grow-0 mx-4">{{ currentDate.toFormat('dd/MM/yyyy') }}</mat-label>
     <button mat-icon-button (click)="nextDay($event)" class="flex items-center justify-center w-10">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
   <input matInput [matDatepicker]="picker" class="hidden" readonly />
-  <mat-datepicker #picker></mat-datepicker>
+  <mat-datepicker #picker (click)="onDateChange($event)"></mat-datepicker>
 </mat-form-field>

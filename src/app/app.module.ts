@@ -22,6 +22,7 @@ import { RegistrazionePageComponent } from './registrazione-page/registrazione-p
 import { AccessoPageComponent } from './accesso-page/accesso-page.component';
 //Providers
 import { ApiService } from './_service/api.service';
+import { DateTime } from 'luxon';
 //Detail-pages
 import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -64,7 +65,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatNativeDateModule,
     MatIconModule,
   ],
-  providers: [ApiService],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
