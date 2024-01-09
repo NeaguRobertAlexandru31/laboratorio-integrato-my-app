@@ -15,7 +15,7 @@ export class RisultatiPageComponent implements OnInit {
   games: Game[] = [];
   squadre: any[] = [];
 
-  currentDate: Date = new Date;
+  currentDate: DateTime = DateTime.now();
 
   // formatDate = () => {
   //   const monthList:string[] = ['01','02','03','04','05','06','07','08','09','10','11','12'];
@@ -33,25 +33,30 @@ export class RisultatiPageComponent implements OnInit {
 
   constructor(private apiService: ApiService) {}
 
+  getGradient(game: any): string {
+    if(game.homeColour === null){
+      return `linear-gradient(to right, #ffffff, #${game.visitorsColour})`
+    }else if(game.visitorsColour === null){
+      return `linear-gradient(to right, #${game.homeColour}, #ffffff)`
+    }else if(game.homeColour === null && game.visitorsColour === null){
+      return `linear-gradient(to right, #808080, #ffffff)`
+    }
+    return `linear-gradient(to right, #${game.homeColour}, #${game.visitorsColour})`;
+  }
+
   ngOnInit(){
     // console.log(this.formatDate());
-    this.apiService.getAll().subscribe( (response) => {
+    // this.apiService.getAll().subscribe( (response) => {
+    //   this.games = response;
+    // });
+    this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
-    this.apiService.getGames(this.currentDate.toFormat('yyyy/MM/dd').subscribe( (response) => {
-      this.games = response;
-    });
-    this.apiService.getTeamTest().subscribe( (response) => {
-      this.squadre = response;
-    });
-    this.apiService.getGiocatoriTest().subscribe( (response) => {
-      this.squadre = response;
-    });
+    // this.apiService.getTeamTest().subscribe( (response) => {
+    //   this.squadre = response;
+    // });
+    // this.apiService.getGiocatoriSquadraTest().subscribe( (response) => {
+    //   this.squadre = response;
+    // });
   }
-
-  onDateChange(selectedDate: Date): void {
-    this.currentDate = selectedDate;
-  }
-
-  
 }

@@ -1,5 +1,6 @@
 export default interface Game {      
     gameId: number,
+    homeColour: string,
     homeTeamLogo: string,
     homeTeamName: string,
     p1home: number,
@@ -15,5 +16,6 @@ export default interface Game {
     risultato: string,
     start: string,
     visitorTeamLogo: string,
-    visitorTeamName: string
+    visitorTeamName: string,
+    visitorsColour: string,
 }

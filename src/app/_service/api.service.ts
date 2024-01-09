@@ -50,8 +50,8 @@ export class ApiService {
         }));
       };
     //Utilizzata in Risultati
-    getGiocatoriTest(){
-      return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 2022)
+    getGiocatoriSquadraTest(){
+      return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 8)
         .pipe(map((response:any) => {
           console.log(response);
           return response as Player[];
