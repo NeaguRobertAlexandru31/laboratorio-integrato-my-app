@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 
 // Model
 import Game from '../_models/game.model';
+import GameDetail from '../_models/gameDetail.model';
 
 @Injectable({
  providedIn: 'root',
@@ -25,7 +26,23 @@ export class ApiService {
     };
 
     getGames(date: string){
-      return this.http.get(this.baseUrl + 'home/gameday' + '/' + date)
+      return this.http.get(this.baseUrl + 'home/gameday/' + date)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as Game[];
+        }));
+      };
+
+    getTeam(idGame: string){
+      return this.http.get(this.baseUrl + 'game/stats/' + idGame)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as GameDetail[];
+        }));
+      };
+
+    getTeamTest(){
+      return this.http.get(this.baseUrl + 'game/stats/' + 1060)
         .pipe(map((response:any) => {
           console.log(response);
           return response as Game[];
