@@ -10,20 +10,21 @@
     <tr *ngFor="let game of games" class="w-full flex p-6 bg-hoops-primary-80 my-3 rounded-2xl">
       <td class="w-full">
         <div class="flex flex-col items-center">
-          <img [src]="game.logo_home" alt="Team A" class="h-16 w-fit mb-2">
-          {{ game.name_team_home }}
+          <img [src]="game.homeTeamLogo" alt="Team A" class="h-16 w-fit mb-2">
+          <p>{{ game.homeTeamName }}</p>
         </div>
       </td>
       <td class="w-full flex flex-col justify-center items-center">
         <p class="my-2">{{ game.start | date: 'HH:mm' }}</p>
-        <p class="my-2 text-lg">{{ game.total_point_home }} - {{ game.total_points_visitors }}</p>
+        <p class="my-2 text-lg">{{ game.risultato }}</p>
         <!-- Formattazione dell'ora -->
-        <a routerLink="/partita" class="bg-hoops-secondary my-2 w-fit px-2 rounded-full"> Preview </a>
+        <a [routerLink]="'/partita/' + this.game.gameId" class="bg-hoops-secondary my-2 w-fit px-2 rounded-full">
+          Preview </a>
       </td>
       <td class="w-full">
         <div class="flex flex-col items-center">
-          <img [src]="game.logo_visitors" alt="Team B" class="h-16 w-fit mb-2">
-          {{ game.name_team_visitors }}
+          <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2">
+          <p>{{ game.visitorTeamName }}</p>
         </div>
       </td>
     </tr>

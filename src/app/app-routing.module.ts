@@ -18,7 +18,7 @@ import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
-  { path: 'partita', component: PartitaDetailPageComponent},
+  { path: 'partita/:idGame', component: PartitaDetailPageComponent},
   { path: 'classifiche', component: ClassifichePageComponent },
   { path: 'preferiti', component: PreferitiPageComponent },
   { path: 'news', component: NewsPageComponent },
