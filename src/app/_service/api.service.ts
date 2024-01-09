@@ -42,7 +42,7 @@ export class ApiService {
       };
 
     getTeamTest(){
-      return this.http.get(this.baseUrl + 'game/stats/' + 1060)
+      return this.http.get(this.baseUrl + 'game/stats/' + 10600)
         .pipe(map((response:any) => {
           console.log(response);
           return response as Game[];
