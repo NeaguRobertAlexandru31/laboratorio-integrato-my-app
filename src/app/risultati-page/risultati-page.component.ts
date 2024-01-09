@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DateTime } from 'luxon';
 
 //Chiama API
 import { ApiService } from '../_service/api.service';
@@ -34,10 +35,16 @@ export class RisultatiPageComponent implements OnInit {
 
   ngOnInit(){
     // console.log(this.formatDate());
-    this.apiService.getGames('2022-10-20').subscribe( (response) => {
+    this.apiService.getAll().subscribe( (response) => {
+      this.games = response;
+    });
+    this.apiService.getGames(this.currentDate.toFormat('yyyy/MM/dd').subscribe( (response) => {
       this.games = response;
     });
     this.apiService.getTeamTest().subscribe( (response) => {
+      this.squadre = response;
+    });
+    this.apiService.getGiocatoriTest().subscribe( (response) => {
       this.squadre = response;
     });
   }

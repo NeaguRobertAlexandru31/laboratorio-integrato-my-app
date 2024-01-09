@@ -1,5 +1,5 @@
-<section id="head">
-  <div class="container flex">
+<section *ngIf="squadre && squadre.length" id="head">
+  <div *ngFor="let squadra of squadre" class="container flex">
     <div class="w-full text-center px-6 py-2">
       <h3>Home</h3>
       <img class="rounded-full my-2" src="https://via.placeholder.com/200x200" alt="">
