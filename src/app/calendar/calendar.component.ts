@@ -18,12 +18,11 @@ export class CalendarComponent {
   previousDay(event: Event) {
     event.stopPropagation();
     this.currentDate = this.currentDate.minus({ days: 1 }); // Utilizza il metodo minus di Luxon
-    console.log(this.currentDate.toFormat('dd-MM-yyyy'))
+    
   }
   
   nextDay(event: Event) {
     event.stopPropagation();
-    console.log("ciao")
     this.currentDate = this.currentDate.plus({ days: 1 }); // Utilizza il metodo plus di Luxon
   }
 
@@ -32,9 +31,4 @@ export class CalendarComponent {
       this.picker.open();
     }
   }         
-  
-  onDateChange(selectedDate: any) {
-    console.log('ciao');
-    this.currentDate = DateTime.fromJSDate(selectedDate.value); // Imposta la nuova data selezionata nel formato di Luxon
-  }
 }
