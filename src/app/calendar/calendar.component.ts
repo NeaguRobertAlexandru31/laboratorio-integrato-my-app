@@ -1,40 +1,50 @@
 import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatDatepickerInputEvent, MatDatepicker } from '@angular/material/datepicker';
+import {
+  MatDatepickerInputEvent,
+  MatDatepicker,
+} from '@angular/material/datepicker';
 import { DateTime } from 'luxon';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
+  providers: [DatePipe],
 })
 export class CalendarComponent {
   currentDate: DateTime = DateTime.now();
   @ViewChild('picker') picker!: MatDatepicker<Date>;
 
+  selectedDate: Date;
+
+  constructor() {
+    this.selectedDate = new Date();
+  }
+
   onDateInput(event: MatDatepickerInputEvent<DateTime>): void {
     this.currentDate = event.value || DateTime.now();
   }
 
-  previousDay(event: Event) {
-    event.stopPropagation();
-    this.currentDate = this.currentDate.minus({ days: 1 }); // Utilizza il metodo minus di Luxon
-    console.log(this.currentDate.toFormat('dd-MM-yyyy'))
+  onChange(event: any) {
+    this.currentDate = DateTime.fromJSDate(event.value);
   }
-  
-  nextDay(event: Event) {
-    event.stopPropagation();
-    console.log("ciao")
-    this.currentDate = this.currentDate.plus({ days: 1 }); // Utilizza il metodo plus di Luxon
+
+  incrementDate() {
+    let currentDate = this.selectedDate || new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
+    this.selectedDate = new Date(currentDate);
+  }
+
+  reduceDate() {
+    let currentDate = this.selectedDate || new Date();
+    currentDate.setDate(currentDate.getDate() - 1);
+    this.selectedDate = new Date(currentDate);
   }
 
   openPicker() {
     if (this.picker) {
       this.picker.open();
     }
-  }         
-  
-  onDateChange(selectedDate: any) {
-    console.log('ciao');
-    this.currentDate = DateTime.fromJSDate(selectedDate.value); // Imposta la nuova data selezionata nel formato di Luxon
   }
 }

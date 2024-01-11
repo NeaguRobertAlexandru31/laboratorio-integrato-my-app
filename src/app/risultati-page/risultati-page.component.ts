@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 //Chiama API
 import { ApiService } from '../_service/api.service';
 import Game from '../_models/game.model';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-risultati-page',
@@ -12,6 +13,9 @@ import Game from '../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
+handleDateChange($event: DateTime<boolean>) {
+throw new Error('Method not implemented.');
+}
   games: Game[] = [];
   squadre: any[] = [];
 
