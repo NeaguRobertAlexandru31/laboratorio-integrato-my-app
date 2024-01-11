@@ -15,6 +15,11 @@ export class CalendarComponent {
     this.currentDate = event.value || DateTime.now();
   }
 
+  onChange(event: any) {
+    console.log(event.value);
+    this.currentDate = DateTime.fromJSDate(event.value);
+  }
+
   previousDay(event: Event) {
     event.stopPropagation();
     this.currentDate = this.currentDate.minus({ days: 1 }); // Utilizza il metodo minus di Luxon

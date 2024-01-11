@@ -8,6 +8,6 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
-  <input matInput [matDatepicker]="picker" class="hidden" readonly />
+  <input matInput [matDatepicker]="picker" class="" readonly (dateChange)="onChange($event)" />
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
