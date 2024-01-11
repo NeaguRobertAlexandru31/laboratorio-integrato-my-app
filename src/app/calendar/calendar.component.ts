@@ -1,5 +1,6 @@
 import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatDatepickerInputEvent, MatDatepicker } from '@angular/material/datepicker';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-calendar',
@@ -7,26 +8,33 @@ import { MatDatepickerInputEvent, MatDatepicker } from '@angular/material/datepi
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent {
-  currentDate: Date = new Date();
+  currentDate: DateTime = DateTime.now();
   @ViewChild('picker') picker!: MatDatepicker<Date>;
 
-  onDateInput(event: MatDatepickerInputEvent<Date>): void {
-    this.currentDate = event.value || new Date();
+  onDateInput(event: MatDatepickerInputEvent<DateTime>): void {
+    this.currentDate = event.value || DateTime.now();
   }
 
   previousDay(event: Event) {
     event.stopPropagation();
-    this.currentDate = new Date(this.currentDate.getTime() - (24 * 60 * 60 * 1000));
+    this.currentDate = this.currentDate.minus({ days: 1 }); // Utilizza il metodo minus di Luxon
+    console.log(this.currentDate.toFormat('dd-MM-yyyy'))
   }
   
   nextDay(event: Event) {
     event.stopPropagation();
-    this.currentDate = new Date(this.currentDate.getTime() + (24 * 60 * 60 * 1000));
+    console.log("ciao")
+    this.currentDate = this.currentDate.plus({ days: 1 }); // Utilizza il metodo plus di Luxon
   }
 
   openPicker() {
     if (this.picker) {
       this.picker.open();
     }
+  }         
+  
+  onDateChange(selectedDate: any) {
+    console.log('ciao');
+    this.currentDate = DateTime.fromJSDate(selectedDate.value); // Imposta la nuova data selezionata nel formato di Luxon
   }
 }

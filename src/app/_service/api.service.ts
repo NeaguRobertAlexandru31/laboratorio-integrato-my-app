@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 // Model
 import Game from '../_models/game.model';
 import GameDetail from '../_models/gameDetail.model';
+import Player from '../_models/player.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ApiService {
   baseUrl = 'http://localhost:8045/';
 
   constructor(private http: HttpClient) {}
-
+  //Inutilizzata
   getAll() {
     return this.http.get(this.baseUrl + 'team/all').pipe(
       map((response: any) => {
@@ -23,7 +24,7 @@ export class ApiService {
       })
     );
   }
-
+  //Utilizzata in Risultati
   getGames(date: string) {
     return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
       map((response: any) => {
@@ -32,7 +33,7 @@ export class ApiService {
       })
     );
   }
-
+  //Utilizzata in Partita-Detail
   getTeam(idGame: string) {
     return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe(
       map((response: any) => {
@@ -41,24 +42,22 @@ export class ApiService {
       })
     );
   }
-
+  //Utilizzata in Risultati
   getTeamTest() {
-    return this.http.get(this.baseUrl + 'game/stats/' + 1060).pipe(
+    return this.http.get(this.baseUrl + 'game/stats/' + 10600).pipe(
       map((response: any) => {
         console.log(response);
-        return response as Game[];
+        return response as GameDetail[];
       })
     );
   }
-  getRanking() {
-    // Api usata per Classificha Est
-    return this.http
-      .get(this.baseUrl + 'team/classifica/' + 2022 + '/East')
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Game[];
-        })
-      );
+  //Utilizzata in Risultati
+  getGiocatoriSquadraTest() {
+    return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 8).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as Player[];
+      })
+    );
   }
 }

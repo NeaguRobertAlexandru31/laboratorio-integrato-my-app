@@ -1,123 +1,124 @@
-<section id="head">
-  <div class="container flex">
-    <div class="w-full text-center px-6 py-2">
-      <h3>Home</h3>
-      <img class="rounded-full my-2" src="https://via.placeholder.com/200x200" alt="">
-      <p>Squadra</p>
+<div class="pb-20">
+  <section *ngIf="squadre && squadre.length" id="head">
+    <div *ngFor="let squadra of squadre" class="container flex">
+      <div class="w-full text-center px-6 py-2">
+        <h3>Home</h3>
+        <img class="rounded-full my-2" src="https://via.placeholder.com/200x200" alt="">
+        <p>Squadra</p>
+      </div>
+      <div class="w-full text-center flex flex-col justify-center">
+        <h2 class="text-3xl py-2">0 - 0</h2>
+        <p>Finished</p>
+      </div>
+      <div class="w-full text-center px-6 py-2">
+        <h3>Visitors</h3>
+        <img class="rounded-full my-2" src="https://via.placeholder.com/200x200" alt="">
+        <p>Squadra</p>
+      </div>
     </div>
-    <div class="w-full text-center flex flex-col justify-center">
-      <h2 class="text-3xl py-2">0 - 0</h2>
-      <p>Finished</p>
+  </section>
+
+  <section id="punteggi-quarti">
+    <div class="container my-10 px-6">
+      <h2 class="text-xl text-center font-bold">Punteggi per quarti</h2>
+      <table class="w-full">
+        <thead>
+          <tr class="w-fit">
+            <th class="p-4 text-lg">Q0</th>
+            <th class="p-4 text-lg">Q1</th>
+            <th class="p-4 text-lg">Q2</th>
+            <th class="p-4 text-lg">Q3</th>
+            <th class="p-4 text-lg">Q4</th>
+            <th class="p-4 text-lg" *ngIf="">Q5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center">
+            <td>img</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg" *ngIf="">1</td>
+          </tr>
+          <tr class="text-center">
+            <td>img</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg">1</td>
+            <td class="p-2 text-lg" *ngIf="">1</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="w-full text-center px-6 py-2">
-      <h3>Visitors</h3>
-      <img class="rounded-full my-2" src="https://via.placeholder.com/200x200" alt="">
-      <p>Squadra</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="punteggi-quarti">
-  <div class="container my-10 px-6">
-    <h2 class="text-xl text-center font-bold">Punteggi per quarti</h2>
-    <table class="w-full">
-      <thead>
-        <tr class="w-fit">
-          <th class="p-4 text-lg">Q0</th>
-          <th class="p-4 text-lg">Q1</th>
-          <th class="p-4 text-lg">Q2</th>
-          <th class="p-4 text-lg">Q3</th>
-          <th class="p-4 text-lg">Q4</th>
-          <th class="p-4 text-lg" *ngIf="">Q5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="text-center">
-          <td>img</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg" *ngIf="">1</td>
-        </tr>
-        <tr class="text-center">
-          <td>img</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg">1</td>
-          <td class="p-2 text-lg" *ngIf="">1</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+  <section id="statistiche">
+    <div class="container">
+      <h2 class="text-xl text-center font-bold">Statistiche</h2>
 
-<section id="statistiche">
-  <div class="container">
-    <h2 class="text-xl text-center font-bold">Statistiche</h2>
-
-    <div class="w-full text-center px-8 py-2">
-      <h3>'Statistica'</h3>
-      <div class="flex w-full">
-        <div class="w-full flex items-center">
-          <p>0/0</p>
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+      <div class="w-full text-center px-8 py-2">
+        <h3>'Statistica'</h3>
+        <div class="flex w-full">
+          <div class="w-full flex items-center">
+            <p>0/0</p>
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+            <p>0/0</p>
+          </div>
         </div>
-        <div class="w-full flex items-center">
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-          <p>0/0</p>
+      </div>
+      <!-- In caso di aggiunta di un NGFOR cancellare da qua -->
+      <div class="w-full text-center px-8 py-2">
+        <h3>'Statistica'</h3>
+        <div class="flex w-full">
+          <div class="w-full flex items-center">
+            <p>0/0</p>
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+            <p>0/0</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full text-center px-8 py-2">
+        <h3>'Statistica'</h3>
+        <div class="flex w-full">
+          <div class="w-full flex items-center">
+            <p>0/0</p>
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+            <p>0/0</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full text-center px-8 py-2">
+        <h3>'Statistica'</h3>
+        <div class="flex w-full">
+          <div class="w-full flex items-center">
+            <p>0/0</p>
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
+            <p>0/0</p>
+          </div>
         </div>
       </div>
     </div>
-    <!-- In caso di aggiunta di un NGFOR cancellare da qua -->
-    <div class="w-full text-center px-8 py-2">
-      <h3>'Statistica'</h3>
-      <div class="flex w-full">
-        <div class="w-full flex items-center">
-          <p>0/0</p>
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-        </div>
-        <div class="w-full flex items-center">
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-          <p>0/0</p>
-        </div>
-      </div>
-    </div>
-    <div class="w-full text-center px-8 py-2">
-      <h3>'Statistica'</h3>
-      <div class="flex w-full">
-        <div class="w-full flex items-center">
-          <p>0/0</p>
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-        </div>
-        <div class="w-full flex items-center">
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-          <p>0/0</p>
-        </div>
-      </div>
-    </div>
-    <div class="w-full text-center px-8 py-2">
-      <h3>'Statistica'</h3>
-      <div class="flex w-full">
-        <div class="w-full flex items-center">
-          <p>0/0</p>
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-        </div>
-        <div class="w-full flex items-center">
-          <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-          <p>0/0</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="notizie">
-  <h2 class="text-xl text-center font-bold">Notizie correlate</h2>
-  <div id="slider">
+  <section id="notizie">
+    <h2 class="text-xl text-center font-bold">Notizie correlate</h2>
+    <div id="slider">
 
-  </div>
-</section>
-
+    </div>
+  </section>
+</div>
 <!-- <img src="https://via.placeholder.com/80x80" alt=""> -->
