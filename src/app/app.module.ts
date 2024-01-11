@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarTopComponent } from './navbar-top/navbar-top.component';
 import { NavbarDownComponent } from './navbar-down/navbar-down.component';
+import {FooterComponent} from './footer/footer.component'
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PartitePageComponent } from './partite-page/partite-page.component';
 import { ClassifichePageComponent } from './classifiche-page/classifiche-page.component';
@@ -37,6 +38,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     AppComponent,
     NavbarTopComponent,
     NavbarDownComponent,
+    FooterComponent,
     SearchBarComponent,
     PartitePageComponent,
     ClassifichePageComponent,

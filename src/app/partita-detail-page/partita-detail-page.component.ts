@@ -13,9 +13,16 @@ export class PartitaDetailPageComponent implements OnInit{
 
   constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute){  }
 
-  squadre: GameDetail[] = [];
+  partite: GameDetail[] = [];
 
   idGame: string = '';
+
+  toNumber(a:string,b:string){
+    let primo:string = a;
+    let secondo:string = b;
+    let c:number = Number(primo + secondo)
+    return c;
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
@@ -24,8 +31,8 @@ export class PartitaDetailPageComponent implements OnInit{
       // this.apiService.getTeam(this.idGame).subscribe( (response) => {
       //   this.squadra = response;
       // });
-      this.apiService.getTeamTest().subscribe( (response) => {
-        this.squadre = response;
+      this.apiService.getPartitaTest().subscribe( (response) => {
+        this.partite = response;
       });
     })
   }

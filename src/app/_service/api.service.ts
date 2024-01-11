@@ -34,7 +34,7 @@ export class ApiService {
         }));
       };
     //Utilizzata in Partita-Detail
-    getTeam(idGame: string){
+    getPartita(idGame: string){
       return this.http.get(this.baseUrl + 'game/stats/' + idGame)
         .pipe(map((response:any) => {
           console.log(response);
@@ -42,16 +42,16 @@ export class ApiService {
         }));
       };
     //Utilizzata in Risultati
-    getTeamTest(){
-      return this.http.get(this.baseUrl + 'game/stats/' + 10600)
+    getPartitaTest(){
+      return this.http.get(this.baseUrl + 'game/stats/' + 11945)
         .pipe(map((response:any) => {
           console.log(response);
           return response as GameDetail[];
         }));
       };
-    //Utilizzata in Risultati
-    getGiocatoriSquadraTest(){
-      return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 8)
+    //Funzionante
+    getGiocatoriSquadra(team: number, season: number){
+      return this.http.get(this.baseUrl + 'team/season/' + team + '/' + season)
         .pipe(map((response:any) => {
           console.log(response);
           return response as Player[];

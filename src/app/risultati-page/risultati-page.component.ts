@@ -45,17 +45,11 @@ export class RisultatiPageComponent implements OnInit {
   }
 
   ngOnInit(){
-    // console.log(this.formatDate());
-    // this.apiService.getAll().subscribe( (response) => {
-    //   this.games = response;
-    // });
+
     this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
-    // this.apiService.getTeamTest().subscribe( (response) => {
-    //   this.squadre = response;
-    // });
-    // this.apiService.getGiocatoriSquadraTest().subscribe( (response) => {
+    // this.apiService.getGiocatoriSquadra(8,2023).subscribe( (response) => {
     //   this.squadre = response;
     // });
   }
