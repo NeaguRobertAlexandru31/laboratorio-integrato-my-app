@@ -5,33 +5,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarTopComponent } from './navbar-top/navbar-top.component';
-import { NavbarDownComponent } from './navbar-down/navbar-down.component';
-import {FooterComponent} from './footer/footer.component'
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { PartitePageComponent } from './partite-page/partite-page.component';
-import { ClassifichePageComponent } from './classifiche-page/classifiche-page.component';
-import { PreferitiPageComponent } from './preferiti-page/preferiti-page.component';
-import { NewsPageComponent } from './news-page/news-page.component';
-import { RisultatiPageComponent } from './risultati-page/risultati-page.component';
-import { ProgrammatePageComponent } from './programmate-page/programmate-page.component';
+import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
+import { NavbarDownComponent } from './components/navbar-down/navbar-down.component';
+import {FooterComponent} from './components/footer/footer.component'
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { PartitePageComponent } from './pages/partite-page/partite-page.component';
+import { ClassifichePageComponent } from './pages/classifiche-page/classifiche-page.component';
+import { PreferitiPageComponent } from './pages/preferiti-page/preferiti-page.component';
+import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { RisultatiPageComponent } from './pages/risultati-page/risultati-page.component';
+import { ProgrammatePageComponent } from './pages/programmate-page/programmate-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OvestPageComponent } from './ovest-page/ovest-page.component';
-import { EstPageComponent } from './est-page/est-page.component';
-import { ProfiloComponent } from './profilo/profilo.component';
-import { RegistrazionePageComponent } from './registrazione-page/registrazione-page.component';
-import { AccessoPageComponent } from './accesso-page/accesso-page.component';
+import { OvestPageComponent } from './pages/ovest-page/ovest-page.component';
+import { EstPageComponent } from './pages/est-page/est-page.component';
+import { ProfiloComponent } from './pages/profilo/profilo.component';
+import { RegistrazionePageComponent } from './pages/registrazione-page/registrazione-page.component';
+import { AccessoPageComponent } from './pages/accesso-page/accesso-page.component';
 //Providers
 import { ApiService } from './_service/api.service';
 import { DateTime } from 'luxon';
 //Detail-pages
-import { PartitaDetailPageComponent } from './partita-detail-page/partita-detail-page.component';
+import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [

@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DateTime } from 'luxon';
 
 //Chiama API
-import { ApiService } from '../_service/api.service';
-import Game from '../_models/game.model';
-import { DateTime } from 'luxon';
+import { ApiService } from '../../_service/api.service';
+import Game from '../../_models/game.model';
 
 @Component({
   selector: 'app-risultati-page',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../_service/api.service';
+import { ApiService } from '../../_service/api.service';
 import { ActivatedRoute } from '@angular/router';
 
-import GameDetail from '../_models/gameDetail.model';
+import GameDetail from '../../_models/gameDetail.model';
 
 @Component({
   selector: 'app-partita-detail-page',
