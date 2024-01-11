@@ -1,10 +1,15 @@
 <div class="flex-1">
   <div class="flex flex-row">
-
     <!-- First Column (col-6) -->
     <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary">
       <!-- Tab "Risultati" -->
-      <button routerLink="/classifiche/ovest" routerLinkActive="active" class="!active">Ovest</button>
+      <button
+        routerLink="/classifiche/ovest"
+        routerLinkActive="active"
+        class="!active"
+      >
+        Ovest
+      </button>
     </div>
 
     <!-- Second Column (col-6) -->
@@ -15,7 +20,7 @@
   </div>
 
   <div class="container">
-    <table *ngIf="nome && nome.length" class="w-full text-center">
+    <table *ngIf="res && res.length" class="w-full text-center">
       <thead class="text-white">
         <tr class="w-full flex flex-row p-2 bg-hoops-primary">
           <!-- Position and NameTeam in col-6 -->
@@ -46,13 +51,20 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let squadra of nome" class="w-full flex flex-row justify-center items-center p-2">
+        <tr
+          *ngFor="let squadra of res"
+          class="w-full flex flex-row justify-center items-center p-2"
+        >
           <td class="w-2/12">
-            <p>{{squadra.idTeam}}</p>
+            <p>{{ res.teamdId }}</p>
           </td>
           <td class="w-5/12 flex flex-row items-center">
-            <img class="w-fit h-auto" src="https://via.placeholder.com/30x30" alt="">
-            <p class="w-full p-classifica">{{squadra.nameTeam}}</p>
+            <img
+              class="w-fit h-auto"
+              src="https://via.placeholder.com/30x30"
+              alt=""
+            />
+            <p class="w-full p-classifica">{{ res.teamName }}</p>
           </td>
           <td class="w-1/12">
             <p>-</p>

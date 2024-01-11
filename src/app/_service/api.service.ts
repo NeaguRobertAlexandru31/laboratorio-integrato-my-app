@@ -8,44 +8,57 @@ import Game from '../_models/game.model';
 import GameDetail from '../_models/gameDetail.model';
 
 @Injectable({
- providedIn: 'root',
+  providedIn: 'root',
 })
-
 export class ApiService {
-    
-    baseUrl = 'http://localhost:8045/';
-    
-    constructor(private http: HttpClient) {}
+  baseUrl = 'http://localhost:8045/';
 
-    getAll(){
-    return this.http.get(this.baseUrl + 'team/all')
-      .pipe(map((response:any) => {
+  constructor(private http: HttpClient) {}
+
+  getAll() {
+    return this.http.get(this.baseUrl + 'team/all').pipe(
+      map((response: any) => {
         console.log(response);
         return response as Game[];
-      }));
-    };
+      })
+    );
+  }
 
-    getGames(date: string){
-      return this.http.get(this.baseUrl + 'home/gameday/' + date)
-        .pipe(map((response:any) => {
+  getGames(date: string) {
+    return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as Game[];
+      })
+    );
+  }
+
+  getTeam(idGame: string) {
+    return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as GameDetail[];
+      })
+    );
+  }
+
+  getTeamTest() {
+    return this.http.get(this.baseUrl + 'game/stats/' + 1060).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as Game[];
+      })
+    );
+  }
+  getRanking() {
+    // Api usata per Classificha Est
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/East')
+      .pipe(
+        map((response: any) => {
           console.log(response);
           return response as Game[];
-        }));
-      };
-
-    getTeam(idGame: string){
-      return this.http.get(this.baseUrl + 'game/stats/' + idGame)
-        .pipe(map((response:any) => {
-          console.log(response);
-          return response as GameDetail[];
-        }));
-      };
-
-    getTeamTest(){
-      return this.http.get(this.baseUrl + 'game/stats/' + 1060)
-        .pipe(map((response:any) => {
-          console.log(response);
-          return response as Game[];
-        }));
-      };
+        })
+      );
+  }
 }
