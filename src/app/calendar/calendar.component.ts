@@ -16,7 +16,6 @@ export class CalendarComponent {
   }
 
   onChange(event: any) {
-    console.log(event.value);
     this.currentDate = DateTime.fromJSDate(event.value);
   }
 
