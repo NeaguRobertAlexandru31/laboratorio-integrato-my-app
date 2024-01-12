@@ -21,43 +21,38 @@ export class ApiService {
       map((response: any) => {
         console.log(response);
         return response as Game[];
-      })
-    );
-  }
-  //Utilizzata in Risultati
-  getGames(date: string) {
-    return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as Game[];
-      })
-    );
-  }
-  //Utilizzata in Partita-Detail
-  getTeam(idGame: string) {
-    return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as GameDetail[];
-      })
-    );
-  }
-  //Utilizzata in Risultati
-  getTeamTest() {
-    return this.http.get(this.baseUrl + 'game/stats/' + 10600).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as GameDetail[];
-      })
-    );
-  }
-  //Utilizzata in Risultati
-  getGiocatoriSquadraTest() {
-    return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 8).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as Player[];
-      })
-    );
-  }
+      }));
+    };
+    //Utilizzata in Risultati
+    getGames(date: string){
+      return this.http.get(this.baseUrl + 'home/gameday/' + date)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as Game[];
+        }));
+      };
+    //Utilizzata in Partita-Detail
+    getPartita(idGame: string){
+      return this.http.get(this.baseUrl + 'game/stats/' + idGame)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as GameDetail[];
+        }));
+      };
+    //Utilizzata in Risultati
+    getPartitaTest(){
+      return this.http.get(this.baseUrl + 'game/stats/' + 11945)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as GameDetail[];
+        }));
+      };
+    //Funzionante
+    getGiocatoriSquadra(team: number, season: number){
+      return this.http.get(this.baseUrl + 'team/season/' + team + '/' + season)
+        .pipe(map((response:any) => {
+          console.log(response);
+          return response as Player[];
+        }));
+      };
 }

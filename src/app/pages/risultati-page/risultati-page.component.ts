@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DateTime } from 'luxon';
 
 //Chiama API
-import { ApiService } from '../_service/api.service';
-import Game from '../_models/game.model';
+import { ApiService } from '../../_service/api.service';
+import Game from '../../_models/game.model';
 
 @Component({
   selector: 'app-risultati-page',
@@ -12,6 +12,9 @@ import Game from '../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
+handleDateChange($event: DateTime<boolean>) {
+throw new Error('Method not implemented.');
+}
   games: Game[] = [];
   squadre: any[] = [];
 
@@ -45,17 +48,11 @@ export class RisultatiPageComponent implements OnInit {
   }
 
   ngOnInit(){
-    // console.log(this.formatDate());
-    // this.apiService.getAll().subscribe( (response) => {
-    //   this.games = response;
-    // });
+
     this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
-    // this.apiService.getTeamTest().subscribe( (response) => {
-    //   this.squadre = response;
-    // });
-    // this.apiService.getGiocatoriSquadraTest().subscribe( (response) => {
+    // this.apiService.getGiocatoriSquadra(8,2023).subscribe( (response) => {
     //   this.squadre = response;
     // });
   }
