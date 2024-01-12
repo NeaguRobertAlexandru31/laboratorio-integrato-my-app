@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 import Game from '../_models/game.model';
 import GameDetail from '../_models/gameDetail.model';
 import Player from '../_models/player.model';
-
+import Ranking from '../_models/ranking.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -59,5 +59,15 @@ export class ApiService {
         return response as Player[];
       })
     );
+  }
+  getRankingEast() {
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Ranking;
+        })
+      );
   }
 }

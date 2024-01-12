@@ -8,16 +8,16 @@ import Ranking from '../_models/ranking.model';
   styleUrls: ['./est-page.component.scss'],
 })
 export class EstPageComponent implements OnInit {
-  res: Ranking[] = [];
+  listsRanking: Ranking[] = [];
   nome: any[] = [];
   currentDate: Date = new Date();
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getRanking().subscribe((response: any) => {
-      console.log(response);
-      this.res = response;
+    this.apiService.getRankingEast().subscribe((response: any) => {
+      // console.log(response);
+      this.listsRanking = response;
     });
   }
 }
