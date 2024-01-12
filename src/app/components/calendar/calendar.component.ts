@@ -28,13 +28,12 @@ export class CalendarComponent {
 
   onChange(event: any) {
     this.currentDate = DateTime.fromJSDate(event.value);
-    
   }
 
   incrementDate() {
     let currentDate = this.selectedDate || new Date();
     currentDate.setDate(currentDate.getDate() + 1);
-    this.selectedDate = currentDate;
+    this.selectedDate = new Date(currentDate);
   }
 
   reduceDate() {
