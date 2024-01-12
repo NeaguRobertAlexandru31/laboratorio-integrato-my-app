@@ -1,5 +1,5 @@
 export default interface Ranking {
-  teamdId: number;
+  teamId: number;
   teamLogo: string;
   teamName: string;
   lose: number;

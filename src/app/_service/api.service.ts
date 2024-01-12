@@ -42,24 +42,8 @@ export class ApiService {
       })
     );
   }
-  //Utilizzata in Risultati
-  getTeamTest() {
-    return this.http.get(this.baseUrl + 'game/stats/' + 10600).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as GameDetail[];
-      })
-    );
-  }
-  //Utilizzata in Risultati
-  getGiocatoriSquadraTest() {
-    return this.http.get(this.baseUrl + 'team/season/' + 8 + '/' + 8).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as Player[];
-      })
-    );
-  }
+  
+  //Utilizzata in Classifiche Est
   getRankingEast() {
     return this.http
       .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')

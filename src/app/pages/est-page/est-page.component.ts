@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../_service/api.service';
-
+import Ranking from 'src/app/_models/ranking.model';
 @Component({
   selector: 'app-est-page',
   templateUrl: './est-page.component.html',
