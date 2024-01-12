@@ -20,7 +20,10 @@
   </div>
 
   <div class="container">
-    <table *ngIf="res && res.length" class="w-full text-center">
+    <table
+      *ngIf="listsRanking && listsRanking.length"
+      class="w-full text-center"
+    >
       <thead class="text-white">
         <tr class="w-full flex flex-row p-2 bg-hoops-primary">
           <!-- Position and NameTeam in col-6 -->
@@ -52,11 +55,11 @@
 
       <tbody>
         <tr
-          *ngFor="let squadra of res"
+          *ngFor="let rank of listsRanking"
           class="w-full flex flex-row justify-center items-center p-2"
         >
           <td class="w-2/12">
-            <p>{{ res.teamdId }}</p>
+            <p>{{ rank.teamId }}</p>
           </td>
           <td class="w-5/12 flex flex-row items-center">
             <img
@@ -64,7 +67,7 @@
               src="https://via.placeholder.com/30x30"
               alt=""
             />
-            <p class="w-full p-classifica">{{ res.teamName }}</p>
+            <!-- <p class="w-full p-classifica">{{ listsRanking.teamName }}</p> -->
           </td>
           <td class="w-1/12">
             <p>-</p>
