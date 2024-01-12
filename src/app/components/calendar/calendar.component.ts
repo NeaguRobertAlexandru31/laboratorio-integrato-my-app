@@ -10,13 +10,15 @@ import { DatePipe } from '@angular/common';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  providers: [DatePipe],                                              /* DATA DA FORMATTARE */
+  providers: [DatePipe],
 })
 export class CalendarComponent {
   currentDate: DateTime = DateTime.now();
   @ViewChild('picker') picker!: MatDatepicker<Date>;
 
   selectedDate: Date;
+  apiService: any;
+  games: any;
 
   constructor() {
     this.selectedDate = new Date();
@@ -25,7 +27,7 @@ export class CalendarComponent {
   onDateInput(event: MatDatepickerInputEvent<DateTime>): void {
     this.currentDate = event.value || DateTime.now();
   }
-
+  
   onChange(event: any) {
     this.currentDate = DateTime.fromJSDate(event.value);
   }
@@ -47,5 +49,4 @@ export class CalendarComponent {
       this.picker.open();
     }
   }
-
 }
