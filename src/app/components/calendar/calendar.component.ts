@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  providers: [DatePipe],
+  providers: [DatePipe],                                              /* DATA DA FORMATTARE */
 })
 export class CalendarComponent {
   currentDate: DateTime = DateTime.now();
@@ -28,12 +28,13 @@ export class CalendarComponent {
 
   onChange(event: any) {
     this.currentDate = DateTime.fromJSDate(event.value);
+    
   }
 
   incrementDate() {
     let currentDate = this.selectedDate || new Date();
     currentDate.setDate(currentDate.getDate() + 1);
-    this.selectedDate = new Date(currentDate);
+    this.selectedDate = currentDate;
   }
 
   reduceDate() {
@@ -47,4 +48,5 @@ export class CalendarComponent {
       this.picker.open();
     }
   }
+
 }

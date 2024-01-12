@@ -67,7 +67,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     MatNativeDateModule,
     MatIconModule,
   ],
-  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

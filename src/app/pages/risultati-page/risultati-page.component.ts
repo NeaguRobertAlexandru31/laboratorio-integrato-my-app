@@ -12,9 +12,7 @@ import Game from '../../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-handleDateChange($event: DateTime<boolean>) {
-throw new Error('Method not implemented.');
-}
+ 
   games: Game[] = [];
   squadre: any[] = [];
 
@@ -28,7 +26,7 @@ throw new Error('Method not implemented.');
   //   if(day<10){
   //     day = '0' + day;
   //   }
-    
+
   //   return "'" + year + '-' +  monthList[month] + '-' + day + "'"
   // }
 
@@ -37,21 +35,22 @@ throw new Error('Method not implemented.');
   constructor(private apiService: ApiService) {}
 
   getGradient(game: any): string {
-    if(game.homeColour === null){
-      return `linear-gradient(to right, #ffffff, #${game.visitorsColour})`
-    }else if(game.visitorsColour === null){
-      return `linear-gradient(to right, #${game.homeColour}, #ffffff)`
-    }else if(game.homeColour === null && game.visitorsColour === null){
-      return `linear-gradient(to right, #808080, #ffffff)`
+    if (game.homeColour === null) {
+      return `linear-gradient(to right, #ffffff, #${game.visitorsColour})`;
+    } else if (game.visitorsColour === null) {
+      return `linear-gradient(to right, #${game.homeColour}, #ffffff)`;
+    } else if (game.homeColour === null && game.visitorsColour === null) {
+      return `linear-gradient(to right, #808080, #ffffff)`;
     }
     return `linear-gradient(to right, #${game.homeColour}, #${game.visitorsColour})`;
   }
 
-  ngOnInit(){
-
-    this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
-      this.games = response;
-    });
+  ngOnInit() {
+    this.apiService
+      .getGames(this.currentDate.toFormat('yyyy-MM-dd'))
+      .subscribe((response) => {
+        this.games = response;
+      });
     // this.apiService.getGiocatoriSquadra(8,2023).subscribe( (response) => {
     //   this.squadre = response;
     // });
