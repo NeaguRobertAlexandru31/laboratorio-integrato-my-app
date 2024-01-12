@@ -1,13 +1,12 @@
-<div class="flex">
+<div class="flex px-2">
   <!-- Tab "Risultati" -->
-  <button routerLink="/partite/risultati"
-    class="flex-1 py-2 px-4 text-center bg-hoops-primary text-white hover:bg-hoops-primary-10 hover:border-b-4 hover:border-hoops-primary">
+  <button routerLink="/partite/risultati" (click)="selectorPage('risultati')"
+    class="flex-1 py-1 px-4 text-center text-black rounded-full hover:font-bold {{styleResult}}">
     Risultati
   </button>
-
   <!-- Tab "Programmate" -->
-  <button routerLink="/partite/programmate"
-    class="flex-1 py-2 px-4 text-center bg-hoops-primary text-white hover:bg-hoops-primary-10 hover:border-b-2 hover:border-hoops-primary">
+  <button routerLink="/partite/programmate" (click)="selectorPage('programmate')"
+    class="flex-1 py-1 px-4 text-black rounded-full hover:font-bold {{styleProgram}}">
     Programmate
   </button>
 </div>
