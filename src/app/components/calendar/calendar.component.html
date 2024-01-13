@@ -1,13 +1,28 @@
-<div class="m-4 p-2 bg-hoops-primary text-white md:w-1/3 mx-auto rounded-lg">
+<div class="m-4 p-2 bg-hoops-primary text-white w-[97%] md:w-1/3 mx-auto rounded-2xl">
   <div class="flex items-center justify-center">
-    <button mat-icon-button (click)="reduceDate()" class="flex items-center justify-center w-10">
+    <button
+      mat-icon-button
+      (click)="reduceDate()"
+      class="flex items-center justify-center w-10"
+    >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
 
-    <input (click)="openPicker()" matInput [matDatepicker]="picker" class="text-center bg-hoops-primary" readonly
-      (dateChange)="onChange($event)" [(ngModel)]="selectedDate" />
+    <input
+      (click)="openPicker()"
+      matInput
+      [matDatepicker]="picker"
+      class="text-center bg-hoops-primary"
+      readonly
+      (dateChange)="onChange($event)"
+      [(ngModel)]="selectedDate"
+    />
 
-    <button mat-icon-button (click)="incrementDate();" class="flex items-center justify-center w-10">
+    <button
+      mat-icon-button
+      (click)="incrementDate()"
+      class="flex items-center justify-center w-10"
+    >
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
