@@ -24,13 +24,16 @@ export class PartitaDetailPageComponent implements OnInit{
     return c;
   }
 
+  isVisible = false;
+
+  openStats() {
+    this.isVisible = !this.isVisible;
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.idGame = params['idGame'];
 
-      // this.apiService.getTeam(this.idGame).subscribe( (response) => {
-      //   this.squadra = response;
-      // });
       this.apiService.getPartitaTest().subscribe( (response) => {
         this.partite = response;
       });

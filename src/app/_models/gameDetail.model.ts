@@ -54,5 +54,15 @@ export default interface GameDetail{
     visitorPlusMinus: string,
     visitorMin: string,
     minutes: string,
-    pfouls: number
+    pfouls: number,
+    p1Home: number,
+    p1Visitors: number,
+    p2Home: number,
+    p2Visitors: number,
+    p3Home: number,
+    p3Visitors: number,
+    p4Home: number,
+    p4Visitors: number,
+    p5Home: number,
+    p5Visitors: number
 }
