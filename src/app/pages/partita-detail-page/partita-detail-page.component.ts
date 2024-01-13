@@ -16,6 +16,8 @@ export class PartitaDetailPageComponent implements OnInit{
   partite: GameDetail[] = [];
 
   idGame: string = '';
+  // homeTeamName: string = '';
+  // visitorTeamName: string = '';
 
   toNumber(a:string,b:string){
     let primo:string = a;
@@ -34,9 +36,14 @@ export class PartitaDetailPageComponent implements OnInit{
     this.activatedRoute.params.subscribe( (params) => {
       this.idGame = params['idGame'];
 
+      //Chiamata di test
       this.apiService.getPartitaTest().subscribe( (response) => {
         this.partite = response;
       });
+      //Chiamata per partita specifica
+      // this.apiService.getPartita(this.idGame).subscribe( (response) => {
+      //   this.partite = response;
+      // });
     })
   }
 

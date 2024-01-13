@@ -13,6 +13,7 @@ import Player from '../_models/player.model';
 })
 export class ApiService {
   baseUrl = 'http://localhost:8045/';
+  // baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   constructor(private http: HttpClient) {}
   //Inutilizzata
@@ -44,13 +45,14 @@ export class ApiService {
   }
   //Utilizzata in Risultati
   getPartitaTest() {
-    return this.http.get(this.baseUrl + 'game/stats/' + 11945).pipe(
+    return this.http.get(this.baseUrl + 'game/stats/' + 12216).pipe(
       map((response: any) => {
         console.log(response);
         return response as GameDetail[];
       })
     );
   }
+  
   //Funzionante
   getGiocatoriSquadra(team: number, season: number) {
     return this.http
@@ -62,4 +64,18 @@ export class ApiService {
         })
       );
   }
+
+  //Chiamata non funzionante ne collegata
+  getFavoriteTeam(idTeam:number){
+    return this.http
+      .get(this.baseUrl + 'fav/new/team/' + idTeam)
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Player[];
+        })
+      );
+  }
+
+
 }

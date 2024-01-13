@@ -4,7 +4,9 @@
       <div class="w-full text-center px-6 py-2">
         <h3 class="h-fit">Home</h3>
         <div class="h-40 flex items-center">
-          <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
+          <a [routerLink]="'/squadra'">
+            <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
+          </a>
         </div>
         <p class="h-fit align-bottom">{{partita.homeTeamName}}</p>
       </div>
@@ -15,7 +17,9 @@
       <div class="w-full text-center px-6 py-2">
         <h3 class="h-fit">Visitors</h3>
         <div class="h-40 flex items-center">
-          <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
+          <a [routerLink]="'/squadra'">
+            <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
+          </a>
         </div>
         <p class="h-fit align-bottom">{{partita.visitorTeamName}}</p>
       </div>

@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 //Chiama API
 import { ApiService } from '../../_service/api.service';
 import Game from '../../_models/game.model';
+import Player from 'src/app/_models/player.model';
 
 @Component({
   selector: 'app-risultati-page',
@@ -18,6 +19,8 @@ export class RisultatiPageComponent implements OnInit {
   currentDate: DateTime = DateTime.now();
 
   idGame: number = 0;
+  // homeTeamName: string = '';
+  // visitorTeamName: string = '';
 
   constructor(private apiService: ApiService) {}
 

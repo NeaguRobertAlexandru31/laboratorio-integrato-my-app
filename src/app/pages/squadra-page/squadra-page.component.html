@@ -1,0 +1,63 @@
+<div class="px-2">
+
+  <section *ngFor="let team of teams" id="header">
+    <div class="flex flex-row justify-center items-center py-2 ps-4 pr-7 bg-[#1752B3] rounded-md">
+      <div class="w-3/12">
+        <img class="h-20" [src]="team.visitorTeamLogo" alt="">
+      </div>
+      <div class="w-7/12 text-center text-md text-white font-bold">
+        <h1 class="drop-shadow">{{team.visitorTeamName}}</h1>
+      </div>
+      <div class="w-2/12 flex items-center justify-center">
+        <button>
+          <img src="https://via.placeholder.com/30x30" alt="">
+        </button>
+      </div>
+    </div>
+
+    <!-- Provare ad utilizzare gli ngClass o ngStyle con la condizionale true o false per le classi -->
+    <div class="flex flex-row justify-center items-center">
+      <button (click)="accordionTeam('panoramica')" class="w-full py-1 px-4 rounded-full">Panoramica</button>
+      <button (click)="accordionTeam('partite')" class="w-full py-1 px-4 rounded-full">Parite</button>
+      <button (click)="accordionTeam('giocatori')" class="w-full py-1 px-4 rounded-full">Giocatori</button>
+    </div>
+  </section>
+
+  <section id="panoramica" *ngIf="sectionPanoramica == true">
+    <div class="w-full">
+
+    </div>
+  </section>
+
+  <section id="partite" *ngIf="sectionPartite == true">
+    <div class="w-full">
+
+    </div>
+  </section>
+
+  <section id="giocatori" *ngIf="sectionGiocatori == true">
+    <div *ngFor="let player of players"
+      class="w-full flex flex-row justify-center items-center drop-shadow-md bg-slate-300 my-2 py-2 px-4 rounded-md">
+      <div class="w-fit">
+        <img src="https://via.placeholder.com/40x40" alt="">
+      </div>
+      <div class="w-full px-3">
+        <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
+        <div class="flex flex-row justify-between items-center text-sm pr-10">
+          <p>{{player.shirtNumber}}</p>
+          <p>{{player.pos}}</p>
+          <p>{{player.eta}} anni</p>
+          <div class="flex flex-row items-center">
+            <img src="https://via.placeholder.com/20x20" alt="">
+            <p>{{player.country}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-fit flex items-center">
+        <button>
+          <img src="https://via.placeholder.com/40x40" alt="">
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

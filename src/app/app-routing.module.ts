@@ -15,6 +15,7 @@ import { RegistrazionePageComponent } from './pages/registrazione-page/registraz
 import { AccessoPageComponent } from './pages/accesso-page/accesso-page.component';
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
+import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'profilo', component: ProfiloComponent },
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
+  { path: 'squadra', component: SquadraPageComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 
