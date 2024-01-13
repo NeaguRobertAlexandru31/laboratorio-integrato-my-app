@@ -2,7 +2,7 @@
 <app-partite-page></app-partite-page>
 
 <!-- Calendario -->
-<app-calendar></app-calendar>
+<app-calendar (sendDateEvent)="receiveDate($event)"></app-calendar>
 
 <!-- Tabella -->
 <table *ngIf="games && games.length" class="w-full border-none text-white">

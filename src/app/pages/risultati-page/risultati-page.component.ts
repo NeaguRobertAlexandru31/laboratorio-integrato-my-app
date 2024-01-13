@@ -12,7 +12,7 @@ import Game from '../../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
- 
+
   games: Game[] = [];
 
   currentDate: DateTime = DateTime.now();
@@ -22,7 +22,7 @@ export class RisultatiPageComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   getGradient(game: Game): string {
-    if(game.homeColour === null){
+    if(game.homeColour === null){ 
       return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`
     }else if(game.visitorsColour === null){
       return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`
@@ -33,8 +33,14 @@ export class RisultatiPageComponent implements OnInit {
   }
 
   ngOnInit(){
-
     this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
+      this.games = response;
+    });
+  }
+
+  receiveDate(date:Date){
+    console.log(date);
+    this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
   }
