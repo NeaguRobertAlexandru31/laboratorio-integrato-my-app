@@ -12,7 +12,6 @@ import Game from '../../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-
   games: Game[] = [];
 
   currentDate: DateTime = DateTime.now();
@@ -22,26 +21,30 @@ export class RisultatiPageComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   getGradient(game: Game): string {
-    if(game.homeColour === null){ 
-      return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`
-    }else if(game.visitorsColour === null){
-      return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`
-    }else if(game.homeColour === null && game.visitorsColour === null){
-      return `linear-gradient(to right, #808080B3, #ffffff)`
+    if (game.homeColour === null) {
+      return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`;
+    } else if (game.visitorsColour === null) {
+      return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`;
+    } else if (game.homeColour === null && game.visitorsColour === null) {
+      return `linear-gradient(to right, #808080B3, #ffffff)`;
     }
     return `linear-gradient(to right, #${game.homeColour}B3, #${game.visitorsColour}B3)`;
   }
 
-  ngOnInit(){
-    this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
-      this.games = response;
-    });
+  ngOnInit() {
+    this.apiService
+      .getGames(this.currentDate.toFormat('yyyy-MM-dd'))
+      .subscribe((response) => {
+        this.games = response;
+      });
   }
 
-  receiveDate(date:Date){
+  receiveDate(date: Date) {
     console.log(date);
-    this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe( (response) => {
-      this.games = response;
-    });
+    this.apiService
+      .getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd'))
+      .subscribe((response) => {
+        this.games = response;
+      });
   }
 }

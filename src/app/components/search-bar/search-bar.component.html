@@ -1,7 +1,15 @@
 <div>
   <button (click)="expand()" *ngIf="isExpanded == false">
-    <img class="bg-hoops-primary rounded-full p-1" src="../../assets/img/Group.svg" alt="">
+    <img
+      class="bg-hoops-primary rounded-full p-1"
+      src="../../assets/img/Group.svg"
+      alt=""
+    />
   </button>
-  <input *ngIf="isExpanded == true" type=" text" placeholder="Cerca..."
-    class="w-full rounded-full px-3 py-1 text-white bg-hoops-primary" />
+  <input
+    *ngIf="isExpanded == true"
+    type=" text"
+    placeholder="Cerca..."
+    class="w-full rounded-full px-3 py-1 text-white bg-hoops-primary"
+  />
 </div>

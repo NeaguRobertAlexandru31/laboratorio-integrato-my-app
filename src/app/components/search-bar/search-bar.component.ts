@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { ApiService } from '../../_service/api.service';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,8 +11,11 @@ import { Component } from '@angular/core';
 export class SearchBarComponent {
 
   isExpanded = false;
-
+    
+  constructor(private ApiService: ApiService) {}
+  
   expand(): void {
     this.isExpanded = !this.isExpanded;
   }
+
 }

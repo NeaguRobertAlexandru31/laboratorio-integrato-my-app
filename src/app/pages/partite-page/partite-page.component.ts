@@ -25,4 +25,5 @@ export class PartitePageComponent implements OnInit {
   ngOnInit(): void {
     this.selectorPage('risultati');
   }
+
 }

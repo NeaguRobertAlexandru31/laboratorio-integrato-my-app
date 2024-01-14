@@ -12,6 +12,9 @@ import Player from '../_models/player.model';
   providedIn: 'root',
 })
 export class ApiService {
+  search(searchTerm: string) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl = 'http://localhost:8045/';
 
   constructor(private http: HttpClient) {}
@@ -62,4 +65,5 @@ export class ApiService {
         })
       );
   }
+
 }
