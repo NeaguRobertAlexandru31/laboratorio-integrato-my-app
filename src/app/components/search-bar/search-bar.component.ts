@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,4 +12,5 @@ export class SearchBarComponent {
   expand(): void {
     this.isExpanded = !this.isExpanded;
   }
+
 }
