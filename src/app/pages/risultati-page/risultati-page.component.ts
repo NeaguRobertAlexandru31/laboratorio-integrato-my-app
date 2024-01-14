@@ -13,10 +13,9 @@ import Game from '../../_models/game.model';
 })
 export class RisultatiPageComponent implements OnInit {
   games: Game[] = [];
-
   currentDate: DateTime = DateTime.now();
-
   idGame: number = 0;
+  isLoading: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
 
   constructor(private apiService: ApiService) {}
 
@@ -31,20 +30,33 @@ export class RisultatiPageComponent implements OnInit {
     return `linear-gradient(to right, #${game.homeColour}B3, #${game.visitorsColour}B3)`;
   }
 
-  ngOnInit() {
-    this.apiService
-      .getGames(this.currentDate.toFormat('yyyy-MM-dd'))
-      .subscribe((response) => {
-        this.games = response;
-      });
+  ngOnInit(){
+    this.loadGames(this.currentDate);
+    this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
+      this.games = response;
+    });
   }
 
-  receiveDate(date: Date) {
-    console.log(date);
-    this.apiService
-      .getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd'))
-      .subscribe((response) => {
+  loadGames(date: DateTime) {
+    this.isLoading = true; // Imposta il flag di caricamento a true
+    this.apiService.getGames(date.toFormat('yyyy-MM-dd')).subscribe(
+      (response) => {
         this.games = response;
-      });
+      },
+      (error) => {
+        console.error('Error fetching games', error);
+      },
+      () => {
+        this.isLoading = false; // Imposta il flag di caricamento a false quando il caricamento è completo
+      }
+    );
+  }
+
+  receiveDate(date:Date){
+    console.log(date);
+    this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe( (response) => {
+      this.games = response;
+    });
+    this.loadGames(DateTime.fromJSDate(date));
   }
 }
