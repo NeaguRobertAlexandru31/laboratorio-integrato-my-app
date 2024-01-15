@@ -16,7 +16,7 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
   baseUrl = 'http://localhost:8045/';
-  // baseUrl = 'http://hoopsdata.ddns.net:8045/';
+  //baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   constructor(private http: HttpClient) {}
   //Inutilizzata
@@ -76,6 +76,30 @@ export class ApiService {
         map((response: any) => {
           console.log(response);
           return response as Player[];
+        })
+      );
+  }
+
+  //Chiamata non funzionante ne collegata
+  getPreviousGame(idTeam:number){
+    return this.http
+      .get(this.baseUrl + 'game/team/pass/' + idTeam)
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Game[];
+        })
+      );
+  }
+
+  //Chiamata non funzionante ne collegata
+  getNextGame(idTeam:number){
+    return this.http
+      .get(this.baseUrl + 'game/team/prog/' + idTeam)
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Game[];
         })
       );
   }

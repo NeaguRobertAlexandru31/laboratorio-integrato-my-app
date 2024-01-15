@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import Team from '../../_models/team.model';
 import Player from 'src/app/_models/player.model';
-import GameDetail from 'src/app/_models/gameDetail.model';
+
+import Game from 'src/app/_models/game.model';
 
 @Component({
   selector: 'squadra-page',
@@ -17,18 +18,16 @@ export class SquadraPageComponent implements OnInit{
 
   //teams: Team[] = [];
   //Provvisorio
-  teams: GameDetail[] = [];
+  teams: Team[] = [];
   players: Player[] = [];
+  prevoiusGame: Game[] = [];
+  nextGame: Game[] = [];
 
   idSquadra: string = '';
 
-  sectionPanoramica: boolean = false; //impostare come primo
+  sectionPanoramica: boolean = true; //impostare come primo
   sectionPartite: boolean = false;
-  sectionGiocatori: boolean = true;
-
-  stylePanoramica:string = '';
-  stylePartite:string = '';
-  styleGiocatori:string = '';
+  sectionGiocatori: boolean = false;
 
   accordionTeam(section:string,) {
     if(section == 'panoramica'){
@@ -46,6 +45,30 @@ export class SquadraPageComponent implements OnInit{
     }
   }
 
+  sectionRisultati: boolean = true;
+  sectionProgrammate: boolean = false;
+
+  accordionGame(section:string){
+    if(section == 'risultati'){
+      this.sectionRisultati = true;
+      this.sectionProgrammate = false;
+    } else if(section == 'programmate'){
+      this.sectionRisultati = false;
+      this.sectionProgrammate = true;
+    }
+  }
+
+  getGradient(game: Game): string {
+    if (game.homeColour === null) {
+      return `linear-gradient(to right, #ffffff, ${game.visitorsColour}B3)`;
+    } else if (game.visitorsColour === null) {
+      return `linear-gradient(to right, ${game.homeColour}B3, #ffffff)`;
+    } else if (game.homeColour === null && game.visitorsColour === null) {
+      return `linear-gradient(to right, 808080B3, #ffffff)`;
+    }
+    return `linear-gradient(to right, ${game.homeColour}B3, ${game.visitorsColour}B3)`;
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.idSquadra = params['idSquadra'];
@@ -53,10 +76,11 @@ export class SquadraPageComponent implements OnInit{
       this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
         this.players = response;
       });
-
-      //Porvvisoria
-      this.apiService.getPartitaTest().subscribe( (response) => {
-        this.teams = response;
+      this.apiService.getPreviousGame(8).subscribe( (response) => {
+        this.prevoiusGame = response;
+      });
+      this.apiService.getNextGame(8).subscribe( (response) => {
+        this.nextGame = response;
       });
     })
   }

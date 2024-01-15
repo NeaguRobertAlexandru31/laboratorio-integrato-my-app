@@ -8,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class PartitePageComponent implements OnInit {
   constructor() {}
 
-  styleResult: string = 'bg-hoops-primary text-white';
-  styleProgram: string = 'bg-hoops-primary text-white';
+  sectionResult: boolean = true;
+  sectionProgram: boolean = false;
 
   selectorPage(page: string) {
     if (page == 'risultati') {
-      this.styleResult = 'bg-hoops-primary text-white';
-      this.styleProgram = '';
+      this.sectionResult = true;
+      this.sectionProgram = false;
     }
     if (page == 'programmate') {
-      this.styleResult = '';
-      this.styleProgram = 'bg-hoops-primary text-white';
+      this.sectionResult = false;
+      this.sectionProgram = true;
     }
   }
 
