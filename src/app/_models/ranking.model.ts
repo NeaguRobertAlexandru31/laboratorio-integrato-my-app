@@ -3,8 +3,8 @@ export default interface Ranking {
   teamLogo: string;
   teamName: string;
   lose: number;
-  win: number;
-  winPercentage: number;
-  diffPoints?: number;
+  victories: number;
+  winPercentage:  number;
+  diffPoints: number;
   colour: string;
 }

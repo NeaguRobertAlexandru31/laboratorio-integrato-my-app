@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    CommonModule
   ],
   providers: [ApiService, { provide: DateTime, useValue: DateTime }],
   bootstrap: [AppComponent],

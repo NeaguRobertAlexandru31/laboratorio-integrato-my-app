@@ -1,9 +1,9 @@
 <div class="flex-1">
     <div class="flex flex-row">
         <!-- First Column (col-6) -->
-        <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary">
+        <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary btnTest">
             <!-- Tab "Risultati" -->
-            <button routerLink="/classifiche/ovest" routerLinkActive="active" class="!active">
+            <button routerLink="/classifiche/ovest" routerLinkActive="!active" class="!active">
         Ovest
       </button>
         </div>
@@ -11,14 +11,14 @@
         <!-- Second Column (col-6) -->
         <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary">
             <!-- Tab "Risultati" -->
-            <button routerLink="/classifiche/est" class="active">Est</button>
+            <button routerLink="/classifiche/est" class="active" routerLinkActive="active">Est</button>
         </div>
     </div>
 
-    <div class="container">
+    <div class="flex flex-row">
         <table *ngIf="listsRanking && listsRanking.length" class="w-full text-center">
-            <thead class="text-white">
-                <tr class="w-full flex flex-row p-2 bg-hoops-primary">
+            <thead class="text-white w-full">
+                <tr class="w-full flex flex-row p-2 bg-hoops-primary tabList ">
                     <!-- Position and NameTeam in col-6 -->
                     <th class="w-2/12">
                         <p>N</p>
@@ -47,28 +47,28 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let rank of listsRanking" class="w-full flex flex-row justify-center items-center p-2">
+                <tr *ngFor="let rank of listsRanking" class="w-full flex flex-row align-center justify-between p-2">
                     <td class="w-2/12">
                         <p>{{ rank.teamId }}</p>
                     </td>
-                    <td class="w-5/12 flex flex-row items-center">
-                        <img class="w-fit h-auto" [src]='rank.teamLogo' alt="" />
-                        <!-- <p class="w-full p-classifica">{{ listsRanking.teamName }}</p> -->
+                    <td class="w-5/12 flex flex-row items-center ">
+                        <img class="h-[50px] w-[50px] lg:h-[15%] lg:w-[15%]" [src]='rank.teamLogo' alt='rank.teamName logo' />
+                        <p class="w-full p-classifica">{{ rank.teamName }}</p>
                     </td>
                     <td class="w-1/12">
-                        <p>-</p>
+                        <!-- <p>{{rank.gamePlayed}}</p> -->
                     </td>
                     <td class="w-1/12">
-                        <p>-</p>
+                        <p>{{ rank.victories }}</p>
                     </td>
                     <td class="w-1/12">
-                        <p>-</p>
+                        <p>{{ rank.lose }}</p>
                     </td>
                     <td class="w-1/12">
-                        <p>-</p>
+                        <p>{{ rank.winPercentage }}%</p>
                     </td>
                     <td class="w-1/12">
-                        <p>-</p>
+                        <p>{{ rank.diffPoints}}</p>
                     </td>
                 </tr>
             </tbody>

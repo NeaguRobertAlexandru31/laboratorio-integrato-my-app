@@ -5,6 +5,34 @@
     /* Change the text color to your preference */
 }
 
-.p-classifica{
+.p-classifica {
     font-size: 14px;
 }
+
+.tabList {
+    display: flex;
+    padding: 6px 17px 6px 26px;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 7px;
+    border-bottom: 2px solid #8D66B7;
+    background: #8D66B7;
+}
+
+.btnTest {
+    display: flex;
+    padding: 5px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+}
+
+// td img {
+//     width: 30%;
+//     /* Larghezza fissa */
+//     height: 30%;
+//     /* Altezza fissa */
+//     object-fit: cover;
+//     /* Impedisce lo sgranamento */
+// }
