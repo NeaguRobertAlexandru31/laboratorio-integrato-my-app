@@ -69,6 +69,13 @@ export class SquadraPageComponent implements OnInit{
     return `linear-gradient(to right, ${game.homeColour}B3, ${game.visitorsColour}B3)`;
   }
 
+  favorite: boolean = false;
+
+  setFavorite(){
+    console.log('funge')
+    this.favorite = !this.favorite;
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.idSquadra = params['idSquadra'];
@@ -81,6 +88,9 @@ export class SquadraPageComponent implements OnInit{
       });
       this.apiService.getNextGame(8).subscribe( (response) => {
         this.nextGame = response;
+      });
+      this.apiService.getThisTeam(8).subscribe( (response) => {
+        this.teams = response;
       });
     })
   }
