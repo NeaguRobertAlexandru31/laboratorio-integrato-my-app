@@ -1,11 +1,12 @@
 <div *ngFor="let partita of partite" class="px-3 text-white">
 
   <section id="head">
-    <div class="container flex bg-slate-400 rounded-xl drop-shadow-md">
+    <div class="container flex rounded-xl drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
       <div class="w-full text-center px-6 py-3">
         <h3 class="h-fit">Home</h3>
         <div class="h-[110px] flex items-center">
-          <a [routerLink]="'/squadra'">
+          <a [routerLink]="'/squadra/'+this.partita.homeTeamName">
             <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
           </a>
         </div>
@@ -17,7 +18,7 @@
       <div class="w-full text-center px-6 py-3">
         <h3 class="h-fit">Visitors</h3>
         <div class="h-[110px] flex items-center">
-          <a [routerLink]="'/squadra'">
+          <a [routerLink]="'/squadra/'+this.partita.visitorTeamName">
             <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
           </a>
         </div>
@@ -27,7 +28,8 @@
   </section>
 
   <section id="punteggi-quarti">
-    <div class="container bg-slate-400 rounded-xl my-2 py-3 px-6 drop-shadow-md">
+    <div class="container rounded-xl my-2 py-3 px-6 drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
       <h2 class="text-xl text-center font-semibold mb-[8px]">Punteggi per quarti</h2>
       <table class="w-full">
         <thead>
@@ -63,7 +65,8 @@
   </section>
 
   <section id="statistiche">
-    <div class="bg-slate-400 flex flex-col justify-center items-center rounded-xl pt-2 drop-shadow-md">
+    <div class="flex flex-col justify-center items-center rounded-xl pt-2 drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
       <h2 class="text-xl text-center font-bold">Statistiche</h2>
 
       <div class="w-full text-center px-8 py-2">
@@ -319,7 +322,8 @@
   </section>
 
   <section id="arena">
-    <div class="flex flex-row justify-between items-center my-4 px-10 py-4 bg-slate-400 rounded-full drop-shadow-md">
+    <div class="flex flex-row justify-between items-center my-4 px-10 py-4 rounded-full drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
       <p>Arena: {{partita.arenaName}}</p>
       <p>City: {{partita.city}}</p>
     </div>

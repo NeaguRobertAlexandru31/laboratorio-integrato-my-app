@@ -23,7 +23,9 @@ export class SquadraPageComponent implements OnInit{
   prevoiusGame: Game[] = [];
   nextGame: Game[] = [];
 
-  idSquadra: string = '';
+  teamName: string = '';
+
+  // idTeam: number = 0;
 
   sectionPanoramica: boolean = true; //impostare come primo
   sectionPartite: boolean = false;
@@ -78,19 +80,25 @@ export class SquadraPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
-      this.idSquadra = params['idSquadra'];
+      this.teamName = params['teamName'];
 
-      this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
-        this.players = response;
+      // TODO: Prendere l'idGame
+      this.apiService.getThisTeam(8).subscribe( (response) => {
+        this.teams = response;
+        // this.idTeam = this.teams[0].idTeam //recupera l'id del team da usare per le altre chiamate
       });
-      this.apiService.getPreviousGame(8).subscribe( (response) => {
-        this.prevoiusGame = response;
-      });
+
+      // TODO: Posticipare il caricamento della seguenti funzioni (sostituire al numero this.idTeam)
       this.apiService.getNextGame(8).subscribe( (response) => {
         this.nextGame = response;
       });
-      this.apiService.getThisTeam(8).subscribe( (response) => {
-        this.teams = response;
+
+      this.apiService.getPreviousGame(8).subscribe( (response) => {
+        this.prevoiusGame = response;
+      });
+
+      this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
+        this.players = response;
       });
     })
   }

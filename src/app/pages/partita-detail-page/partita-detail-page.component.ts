@@ -16,8 +16,8 @@ export class PartitaDetailPageComponent implements OnInit{
   partite: GameDetail[] = [];
 
   idGame: string = '';
-  // homeTeamName: string = '';
-  // visitorTeamName: string = '';
+
+  teamName: string = '';
 
   toNumber(a:string,b:string){
     let primo:string = a;

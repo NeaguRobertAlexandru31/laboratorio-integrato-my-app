@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'profilo', component: ProfiloComponent },
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
-  { path: 'squadra', component: SquadraPageComponent },
+  { path: 'squadra/:teamName', component: SquadraPageComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 
