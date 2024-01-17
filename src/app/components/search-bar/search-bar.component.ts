@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../_service/api.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-search-bar',
@@ -10,12 +12,18 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class SearchBarComponent {
 
-  isExpanded = false;
-    
-  constructor(private ApiService: ApiService) {}
-  
-  expand(): void {
-    this.isExpanded = !this.isExpanded;
+  jsonIn = {
+    title: ""
+  }
+
+  constructor(private router:Router, private route: ActivatedRoute){}
+
+  ngOnInit(): void{
+
+  }
+
+  handleSearch(event: any){
+    this.router.navigate(['/list/' + this.jsonIn.title], { relativeTo: this.route });
   }
 
 }

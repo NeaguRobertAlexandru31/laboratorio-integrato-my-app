@@ -44,7 +44,6 @@ export class RisultatiPageComponent implements OnInit {
   }
 
   receiveDate(date:Date){
-    console.log(date);
     this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });

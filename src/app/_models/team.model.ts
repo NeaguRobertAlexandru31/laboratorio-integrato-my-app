@@ -1,4 +1,4 @@
-export default interface Team{
+export default interface Team {
     allStar: number | null,
     city: string,
     codeTeam: string,

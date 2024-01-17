@@ -36,12 +36,13 @@ import { DateTime } from 'luxon';
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 //Calendar
-import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { ListComponent } from './list/list.component';
 //Squadra
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component'
 
@@ -67,6 +68,7 @@ import { SquadraPageComponent } from './pages/squadra-page/squadra-page.componen
     //detail
     PartitaDetailPageComponent,
     CalendarComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

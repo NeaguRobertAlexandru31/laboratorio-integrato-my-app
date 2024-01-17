@@ -1,15 +1,19 @@
-<div>
-  <button (click)="expand()" *ngIf="isExpanded == false">
-    <img
-      class="bg-hoops-primary rounded-full p-1"
-      src="../../assets/img/Group.svg"
-      alt=""
-    />
-  </button>
+<form class="w-[112px] h-[28px]">
   <input
-    *ngIf="isExpanded == true"
+    name="term"
+    [(ngModel)]="jsonIn.title"
+    (keydown.enter)="handleSearch($event)"
+    required
     type=" text"
     placeholder="Cerca..."
     class="w-full rounded-full px-3 py-1 text-white bg-hoops-primary"
   />
-</div>
+  <button
+    routerLink="/list/{{ jsonIn.title }}"
+    (click)="handleSearch($event)"
+    type="button"
+    id="button-addon2"
+  ></button>
+</form>
+
+
