@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ListComponent } from './list/list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     //detail
     PartitaDetailPageComponent,
     CalendarComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

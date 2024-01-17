@@ -8,15 +8,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  title = 'HoopsData';
 
-  searchForm: FormGroup = new FormGroup({
-    search: new FormControl('')
-  })
-
-  public termList:Array<any> = [];
-
-  constructor(private apiService: ApiService){
+  constructor(){
 
   }
 }
