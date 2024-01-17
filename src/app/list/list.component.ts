@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../_service/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { ShowSearch } from '../_models/show.model';
+import Team  from '../_models/team.model'
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,7 +10,7 @@ import { ShowSearch } from '../_models/show.model';
 })
 export class ListComponent implements OnInit {
   searchedTitle: string | null = '';
-  shows: ShowSearch[] = [];
+  teams: Team[] = [];
 
   constructor(
     private http: HttpClient,
@@ -23,19 +23,12 @@ export class ListComponent implements OnInit {
       this.searchedTitle = params.get('title');
 
       this.apiService
-        .searchShow(this.searchedTitle ? this.searchedTitle : '')
+        .getAll()
         .subscribe((response: any) => {
-          this.shows = response;
-          console.log(this.shows);
+          this.teams = response;
+          console.log(this.teams);
         });
     });
   }
 
-  replaceSpaceBetweenWords(words: string) {
-    let newWords = words
-      .toLowerCase()
-      .replace(/[ ,\.]/g, '-')
-      .replace(/:/g, '');
-    return newWords;
-  }
 }

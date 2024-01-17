@@ -1,4 +1,4 @@
-export default interface Team{
+export default interface Team {
     allStar: number | null,
     city: string,
     codeTeam: string,
@@ -7,7 +7,7 @@ export default interface Team{
     league: {
         idLeague: number,
         nameLeague: string
-    }
+    },
     logo: string,
     nameTeam: string,
     nbaFranchise: string | null,

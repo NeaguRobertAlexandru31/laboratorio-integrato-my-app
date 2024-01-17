@@ -1,23 +1,12 @@
-<div class="container lista-film">
-    <div class="row">
-        <h2>Titolo cercato: {{searchedTitle}}</h2>
+<div >
+  <div >
+    <h2>Risultati per: {{ searchedTitle }}</h2>
+  </div>
+  <div >
+    <div
+      *ngFor="let team of teams"
+    >
+      <h5>{{ team.nameTeam}}</h5>
     </div>
-    <div class="row">
-        <div *ngFor="let show of shows" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="card">
-                <ng-container *ngIf="show.image != null">
-                    <img  src="{{show.image.medium}}" class="card-img-top" alt="immagine {{show.name}}" height="385px">
-                </ng-container>
-                <ng-container *ngIf="show.image == null">
-                    <img src="https://static.tvmaze.com/images/no-img/no-img-portrait-text.png" class="card-img-top" height="385px" alt="immagine {{show.name}}" >
-                </ng-container>
-                <div class="card-body">
-                    <h5 class="card-title">{{show.name}} - {{show.id}}</h5>
-                    <p class="card-text">Type: {{show.type}}</p>
-                    <p class="card-text">Language: {{show.language}}</p>
-                    <a routerLink="/shows/{{show.id}}/{{replaceSpaceBetweenWords(show.name)}}" class="btn btn-primary">Scopri di più</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

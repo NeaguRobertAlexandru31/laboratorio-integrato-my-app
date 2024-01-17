@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../_service/api.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-search-bar',
