@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService
   ) {}
-
+ 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.searchedTitle = params.get('title');
