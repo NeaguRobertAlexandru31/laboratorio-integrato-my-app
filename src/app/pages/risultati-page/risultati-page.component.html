@@ -11,45 +11,27 @@
 </div>
 
 <!-- Tabella -->
-<table
-  *ngIf="!isLoading && games && games.length"
-  class="w-full border-none text-white"
->
+<table *ngIf="!isLoading && games && games.length" class="w-full border-none text-white">
   <tbody class="text-center">
-    <tr
-      *ngFor="let game of games"
-      class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
-      [style.background]="getGradient(game)"
-    >
+    <tr *ngFor="let game of games" class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
       <td class="w-full">
-        <div
-          class="w-[109px] h-full px-3 flex flex-col items-center justify-center"
-        >
-          <img
-            [src]="game.homeTeamLogo"
-            alt="Team A"
-            class="h-[65px] w-fit mb-2"
-          />
+        <div class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
+          <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />
           <p class="drop-shadow">{{ game.homeTeamName }}</p>
         </div>
       </td>
       <td class="w-full h-full flex flex-col justify-center items-center">
         <p class="my-2 text-lg">{{ game.risultato }}</p>
         <!-- Formattazione dell'ora -->
-        <a
-          [routerLink]="'/partita/' + this.game.gameId"
-          class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full"
-        >
+        <a [routerLink]="'/partita/' + this.game.gameId"
+          class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full">
           Preview
         </a>
       </td>
       <td class="w-full">
         <div class="w-[109px] h-full px-3 flex flex-col items-center">
-          <img
-            [src]="game.visitorTeamLogo"
-            alt="Team B"
-            class="h-16 w-fit mb-2"
-          />
+          <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2" />
           <p class="drop-shadow">{{ game.visitorTeamName }}</p>
         </div>
       </td>

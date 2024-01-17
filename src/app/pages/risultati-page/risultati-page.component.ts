@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 //Chiama API
 import { ApiService } from '../../_service/api.service';
 import Game from '../../_models/game.model';
+import Player from 'src/app/_models/player.model';
 
 @Component({
   selector: 'app-risultati-page',
@@ -12,24 +13,14 @@ import Game from '../../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-
   games: Game[] = [];
   currentDate: DateTime = DateTime.now();
   idGame: number = 0;
   isLoading: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
 
-  constructor(private apiService: ApiService) {}
+  sectionResult: boolean = true;
 
-  getGradient(game: Game): string {
-    if(game.homeColour === null){ 
-      return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`
-    }else if(game.visitorsColour === null){
-      return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`
-    }else if(game.homeColour === null && game.visitorsColour === null){
-      return `linear-gradient(to right, #808080B3, #ffffff)`
-    }
-    return `linear-gradient(to right, #${game.homeColour}B3, #${game.visitorsColour}B3)`;
-  }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(){
     this.loadGames(this.currentDate);

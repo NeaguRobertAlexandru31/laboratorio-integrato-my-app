@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { ApiService } from '../../_service/api.service';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,4 +23,5 @@ export class SearchBarComponent {
   handleSearch(event: any){
     this.router.navigate(['/list/' + this.jsonIn.title], { relativeTo: this.route });
   }
+
 }

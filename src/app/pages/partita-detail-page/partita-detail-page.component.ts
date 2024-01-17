@@ -17,6 +17,8 @@ export class PartitaDetailPageComponent implements OnInit{
 
   idGame: string = '';
 
+  teamName: string = '';
+
   toNumber(a:string,b:string){
     let primo:string = a;
     let secondo:string = b;
@@ -30,13 +32,29 @@ export class PartitaDetailPageComponent implements OnInit{
     this.isVisible = !this.isVisible;
   }
 
+  // getGradient(game: GameDetail): string {
+  //   if (game.homeColour === null) {
+  //     return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`;
+  //   } else if (game.visitorsColour === null) {
+  //     return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`;
+  //   } else if (game.homeColour === null && game.visitorsColour === null) {
+  //     return `linear-gradient(to right, #808080B3, #ffffff)`;
+  //   }
+  //   return `linear-gradient(to right, #${game.homeColour}B3, #${game.visitorsColour}B3)`;
+  // }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.idGame = params['idGame'];
 
+      //Chiamata di test
       this.apiService.getPartitaTest().subscribe( (response) => {
         this.partite = response;
       });
+      //Chiamata per partita specifica
+      // this.apiService.getPartita(this.idGame).subscribe( (response) => {
+      //   this.partite = response;
+      // });
     })
   }
 
