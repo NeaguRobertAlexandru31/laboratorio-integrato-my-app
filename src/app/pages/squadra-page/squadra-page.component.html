@@ -26,10 +26,10 @@
       <button (click)="accordionTeam('panoramica')"
         [ngStyle]="{'background': sectionPanoramica ? team.colour+'B3' : '','color': sectionPanoramica ? 'white' : 'black'}"
         class="w-full py-1 px-4 rounded-full">Panoramica</button>
-      <button (click)="accordionTeam('partite')"
+      <button (click)="accordionTeam('partite')" (click)="loadPreviousGame()"
         [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}"
         class="w-full py-1 px-4 rounded-full">Parite</button>
-      <button (click)="accordionTeam('giocatori')"
+      <button (click)="accordionTeam('giocatori')" (click)="loadPlayers()"
         [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}"
         class=" w-full py-1 px-4
         rounded-full">Giocatori</button>
@@ -146,7 +146,7 @@
       <button (click)="accordionGame('risultati')"
         [ngStyle]="{'background': sectionRisultati ? team.colour+'B3' : '','color': sectionRisultati ? 'white' : 'black'}"
         class="w-full py-1 px-4 rounded-full">Risultati</button>
-      <button (click)="accordionGame('programmate')"
+      <button (click)="accordionGame('programmate')" (click)="loadNextGame()"
         [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}"
         class=" w-full py-1 px-4
         rounded-full">Programmate</button>
@@ -159,7 +159,7 @@
       <table *ngIf="prevoiusGame.length" class="w-full">
         <tbody *ngFor="let game of prevoiusGame" class="text-center">
           <tr class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
-            [style.background]="getGradient(game)">
+            [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
             <td class="w-full">
               <div class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
                 <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />

@@ -7,7 +7,7 @@ export default interface Team{
     league: {
         idLeague: number,
         nameLeague: string
-    }
+    },
     logo: string,
     nameTeam: string,
     nbaFranchise: string | null,

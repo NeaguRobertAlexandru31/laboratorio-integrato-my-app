@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './partite-page.component.html',
   styleUrls: ['./partite-page.component.scss'],
 })
-export class PartitePageComponent implements OnInit {
+export class PartitePageComponent {
   constructor() {}
 
   sectionResult: boolean = true;
@@ -20,10 +20,6 @@ export class PartitePageComponent implements OnInit {
       this.sectionResult = false;
       this.sectionProgram = true;
     }
-  }
-
-  ngOnInit(): void {
-    this.selectorPage('risultati');
   }
 
 }

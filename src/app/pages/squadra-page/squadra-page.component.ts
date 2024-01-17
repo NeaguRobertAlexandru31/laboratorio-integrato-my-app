@@ -60,15 +60,37 @@ export class SquadraPageComponent implements OnInit{
     }
   }
 
-  getGradient(game: Game): string {
-    if (game.homeColour === null) {
-      return `linear-gradient(to right, #ffffff, ${game.visitorsColour}B3)`;
-    } else if (game.visitorsColour === null) {
-      return `linear-gradient(to right, ${game.homeColour}B3, #ffffff)`;
-    } else if (game.homeColour === null && game.visitorsColour === null) {
-      return `linear-gradient(to right, 808080B3, #ffffff)`;
+  isLoadedGame:boolean = false;
+
+  loadPreviousGame(){
+    if(!this.isLoadedGame){
+      this.apiService.getPreviousGame(8).subscribe( (response) => {
+        this.prevoiusGame = response;
+      });
+      this.isLoadedGame = true;
     }
-    return `linear-gradient(to right, ${game.homeColour}B3, ${game.visitorsColour}B3)`;
+  }
+
+  isLoadedNext:boolean = false;
+
+  loadNextGame(){
+    if(!this.isLoadedNext){
+      this.apiService.getNextGame(8).subscribe( (response) => {
+        this.nextGame = response;
+      });
+      this.isLoadedNext = true;
+    }
+  }
+
+  isLoadedPlayer:boolean = false;
+
+  loadPlayers(){
+    if(!this.isLoadedPlayer){
+      this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
+        this.players = response;
+      });
+      this.isLoadedPlayer = true;
+    }
   }
 
   favorite: boolean = false;
@@ -82,23 +104,9 @@ export class SquadraPageComponent implements OnInit{
     this.activatedRoute.params.subscribe( (params) => {
       this.teamName = params['teamName'];
 
-      // TODO: Prendere l'idGame
+      // this.idTeam = this.teams[0].idTeam //recupera l'id del team da usare per le altre chiamate
       this.apiService.getThisTeam(8).subscribe( (response) => {
         this.teams = response;
-        // this.idTeam = this.teams[0].idTeam //recupera l'id del team da usare per le altre chiamate
-      });
-
-      // TODO: Posticipare il caricamento della seguenti funzioni (sostituire al numero this.idTeam)
-      this.apiService.getNextGame(8).subscribe( (response) => {
-        this.nextGame = response;
-      });
-
-      this.apiService.getPreviousGame(8).subscribe( (response) => {
-        this.prevoiusGame = response;
-      });
-
-      this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
-        this.players = response;
       });
     })
   }
