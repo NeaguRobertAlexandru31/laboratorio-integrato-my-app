@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
 import { NavbarDownComponent } from './components/navbar-down/navbar-down.component';
-import {FooterComponent} from './components/footer/footer.component'
+import { FooterComponent } from './components/footer/footer.component'
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PartitePageComponent } from './pages/partite-page/partite-page.component';
 import { ClassifichePageComponent } from './pages/classifiche-page/classifiche-page.component';
@@ -32,7 +32,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -16,8 +16,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
   //Inutilizzata
-  getAll() {
-    return this.http.get(this.baseUrl + 'team/all').pipe(
+  getAll(term:string) {
+    return this.http.get(this.baseUrl + 'team/all/search?q=' + {term}).pipe(
       map((response: any) => {
         console.log(response);
         return response as Game[];

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from './_service/api.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+
+  searchForm: FormGroup = new FormGroup({
+    search: new FormControl('')
+  })
+
+  public termList:Array<any> = [];
+
+  constructor(private apiService: ApiService){
+
+  }
 }

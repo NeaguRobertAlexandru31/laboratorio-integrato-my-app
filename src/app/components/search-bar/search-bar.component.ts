@@ -7,10 +7,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent {
 
-  isExpanded = false;
-
-  expand(): void {
-    this.isExpanded = !this.isExpanded;
-  }
+  term: any;
 
 }
