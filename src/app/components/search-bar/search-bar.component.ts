@@ -2,8 +2,8 @@ import { Component, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '
 import { ApiService } from '../../_service/api.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
-
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { HttpClient } from '@angular/common/http';
 
 @Component({

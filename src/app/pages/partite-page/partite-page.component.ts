@@ -5,25 +5,21 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './partite-page.component.html',
   styleUrls: ['./partite-page.component.scss'],
 })
-export class PartitePageComponent implements OnInit {
+export class PartitePageComponent {
   constructor() {}
 
-  styleResult: string = 'bg-hoops-primary text-white';
-  styleProgram: string = 'bg-hoops-primary text-white';
+  sectionResult: boolean = true;
+  sectionProgram: boolean = false;
 
   selectorPage(page: string) {
     if (page == 'risultati') {
-      this.styleResult = 'bg-hoops-primary text-white';
-      this.styleProgram = '';
+      this.sectionResult = true;
+      this.sectionProgram = false;
     }
     if (page == 'programmate') {
-      this.styleResult = '';
-      this.styleProgram = 'bg-hoops-primary text-white';
+      this.sectionResult = false;
+      this.sectionProgram = true;
     }
-  }
-
-  ngOnInit(): void {
-    this.selectorPage('risultati');
   }
 
 }

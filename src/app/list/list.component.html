@@ -1,0 +1,12 @@
+<div >
+  <div >
+    <h2>Risultati per: {{ searchedTitle }}</h2>
+  </div>
+  <div >
+    <div
+      *ngFor="let team of teams"
+    >
+      <h5>{{ team.nameTeam}}</h5>
+    </div>
+  </div>
+</div>

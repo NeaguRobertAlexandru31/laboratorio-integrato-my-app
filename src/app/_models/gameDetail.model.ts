@@ -2,6 +2,8 @@ export default interface GameDetail{
     gameId: number,
     arenaName: string,
     city: string,
+    colourHome: string,
+    colourVisitor: string,
     homeTeamName: string,
     homeTeamLogo: string,
     visitorTeamName: string,

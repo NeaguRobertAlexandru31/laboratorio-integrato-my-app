@@ -1,12 +1,13 @@
-<div class="flex px-2">
-  <!-- Tab "Risultati" -->
+<div class="flex flex-row px-2">
   <button routerLink="/partite/risultati" (click)="selectorPage('risultati')"
-    class="flex-1 py-1 px-4 text-center text-black rounded-full hover:font-bold {{styleResult}}">
+    [ngClass]="sectionResult ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white text-black'"
+    class="w-full py-1 rounded-full">
     Risultati
   </button>
-  <!-- Tab "Programmate" -->
+
   <button routerLink="/partite/programmate" (click)="selectorPage('programmate')"
-    class="flex-1 py-1 px-4 text-black rounded-full hover:font-bold {{styleProgram}}">
+    [ngClass]="sectionProgram ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white text-black'"
+    class="w-full py-1 rounded-full">
     Programmate
   </button>
 </div>

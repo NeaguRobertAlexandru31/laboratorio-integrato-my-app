@@ -1,57 +1,63 @@
-<div *ngFor="let partita of partite" class="pb-20">
+<div *ngFor="let partita of partite" class="px-3 text-white">
+
   <section id="head">
-    <div class="container flex">
-      <div class="w-full text-center px-6 py-2">
+    <div class="container flex rounded-xl drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
+      <div class="w-full text-center px-6 py-3">
         <h3 class="h-fit">Home</h3>
-        <div class="h-40 flex items-center">
-          <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
+        <div class="h-[110px] flex items-center">
+          <a [routerLink]="'/squadra/'+this.partita.homeTeamName">
+            <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
+          </a>
         </div>
-        <p class="h-fit align-bottom">{{partita.homeTeamName}}</p>
+        <p class="h-fit text-[16px] align-bottom">{{partita.homeTeamName}}</p>
       </div>
       <div class="w-full text-center flex flex-col justify-center">
-        <h2 class="text-2xl py-2">{{partita.points}} - {{partita.visitorPoints}}</h2>
-        <p>Finished</p>
+        <h2 class="text-[22px] py-2">{{partita.points}} - {{partita.visitorPoints}}</h2>
       </div>
-      <div class="w-full text-center px-6 py-2">
+      <div class="w-full text-center px-6 py-3">
         <h3 class="h-fit">Visitors</h3>
-        <div class="h-40 flex items-center">
-          <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
+        <div class="h-[110px] flex items-center">
+          <a [routerLink]="'/squadra/'+this.partita.visitorTeamName">
+            <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
+          </a>
         </div>
-        <p class="h-fit align-bottom">{{partita.visitorTeamName}}</p>
+        <p class="h-fit text-[16px] align-bottom">{{partita.visitorTeamName}}</p>
       </div>
     </div>
   </section>
 
   <section id="punteggi-quarti">
-    <div class="container mt-8 mb-10 px-6">
-      <h2 class="text-xl text-center font-bold">Punteggi per quarti</h2>
+    <div class="container rounded-xl my-2 py-3 px-6 drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
+      <h2 class="text-xl text-center font-semibold mb-[8px]">Punteggi per quarti</h2>
       <table class="w-full">
         <thead>
           <tr class="w-fit">
-            <th class="p-4 w-10 text-lg"></th>
-            <th class="p-4 text-lg">Q1</th>
-            <th class="p-4 text-lg">Q2</th>
-            <th class="p-4 text-lg">Q3</th>
-            <th class="p-4 text-lg">Q4</th>
-            <th class="p-4 text-lg" *ngIf="">Q5</th>
+            <th class="w-10 text-lg"></th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+            <th *ngIf="">Q5</th>
           </tr>
         </thead>
         <tbody>
           <tr class="text-center h-20">
             <td><img [src]="partita.homeTeamLogo" alt=""></td>
-            <td class="p-2 text-lg">{{partita.p1Home}}</td>
-            <td class="p-2 text-lg">{{partita.p2Home}}</td>
-            <td class="p-2 text-lg">{{partita.p3Home}}</td>
-            <td class="p-2 text-lg">{{partita.p4Home}}</td>
-            <td class="p-2 text-lg" *ngIf="partita.p5Home>0">{{partita.p5Home}}</td>
+            <td>{{partita.p1Home}}</td>
+            <td>{{partita.p2Home}}</td>
+            <td>{{partita.p3Home}}</td>
+            <td>{{partita.p4Home}}</td>
+            <td *ngIf="partita.p5Home>0">{{partita.p5Home}}</td>
           </tr>
           <tr class="text-center h-20">
             <td><img [src]="partita.visitorTeamLogo" alt=""></td>
-            <td class="p-2 text-lg">{{partita.p1Visitors}}</td>
-            <td class="p-2 text-lg">{{partita.p2Visitors}}</td>
-            <td class="p-2 text-lg">{{partita.p3Visitors}}</td>
-            <td class="p-2 text-lg">{{partita.p4Visitors}}</td>
-            <td class="p-2 text-lg" *ngIf="">{{partita}}</td>
+            <td>{{partita.p1Visitors}}</td>
+            <td>{{partita.p2Visitors}}</td>
+            <td>{{partita.p3Visitors}}</td>
+            <td>{{partita.p4Visitors}}</td>
+            <td *ngIf="">{{partita}}</td>
           </tr>
         </tbody>
       </table>
@@ -59,7 +65,8 @@
   </section>
 
   <section id="statistiche">
-    <div class="container flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center rounded-xl pt-2 drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
       <h2 class="text-xl text-center font-bold">Statistiche</h2>
 
       <div class="w-full text-center px-8 py-2">
@@ -305,23 +312,25 @@
         </div>
       </div>
 
-      <button class="bg-hoops-primary px-6 py-2 mt-4 rounded-md text-white flex flex-col items-center"
+      <button class="bg-hoops-primary px-6 py-2 my-2 rounded-md text-white flex flex-col items-center"
         (click)="openStats()">
         <p>{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
         <!-- <img class="rotate-180" *ngIf="isVisible" src="../../assets/img/Vector.svg" alt="">
         <img *ngIf="!isVisible" src="../../assets/img/Vector.svg" alt=""> -->
       </button>
+    </div>
+  </section>
 
-      <div class="flex flex-row justify-between items-center my-8 px-6">
-        <p>Arena: {{partita.arenaName}}</p>
-        <p>City: {{partita.city}}</p>
-      </div>
-
+  <section id="arena">
+    <div class="flex flex-row justify-between items-center my-4 px-10 py-4 rounded-full drop-shadow-md"
+      [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
+      <p>Arena: {{partita.arenaName}}</p>
+      <p>City: {{partita.city}}</p>
     </div>
   </section>
 
   <section id="notizie">
-    <h2 class="text-xl text-center font-bold">Notizie correlate</h2>
+    <h2 class="text-xl text-black text-center font-bold">Notizie correlate</h2>
     <div id="slider">
 
     </div>
