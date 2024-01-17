@@ -1,15 +1,18 @@
 <div>
-  <button (click)="expand()" *ngIf="isExpanded == false">
-    <img
-      class="bg-hoops-primary rounded-full p-1"
-      src="../../assets/img/Group.svg"
-      alt=""
-    />
-  </button>
-  <input
-    *ngIf="isExpanded == true"
-    type=" text"
-    placeholder="Cerca..."
-    class="w-full rounded-full px-3 py-1 text-white bg-hoops-primary"
-  />
+  <div>
+    <form class="w-[112px] h-[28px]">
+      <input class="search-control" type="text" placeholder="Search" [(ngModel)]="searchText" #searchbar>
+    </form>
+  </div>
+
+  <div>
+    <div *ngFor="let item of list | filter: searchText">
+      <div>{{item.nameTeam}}</div>
+    </div>
+    <div *ngIf="(list | filter: searchText).length === 0">
+      <mat-icon mat-list-avatar>error</mat-icon>
+      <div mat-line>0 results</div>
+      <div mat-line>No matching presidents</div>
+    </div>
+  </div>
 </div>
