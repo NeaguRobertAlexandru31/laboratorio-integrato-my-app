@@ -12,6 +12,9 @@ import Ranking from '../_models/ranking.model';
   providedIn: 'root',
 })
 export class ApiService {
+  search(searchTerm: string) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl = 'http://localhost:8045/';
 
   constructor(private http: HttpClient) {}
@@ -34,7 +37,7 @@ export class ApiService {
     );
   }
   //Utilizzata in Partita-Detail
-  getTeam(idGame: string) {
+  getPartita(idGame: string) {
     return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe(
       map((response: any) => {
         console.log(response);

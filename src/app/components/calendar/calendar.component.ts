@@ -16,7 +16,11 @@ export class CalendarComponent {
   currentDate: DateTime = DateTime.now();
   @ViewChild('picker') picker!: MatDatepicker<Date>;
 
+  @Output() sendDateEvent = new EventEmitter<Date>();
+
   selectedDate: Date;
+  apiService: any;
+  games: any;
 
   constructor() {
     this.selectedDate = new Date();
@@ -25,21 +29,24 @@ export class CalendarComponent {
   onDateInput(event: MatDatepickerInputEvent<DateTime>): void {
     this.currentDate = event.value || DateTime.now();
   }
-
+  
   onChange(event: any) {
     this.currentDate = DateTime.fromJSDate(event.value);
+    this.sendDateEvent.emit(this.selectedDate);
   }
 
   incrementDate() {
     let currentDate = this.selectedDate || new Date();
     currentDate.setDate(currentDate.getDate() + 1);
     this.selectedDate = new Date(currentDate);
+    this.sendDateEvent.emit(this.selectedDate);
   }
 
   reduceDate() {
     let currentDate = this.selectedDate || new Date();
     currentDate.setDate(currentDate.getDate() - 1);
     this.selectedDate = new Date(currentDate);
+    this.sendDateEvent.emit(this.selectedDate);
   }
 
   openPicker() {

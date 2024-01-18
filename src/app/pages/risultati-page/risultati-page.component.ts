@@ -12,48 +12,51 @@ import Game from '../../_models/game.model';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-handleDateChange($event: DateTime<boolean>) {
-throw new Error('Method not implemented.');
-}
   games: Game[] = [];
-  squadre: any[] = [];
-
   currentDate: DateTime = DateTime.now();
-
-  // formatDate = () => {
-  //   const monthList:string[] = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-  //   let year = new Date().getFullYear();
-  //   let month = new Date().getMonth();
-  //   let day = new Date().getDate();
-  //   if(day<10){
-  //     day = '0' + day;
-  //   }
-    
-  //   return "'" + year + '-' +  monthList[month] + '-' + day + "'"
-  // }
-
   idGame: number = 0;
+  isLoading: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
 
   constructor(private apiService: ApiService) {}
 
-  getGradient(game: any): string {
-    if(game.homeColour === null){
-      return `linear-gradient(to right, #ffffff, #${game.visitorsColour})`
-    }else if(game.visitorsColour === null){
-      return `linear-gradient(to right, #${game.homeColour}, #ffffff)`
-    }else if(game.homeColour === null && game.visitorsColour === null){
-      return `linear-gradient(to right, #808080, #ffffff)`
+  getGradient(game: Game): string {
+    if (game.homeColour === null) {
+      return `linear-gradient(to right, #ffffff, #${game.visitorsColour}B3)`;
+    } else if (game.visitorsColour === null) {
+      return `linear-gradient(to right, #${game.homeColour}B3, #ffffff)`;
+    } else if (game.homeColour === null && game.visitorsColour === null) {
+      return `linear-gradient(to right, #808080B3, #ffffff)`;
     }
-    return `linear-gradient(to right, #${game.homeColour}, #${game.visitorsColour})`;
+    return `linear-gradient(to right, #${game.homeColour}B3, #${game.visitorsColour}B3)`;
   }
 
   ngOnInit(){
-
+    this.loadGames(this.currentDate);
     this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
-    // this.apiService.getGiocatoriSquadra(8,2023).subscribe( (response) => {
-    //   this.squadre = response;
-    // });
+  }
+
+  loadGames(date: DateTime) {
+    this.isLoading = true; // Imposta il flag di caricamento a true
+    this.apiService.getGames(date.toFormat('yyyy-MM-dd')).subscribe(
+      (response) => {
+        this.games = response;
+      },
+      (error) => {
+        console.error('Error fetching games', error);
+      },
+      () => {
+        this.isLoading = false; // Imposta il flag di caricamento a false quando il caricamento è completo
+      }
+    );
+  }
+
+  receiveDate(date:Date){
+    console.log(date);
+    this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe( (response) => {
+      this.games = response;
+    });
+    this.loadGames(DateTime.fromJSDate(date));
   }
 }

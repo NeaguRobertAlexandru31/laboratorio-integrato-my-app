@@ -2,30 +2,55 @@
 <app-partite-page></app-partite-page>
 
 <!-- Calendario -->
-<app-calendar></app-calendar>
+<app-calendar (sendDateEvent)="receiveDate($event)"></app-calendar>
+
+<div *ngIf="isLoading" class="w-full h-[100%]">
+  <p class="text-center">
+    Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+  </p>
+</div>
 
 <!-- Tabella -->
-<table *ngIf="games && games.length" class="w-full border-none">
+<table
+  *ngIf="!isLoading && games && games.length"
+  class="w-full border-none text-white"
+>
   <tbody class="text-center">
-    <tr *ngFor="let game of games" class="w-full flex p-6 my-3 rounded-2xl shadow-md"
-      [style.background]="getGradient(game)">
+    <tr
+      *ngFor="let game of games"
+      class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
+      [style.background]="getGradient(game)"
+    >
       <td class="w-full">
-        <div class="flex flex-col items-center">
-          <img [src]="game.homeTeamLogo" alt="Team A" class="h-16 w-fit mb-2">
-          <p>{{ game.homeTeamName }}</p>
+        <div
+          class="w-[109px] h-full px-3 flex flex-col items-center justify-center"
+        >
+          <img
+            [src]="game.homeTeamLogo"
+            alt="Team A"
+            class="h-[65px] w-fit mb-2"
+          />
+          <p class="drop-shadow">{{ game.homeTeamName }}</p>
         </div>
       </td>
-      <td class="w-full flex flex-col justify-center items-center">
-        <p class="my-2">{{ game.start | date: 'HH:mm' }}</p>
+      <td class="w-full h-full flex flex-col justify-center items-center">
         <p class="my-2 text-lg">{{ game.risultato }}</p>
         <!-- Formattazione dell'ora -->
-        <a [routerLink]="'/partita/' + this.game.gameId" class="bg-hoops-secondary my-2 w-fit px-2 rounded-full">
-          Preview </a>
+        <a
+          [routerLink]="'/partita/' + this.game.gameId"
+          class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full"
+        >
+          Preview
+        </a>
       </td>
       <td class="w-full">
-        <div class="flex flex-col items-center">
-          <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2">
-          <p>{{ game.visitorTeamName }}</p>
+        <div class="w-[109px] h-full px-3 flex flex-col items-center">
+          <img
+            [src]="game.visitorTeamLogo"
+            alt="Team B"
+            class="h-16 w-fit mb-2"
+          />
+          <p class="drop-shadow">{{ game.visitorTeamName }}</p>
         </div>
       </td>
     </tr>
@@ -33,6 +58,6 @@
 </table>
 
 <!-- SE non ci sono partite -->
-<div *ngIf="!games || !games.length">
-  <p>Nessun gioco disponibile al momento.</p>
+<div *ngIf="!isLoading && (!games || !games.length)">
+  <p>Nessun dato disponibile per la data selezionata!</p>
 </div>

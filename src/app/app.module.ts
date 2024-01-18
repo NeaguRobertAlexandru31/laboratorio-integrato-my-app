@@ -69,7 +69,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     CommonModule
   ],
-  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
