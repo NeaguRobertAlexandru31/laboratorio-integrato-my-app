@@ -9,6 +9,7 @@ import GameDetail from '../_models/gameDetail.model';
 import Player from '../_models/player.model';
 import Team from '../_models/team.model';
 
+import Ranking from '../_models/ranking.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -114,6 +115,30 @@ export class ApiService {
         map((response: any) => {
           console.log(response);
           return response as Game[];
+        })
+      );
+  }
+}
+
+  //Utilizzata in Classifiche Est
+  getRankingEast() {
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Ranking;
+        })
+      );
+  }
+  //Utilizzata in Classifiche Est
+  getRankingOvest() {
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Ranking;
         })
       );
   }

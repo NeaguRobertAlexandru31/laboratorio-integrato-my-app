@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Components
 import { NavbarTopComponent } from './components/navbar-top/navbar-top.component';
 import { NavbarDownComponent } from './components/navbar-down/navbar-down.component';
-import { FooterComponent } from './components/footer/footer.component'
+import { FooterComponent } from './components/footer/footer.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 //PAGES:
@@ -44,8 +44,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ListComponent } from './list/list.component';
 //Squadra
-import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component'
+import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 import { FilterPipe } from './_hooks/filter.pipe';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { FilterPipe } from './_hooks/filter.pipe';
     //detail
     PartitaDetailPageComponent,
     CalendarComponent,
-    FilterPipe
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -82,8 +83,9 @@ import { FilterPipe } from './_hooks/filter.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    CommonModule,
   ],
-  providers: [ApiService, { provide: DateTime, useValue: DateTime },],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
