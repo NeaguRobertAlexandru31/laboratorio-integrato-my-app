@@ -20,7 +20,7 @@ export class ApiService {
   //baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   constructor(private http: HttpClient) {}
-  //Inutilizzata
+  //Search bar da finire 
   getAll() {
     return this.http.get(this.baseUrl + 'team/all').pipe(
       map((response: any) => {
