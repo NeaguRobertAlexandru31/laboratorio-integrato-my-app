@@ -1,9 +1,13 @@
 <div class="flex">
-  <!-- Tab "Risultati" -->
-  <button routerLink="/classifiche/ovest"
-    class="flex-1 py-2 px-4 text-center bg-hoops-primary text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">Ovest</button>
+  <button routerLink="/classifiche/ovest" (click)="selectorClassifica('ovest')"
+    [ngClass]="classificaOvest ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white text-black'"
+    class="w-full py-1 rounded-full">
+    Ovest
+  </button>
 
-  <!-- Tab "Programmate" -->
-  <button routerLink="/classifiche/est"
-    class="flex-1 py-2 px-4 text-center bg-hoops-primary text-white hover:bg-gray-300 focus:outline-none focus:bg-gray-300">Est</button>
+  <button routerLink="/classifiche/est" (click)="selectorClassifica('est')"
+    [ngClass]="classificaEst ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white text-black'"
+    class="w-full py-1 rounded-full">
+    Est
+  </button>
 </div>
