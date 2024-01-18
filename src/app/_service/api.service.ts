@@ -42,11 +42,22 @@ export class ApiService {
       })
     );
   }
-  
+
   //Utilizzata in Classifiche Est
   getRankingEast() {
     return this.http
       .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+      .pipe(
+        map((response: any) => {
+          console.log(response);
+          return response as Ranking;
+        })
+      );
+  }
+  //Utilizzata in Classifiche Est
+  getRankingOvest() {
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
       .pipe(
         map((response: any) => {
           console.log(response);

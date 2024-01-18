@@ -61,11 +61,11 @@
 
       <tbody>
         <tr
-          *ngFor="let rank of listsRanking"
+          *ngFor="let rank of listsRanking; let i = index"
           class="w-full flex flex-row align-center justify-between p-2"
         >
           <td class="w-2/12">
-            <p class="text-base">{{ createRankPosition() }}</p>
+            <p class="text-base">{{ i + 1 }}</p>
           </td>
           <!-- riga image / name team-->
           <td class="w-5/12 flex flex-row items-center">
