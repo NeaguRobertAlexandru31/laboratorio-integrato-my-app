@@ -5,6 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
+import All from 'src/app/_models/all.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -16,14 +17,21 @@ export class SearchBarComponent implements OnInit{
   searchbar!: ElementRef;
   searchText = '';
 
-  list: any[] = []; 
+  list: All[] = []; 
 
   constructor(private apiService: ApiService, private router:Router ,private route: ActivatedRoute) {}
+
+  toggleSearch: boolean = false;
+
+  isVisible:boolean = false;
+
+  showList(){
+    this.isVisible = !this.isVisible;
+  }
 
   ngOnInit(): void{
     this.apiService.getAll().subscribe((response: any) => {
     this.list = response;
-    console.log('lista', this.list);
   });
   }
 }

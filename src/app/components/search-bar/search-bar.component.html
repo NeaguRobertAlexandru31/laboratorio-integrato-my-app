@@ -1,18 +1,16 @@
 <div>
   <div>
-    <form class="w-[112px] h-[28px]">
-      <input class="search-control" type="text" placeholder="Search" [(ngModel)]="searchText" #searchbar>
-    </form>
+    <input (click)="showList()" class="bg-slate-300 rounded-full px-2" type="text" placeholder="Search"
+      [(ngModel)]="searchText" #searchbar>
   </div>
 
-  <div>
-    <div *ngFor="let item of list | filter: searchText">
-      <div>{{item.nameTeam}}</div>
+
+  <div *ngIf="isVisible" class="absolute bg-white">
+    <div class="flex flex-row justify-center items-center px-2" *ngFor="let item of list | filter: searchText">
+      <img class="w-fit h-6" [src]="item.logo" alt="">
+      <div class="w-full ps-3 py-1">{{item.nameTeam}}</div>
     </div>
     <div *ngIf="(list | filter: searchText).length === 0">
-      <mat-icon mat-list-avatar>error</mat-icon>
-      <div mat-line>0 results</div>
-      <div mat-line>No matching presidents</div>
     </div>
   </div>
 </div>
