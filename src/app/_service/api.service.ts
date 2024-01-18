@@ -118,7 +118,6 @@ export class ApiService {
         })
       );
   }
-}
 
   //Utilizzata in Classifiche Est
   getRankingEast() {
