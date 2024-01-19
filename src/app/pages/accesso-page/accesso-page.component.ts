@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./accesso-page.component.scss'],
 })
 export class AccessoPageComponent {
+  
   constructor() {}
 
   loginForm = new FormGroup({
