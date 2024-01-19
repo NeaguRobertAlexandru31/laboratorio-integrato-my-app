@@ -1,4 +1,4 @@
-<div *ngFor="let team of teams" class="px-2">
+<div *ngFor="let team of teams" class="h-[100vh] px-2">
 
   <section id="header">
     <!--  *ngFor="let team of teams -->
@@ -209,7 +209,7 @@
           <p>{{player.shirtNumber}}</p>
           <p>{{player.pos}}</p>
           <p>{{player.eta}} anni</p>
-          <div class="flex flex-row items-center">
+          <div class="flex flex-row items-center justify-end">
             <img class="rounded-full" src="https://via.placeholder.com/20x20" alt="">
             <p>{{player.country}}</p>
           </div>

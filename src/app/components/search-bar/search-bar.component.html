@@ -13,7 +13,20 @@
         <img class="w-fit h-6" [src]="item.logo" alt="">
         <div class="w-full ps-3 py-1 truncate">{{item.nameTeam}}</div>
       </a>
+      <!--
+        TODO: Cambiare il percorso del routerLink
+      -->
+      <div class="w-full text-white text-center py-1" [ngStyle]="{'background': '#E58C38' + 'B2'}">
+        <p>Giocatori</p>
+      </div>
+
+      <a [routerLink]="'/squadra/'+this.player" class="flex flex-row justify-center items-center px-2"
+        *ngFor="let player of listPlayer | filterPlayer: searchText">
+        <!-- <img class="w-fit h-6" [src]="player" alt=""> -->
+        <div class="w-full ps-3 py-1 truncate">{{player.firstname + ' ' + player.lastname}}</div>
+      </a>
     </div>
+
     <div *ngIf="(listTeam | filter: searchText).length === 0">
       <p>Nessun risultato</p>
     </div>

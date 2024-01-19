@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import All from '../_models/all.model';
+import AllTeams from '../_models/all.model';
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: All[], searchText: string): All[] {
+  transform(items: AllTeams[], searchText: string): AllTeams[] {
     if(!items) return [];
     if(!searchText) return items;
       searchText = searchText.toLowerCase();

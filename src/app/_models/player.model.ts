@@ -9,4 +9,5 @@ export default interface Player{
     nameTeam: string,
     logo: string,
     pos: string,
+    img: string
 }
