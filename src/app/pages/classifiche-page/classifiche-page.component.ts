@@ -5,6 +5,21 @@ import { Component } from '@angular/core';
   templateUrl: './classifiche-page.component.html',
   styleUrls: ['./classifiche-page.component.scss']
 })
-export class ClassifichePageComponent {
+export class ClassifichePageComponent{
 
+  constructor(){}
+  
+  classificaOvest: boolean = true;
+  classificaEst: boolean = false;
+
+  selectorClassifica(page: string) {
+    if (page == 'ovest') {
+      this.classificaOvest = true;
+      this.classificaEst = false;
+    }
+    if (page == 'est') {
+      this.classificaOvest = false;
+      this.classificaEst = true;
+    }
+  }
 }

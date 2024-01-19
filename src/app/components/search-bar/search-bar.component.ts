@@ -23,6 +23,8 @@ export class SearchBarComponent implements OnInit{
 
   toggleSearch: boolean = false;
 
+  teamName: string = '';
+
   isVisible:boolean = false;
 
   showList(){

@@ -1,23 +1,20 @@
-<div class="flex-1">
-  <div class="flex flex-row">
-
+<div class="flex-1 px-2">
+  <div class="flex flex-row mb-2">
     <!-- First Column (col-6) -->
-    <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary">
-      <!-- Tab "Risultati" -->
-      <button routerLink="/classifiche/ovest" routerLinkActive="active" class="!active">Ovest</button>
-    </div>
+    <button routerLink="/classifiche/ovest" routerLinkActive="!active" class="w-full py-1 rounded-full text-black">
+      Ovest
+    </button>
 
-    <!-- Second Column (col-6) -->
-    <div class="w-1/2 flex-1 py-2 px-4 text-center bg-hoops-primary">
-      <!-- Tab "Risultati" -->
-      <button routerLink="/classifiche/est" class="active">Est</button>
-    </div>
+    <button routerLink="/classifiche/est" routerLinkActive="active"
+      class="w-full py-1 rounded-full bg-[#8D66B7] text-white font-semibold">
+      Est
+    </button>
   </div>
 
-  <div class="container">
-    <table *ngIf="nome && nome.length" class="w-full text-center">
-      <thead class="text-white">
-        <tr class="w-full flex flex-row p-2 bg-hoops-primary">
+  <div class="flex flex-row">
+    <table *ngIf="listsRanking && listsRanking.length" class="w-full text-center">
+      <thead class="text-white w-full">
+        <tr class="w-full flex flex-row p-2 bg-hoops-primary tabList">
           <!-- Position and NameTeam in col-6 -->
           <th class="w-2/12">
             <p>N</p>
@@ -46,28 +43,35 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let squadra of nome" class="w-full flex flex-row justify-center items-center p-2">
+        <tr *ngFor="let rank of listsRanking; let i = index"
+          class="w-full flex flex-row align-center justify-between p-2">
           <td class="w-2/12">
-            <p>{{squadra.idTeam}}</p>
+            <p class="text-base">{{ i + 1 }}</p>
           </td>
+          <!-- riga image / name team-->
           <td class="w-5/12 flex flex-row items-center">
-            <img class="w-fit h-auto" src="https://via.placeholder.com/30x30" alt="">
-            <p class="w-full p-classifica">{{squadra.nameTeam}}</p>
+            <img class="h-[50px] w-[50px] lg:h-[15%] lg:w-[15%]" [src]="rank.teamLogo" alt="rank.teamName logo" />
+            <p class="text-base">{{ rank.teamName }}</p>
           </td>
           <td class="w-1/12">
-            <p>-</p>
+            <p class="text-base">{{ rank.gamePlayed }}</p>
           </td>
           <td class="w-1/12">
-            <p>-</p>
+            <p class="text-base">{{ rank.victories }}</p>
           </td>
           <td class="w-1/12">
-            <p>-</p>
+            <p class="text-base">{{ rank.lose }}</p>
           </td>
           <td class="w-1/12">
-            <p>-</p>
+            <div>
+              <p class="text-base">
+                {{ rank.winPercentage }}
+              </p>
+              <p class="text-sm">%</p>
+            </div>
           </td>
           <td class="w-1/12">
-            <p>-</p>
+            <p class="text-base">{{ rank.diffPoints }}</p>
           </td>
         </tr>
       </tbody>

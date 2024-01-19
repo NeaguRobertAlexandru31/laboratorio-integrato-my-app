@@ -1,14 +1,18 @@
 <div>
   <div>
-    <input (click)="showList()" class="bg-slate-300 rounded-full px-2" type="text" placeholder="Search"
-      [(ngModel)]="searchText" #searchbar>
+    <input (click)="showList()"
+      class="bg-hoops-primary placeholder:text-white placeholder:text-opacity-80 rounded-full text-white py-1 px-3"
+      type="text" placeholder="Cerca..." [(ngModel)]="searchText" #searchbar>
   </div>
 
 
-  <div *ngIf="isVisible" class="absolute bg-white">
-    <div class="flex flex-row justify-center items-center px-2" *ngFor="let item of list | filter: searchText">
-      <img class="w-fit h-6" [src]="item.logo" alt="">
-      <div class="w-full ps-3 py-1">{{item.nameTeam}}</div>
+  <div *ngIf="isVisible" class="absolute h-[50vh] rounded-md overflow-auto">
+    <div class="bg-white h-fit w-[185px]">
+      <a [routerLink]="'/squadra/'+this.item.nameTeam" class="flex flex-row justify-center items-center px-2"
+        *ngFor="let item of list | filter: searchText">
+        <img class="w-fit h-6" [src]="item.logo" alt="">
+        <div class="w-full ps-3 py-1 truncate">{{item.nameTeam}}</div>
+      </a>
     </div>
     <div *ngIf="(list | filter: searchText).length === 0">
     </div>
