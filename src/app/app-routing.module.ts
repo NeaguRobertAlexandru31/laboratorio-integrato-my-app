@@ -16,6 +16,7 @@ import { AccessoPageComponent } from './pages/accesso-page/accesso-page.componen
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
+import { PlayerPageComponent } from './pages/player-page/player-page.component';
 
 const routes: Routes = [
   { path: 'partite', component: PartitePageComponent },
@@ -31,6 +32,8 @@ const routes: Routes = [
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
   { path: 'squadra/:teamName', component: SquadraPageComponent },
+  { path: 'player/:id_player/:season', component: PlayerPageComponent },
+  { path: 'player', component: PlayerPageComponent },
   { path: '**', component: RisultatiPageComponent },
 ];
 

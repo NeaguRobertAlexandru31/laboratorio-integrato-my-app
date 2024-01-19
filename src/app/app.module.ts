@@ -47,6 +47,7 @@ import { ListComponent } from './list/list.component';
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 import { FilterPipe } from './_hooks/filter.pipe';
 import { CommonModule } from '@angular/common';
+import { PlayerPageComponent } from './pages/player-page/player-page.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { CommonModule } from '@angular/common';
     RegistrazionePageComponent,
     AccessoPageComponent,
     SquadraPageComponent,
+    PlayerPageComponent,
     //detail
     PartitaDetailPageComponent,
     CalendarComponent,
