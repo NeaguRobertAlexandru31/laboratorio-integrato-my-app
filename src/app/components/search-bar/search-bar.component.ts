@@ -5,7 +5,8 @@ import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
-import All from 'src/app/_models/all.model';
+import AllTeams from 'src/app/_models/all.model';
+import AllPlayers from 'src/app/_models/all.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -17,7 +18,9 @@ export class SearchBarComponent implements OnInit{
   searchbar!: ElementRef;
   searchText = '';
 
-  list: All[] = []; 
+  listTeam: AllTeams[] = [];
+  listPlayer: AllPlayers[] = [];
+
 
   constructor(private apiService: ApiService, private router:Router ,private route: ActivatedRoute) {}
 
@@ -32,8 +35,11 @@ export class SearchBarComponent implements OnInit{
   }
 
   ngOnInit(): void{
-    this.apiService.getAll().subscribe((response: any) => {
-    this.list = response;
+    this.apiService.getAllTeams().subscribe((response: any) => {
+    this.listTeam = response;
+  });
+    this.apiService.getAllPlayer().subscribe((response: any) => {
+    this.listPlayer = response;
   });
   }
 }

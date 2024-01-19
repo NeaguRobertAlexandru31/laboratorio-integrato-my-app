@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
       this.searchedTitle = params.get('title');
 
       this.apiService
-        .getAll()
+        .getAllTeams()
         .subscribe((response: any) => {
           this.teams = response;
           console.log(this.teams);
