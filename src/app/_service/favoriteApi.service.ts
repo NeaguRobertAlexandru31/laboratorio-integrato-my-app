@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 
+import FavoriteTeam from '../_models/favorite.model';
+import FavoritePlayer from '../_models/favorite.model';
+
 // Model
 
 @Injectable({
@@ -12,17 +15,17 @@ export class FavoriteApiService {
   
   constructor(private http: HttpClient) {}
 
-  //baseUrl = 'http://localhost:8045/';
-  baseUrl = 'http://hoopsdata.ddns.net:8045/';
+  baseUrl = 'http://localhost:8045/';
+  //baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   tokenVerify:boolean = false;
   
-  getFavoriteTeam() {
+  getFavoriteTeam(): Promise<FavoriteTeam> {
     const formData = {
       token: sessionStorage.getItem('token')
     };
 
-    fetch(this.baseUrl + 'fav/get/team', {
+    return fetch(this.baseUrl + 'fav/get/team', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,13 +33,27 @@ export class FavoriteApiService {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((response) => {
-        console.log('Accesso avvenuto con successo:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
-      })
-      .catch((error) => {
-        console.error("Errore durante l'accesso:", error);
+      .then((response: FavoriteTeam) => {
+        return response;
       });
+  }
+
+  getFavoritePlayer():any {
+    const formData = {
+      token: sessionStorage.getItem('token')
+    };
+
+    fetch(this.baseUrl + 'fav/get/player', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((response:FavoritePlayer) => {
+        console.log('Accesso avvenuto con successo:', response);
+      })
   }
 
   //Aggiunge e rimuove l'oggetto 
@@ -58,9 +75,6 @@ export class FavoriteApiService {
         console.log('Aggiunto:', response);
         // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
       })
-      .catch((error) => {
-        console.error("Errore durante l'accesso:", error);
-      });
   }
   //Aggiunge e rimuove l'oggetto 
   addFavoritePlayer(id:number) {
@@ -69,7 +83,7 @@ export class FavoriteApiService {
       idPlayer: id,
     };
 
-    fetch(this.baseUrl + 'fav/new/team', {
+    fetch(this.baseUrl + 'fav/new/player', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,8 +95,5 @@ export class FavoriteApiService {
         console.log('Aggiunto:', response);
         // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
       })
-      .catch((error) => {
-        console.error("Errore durante l'accesso:", error);
-      });
   }
 }

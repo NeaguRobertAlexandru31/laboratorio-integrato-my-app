@@ -1,25 +1,27 @@
 <div class="h-[90vh] px-2">
   <div class="flex flex-row">
-    <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')"
+    <!-- <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')"
       [ngClass]="accordionPartite ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Partite
-    </button>
+    </button> -->
     <button class="w-full rounded-full py-1" (click)="accordionFavorite('squadre')"
       [ngClass]="accordionSquadre ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Squadre
     </button>
-    <button class="w-full rounded-full py-1" (click)="accordionFavorite('giocatori')"
+    <button class="w-full rounded-full py-1" (click)="accordionFavorite('giocatori')" (click)="loadPlayers()"
       [ngClass]="accordionGiocatori ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Giocatori
     </button>
   </div>
 
-  <section id="accordionPartite" *ngIf="accordionPartite == true">
+  <!-- <section id="accordionPartite" *ngIf="accordionPartite == true">
     Partite
-  </section>
+  </section> -->
 
   <section id="accordionSquadre" *ngIf="accordionSquadre == true">
-    Squadre
+    <div *ngFor="let team of favoriteTeam">
+      <p class="text-black">{{team.nameTeam}}</p>
+    </div>
   </section>
 
   <section id="accordionGiocatori" *ngIf="accordionGiocatori == true">
