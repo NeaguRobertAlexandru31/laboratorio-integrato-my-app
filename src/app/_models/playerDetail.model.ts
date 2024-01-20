@@ -1,4 +1,5 @@
 export default interface PlayerStat{
+    
     totalPoints: number,// V
     gamePlayed?: number,
     totalRebounds: number,// V

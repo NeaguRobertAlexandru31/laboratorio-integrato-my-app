@@ -81,7 +81,6 @@ export class SquadraPageComponent implements OnInit{
   }
 
   isLoadedPlayer:boolean = false;
-
   loadPlayers(){
     if(!this.isLoadedPlayer){
       this.apiService.getGiocatoriSquadra(this.idTeam,2022).subscribe( (response) => {
@@ -90,13 +89,44 @@ export class SquadraPageComponent implements OnInit{
       this.isLoadedPlayer = true;
     }
   }
-
+  
   favorite: boolean = false;
-
+  
   setFavorite(){
     this.favorite = !this.favorite;
   }
+  listsPlayer:Player[]=[];
+  saveInfoLocalStorage(selectPlayer:any){
+    this.apiService.getGiocatoriSquadra(this.idTeam,2021).subscribe((response)=>{
+      this.listsPlayer = response;
+    })
+    console.log('Chiamata Api:200');
+    const foundPlayer = this.listsPlayer.find(p => p.idPlayer === selectPlayer.idPlayer);
+    console.log(foundPlayer)
+    this.listsPlayer.forEach((listPlayer)=>{
+      // Trova il giocatore selezionato nell'elenco
+      if (foundPlayer) {
+        // Salva le informazioni desiderate nel localStorage
+        const playerInfo = {
+          id: foundPlayer.idPlayer,
+          name: foundPlayer.firstname +' '+ foundPlayer.lastname,
+          img: foundPlayer.imgGiocatore,  // Assumi che imgPlayer sia valorizzato precedentemente
+          // Aggiungi altre informazioni se necessario
+        };
+        console.log('ho selezionato il giocatore')
+        // Salva le informazioni nel localStorage
+        localStorage.setItem('selectedPlayer', JSON.stringify(playerInfo));
+        // Imposta la variabile favorite a true
+        this.favorite = true;
 
+        console.log('Valori Salvati con successo');
+      }else{
+        console.log('cè stato un problema');
+      }
+    })
+    console.log('funzione terminata');
+    
+  }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.teamName = params['teamName'];

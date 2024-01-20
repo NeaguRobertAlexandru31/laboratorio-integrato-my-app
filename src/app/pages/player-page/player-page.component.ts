@@ -58,27 +58,10 @@ export class PlayerPageComponent implements OnInit{
     }
   }
 
-  isLoadedGame:boolean = false;
+ 
 
-  loadPreviousGame(){
-    if(!this.isLoadedGame){
-      this.apiService.getPreviousGame(this.idTeam).subscribe( (response) => {
-        this.prevoiusGame = response;
-      });
-      this.isLoadedGame = true;
-    }
-  }
-
-  isLoadedNext:boolean = false;
-
-  loadNextGame(){
-    if(!this.isLoadedNext){
-      this.apiService.getNextGame(this.idTeam).subscribe( (response) => {
-        this.nextGame = response;
-      });
-      this.isLoadedNext = true;
-    }
-  }
+  
+  
 
   isLoadedPlayer:boolean = false;
 
@@ -98,25 +81,7 @@ export class PlayerPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( (params) => {
-      this.teamName = params['teamName'];
-
-      this.accordionTeam('panoramica');
-      this.accordionGame('risultati');
-
-      this.nextGame.splice(0, this.nextGame.length);
-      this.prevoiusGame.splice(0, this.prevoiusGame.length);
-      this.players.splice(0, this.players.length);
-
-      this.isLoadedGame = false;
-      this.isLoadedPlayer = false;
-      this.isLoadedNext = false;
-
-      this.apiService.getThisTeam(this.teamName).subscribe( (response) => {
-        this.teams = response;
-        this.idTeam = this.teams[0].idTeam
-      });
-    })
+   
   }
 
 }
