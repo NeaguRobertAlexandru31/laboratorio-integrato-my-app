@@ -1,4 +1,4 @@
-<div *ngIf="!partite.length">
+<div class="h-[90vh]" *ngIf="!partite.length">
 
 </div>
 <div *ngIf="partite.length">
@@ -103,12 +103,12 @@
           <h3>Percentuale dei tiri liberi</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.ftp}}/{{toNumber(partita.ftp,partita.visitorFtp)}}</p>
+              <p>{{partita.ftp}}%</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.ftp}}/{{toNumber(partita.ftp,partita.visitorFtp)}}</p>
+              <p>{{partita.visitorFtp}}%</p>
             </div>
           </div>
         </div>
@@ -145,12 +145,12 @@
           <h3>Percentuale dal campo</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.fgp}}/{{toNumber(partita.fgp,partita.visitorFgp)}}</p>
+              <p>{{partita.fgp}}%</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFgp}}/{{toNumber(partita.fgp,partita.visitorFgp)}}</p>
+              <p>{{partita.visitorFgp}}%</p>
             </div>
           </div>
         </div>
@@ -188,12 +188,12 @@
             <h3>TPP</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.tpp}}/{{toNumber(partita.tpp,partita.visitorTpp)}}</p>
+                <p>{{partita.tpp}}%</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTpp}}/{{toNumber(partita.tpp,partita.visitorTpp)}}</p>
+                <p>{{partita.visitorTpp}}%</p>
               </div>
             </div>
           </div>

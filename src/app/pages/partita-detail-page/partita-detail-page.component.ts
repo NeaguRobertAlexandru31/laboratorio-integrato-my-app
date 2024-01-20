@@ -43,9 +43,9 @@ export class PartitaDetailPageComponent implements OnInit {
         this.partite = response;
       });
 
-      //  this.apiService.getPartita(this.idGame).subscribe( (response) => {
-      //    this.partite = response;
-      //  });
+      // this.apiService.getPartita(this.idGame).subscribe( (response) => {
+      // this.partite = response;
+      // });
     });
   }
 }
