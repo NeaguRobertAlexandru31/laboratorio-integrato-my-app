@@ -15,6 +15,8 @@ export class AccessoPageComponent {
     password: new FormControl(''),
   });
 
+  tokenVerify:boolean = false;
+
   signin() {
     const formData = {
       email: this.loginForm.get('email')?.value,
@@ -32,6 +34,11 @@ export class AccessoPageComponent {
       .then((response) => {
         console.log('Accesso avvenuto con successo:', response);
         // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
+
+        if(!this.tokenVerify){
+          this.tokenVerify = true;
+          sessionStorage.setItem('token', response.token)
+        }
       })
       .catch((error) => {
         console.error("Errore durante l'accesso:", error);
