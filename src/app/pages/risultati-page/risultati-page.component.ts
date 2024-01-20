@@ -26,6 +26,8 @@ export class RisultatiPageComponent implements OnInit {
     this.apiService.getGames(this.currentDate.toFormat('yyyy-MM-dd')).subscribe( (response) => {
       this.games = response;
     });
+
+    console.log(sessionStorage.getItem('token'))
   }
 
   loadGames(date: DateTime) {
