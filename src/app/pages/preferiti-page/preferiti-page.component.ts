@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 
 @Component({
   selector: 'app-preferiti-page',
   templateUrl: './preferiti-page.component.html',
   styleUrls: ['./preferiti-page.component.scss']
 })
-export class PreferitiPageComponent {
+export class PreferitiPageComponent implements OnInit {
 
-  constructor(){}
+  favoriteTeam: any[] = []
+
+  constructor(private apiService: FavoriteApiService) {}
+
+  token:string = '';
+
+  tokenVerify: boolean = false;
 
   accordionPartite:boolean = true;
   accordionSquadre:boolean = false;
@@ -27,6 +34,12 @@ export class PreferitiPageComponent {
       this.accordionSquadre = false;
       this.accordionGiocatori = true;
     }
+  }
+
+  ngOnInit(){
+    
+    this.apiService.getFavoriteTeam();
+
   }
 
 }
