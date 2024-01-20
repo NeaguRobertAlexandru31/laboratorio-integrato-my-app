@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from './_service/api.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -7,10 +7,15 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'HoopsData';
 
   constructor(){
 
   }
+
+  ngOnInit(): void {
+    sessionStorage
+  }
+  
 }
