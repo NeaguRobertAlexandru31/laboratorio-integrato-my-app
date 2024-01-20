@@ -150,4 +150,15 @@ export class ApiService {
         })
       );
   }
+  // Utilizzata in Player Page , aggiornare season
+  getInfoPlayer(idPlayer:string){
+    return this.http
+    .get(this.baseUrl + '/team/season/player/' + idPlayer + '/' + 2021)
+    .pipe(
+      map((response:any)=>{
+        console.log(response);
+        return response as Player;
+    })
+    );
+  }
 }
