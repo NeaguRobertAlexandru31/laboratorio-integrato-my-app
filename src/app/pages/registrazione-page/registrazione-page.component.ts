@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registrazione-page.component.scss'],
 })
 export class RegistrazionePageComponent {
+  
   signUpForm = new FormGroup({
     nome: new FormControl('', Validators.required),
     cognome: new FormControl('', Validators.required),
@@ -27,6 +28,7 @@ export class RegistrazionePageComponent {
   }
 
   signup() {
+    
     if (this.signUpForm.valid) {
       const formData = this.signUpForm.value;
 
