@@ -18,6 +18,9 @@ export class AccessoPageComponent {
   });
 
   tokenVerify:boolean = false;
+  // Variabile per memorizzare il messaggio di errore
+  errorMessage: string = ''; 
+
 
   signin() {
 
@@ -47,10 +50,15 @@ export class AccessoPageComponent {
 
         if(!this.tokenVerify){
           this.tokenVerify = true;
-          sessionStorage.setItem('token', response.token)
+          localStorage.setItem('token', response.token);
+          console.log(response.token)
+          // Reindirizzamento automatico a /preferiti
+          this.router.navigate(['/preferiti']);
         }
       })
       .catch((error) => {
         console.error("Errore durante l'accesso:", error);
+        // Mostriamo un messaggio di errore quando le credenziali sono sbagliate
+        this.errorMessage = 'Credenziali non valide. Riprova.';
       });
   }}
