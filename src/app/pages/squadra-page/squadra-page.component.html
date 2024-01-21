@@ -175,12 +175,12 @@
 
     <section id="giocatori" *ngIf="sectionGiocatori == true">
         <div *ngFor="let player of players" class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-2 px-4 rounded-md" [ngStyle]="{'background': team.colour+'B3'}">
-            <a [routerLink]="'/player/'+ player.idPlayer + '/' + 2022" (click)="saveInfoLocalStorage(player)">
+            <a [routerLink]="'/player/'+ player.idPlayer + '/' + 2022" (click)="saveInfoLocalStorage(player.idPlayer)">
                 <div class="w-fit">
                     <img class="rounded-full" src="https://via.placeholder.com/40x40" alt="">
                 </div>
                 <div class="w-full px-3">
-                    <h3>{{player.firstname+ ' ' + player.lastname}}</h3>
+                    <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
                     <div class="flex flex-row justify-between items-center text-sm pr-10">
                         <p>{{player.shirtNumber}}</p>
                         <p>{{player.pos}}</p>

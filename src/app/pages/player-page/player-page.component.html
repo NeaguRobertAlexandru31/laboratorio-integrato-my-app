@@ -1,1 +1,16 @@
-<h2>Player Page Works</h2>
+<div class="flex flex-row justify-center items-center my-3">
+    <button (click)="accordionPan('stat')" [ngStyle]="{'background': sectionPanoramica ? 'white' : '','color': sectionPanoramica ? 'black' : 'black'}" class="w-full py-1 px-4 rounded-full">
+        Panoramica
+    </button>
+    <button (click)="accordionPan('panoramica')" [ngStyle]="{'background': sectionStat ? 'white' : '','color': sectionStat ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">
+        Partite
+    </button>
+
+</div>
+
+<section *ngIf="sectionPanoramica == true" id="panoramica">
+    <p>section panoramica</p>
+</section>
+<section *ngIf="sectionStat == true" id="stat">
+    <p>section stat</p>
+</section>

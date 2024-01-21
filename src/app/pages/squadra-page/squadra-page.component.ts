@@ -83,10 +83,12 @@ export class SquadraPageComponent implements OnInit{
   isLoadedPlayer:boolean = false;
   loadPlayers(){
     if(!this.isLoadedPlayer){
-      this.apiService.getGiocatoriSquadra(this.idTeam,2022).subscribe( (response) => {
+      this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe( (response) => {
         this.players = response;
       });
       this.isLoadedPlayer = true;
+      console.log('Chiamata GiocatoriSquadra Avvenuta.');
+      
     }
   }
   
@@ -96,35 +98,32 @@ export class SquadraPageComponent implements OnInit{
     this.favorite = !this.favorite;
   }
   listsPlayer:Player[]=[];
+  imgPlayer:string="";
+  firstName:string="";
+  lastName:string="";
   saveInfoLocalStorage(selectPlayer:any){
-    this.apiService.getGiocatoriSquadra(this.idTeam,2021).subscribe((response)=>{
+    this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe((response)=>{
       this.listsPlayer = response;
-    })
-    console.log('Chiamata Api:200');
-    const foundPlayer = this.listsPlayer.find(p => p.idPlayer === selectPlayer.idPlayer);
-    console.log(foundPlayer)
-    this.listsPlayer.forEach((listPlayer)=>{
-      // Trova il giocatore selezionato nell'elenco
-      if (foundPlayer) {
-        // Salva le informazioni desiderate nel localStorage
-        const playerInfo = {
-          id: foundPlayer.idPlayer,
-          name: foundPlayer.firstname +' '+ foundPlayer.lastname,
-          img: foundPlayer.imgGiocatore,  // Assumi che imgPlayer sia valorizzato precedentemente
-          // Aggiungi altre informazioni se necessario
-        };
-        console.log('ho selezionato il giocatore')
-        // Salva le informazioni nel localStorage
-        localStorage.setItem('selectedPlayer', JSON.stringify(playerInfo));
-        // Imposta la variabile favorite a true
-        this.favorite = true;
-
-        console.log('Valori Salvati con successo');
-      }else{
-        console.log('cè stato un problema');
+      console.log(this.listsPlayer)
+      this.listsPlayer.forEach((player:Player)=>{
+        if(selectPlayer === player.idPlayer){
+          this.imgPlayer = player.imgGiocatore;
+          this.firstName = player.firsname;
+          this.lastName = player.lastname;
+          console.log('Nome:'+player.firsname,'','Cognome:'+player.lastname,' ','Img:'+player.imgGiocatore)
+        }else{
+          console.log('Player non trovaro. Riprovo');
+        }
+      })
+      // console.log('Nome:'+this.firstName,'','Cognome:'+this.lastName,' ','Img:'+this.imgPlayer)
+      let object={
+        "img" : this.imgPlayer,
+        "firstName" : this.firstName,
+        "lastName" : this.lastName
       }
+      console.log('object:', object)
+      localStorage.setItem('object',JSON.stringify(object));
     })
-    console.log('funzione terminata');
     
   }
   ngOnInit(): void {

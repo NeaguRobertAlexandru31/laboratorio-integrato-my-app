@@ -10,6 +10,8 @@ import Player from '../_models/player.model';
 import Team from '../_models/team.model';
 
 import Ranking from '../_models/ranking.model';
+import PlayerStat from '../_models/playerDetail.model';
+import PlayerPan from '../_models/playerPan.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -151,13 +153,23 @@ export class ApiService {
       );
   }
   // Utilizzata in Player Page , aggiornare season
-  getInfoPlayer(idPlayer:string){
+  getPlayerStat(idPlayer:number){
     return this.http
-    .get(this.baseUrl + '/team/season/player/' + idPlayer + '/' + 2021)
+    .get(this.baseUrl + '/team/season/player/' + idPlayer + '/' + 2023)
     .pipe(
       map((response:any)=>{
         console.log(response);
-        return response as Player;
+        return response as PlayerStat;
+    })
+    );
+  }
+  getPlayerPan(idPlayer:number){
+    return this.http
+    .get(this.baseUrl + '/player/pan/' + idPlayer + '/' + 2021)
+    .pipe(
+      map((response:any)=>{
+        console.log(response);
+        return response as PlayerPan;
     })
     );
   }

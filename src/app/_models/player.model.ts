@@ -1,6 +1,6 @@
 export default interface Player{
     idPlayer: number,
-    firstname: string,
+    firsname: string,
     lastname: string,
     eta: string,
     height: number,
