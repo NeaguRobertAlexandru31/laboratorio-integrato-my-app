@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../_service/auth.service';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-accesso-page',
@@ -7,8 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./accesso-page.component.scss'],
 })
 export class AccessoPageComponent {
-  
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -16,11 +18,14 @@ export class AccessoPageComponent {
   });
 
   signin() {
+
+    /* Manda mail e password */
     const formData = {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
     };
 
+    // Esegui la richiesta di login al server
     fetch('http://localhost:8045/user/signin', {
       method: 'POST',
       headers: {
@@ -28,10 +33,27 @@ export class AccessoPageComponent {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
       .then((response) => {
-        console.log('Accesso avvenuto con successo:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((response) => {
+        // Se la risposta contiene un token
+        if (response && response.token) {
+          // Memorizza il token nel local storage
+          localStorage.setItem('token', response.token);
+          console.log(response.token)
+
+          // Setta l'autenticazione nello stato dell'AuthService
+          this.authService.setUserAuthenticated(true);
+
+          // Reindirizzamento alla pagina preferiti
+          this.router.navigate(['/preferiti']);
+        } else {
+          console.error("Errore durante l'accesso: Token non presente nella risposta");
+        }
       })
       .catch((error) => {
         console.error("Errore durante l'accesso:", error);

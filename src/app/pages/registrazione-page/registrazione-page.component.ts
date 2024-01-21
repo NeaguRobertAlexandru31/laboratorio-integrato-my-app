@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrazione-page',
@@ -6,20 +7,54 @@ import { Component } from '@angular/core';
   styleUrls: ['./registrazione-page.component.scss'],
 })
 export class RegistrazionePageComponent {
-  FirstForm: boolean = true;
-  SecondForm: boolean = false;
+  signUpForm = new FormGroup({
+    nome: new FormControl('', Validators.required),
+    cognome: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
-  nome: string = '';
-  email: string = '';
-  password: string = '';
+  registrationData: any = {
+    
+  };
 
   showSecondForm() {
     this.FirstForm = false;
     this.SecondForm = true;
   }
 
+  signup() {
+    if (this.signUpForm.valid) {
+      const formData = this.signUpForm.value;
+
+      fetch('http://localhost:8045/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((response) => {
+        console.log('Registrazione avvenuta con successo:', response);
+      })
+      .catch((error) => {
+        console.error('Errore durante la registrazione:', error);
+      });
+  }}
+
+  FirstForm: boolean = true;
+  SecondForm: boolean = false;
+
   submitFinalForm() {
-    // Qui puoi gestire l'invio dei dati, ad esempio chiamando un servizio o un'altra logica necessaria
-    console.log('Dati inviati:', this.nome, this.email, this.password);
+    console.log('Dati inviati:', this.registrationData);
   }
 }
