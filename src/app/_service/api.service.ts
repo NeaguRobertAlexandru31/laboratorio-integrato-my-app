@@ -22,7 +22,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
   //Search bar da finire 
-  getAll() {
+  getAllTeams() {
     return this.http.get(this.baseUrl + 'team/all').pipe(
       map((response: any) => {
         console.log(response);
@@ -30,6 +30,15 @@ export class ApiService {
       })
     );
   }
+  getAllPlayer() {
+    return this.http.get(this.baseUrl + 'player/all ').pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as Game[];
+      })
+    );
+  }
+
   //Utilizzata in Risultati
   getGames(date: string) {
     return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
@@ -48,6 +57,7 @@ export class ApiService {
       })
     );
   }
+
   //Utilizzata in Risultati
   getPartitaTest() {
     return this.http.get(this.baseUrl + 'game/stats/' + 12216).pipe(
@@ -57,7 +67,6 @@ export class ApiService {
       })
     );
   }
-  
   
   //Chiamata non funzionante ne collegata
   getFavoriteTeam(idTeam:number){
@@ -84,9 +93,9 @@ export class ApiService {
     }
     
   //Chiamata non funzionante ne collegata
-  getThisTeam(idTeam:number){
+  getThisTeam(teamName:string){
     return this.http
-      .get(this.baseUrl + 'team/teamById/' + idTeam)
+      .get(this.baseUrl + 'team/teamById/' + teamName)
       .pipe(
         map((response: any) => {
           console.log(response);

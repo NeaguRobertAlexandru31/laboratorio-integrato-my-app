@@ -11,7 +11,7 @@
 </div>
 
 <!-- Tabella -->
-<table *ngIf="!isLoading && games && games.length" class="w-full border-none text-white">
+<table *ngIf="!isLoading && games && games.length" class="h-[80vh] w-full border-none text-white">
   <tbody class="text-center">
     <tr *ngFor="let game of games" class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
       [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">

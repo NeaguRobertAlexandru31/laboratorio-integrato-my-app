@@ -16,8 +16,6 @@ export class SquadraPageComponent implements OnInit{
 
   constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute){  }
 
-  //teams: Team[] = [];
-  //Provvisorio
   teams: Team[] = [];
   players: Player[] = [];
   prevoiusGame: Game[] = [];
@@ -25,7 +23,7 @@ export class SquadraPageComponent implements OnInit{
 
   teamName: string = '';
 
-  // idTeam: number = 0;
+  idTeam: number = 0;
 
   sectionPanoramica: boolean = true; //impostare come primo
   sectionPartite: boolean = false;
@@ -64,7 +62,7 @@ export class SquadraPageComponent implements OnInit{
 
   loadPreviousGame(){
     if(!this.isLoadedGame){
-      this.apiService.getPreviousGame(8).subscribe( (response) => {
+      this.apiService.getPreviousGame(this.idTeam).subscribe( (response) => {
         this.prevoiusGame = response;
       });
       this.isLoadedGame = true;
@@ -75,7 +73,7 @@ export class SquadraPageComponent implements OnInit{
 
   loadNextGame(){
     if(!this.isLoadedNext){
-      this.apiService.getNextGame(8).subscribe( (response) => {
+      this.apiService.getNextGame(this.idTeam).subscribe( (response) => {
         this.nextGame = response;
       });
       this.isLoadedNext = true;
@@ -86,7 +84,7 @@ export class SquadraPageComponent implements OnInit{
 
   loadPlayers(){
     if(!this.isLoadedPlayer){
-      this.apiService.getGiocatoriSquadra(8,2022).subscribe( (response) => {
+      this.apiService.getGiocatoriSquadra(this.idTeam,2022).subscribe( (response) => {
         this.players = response;
       });
       this.isLoadedPlayer = true;
@@ -96,7 +94,6 @@ export class SquadraPageComponent implements OnInit{
   favorite: boolean = false;
 
   setFavorite(){
-    console.log('funge')
     this.favorite = !this.favorite;
   }
 
@@ -104,9 +101,20 @@ export class SquadraPageComponent implements OnInit{
     this.activatedRoute.params.subscribe( (params) => {
       this.teamName = params['teamName'];
 
-      // this.idTeam = this.teams[0].idTeam //recupera l'id del team da usare per le altre chiamate
-      this.apiService.getThisTeam(8).subscribe( (response) => {
+      this.accordionTeam('panoramica');
+      this.accordionGame('risultati');
+
+      this.nextGame.splice(0, this.nextGame.length);
+      this.prevoiusGame.splice(0, this.prevoiusGame.length);
+      this.players.splice(0, this.players.length);
+
+      this.isLoadedGame = false;
+      this.isLoadedPlayer = false;
+      this.isLoadedNext = false;
+
+      this.apiService.getThisTeam(this.teamName).subscribe( (response) => {
         this.teams = response;
+        this.idTeam = this.teams[0].idTeam
       });
     })
   }
