@@ -17,6 +17,8 @@ export class AccessoPageComponent {
     password: new FormControl(''),
   });
 
+  tokenVerify:boolean = false;
+
   signin() {
 
     /* Manda mail e password */
@@ -40,23 +42,15 @@ export class AccessoPageComponent {
         return response.json();
       })
       .then((response) => {
-        // Se la risposta contiene un token
-        if (response && response.token) {
-          // Memorizza il token nel local storage
-          localStorage.setItem('token', response.token);
-          console.log(response.token)
+        console.log('Accesso avvenuto con successo:', response);
+        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
 
-          // Setta l'autenticazione nello stato dell'AuthService
-          this.authService.setUserAuthenticated(true);
-
-          // Reindirizzamento alla pagina preferiti
-          this.router.navigate(['/preferiti']);
-        } else {
-          console.error("Errore durante l'accesso: Token non presente nella risposta");
+        if(!this.tokenVerify){
+          this.tokenVerify = true;
+          sessionStorage.setItem('token', response.token)
         }
       })
       .catch((error) => {
         console.error("Errore durante l'accesso:", error);
       });
-  }
-}
+  }}
