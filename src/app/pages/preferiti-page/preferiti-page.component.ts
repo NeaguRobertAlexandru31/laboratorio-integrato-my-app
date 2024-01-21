@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import FavoriteTeam from 'src/app/_models/favorite.model';
 import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
+
+import FavoriteTeam from 'src/app/_models/favorite.model';
+import FavoritePlayer from 'src/app/_models/favorite.model';
 
 @Component({
   selector: 'app-preferiti-page',
@@ -9,7 +11,8 @@ import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 })
 export class PreferitiPageComponent implements OnInit {
 
-  favoriteTeam: FavoriteTeam[] = []
+  favoriteTeams: FavoriteTeam[] = []
+  favoritePlayers: FavoritePlayer[] = []
 
   constructor(private apiService: FavoriteApiService) {}
 
@@ -41,20 +44,24 @@ export class PreferitiPageComponent implements OnInit {
 
   loadPlayers(){
     if(!this.isLoadedPlayer){
-      this.apiService.getFavoritePlayer()
+      this.apiService.getFavoritePlayer().subscribe((response: FavoritePlayer[]) => {
+        this.favoritePlayers = response;
+      }
+    );
       };
       this.isLoadedPlayer = true;
     }
 
   ngOnInit(){
 
-    this.apiService.getFavoriteTeam().then((favoriteTeam: FavoriteTeam) => {
-      this.favoriteTeam =  // Puoi fare qualcosa con il valore restituito
-    });
+    if(sessionStorage.getItem('token')?.length){
+      this.tokenVerify = true;
+    }
 
-    // this.apiService.getFavoriteTeam().subscribe( (response: FavoriteTeam[]) => {
-    //   this.favoriteTeam = response;
-    // });
+    this.apiService.getFavoriteTeam().subscribe((response: FavoriteTeam[]) => {
+        this.favoriteTeams = response;
+      }
+    );
 
   }
 

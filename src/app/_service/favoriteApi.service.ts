@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs';
 
 import FavoriteTeam from '../_models/favorite.model';
@@ -19,44 +19,34 @@ export class FavoriteApiService {
   //baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   tokenVerify:boolean = false;
+
+  getFavoriteTeam(): Observable<FavoriteTeam[]> {
+    const formData = {
+      token: sessionStorage.getItem('token')
+    };
   
-  getFavoriteTeam(): Promise<FavoriteTeam> {
-    const formData = {
-      token: sessionStorage.getItem('token')
-    };
-
-    return fetch(this.baseUrl + 'fav/get/team', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((response: FavoriteTeam) => {
-        return response;
-      });
-  }
-
-  getFavoritePlayer():any {
-    const formData = {
-      token: sessionStorage.getItem('token')
-    };
-
-    fetch(this.baseUrl + 'fav/get/player', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((response:FavoritePlayer) => {
-        console.log('Accesso avvenuto con successo:', response);
+    return this.http.post<FavoriteTeam[]>(this.baseUrl + 'fav/get/team', formData).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as FavoriteTeam[];
       })
+    );;
   }
 
-  //Aggiunge e rimuove l'oggetto 
+  getFavoritePlayer(): Observable<FavoritePlayer[]> {
+    const formData = {
+      token: sessionStorage.getItem('token')
+    };
+  
+    return this.http.post<FavoritePlayer[]>(this.baseUrl + 'fav/get/player', formData).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as FavoritePlayer[];
+      })
+    );;
+  };
+
+  //Aggiunge e rimuove le squadre 
   addFavoriteTeam(teamName:string) {
     const formData = {
       token: sessionStorage.getItem('token'),
@@ -73,10 +63,10 @@ export class FavoriteApiService {
       .then((response) => response.json())
       .then((response) => {
         console.log('Aggiunto:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
       })
   }
-  //Aggiunge e rimuove l'oggetto 
+
+  //Aggiunge e rimuove i giocatori 
   addFavoritePlayer(id:number) {
     const formData = {
       token: sessionStorage.getItem('token'),
@@ -93,7 +83,6 @@ export class FavoriteApiService {
       .then((response) => response.json())
       .then((response) => {
         console.log('Aggiunto:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
       })
   }
 }

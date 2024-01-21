@@ -8,25 +8,25 @@
       <div class="container flex rounded-xl drop-shadow-md"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
         <div class="w-full text-center px-6 py-3">
-          <h3 class="h-fit">Home</h3>
+          <h3 class="h-fit drop-shadow">Home</h3>
           <div class="h-[110px] flex items-center">
             <a [routerLink]="'/squadra/'+this.partita.homeTeamName">
               <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
             </a>
           </div>
-          <p class="h-fit text-[16px] align-bottom">{{partita.homeTeamName}}</p>
+          <p class="h-fit text-[16px] align-bottom drop-shadow">{{partita.homeTeamName}}</p>
         </div>
         <div class="w-full text-center flex flex-col justify-center">
-          <h2 class="text-[22px] py-2">{{partita.points}} - {{partita.visitorPoints}}</h2>
+          <h2 class="text-[22px] font-semibold py-2 drop-shadow">{{partita.points}} - {{partita.visitorPoints}}</h2>
         </div>
         <div class="w-full text-center px-6 py-3">
-          <h3 class="h-fit">Visitors</h3>
+          <h3 class="h-fit drop-shadow">Visitors</h3>
           <div class="h-[110px] flex items-center">
             <a [routerLink]="'/squadra/'+this.partita.visitorTeamName">
               <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
             </a>
           </div>
-          <p class="h-fit text-[16px] align-bottom">{{partita.visitorTeamName}}</p>
+          <p class="h-fit text-[16px] align-bottom drop-shadow">{{partita.visitorTeamName}}</p>
         </div>
       </div>
     </section>
@@ -77,12 +77,11 @@
           <h3>Tiri liberi tentati</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.fta}}/{{partita.fta+partita.visitorFta}}</p>
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-            </div>
-            <div class="w-full flex items-center">
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFta}}/{{partita.fta+partita.visitorFta}}</p>
+              <p class="drop-shadow">{{partita.fta}}/{{partita.fta+partita.visitorFta}}</p>
+              <div class="w-full h-2 mx-2 rounded-md border border-white"
+                [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3'+  +' ,' + partita.colourVisitor + 'B3)'}">
+              </div>
+              <p class="drop-shadow">{{partita.visitorFta}}/{{partita.fta+partita.visitorFta}}</p>
             </div>
           </div>
         </div>
@@ -90,12 +89,12 @@
           <h3>Tiri liberi realizzati</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.ftm}}/{{partita.ftm+partita.visitorFtm}}</p>
+              <p class="drop-shadow">{{partita.ftm}}/{{partita.ftm+partita.visitorFtm}}</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFtm}}/{{partita.ftm+partita.visitorFtm}}</p>
+              <p class="drop-shadow">{{partita.visitorFtm}}/{{partita.ftm+partita.visitorFtm}}</p>
             </div>
           </div>
         </div>
@@ -103,12 +102,12 @@
           <h3>Percentuale dei tiri liberi</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.ftp}}%</p>
+              <p class="drop-shadow">{{partita.ftp}}%</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFtp}}%</p>
+              <p class="drop-shadow">{{partita.visitorFtp}}%</p>
             </div>
           </div>
         </div>
@@ -117,12 +116,12 @@
           <h3>Tiri dal campo tentati</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.fga}}/{{partita.fga+partita.visitorFga}}</p>
+              <p class="drop-shadow">{{partita.fga}}/{{partita.fga+partita.visitorFga}}</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFga}}/{{partita.fga+partita.visitorFga}}</p>
+              <p class="drop-shadow">{{partita.visitorFga}}/{{partita.fga+partita.visitorFga}}</p>
             </div>
           </div>
         </div>
@@ -131,12 +130,12 @@
           <h3>Tiri dal campo realizzati</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.fgm}}/{{partita.fgm+partita.visitorFgm}}</p>
+              <p class="drop-shadow">{{partita.fgm}}/{{partita.fgm+partita.visitorFgm}}</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFgm}}/{{partita.fgm+partita.visitorFgm}}</p>
+              <p class="drop-shadow">{{partita.visitorFgm}}/{{partita.fgm+partita.visitorFgm}}</p>
             </div>
           </div>
         </div>
@@ -145,12 +144,12 @@
           <h3>Percentuale dal campo</h3>
           <div class="flex w-full">
             <div class="w-full flex items-center">
-              <p>{{partita.fgp}}%</p>
+              <p class="drop-shadow">{{partita.fgp}}%</p>
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p>{{partita.visitorFgp}}%</p>
+              <p class="drop-shadow">{{partita.visitorFgp}}%</p>
             </div>
           </div>
         </div>
@@ -160,12 +159,12 @@
             <h3>TPA</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.tpa}}/{{partita.tpa+partita.visitorTpa}}</p>
+                <p class="drop-shadow">{{partita.tpa}}/{{partita.tpa+partita.visitorTpa}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTpa}}/{{partita.tpa+partita.visitorTpa}}</p>
+                <p class="drop-shadow">{{partita.visitorTpa}}/{{partita.tpa+partita.visitorTpa}}</p>
               </div>
             </div>
           </div>
@@ -174,12 +173,12 @@
             <h3>TPM</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.tpm}}/{{partita.tpm+partita.visitorTpm}}</p>
+                <p class="drop-shadow">{{partita.tpm}}/{{partita.tpm+partita.visitorTpm}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTpm}}/{{partita.tpm+partita.visitorTpm}}</p>
+                <p class="drop-shadow">{{partita.visitorTpm}}/{{partita.tpm+partita.visitorTpm}}</p>
               </div>
             </div>
           </div>
@@ -188,12 +187,12 @@
             <h3>TPP</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.tpp}}%</p>
+                <p class="drop-shadow">{{partita.tpp}}%</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTpp}}%</p>
+                <p class="drop-shadow">{{partita.visitorTpp}}%</p>
               </div>
             </div>
           </div>
@@ -202,12 +201,12 @@
             <h3>Rimbalzi offensivi</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.offReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
+                <p class="drop-shadow">{{partita.offReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorOffReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
+                <p class="drop-shadow">{{partita.visitorOffReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
               </div>
             </div>
           </div>
@@ -216,12 +215,12 @@
             <h3>Rimbalzi totali</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.totReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                <p class="drop-shadow">{{partita.totReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
               </div>
             </div>
           </div>
@@ -230,12 +229,12 @@
             <h3>Falli fatti</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.pfouls}}/{{partita.pfouls+partita.visitorPFouls}}</p>
+                <p class="drop-shadow">{{partita.pfouls}}/{{partita.pfouls+partita.visitorPFouls}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
               </div>
             </div>
           </div>
@@ -246,12 +245,12 @@
             <h3>Plus Minus</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.plusMinus}}/{{partita.plusMinus}}</p>
+                <p class="drop-shadow">{{partita.plusMinus}}/{{partita.plusMinus}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
+                <p class="drop-shadow">{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
               </div>
             </div>
           </div>
@@ -259,13 +258,13 @@
           <div class="w-full text-center px-8 py-2">
             <h3>Palle rubate</h3>
             <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p>{{partita.steals}}/{{partita.steals+partita.visitorSteals}}</p>
+              <div class="w-full flex itepms-center">
+                <p class="drop-shadow">{{partita.steals}}/{{partita.steals+partita.visitorSteals}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorSteals}}/{{partita.plusMinus+partita.visitorSteals}}</p>
+                <p class="drop-shadow">{{partita.visitorSteals}}/{{partita.steals+partita.visitorSteals}}</p>
               </div>
             </div>
           </div>
@@ -274,12 +273,12 @@
             <h3>Palle perse</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.turnovers}}/{{partita.turnovers+partita.visitorTurnovers}}</p>
+                <p class="drop-shadow">{{partita.turnovers}}/{{partita.turnovers+partita.visitorTurnovers}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorTurnovers}}/{{partita.turnovers+partita.visitorTurnovers}}
+                <p class="drop-shadow">{{partita.visitorTurnovers}}/{{partita.turnovers+partita.visitorTurnovers}}
                 </p>
               </div>
             </div>
@@ -289,12 +288,12 @@
             <h3>Palle stoppate</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.blocks}}/{{partita.blocks+partita.visitorBlocks}}</p>
+                <p class="drop-shadow">{{partita.blocks}}/{{partita.blocks+partita.visitorBlocks}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorBlocks}}/{{partita.blocks+partita.visitorBlocks}}
+                <p class="drop-shadow">{{partita.visitorBlocks}}/{{partita.blocks+partita.visitorBlocks}}
                 </p>
               </div>
             </div>
@@ -304,12 +303,12 @@
             <h3>Maggior Vantaggio</h3>
             <div class="flex w-full">
               <div class="w-full flex items-center">
-                <p>{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
+                <p class="drop-shadow">{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
               </div>
               <div class="w-full flex items-center">
                 <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p>{{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}
+                <p class="drop-shadow">{{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}
                 </p>
               </div>
             </div>
@@ -318,7 +317,7 @@
 
         <button class="bg-hoops-primary px-6 py-2 my-2 rounded-md text-white flex flex-col items-center"
           (click)="openStats()">
-          <p>{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
+          <p class="drop-shadow">{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
           <!-- <img class="rotate-180" *ngIf="isVisible" src="../../assets/img/Vector.svg" alt="">
         <img *ngIf="!isVisible" src="../../assets/img/Vector.svg" alt=""> -->
         </button>
@@ -328,8 +327,8 @@
     <section id="arena">
       <div class="flex flex-row justify-between items-center my-4 px-10 py-4 rounded-full drop-shadow-md"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
-        <p>Arena: {{partita.arenaName}}</p>
-        <p>City: {{partita.city}}</p>
+        <p class="drop-shadow">Arena: {{partita.arenaName}}</p>
+        <p class="drop-shadow">City: {{partita.city}}</p>
       </div>
     </section>
 
