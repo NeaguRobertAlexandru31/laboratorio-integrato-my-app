@@ -22,7 +22,7 @@
       tardi.</p>
   </div>
 
-  <div class="flex flex-row">
+  <div class="flex flex-row border-b-4 border-[#8D66B7] rounded-b-md mb-4 drop-shadow shadow-md">
     <table *ngIf="listsRanking && listsRanking.length" class="w-full text-center">
       <thead class="text-white w-full">
         <tr class="w-full flex flex-row p-2 bg-hoops-primary rounded-md px-[12px]">
@@ -55,9 +55,10 @@
 
       <tbody>
         <tr *ngFor="let rank of listsRanking; let i = index"
-          class="w-full min-h-[62px] max-h-[62px] flex flex-row items-center justify-between text-center px-[12px] py-[10px]">
+          class="w-full min-h-[62px] max-h-[62px] flex flex-row items-center justify-between text-center px-[12px] py-[10px]"
+          [ngClass]="{'bg-[rgba(211,191,233,0.8)]': i % 2 !== 0}">
           <td class="w-1/12">
-            <p class="text-base">{{ i + 1 }}</p>
+            <p class="text-base font-semibold">{{ i + 1 }}</p>
           </td>
           <!-- riga image / name team-->
           <td class="w-5/12 flex flex-row items-center">

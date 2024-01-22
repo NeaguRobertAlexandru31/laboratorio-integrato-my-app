@@ -27,7 +27,7 @@
       [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
       <td class="w-full flex justify-center items-center">
         <div class="w-[109px] h-full flex flex-col items-center justify-center">
-          <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />
+          <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2 drop-shadow-md" />
           <p class="drop-shadow">{{ game.homeTeamName }}</p>
         </div>
       </td>
@@ -41,7 +41,7 @@
       </td>
       <td class="w-full flex justify-center items-center">
         <div class="w-[109px] h-full flex flex-col items-center justify-center">
-          <img [src]="game.visitorTeamLogo" alt="Team B" class="h-[65px] w-fit mb-2" />
+          <img [src]="game.visitorTeamLogo" alt="Team B" class="h-[65px] w-fit mb-2 drop-shadow-md" />
           <p class="drop-shadow">{{ game.visitorTeamName }}</p>
         </div>
       </td>
