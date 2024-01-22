@@ -10,6 +10,7 @@ import { Token } from '@angular/compiler';
   styleUrls: ['./accesso-page.component.scss'],
 })
 export class AccessoPageComponent {
+  
   constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
