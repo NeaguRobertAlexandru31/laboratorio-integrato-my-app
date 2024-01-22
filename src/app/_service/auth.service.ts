@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   
   private isUserAuthenticatedSubject = new BehaviorSubject<boolean>(false);
@@ -15,4 +16,11 @@ export class AuthService {
   getUserAuthenticated(): Observable<boolean> {
     return this.isUserAuthenticatedSubject.asObservable();
   }
+
+  logout(): void {
+    this.setUserAuthenticated(false);
+    localStorage.removeItem('token');
+    console.log("logout eseguito");
+  }
+
 }

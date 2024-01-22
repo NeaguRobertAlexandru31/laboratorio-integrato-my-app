@@ -54,7 +54,7 @@ export class PreferitiPageComponent implements OnInit {
 
   ngOnInit(){
 
-    if(sessionStorage.getItem('token')?.length){
+    if(localStorage.getItem('token')?.length){
       this.tokenVerify = true;
     }
 

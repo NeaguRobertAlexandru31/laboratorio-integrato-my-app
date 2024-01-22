@@ -22,7 +22,7 @@ export class FavoriteApiService {
 
   getFavoriteTeam(): Observable<FavoriteTeam[]> {
     const formData = {
-      token: sessionStorage.getItem('token')
+      token: localStorage.getItem('token')
     };
   
     return this.http.post<FavoriteTeam[]>(this.baseUrl + 'fav/get/team', formData).pipe(
@@ -35,7 +35,7 @@ export class FavoriteApiService {
 
   getFavoritePlayer(): Observable<FavoritePlayer[]> {
     const formData = {
-      token: sessionStorage.getItem('token')
+      token: localStorage.getItem('token')
     };
   
     return this.http.post<FavoritePlayer[]>(this.baseUrl + 'fav/get/player', formData).pipe(
@@ -49,7 +49,7 @@ export class FavoriteApiService {
   //Aggiunge e rimuove le squadre 
   addFavoriteTeam(teamName:string) {
     const formData = {
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       nameTeam: teamName,
     };
 
@@ -69,7 +69,7 @@ export class FavoriteApiService {
   //Aggiunge e rimuove i giocatori 
   addFavoritePlayer(id:number) {
     const formData = {
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       idPlayer: id,
     };
 

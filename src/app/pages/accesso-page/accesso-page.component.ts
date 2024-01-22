@@ -10,7 +10,6 @@ import { Token } from '@angular/compiler';
   styleUrls: ['./accesso-page.component.scss'],
 })
 export class AccessoPageComponent {
-  
   constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
@@ -18,13 +17,11 @@ export class AccessoPageComponent {
     password: new FormControl(''),
   });
 
-  tokenVerify:boolean = false;
+  tokenVerify: boolean = false;
   // Variabile per memorizzare il messaggio di errore
-  errorMessage: string = ''; 
-
+  errorMessage: string = '';
 
   signin() {
-
     /* Manda mail e password */
     const formData = {
       email: this.loginForm.get('email')?.value,
@@ -59,4 +56,6 @@ export class AccessoPageComponent {
         // Mostriamo un messaggio di errore quando le credenziali sono sbagliate
         this.errorMessage = 'Credenziali non valide. Riprova.';
       });
-  }}
+  }
+
+}
