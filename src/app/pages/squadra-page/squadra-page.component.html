@@ -1,4 +1,4 @@
-<div *ngFor="let team of teams" class="h-[100vh] px-2">
+<div *ngFor="let team of teams" class="min-h-[90vh] px-2">
 
   <section id="header">
     <!--  *ngFor="let team of teams -->
@@ -14,7 +14,7 @@
         <!--
           TODO: Settare correttamente i bottoni una volta collegato l'api favorite
         -->
-        <button (click)="setFavorite()">
+        <button (click)="setFavoriteTeam(teamName)">
           <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
           <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
         </button>
@@ -193,7 +193,6 @@
       <div *ngIf="nextGame.length"></div>
       <div></div>
     </section>
-
   </section>
 
   <section id="giocatori" *ngIf="sectionGiocatori == true">
@@ -201,7 +200,7 @@
       class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-2 px-4 rounded-md"
       [ngStyle]="{'background': team.colour+'B3'}">
       <div class="w-fit">
-        <img class="rounded-full" src="https://via.placeholder.com/40x40" alt="">
+        <img class="w-fit h-[40px]" [src]="player.img" alt="">
       </div>
       <div class="w-full px-3">
         <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
@@ -210,13 +209,13 @@
           <p>{{player.pos}}</p>
           <p>{{player.eta}} anni</p>
           <div class="flex flex-row items-center justify-end">
-            <img class="rounded-full" src="https://via.placeholder.com/20x20" alt="">
-            <p>{{player.country}}</p>
+            <img class="rounded-full w-[20px] h-[20px] mr-1" [src]="player.logo" alt="">
+            <p class="truncate">{{player.country}}</p>
           </div>
         </div>
       </div>
       <div class="w-fit flex items-center">
-        <button (click)="setFavorite()">
+        <button (click)="setFavoritePlayer(player.idPlayer)">
           <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
           <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
         </button>

@@ -46,13 +46,10 @@ export class AccessoPageComponent {
       })
       .then((response) => {
         console.log('Accesso avvenuto con successo:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
-
-        if(!this.tokenVerify){
+        if (!this.tokenVerify) {
           this.tokenVerify = true;
           localStorage.setItem('token', response.token);
-          console.log(response.token)
-          // Reindirizzamento automatico a /preferiti
+          // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
           this.router.navigate(['/preferiti']);
         }
       })

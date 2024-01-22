@@ -48,6 +48,7 @@ import { SquadraPageComponent } from './pages/squadra-page/squadra-page.componen
 import { FilterPipe } from './_hooks/filter.pipe';
 import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
+import { FavoriteApiService } from './_service/favoriteApi.service';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
   ],
-  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime }, FavoriteApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

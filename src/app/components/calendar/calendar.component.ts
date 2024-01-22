@@ -1,10 +1,9 @@
-import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
-import {
-  MatDatepickerInputEvent,
-  MatDatepicker,
-} from '@angular/material/datepicker';
+import { Component, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
+import { MatDatepickerInputEvent,MatDatepicker } from '@angular/material/datepicker';
+import { map } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -12,7 +11,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./calendar.component.scss'],
   providers: [DatePipe],
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit{
   currentDate: DateTime = DateTime.now();
   @ViewChild('picker') picker!: MatDatepicker<Date>;
 
@@ -22,7 +21,7 @@ export class CalendarComponent {
   apiService: any;
   games: any;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.selectedDate = new Date();
   }
 
@@ -53,5 +52,19 @@ export class CalendarComponent {
     if (this.picker) {
       this.picker.open();
     }
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const page = params[''];
+
+      console.log(page)
+
+      // if(page === '/partite/risultati') {
+
+      // } else if (page === '2') {
+
+      // }
+    });
   }
 }

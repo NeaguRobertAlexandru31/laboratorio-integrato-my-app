@@ -1,21 +1,28 @@
-<!-- Tabs -->
-<app-partite-page></app-partite-page>
+<div class="flex flex-row px-2">
+  <button routerLink="/partite/risultati" class="w-full py-1 rounded-full bg-hoops-primary text-white font-bold">
+    Risultati
+  </button>
+
+  <button routerLink="/partite/programmate" class="w-full py-1 rounded-full">
+    Programmate
+  </button>
+</div>
 
 <!-- Calendario -->
 <app-calendar (sendDateEvent)="receiveDate($event)"></app-calendar>
 
-<div *ngIf="isLoading" class="w-full h-[100%]">
+<div *ngIf="isLoading" class="w-full h-[70vh] flex items-center justify-center">
   <p class="text-center">
     Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
   </p>
 </div>
 
 <!-- Tabella -->
-<table *ngIf="!isLoading && games && games.length" class="h-[80vh] w-full border-none text-white">
+<table *ngIf="!isLoading && games && games.length" class="h-[80vh] w-full border-none text-white md:w-[60vh]">
   <tbody class="text-center">
-    <tr *ngFor="let game of games" class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs"
+    <tr *ngFor="let game of games" class="w-full h-[150px] flex p-5 mb-2 rounded-2xl shadow-md text-xs"
       [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
-      <td class="w-full">
+      <td class="w-full flex justify-center items-center">
         <div class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
           <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />
           <p class="drop-shadow">{{ game.homeTeamName }}</p>
@@ -29,7 +36,7 @@
           Preview
         </a>
       </td>
-      <td class="w-full">
+      <td class="w-full flex justify-center items-center">
         <div class="w-[109px] h-full px-3 flex flex-col items-center">
           <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2" />
           <p class="drop-shadow">{{ game.visitorTeamName }}</p>
