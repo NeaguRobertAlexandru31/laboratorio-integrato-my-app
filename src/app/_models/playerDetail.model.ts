@@ -6,8 +6,8 @@ export default interface PlayerStat{
     totalMinutes: number,// V
     totalBlocks: number,// V
     totalSteals: number,// V
-    minutsGame?: number, // V
-    freeThrowPercentage: number,// V Gia convertiti in percent
+    avgMinutes: number, // V
     threePointPercentage: number, // V Gia convertiti in percent
+    freeThrowPercentage: number,// V Gia convertiti in percent
     fieldGoalsMade: number// V Gia convertiti in percent
 }

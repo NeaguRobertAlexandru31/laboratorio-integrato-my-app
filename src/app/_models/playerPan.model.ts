@@ -1,9 +1,11 @@
 export default interface PlayerPan {
-    country:string,
-    age:number,
-    height:number,
-    roule:string,
-    nTshirt:number,
-    nameTeam:string,
-    
+    logoTeam: string,
+    nameTeam: string,
+    eta: string,
+    nameCountry: string,
+    flagCountry: string,
+    height: number,
+    weight: number,
+    pos: string,
+    shirtNumber: number
 }

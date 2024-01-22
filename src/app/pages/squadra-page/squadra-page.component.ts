@@ -105,6 +105,7 @@ export class SquadraPageComponent implements OnInit{
   imgPlayer:string="";
   firstName:string="";
   lastName:string="";
+  colourTeam:string="";
   saveInfoLocalStorage(selectPlayer:any){
     this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe((response)=>{
       this.listsPlayer = response;
@@ -114,6 +115,7 @@ export class SquadraPageComponent implements OnInit{
           this.imgPlayer = player.imgGiocatore;
           this.firstName = player.firsname;
           this.lastName = player.lastname;
+          
           console.log('Nome:'+player.firsname,'','Cognome:'+player.lastname,' ','Img:'+player.imgGiocatore)
         }else{
           console.log('Player non trovaro. Riprovo');

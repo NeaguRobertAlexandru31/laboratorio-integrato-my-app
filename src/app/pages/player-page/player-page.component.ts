@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 // File Per Chiamata APi
 import { ApiService } from '../../_service/api.service';
+import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 //Models
 import PlayerStat from 'src/app/_models/playerDetail.model';
 import PlayerPan from 'src/app/_models/playerPan.model';
@@ -16,7 +17,7 @@ import Team from 'src/app/_models/team.model';
 })
 export class PlayerPageComponent implements OnInit{
 
-  constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute){  }
+  constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute,private favoriteApiService: FavoriteApiService){  }
 
   playerStat: PlayerStat[] = []; 
   playerPan: PlayerPan[] = []; 
@@ -27,7 +28,7 @@ export class PlayerPageComponent implements OnInit{
   sectionStat: boolean = false;
   
   //Funzione per cambiare tra i due bottoni
-  accordionPan(section:string,) {
+  accordionPan(section:string) {
     if(section == 'stat'){
       this.sectionPanoramica = false;
       this.sectionStat = true;
@@ -38,23 +39,39 @@ export class PlayerPageComponent implements OnInit{
     } 
   }
 
-
-  favorite: boolean = false;
+ 
   teamName: string = "";
   teams: Team[] = [];
-  setFavorite(){
-    this.favorite = !this.favorite;
+  
+  setFavoriteTeam(nameTeam:string){
+        this.favoriteApiService.addFavoriteTeam(nameTeam);
   }
-
+  //modifica il risultato dell'api e lo rende da float a int
+  modifyAvgMinuts(){
+    this.playerStat.forEach((stat)=>{
+      stat.avgMinutes = Math.floor(stat.avgMinutes);
+    })
+  }
+  playerInfo:[]=[]
+  // prendo le informazioni dal localStorage(Img Giocatore,Nome,Cognome,Colore squadra)
+  getInfoLocalStorage(){
+    // this.playerInfo = localStorage.getItem('object');
+  }
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( (params) => {
-      //prendo dal router idPlayer 
+    // prendo dal router idPlayer 
+    this.activatedRoute.params.subscribe((params) => {
       this.idPlayer = params['idPlayer'];
     })
-    console.log('idPlayer:'+this.idPlayer)
+    // prendo le Statische del player
     this.apiService.getPlayerStat(this.idPlayer).subscribe((response:any)=>{
       this.playerStat = response;
-      console.log(this.playerStat)
+      // modifico il valore di avgMinuts perchè mi serve in int 
+      this.modifyAvgMinuts();
+    })
+    // prendo la Panoramica del player
+    this.apiService.getPlayerPan(this.idPlayer).subscribe((response:any)=>{
+      this.playerPan = response;
+      // console.log(this.playerPan);
     })
   }
 
