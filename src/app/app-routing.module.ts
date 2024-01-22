@@ -18,19 +18,25 @@ import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 
 const routes: Routes = [
+  /* Partite svolte, programmate e statistiche */
   { path: 'partite', component: PartitePageComponent },
-  { path: 'partita/:idGame', component: PartitaDetailPageComponent},
-  { path: 'classifiche', component: OvestPageComponent },
-  { path: 'preferiti', component: PreferitiPageComponent },
-  { path: 'news', component: NewsPageComponent },
   { path: 'partite/risultati', component: RisultatiPageComponent },
   { path: 'partite/programmate', component: ProgrammatePageComponent },
+  { path: 'partita/:idGame', component: PartitaDetailPageComponent},
+  /* Classifiche ovest & est */
+  { path: 'classifiche', component: OvestPageComponent },
   { path: 'classifiche/ovest', component: OvestPageComponent },
   { path: 'classifiche/est', component: EstPageComponent },
+  /* Squadre e giocatori preferiti */
+  { path: 'preferiti', component: PreferitiPageComponent },
+  /* News e blog */
+  { path: 'news', component: NewsPageComponent },
+  /* Signup e Signin */
   { path: 'profilo', component: ProfiloComponent },
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
   { path: 'squadra/:teamName', component: SquadraPageComponent },
+  /* Reindirizzamento */
   { path: '**', component: RisultatiPageComponent },
 ];
 
