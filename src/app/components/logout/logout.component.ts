@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../_service/auth.service';  // Assicurati di inserire il percorso corretto
-
+import { AuthService } from '../../_service/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
@@ -8,9 +8,10 @@ import { AuthService } from '../../_service/auth.service';  // Assicurati di ins
 })
 export class LogoutComponent {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/partite/risultati']);
   }
 }
