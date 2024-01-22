@@ -36,7 +36,7 @@ export class AccessoPageComponent {
         if (!this.tokenVerify) {
           this.tokenVerify = true;
           localStorage.setItem('token', response.token);
-          // Reindirizza l'utente alla pagina /preferiti
+          // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
           this.router.navigate(['/preferiti']);
         }
       })
