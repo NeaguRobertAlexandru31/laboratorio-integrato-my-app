@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'src/app/_service/api.service';
 
 @Component({
   selector: 'app-profilo-detail',
