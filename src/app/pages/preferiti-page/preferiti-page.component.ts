@@ -45,7 +45,7 @@ export class PreferitiPageComponent implements OnInit {
     isLoadedTeams:boolean = false;
     //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
     loadingTeams() {
-      if(this.isLoadedTeams == false){
+      if(this.isLoadedTeams == false && sessionStorage.getItem('token')){
       this.apiService.getFavoriteTeam().subscribe({
         next: (response: FavoriteTeam[]) => {
           this.favoriteTeams = response;
@@ -61,7 +61,7 @@ export class PreferitiPageComponent implements OnInit {
     isLoadedPlayer:boolean = false;
     //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
     loadingPlayers() {
-      if(this.isLoadedPlayer == false){
+      if(this.isLoadedPlayer == false && sessionStorage.getItem('token')){
       this.apiService.getFavoritePlayer().subscribe({
         next: (response: FavoritePlayer[]) => {
           this.favoritePlayers = response;
