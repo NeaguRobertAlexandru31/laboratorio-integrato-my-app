@@ -78,7 +78,6 @@ export class PreferitiPageComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('token')?.length) {
       this.tokenVerify = true;
-      console.log('sono qua')
     }
 
     this.loadingTeams();
