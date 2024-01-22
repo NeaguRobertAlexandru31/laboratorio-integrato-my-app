@@ -1,79 +1,35 @@
 <nav class="bg-white absolute md:relative bottom-0 w-full py-1 px-3">
   <!-- Links -->
   <div class="flex bg-white">
-    <a
-      (click)="activePage('partite')"
-      routerLink="/partite/risultati"
-      class="text-white w-full text-center hover:font-bold"
-    >
+    <a (click)="activePage('partite')" routerLink="/partite/risultati"
+      class="text-white w-full text-center hover:font-bold">
       <div class="text-hoops-primary flex flex-col items-center">
-        <img
-          *ngIf="buttonPartite == true"
-          src="../../../assets/img/icone-navbar-down/icone-active/Basketball.png"
-          alt=""
-        />
-        <img
-          *ngIf="buttonPartite == false"
-          src="../../../assets/img/icone-navbar-down/icone/Basketball.png"
-          alt=""
-        />
+        <img *ngIf="buttonPartite == true" src="../../../assets/img/icone-navbar-down/icone-active/Basketball.png"
+          alt="" />
+        <img *ngIf="buttonPartite == false" src="../../../assets/img/icone-navbar-down/icone/Basketball.png" alt="" />
         <p>Partite</p>
       </div>
     </a>
-    <a
-      (click)="activePage('classifiche')"
-      routerLink="/classifiche"
-      class="text-white w-full text-center hover:font-bold"
-    >
+    <a (click)="activePage('classifiche')" routerLink="/classifiche"
+      class="text-white w-full text-center hover:font-bold">
       <div class="text-hoops-primary flex flex-col items-center">
-        <img
-          *ngIf="buttonClassifiche == true"
-          src="../../../assets/img/icone-navbar-down/icone-active/Trophy.png"
-          alt=""
-        />
-        <img
-          *ngIf="buttonClassifiche == false"
-          src="../../../assets/img/icone-navbar-down/icone/Trophy.png"
-          alt=""
-        />
+        <img *ngIf="buttonClassifiche == true" src="../../../assets/img/icone-navbar-down/icone-active/Trophy.png"
+          alt="" />
+        <img *ngIf="buttonClassifiche == false" src="../../../assets/img/icone-navbar-down/icone/Trophy.png" alt="" />
         <p>Classifiche</p>
       </div>
     </a>
-    <a
-      (click)="activePage('preferiti')"
-      routerLink="/preferiti"
-      class="text-white w-full text-center hover:font-bold"
-    >
+    <a (click)="activePage('preferiti')" routerLink="/preferiti" class="text-white w-full text-center hover:font-bold">
       <div class="text-hoops-primary flex flex-col items-center">
-        <img
-          *ngIf="buttonPreferiti == true"
-          src="../../../assets/img/icone-navbar-down/icone-active/Star.png"
-          alt=""
-        />
-        <img
-          *ngIf="buttonPreferiti == false"
-          src="../../../assets/img/icone-navbar-down/icone/Star.png"
-          alt=""
-        />
+        <img *ngIf="buttonPreferiti == true" src="../../../assets/img/icone-navbar-down/icone-active/Star.png" alt="" />
+        <img *ngIf="buttonPreferiti == false" src="../../../assets/img/icone-navbar-down/icone/Star.png" alt="" />
         <p>Preferiti</p>
       </div>
     </a>
-    <a
-      (click)="activePage('blog')"
-      routerLink="/news"
-      class="text-white w-full text-center hover:font-bold"
-    >
+    <a (click)="activePage('blog')" routerLink="/news" class="text-white w-full text-center hover:font-bold">
       <div class="text-hoops-primary flex flex-col items-center">
-        <img
-          *ngIf="buttonBlog == true"
-          src="../../../assets/img/icone-navbar-down/icone-active/News.png"
-          alt=""
-        />
-        <img
-          *ngIf="buttonBlog == false"
-          src="../../../assets/img/icone-navbar-down/icone/News.png"
-          alt=""
-        />
+        <img *ngIf="buttonBlog == true" src="../../../assets/img/icone-navbar-down/icone-active/News.png" alt="" />
+        <img *ngIf="buttonBlog == false" src="../../../assets/img/icone-navbar-down/icone/News.png" alt="" />
         <p>Blog</p>
       </div>
     </a>
