@@ -43,7 +43,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { ListComponent } from './list/list.component';
 //Squadra
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 import { FilterPipe } from './_hooks/filter.pipe';

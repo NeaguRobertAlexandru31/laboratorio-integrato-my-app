@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accesso-page',
@@ -7,15 +8,14 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./accesso-page.component.scss'],
 })
 export class AccessoPageComponent {
-  
-  constructor() {}
+  constructor(private router: Router) {}
 
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
-  tokenVerify:boolean = false;
+  tokenVerify: boolean = false;
 
   signin() {
     const formData = {
@@ -33,11 +33,11 @@ export class AccessoPageComponent {
       .then((response) => response.json())
       .then((response) => {
         console.log('Accesso avvenuto con successo:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
-
-        if(!this.tokenVerify){
+        if (!this.tokenVerify) {
           this.tokenVerify = true;
-          sessionStorage.setItem('token', response.token)
+          localStorage.setItem('token', response.token);
+          // Reindirizza l'utente alla pagina /preferiti
+          this.router.navigate(['/preferiti']);
         }
       })
       .catch((error) => {
