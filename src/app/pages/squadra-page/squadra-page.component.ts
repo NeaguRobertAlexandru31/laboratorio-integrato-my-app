@@ -59,39 +59,6 @@ export class SquadraPageComponent implements OnInit{
     }
   }
 
-  isLoadedGame:boolean = false;
-
-  loadPreviousGame(){
-    if(!this.isLoadedGame){
-      this.apiService.getPreviousGame(this.idTeam).subscribe( (response) => {
-        this.prevoiusGame = response;
-      });
-      this.isLoadedGame = true;
-    }
-  }
-
-  isLoadedNext:boolean = false;
-
-  loadNextGame(){
-    if(!this.isLoadedNext){
-      this.apiService.getNextGame(this.idTeam).subscribe( (response) => {
-        this.nextGame = response;
-      });
-      this.isLoadedNext = true;
-    }
-  }
-
-  isLoadedPlayer:boolean = false;
-
-  loadPlayers(){
-    if(!this.isLoadedPlayer){
-      this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe( (response) => {
-        this.players = response;
-      });
-      this.isLoadedPlayer = true;
-    }
-  }
-
   favorite: boolean = false;
 
   setFavoriteTeam(nameTeam:string){
@@ -100,6 +67,71 @@ export class SquadraPageComponent implements OnInit{
   setFavoritePlayer(id:number){
     this.favoriteApiService.addFavoritePlayer(id)
   }
+
+  //Team
+  isLoadingTeam: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingTeam(teamName: string) {
+    this.apiService.getThisTeam(teamName).subscribe({
+      next: (response:Team[]) => {
+        this.teams = response;
+        this.idTeam = this.teams[0].idTeam;
+      },
+      error: (error) => console.error('Error fetching team', error),
+      complete: () => this.isLoadingTeam = false
+    });
+  }
+
+  //PreviousGame
+  isLoadingPreviousGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedPrevoius:boolean = false; // Flag per indicare se l'array e gia stato caricato
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingPreviousGame(idTeam: number) {
+    if(this.isLoadedPrevoius == false){
+    this.apiService.getPreviousGame(idTeam).subscribe({
+      next: (response:Game[]) => {
+        this.prevoiusGame = response;
+      },
+      error: (error) => console.error('Error fetching prevoius game', error),
+      complete: () => {
+        return this.isLoadingPreviousGame = false, this.isLoadedPrevoius = true;
+      }
+    });
+  }
+  }
+
+  //NextGame
+  isLoadingNextGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedNext:boolean = false; // Flag per indicare se l'array e gia stato caricato
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingNextGame(idTeam: number) {
+    if(this.isLoadedNext == false){
+    this.apiService.getNextGame(idTeam).subscribe({
+      next: (response:Game[]) => {
+        this.nextGame = response;
+      },
+      error: (error) => console.error('Error fetching next game', error),
+      complete: () => {return this.isLoadingNextGame = false, this.isLoadedNext = true}
+    });
+  }
+  }
+
+  //Player
+  isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedPlayer:boolean = false;
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingPlayers(teamId: number) {
+    if(this.isLoadedPlayer == false){
+    this.apiService.getGiocatoriSquadra(teamId,2023).subscribe({
+      next: (response:Player[]) => {
+        this.players = response;
+      },
+      error: (error) => console.error('Error fetching players', error),
+      complete: () => {return this.isLoadingPlayers = false, this.isLoadedPlayer = true}
+    });
+  }
+  }
+
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
@@ -112,14 +144,12 @@ export class SquadraPageComponent implements OnInit{
       this.prevoiusGame.splice(0, this.prevoiusGame.length);
       this.players.splice(0, this.players.length);
 
-      this.isLoadedGame = false;
+      this.isLoadingTeam = false;
+      this.isLoadedPrevoius = false;
       this.isLoadedPlayer = false;
       this.isLoadedNext = false;
 
-      this.apiService.getThisTeam(this.teamName).subscribe( (response) => {
-        this.teams = response;
-        this.idTeam = this.teams[0].idTeam
-      });
+      this.loadingTeam(this.teamName); //Chiamata API
     })
   }
 

@@ -10,4 +10,7 @@
 
 <app-calendar></app-calendar>
 
-works
+<div class="h-[80vh]" *ngIf="!nextGames.length">
+  <p class="rounded-md p-3 m-4 bg-hoops-primary text-white text-center"> Nessuna partita programmata trovata. Riprova
+    più tardi </p>
+</div>

@@ -12,12 +12,7 @@ export class OvestPageComponent {
   currentDate: Date = new Date();
 
   constructor(private apiService: ApiService) {}
-  ngOnInit() {
-    this.apiService.getRankingOvest().subscribe((response: any) => {
-      this.listsRanking = response;
-      this.mofidyWinPerc(), this.modifyLose();
-    });
-  }
+
   mofidyWinPerc() {
     // Formatta La Percentuale da numero a stringa e lo restituisce
     this.listsRanking.forEach((ranking: any) => {
@@ -32,5 +27,24 @@ export class OvestPageComponent {
       const newLose = Math.abs(ranking.lose);
       ranking.lose = newLose;
     });
+  }
+
+  //Ranking
+  isLoadingRanking: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingRanking() {
+    this.isLoadingRanking = true;
+    this.apiService.getRankingOvest().subscribe({
+      next: (response:any) => {
+        this.listsRanking = response;
+        this.mofidyWinPerc(), this.modifyLose();
+      },
+      error: (error) => console.error('Error fetching ranking', error),
+      complete: () => {return this.isLoadingRanking = false}
+    });
+  }
+  
+  ngOnInit() {
+    this.loadingRanking();
   }
 }

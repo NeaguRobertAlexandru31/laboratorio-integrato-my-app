@@ -40,29 +40,45 @@ export class PreferitiPageComponent implements OnInit {
       // }
   }
 
-  isLoadedPlayer:boolean = false;
-
-  loadPlayers(){
-    if(!this.isLoadedPlayer){
-      this.apiService.getFavoritePlayer().subscribe((response: FavoritePlayer[]) => {
-        this.favoritePlayers = response;
-      }
-    );
-      };
-      this.isLoadedPlayer = true;
+    //Teams
+    isLoadingTeams: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+    isLoadedTeams:boolean = false;
+    //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+    loadingTeams() {
+      if(this.isLoadedTeams == false){
+      this.apiService.getFavoriteTeam().subscribe({
+        next: (response: FavoriteTeam[]) => {
+          this.favoriteTeams = response;
+        },
+        error: (error) => console.error('Error fetching players', error),
+        complete: () => {return this.isLoadingTeams = false, this.isLoadedTeams = true}
+      });
     }
-
-  ngOnInit(){
-
-    if(sessionStorage.getItem('token')?.length){
-      this.tokenVerify = true;
     }
+    
+    //Player
+    isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+    isLoadedPlayer:boolean = false;
+    //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+    loadingPlayers() {
+      if(this.isLoadedPlayer == false){
+      this.apiService.getFavoritePlayer().subscribe({
+        next: (response: FavoritePlayer[]) => {
+          this.favoritePlayers = response;
+        },
+        error: (error) => console.error('Error fetching players', error),
+        complete: () => {return this.isLoadingPlayers = false, this.isLoadedPlayer = true}
+      });
+    };};
 
-    this.apiService.getFavoriteTeam().subscribe((response: FavoriteTeam[]) => {
-        this.favoriteTeams = response;
+    ngOnInit(){
+
+      if(sessionStorage.getItem('token')?.length){
+        this.tokenVerify = true;
       }
-    );
 
-  }
+      this.loadingTeams();
+
+    }
 
 }

@@ -42,39 +42,39 @@ export class PartitaDetailPageComponent implements OnInit {
       'background-color': colore
     };
   }
-  // calcolaPercentuali(A:number, B:number, lunghezzaTotale:number) {
-  //   const percentualeA = (A / (A + B)) * 100;
-  //   const percentualeB = (B / (A + B)) * 100;
 
-  //   const lunghezzaA = (percentualeA / 100) * lunghezzaTotale;
-  //   const lunghezzaB = (percentualeB / 100) * lunghezzaTotale;
-
-  //   return {
-  //       percentualeA: percentualeA,
-  //       percentualeB: percentualeB,
-  //       lunghezzaA: lunghezzaA,
-  //       lunghezzaB: lunghezzaB
-  //   };
-  // }
+  calcolaPercentualeString(colore: string, a: string, b: string) {
+    // Converte le stringhe in numeri
+    const valoreA = parseFloat(a);
+    const valoreB = parseFloat(b);
   
+    const sommaPercentuali = valoreA + valoreB;
+    const percentuale = (valoreA / sommaPercentuali) * 100;
 
-  // calcolaBackground(A:number, B:number, coloreA: string, coloreB: string) {
+    return {
+      'flex': `${percentuale}%`,
+      'background-color': colore,
+    };
+  }
 
-  //   const risultati = this.calcolaPercentuali(A, B, A+B);
-
-  //   const parteStringaA = `'${risultati.percentualeA.toFixed(2)}% ,'`;
-  //   const parteStringaB = `'${risultati.percentualeB.toFixed(2)}%'`;
-
-  //   return coloreA + parteStringaA + coloreB + parteStringaB + ')';
-  // }
+  //Game
+  isLoadingGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingGame(idGame: string) {
+    this.apiService.getPartita(this.idGame).subscribe({
+      next: (response: GameDetail[]) => {
+        this.partite = response;
+      },
+      error: (error) => console.error('Error fetching games', error),
+      complete: () => {return this.isLoadingGame = false}
+    });
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.idGame = params['idGame'];
 
-      this.apiService.getPartita(this.idGame).subscribe( (response) => {
-      this.partite = response;
-      });
+      this.loadingGame(this.idGame)
 
     });
   }

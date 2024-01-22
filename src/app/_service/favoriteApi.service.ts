@@ -20,6 +20,7 @@ export class FavoriteApiService {
 
   tokenVerify:boolean = false;
 
+  //Prende le squadre preferite
   getFavoriteTeam(): Observable<FavoriteTeam[]> {
     const formData = {
       token: sessionStorage.getItem('token')
@@ -33,6 +34,7 @@ export class FavoriteApiService {
     );;
   }
 
+  //Prende i giocatori preferiti
   getFavoritePlayer(): Observable<FavoritePlayer[]> {
     const formData = {
       token: sessionStorage.getItem('token')
