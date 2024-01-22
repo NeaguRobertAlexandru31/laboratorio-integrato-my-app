@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+/* import { User } from '../../_models/user.model'
+ */
 @Component({
   selector: 'app-registrazione-page',
   templateUrl: './registrazione-page.component.html',
@@ -9,13 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegistrazionePageComponent {
   
   signUpForm = new FormGroup({
-    nome: new FormControl('', Validators.required),
-    cognome: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
   });
 
   registrationData: any = {
@@ -29,8 +27,10 @@ export class RegistrazionePageComponent {
 
   signup() {
     
-    if (this.signUpForm.valid) {
+    if (this.signUpForm) {
       const formData = this.signUpForm.value;
+      console.log('Dati inviati al server:', formData);
+
 
       fetch('http://localhost:8045/user/signup', {
         method: 'POST',
@@ -56,7 +56,5 @@ export class RegistrazionePageComponent {
   FirstForm: boolean = true;
   SecondForm: boolean = false;
 
-  submitFinalForm() {
-    console.log('Dati inviati:', this.registrationData);
-  }
+
 }

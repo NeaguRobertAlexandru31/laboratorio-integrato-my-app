@@ -7,7 +7,7 @@
         Lieto di conoscerti...
       </h3>
       <input
-        formControlName="nome"
+        formControlName="firstname"
         type="text"
         id="nome"
         name="nome"
@@ -20,7 +20,7 @@
     </div>
     <div class="relative mb-4">
       <input
-        formControlName="cognome"
+        formControlName="lastname"
         type="text"
         id="cognome"
         name="cognome"
@@ -39,7 +39,7 @@
     </button>
   </form>
 
-  <form *ngIf="SecondForm" class="mt-24" (ngSubmit)="submitFinalForm()" [formGroup]="signUpForm">
+  <form *ngIf="SecondForm" class="mt-24" [formGroup]="signUpForm">
     <h3 class="mb-[44px] text-black text-[28px] font-semibold font-Genera">
       Completa la registrazione
     </h3>
@@ -70,7 +70,6 @@
     </div>
     <button
       (click)="signup()"
-      type="submit"
       class="p-2 w-[300px] h-[35] rounded-[5px] border border-black text-center text-white text-base font-semibold font-Genera bg-hoops-primary"
     >
       Registrati
