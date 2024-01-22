@@ -51,7 +51,6 @@ import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
 import { FavoriteApiService } from './_service/favoriteApi.service';
 import { LogoutComponent } from './components/logout/logout.component';
-import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +78,6 @@ import { DeleteConfirmationComponent } from './components/delete-confirmation/de
     FilterPipePlayers,
     ProfiloDetailComponent,
     LogoutComponent,
-    DeleteConfirmationComponent,
   ],
   imports: [
     BrowserModule,
