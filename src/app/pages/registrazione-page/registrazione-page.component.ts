@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-/* import { User } from '../../_models/user.model'
- */
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_service/auth.service';
 @Component({
   selector: 'app-registrazione-page',
   templateUrl: './registrazione-page.component.html',
@@ -20,6 +20,8 @@ export class RegistrazionePageComponent {
     
   };
 
+  constructor(private router: Router, private authService: AuthService) {}
+
   showSecondForm() {
     this.FirstForm = false;
     this.SecondForm = true;
@@ -28,9 +30,9 @@ export class RegistrazionePageComponent {
   signup() {
     
     if (this.signUpForm) {
+      
       const formData = this.signUpForm.value;
       console.log('Dati inviati al server:', formData);
-
 
       fetch('http://localhost:8045/user/signup', {
         method: 'POST',
@@ -47,6 +49,11 @@ export class RegistrazionePageComponent {
       })
       .then((response) => {
         console.log('Registrazione avvenuta con successo:', response);
+        if (response.token) {
+          localStorage.setItem('token', response.token);
+          this.authService.setUserAuthenticated(true);
+          this.router.navigate(['/preferiti']); 
+        }
       })
       .catch((error) => {
         console.error('Errore durante la registrazione:', error);
