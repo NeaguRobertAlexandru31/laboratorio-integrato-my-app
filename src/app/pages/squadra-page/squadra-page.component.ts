@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../_service/api.service';
+import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 import { ActivatedRoute } from '@angular/router';
 
 import Team from '../../_models/team.model';
@@ -14,7 +15,7 @@ import Game from 'src/app/_models/game.model';
 })
 export class SquadraPageComponent implements OnInit{
 
-  constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute){  }
+  constructor(private apiService: ApiService, private favoriteApiService: FavoriteApiService , private activatedRoute: ActivatedRoute){  }
 
   teams: Team[] = [];
   players: Player[] = [];
@@ -93,9 +94,12 @@ export class SquadraPageComponent implements OnInit{
   }
   
   favorite: boolean = false;
-  
-  setFavorite(){
-    this.favorite = !this.favorite;
+
+  setFavoriteTeam(nameTeam:string){
+    this.favoriteApiService.addFavoriteTeam(nameTeam)
+  }
+  setFavoritePlayer(id:number){
+    this.favoriteApiService.addFavoritePlayer(id)
   }
   listsPlayer:Player[]=[];
   imgPlayer:string="";

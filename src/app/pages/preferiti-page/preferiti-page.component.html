@@ -1,28 +1,48 @@
-<div class="px-2">
+<div class="h-[90vh] px-2">
   <div class="flex flex-row">
-    <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')"
+    <!-- <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')"
       [ngClass]="accordionPartite ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Partite
-    </button>
-    <button class="w-full rounded-full py-1" (click)="accordionFavorite('squadre')"
+    </button> -->
+    <button [disabled]="tokenVerify==false" class="w-full rounded-full py-1" (click)="accordionFavorite('squadre')"
       [ngClass]="accordionSquadre ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Squadre
     </button>
-    <button class="w-full rounded-full py-1" (click)="accordionFavorite('giocatori')"
-      [ngClass]="accordionGiocatori ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
+    <button [disabled]="tokenVerify==false" class="w-full rounded-full py-1" (click)="accordionFavorite('giocatori')"
+      (click)="loadPlayers()" [ngClass]="accordionGiocatori ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
       Giocatori
     </button>
   </div>
 
-  <section id="accordionPartite" *ngIf="accordionPartite == true">
+  <div class="flex justify-center items-center drop-shadow-lg" *ngIf="tokenVerify == false">
+    <div class="w-fit flex flex-col bg-hoops-secondary rounded text-center text-white p-4 mt-[20vh] mx-8">
+      <h2 class="text-xl my-4 font-bold drop-shadow">ACCESSO NON EFFETTUATO</h2>
+      <p class="my-4 drop-shadow">Per utilizzare la sezione preferiti devi effettuare l'accesso alla piattaforma</p>
+      <div class="flex flex-col items-center">
+        <a routerLink="/accesso"
+          class="drop-shadow py-3 my-3 w-full h-fit rounded-md text-center text-base font-semibold font-Genera bg-hoops-primary">ACCEDI</a>
+        <a routerLink="/registrazione"
+          class="drop-shadow py-3 my-3 w-full h-fit rounded-md text-center text-white text-base font-semibold font-Genera bg-hoops-primary">REGISTRATI</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="tokenVerify == true">
+    <!-- <section id="accordionPartite" *ngIf="accordionPartite == true">
     Partite
-  </section>
+  </section> -->
 
-  <section id="accordionSquadre" *ngIf="accordionSquadre == true">
-    Squadre
-  </section>
+    <section id="accordionSquadre" *ngIf="accordionSquadre == true">
+      <div *ngFor="let team of favoriteTeams">
+        <p class="text-black">{{team.nameTeam}}</p>
+      </div>
+    </section>
 
-  <section id="accordionGiocatori" *ngIf="accordionGiocatori == true">
-    Giocatori
-  </section>
+    <section id="accordionGiocatori" *ngIf="accordionGiocatori == true">
+      <div *ngFor="let player of favoritePlayers">
+        <p class="text-black">{{player.firstname + ' ' + player.lastname}}</p>
+      </div>
+    </section>
+  </div>
+
 </div>

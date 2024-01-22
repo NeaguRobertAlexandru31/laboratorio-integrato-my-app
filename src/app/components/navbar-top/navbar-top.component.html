@@ -1,22 +1,23 @@
-<nav class="flex items-center p-2 h-[58px]">
-  <div class="container flex items-center">
+<nav class="flex items-center justify-center p-2 h-[58px] md:h-[68px]">
+  <div class="w-full flex items-center">
     <!-- Logo -->
-    <div class="w-2/12">
+    <div class="w-2/12 md:ps-4">
       <a routerLink="/partite/risultati">
-        <img class="w-fit h-[38px]" src="../../assets/img/Logo.png" width="50" height="50" alt="">
+        <img class="w-fit h-[38px] md:h-[46px]" src="../../assets/img/Logo.png" width="50" height="50" alt="">
       </a>
     </div>
 
     <!-- Search bar -->
-    <div class="w-8/12 px-5 justify-center">
+    <div class="w-8/12 flex justify-center items-center">
       <app-search-bar></app-search-bar>
     </div>
 
     <!-- Links -->
-    <div class="flex justify-end w-2/12">
-      <a routerLink="/profilo" class="text-white hover:text-gray-300">
-        <img class="rounded-full w-[38px] h-[38px]" src="https://via.placeholder.com/38x38" width="50" height="50"
-          alt="">
+    <div class="flex justify-end w-2/12 md:pr-4">
+      <a routerLink="/profilo"
+        class="text-white hover:text-gray-300 flex justify-center items-center bg-gray-400  rounded-full p-1">
+        <img class="w-[30px] h-[30px] md:w-[40px] md:h-[40px]" src="../../../assets/img/iconamoon_profile-fill.svg"
+          width="50" height="50" alt="">
       </a>
     </div>
   </div>

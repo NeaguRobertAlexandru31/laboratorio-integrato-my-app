@@ -1,6 +1,8 @@
 <div class="flex flex-col">
-  <app-navbar-top class="z-10"></app-navbar-top>
-  <router-outlet></router-outlet>
-  <footer-component></footer-component>
-  <app-navbar-down class="fixed md:relative bottom-0 w-full"></app-navbar-down>
+  <app-navbar-top class="z-10 md:order-1"></app-navbar-top>
+  <div class="md:order-3">
+    <router-outlet></router-outlet>
+    <footer-component></footer-component>
+  </div>
+  <app-navbar-down class="fixed bottom-0 md:relative md:order-2 w-full"></app-navbar-down>
 </div>

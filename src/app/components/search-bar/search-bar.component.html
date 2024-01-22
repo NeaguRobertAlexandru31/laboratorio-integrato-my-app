@@ -1,19 +1,32 @@
 <div>
   <div>
     <input (click)="showList()"
-      class="bg-hoops-primary placeholder:text-white placeholder:text-opacity-80 rounded-full text-white py-1 px-3"
+      class="w-[230px] md:w-[300px] bg-hoops-primary placeholder:text-white placeholder:text-opacity-80 rounded-full text-white py-1 px-3"
       type="text" placeholder="Cerca..." [(ngModel)]="searchText" #searchbar>
   </div>
 
 
-  <div *ngIf="isVisible" class="absolute h-[50vh] rounded-md overflow-auto">
-    <div class="bg-white h-fit w-[185px]">
+  <div *ngIf="isVisible" class="w-[230px] md:w-[300px] absolute h-[50vh] rounded-md overflow-auto">
+    <div class="bg-white h-fit w-full">
       <a [routerLink]="'/squadra/'+this.item.nameTeam" class="flex flex-row justify-center items-center px-2"
         *ngFor="let item of listTeam | filter: searchText">
         <img class="w-fit h-6" [src]="item.logo" alt="">
         <div class="w-full ps-3 py-1 truncate">{{item.nameTeam}}</div>
       </a>
+      <!--
+        TODO: Cambiare il percorso del routerLink
+      -->
+      <div class="w-full text-white text-center py-1" [ngStyle]="{'background': '#E58C38' + 'B2'}">
+        <p>Giocatori</p>
+      </div>
+
+      <a [routerLink]="'/squadra/'+this.player.idPlayer" class="flex flex-row justify-center items-center px-2"
+        *ngFor="let player of listPlayer | filterPlayer: searchText">
+        <img class="w-[30px] h-[20px]" [src]="player.img" alt="">
+        <div class="w-full ps-3 py-1 truncate">{{player.firstname + ' ' + player.lastname}}</div>
+      </a>
     </div>
+
     <div *ngIf="(listTeam | filter: searchText).length === 0">
       <p>Nessun risultato</p>
     </div>

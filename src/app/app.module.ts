@@ -47,8 +47,10 @@ import { ListComponent } from './list/list.component';
 //Squadra
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 import { FilterPipe } from './_hooks/filter.pipe';
+import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
 import { PlayerPageComponent } from './pages/player-page/player-page.component';
+import { FavoriteApiService } from './_service/favoriteApi.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { PlayerPageComponent } from './pages/player-page/player-page.component';
     PartitaDetailPageComponent,
     CalendarComponent,
     FilterPipe,
+    FilterPipePlayers,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,7 @@ import { PlayerPageComponent } from './pages/player-page/player-page.component';
     ReactiveFormsModule,
     CommonModule,
   ],
-  providers: [ApiService, { provide: DateTime, useValue: DateTime }],
+  providers: [ApiService, { provide: DateTime, useValue: DateTime }, FavoriteApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

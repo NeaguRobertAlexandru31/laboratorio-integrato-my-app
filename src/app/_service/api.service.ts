@@ -19,6 +19,7 @@ export class ApiService {
   search(searchTerm: string) {
     throw new Error('Method not implemented.');
   }
+
   baseUrl = 'http://localhost:8045/';
   //baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
@@ -32,6 +33,7 @@ export class ApiService {
       })
     );
   }
+
   getAllPlayer() {
     return this.http.get(this.baseUrl + 'player/all ').pipe(
       map((response: any) => {
@@ -69,18 +71,6 @@ export class ApiService {
       })
     );
   }
-  
-  //Chiamata non funzionante ne collegata
-  getFavoriteTeam(idTeam:number){
-    return this.http
-    .get(this.baseUrl + 'fav/new/team/' + idTeam)
-    .pipe(
-      map((response: any) => {
-        console.log(response);
-        return response as Player[];
-      })
-      );
-    }
     
     //Funzionante
     getGiocatoriSquadra(team: number, season: number) {
@@ -94,28 +84,77 @@ export class ApiService {
         );
     }
     
-  //Chiamata non funzionante ne collegata
-  getThisTeam(teamName:string){
-    return this.http
-      .get(this.baseUrl + 'team/teamById/' + teamName)
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Team[];
-        })
-      );
-  }
+    //Chiamata non funzionante ne collegata
+    getThisTeam(teamName:string){
+      return this.http
+        .get(this.baseUrl + 'team/teamById/' + teamName)
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Team[];
+          })
+        );
+    }
+      
+    //Chiamata non funzionante ne collegata
+    getPreviousGame(idTeam:number){
+      return this.http
+        .get(this.baseUrl + 'game/team/pass/' + idTeam)
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Game[];
+          })
+        );
+    }
+  
+    //Chiamata non funzionante ne collegata
+    getNextGame(idTeam:number){
+      return this.http
+        .get(this.baseUrl + 'game/team/prog/' + idTeam)
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Game[];
+          })
+        );
+    }
+  
+    //Utilizzata in Classifiche Est
+    getRankingEast() {
+      return this.http
+        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Ranking;
+          })
+        );
+    }
     
-  //Chiamata non funzionante ne collegata
-  getPreviousGame(idTeam:number){
-    return this.http
-      .get(this.baseUrl + 'game/team/pass/' + idTeam)
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Game[];
-        })
-      );
+    //Utilizzata in Classifiche Est
+    getRankingOvest() {
+      return this.http
+        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Ranking;
+          })
+        );
+    }
+    
+    //Utilizzata in Classifiche Est
+    getFavoriteTeam(token:string) {
+      return this.http
+        .get(this.baseUrl + 'fav/get/team' + token)
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as any[];
+          })
+        );
+    }
   }
 
   //Chiamata non funzionante ne collegata
