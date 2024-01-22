@@ -13,6 +13,7 @@ import { OvestPageComponent } from './pages/ovest-page/ovest-page.component';
 import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { RegistrazionePageComponent } from './pages/registrazione-page/registrazione-page.component';
 import { AccessoPageComponent } from './pages/accesso-page/accesso-page.component';
+import { ProfiloDetailComponent } from './pages/profilo-detail/profilo-detail.component';
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
@@ -31,8 +32,9 @@ const routes: Routes = [
   { path: 'preferiti', component: PreferitiPageComponent },
   /* News e blog */
   { path: 'news', component: NewsPageComponent },
-  /* Signup e Signin */
+  /* Signup, Signin e Profilo Detail */
   { path: 'profilo', component: ProfiloComponent },
+  { path: 'profilo/detail', component: ProfiloDetailComponent },
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
   { path: 'squadra/:teamName', component: SquadraPageComponent },
