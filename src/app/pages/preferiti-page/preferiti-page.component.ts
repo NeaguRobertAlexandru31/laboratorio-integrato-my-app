@@ -7,83 +7,79 @@ import FavoritePlayer from 'src/app/_models/favorite.model';
 @Component({
   selector: 'app-preferiti-page',
   templateUrl: './preferiti-page.component.html',
-  styleUrls: ['./preferiti-page.component.scss']
+  styleUrls: ['./preferiti-page.component.scss'],
 })
 export class PreferitiPageComponent implements OnInit {
-
-  favoriteTeams: FavoriteTeam[] = []
-  favoritePlayers: FavoritePlayer[] = []
+  favoriteTeams: FavoriteTeam[] = [];
+  favoritePlayers: FavoritePlayer[] = [];
 
   constructor(private apiService: FavoriteApiService) {}
 
-  token:string = '';
+  token: string = '';
 
   tokenVerify: boolean = false;
 
   // accordionPartite:boolean = true;
-  accordionSquadre:boolean = true;
-  accordionGiocatori:boolean = false;
+  accordionSquadre: boolean = true;
+  accordionGiocatori: boolean = false;
 
-  accordionFavorite(section:string,) {
-    if(section == 'squadre'){
+  accordionFavorite(section: string) {
+    if (section == 'squadre') {
       //this.accordionPartite = false;
       this.accordionSquadre = true;
       this.accordionGiocatori = false;
-    } else if(section == 'giocatori'){
+    } else if (section == 'giocatori') {
       //this.accordionPartite = false;
       this.accordionSquadre = false;
       this.accordionGiocatori = true;
     } //else if(section == 'partite'){
-      //   this.accordionPartite = true;
-      //   this.accordionSquadre = false;
-      //   this.accordionGiocatori = false;
-      // }
+    //   this.accordionPartite = true;
+    //   this.accordionSquadre = false;
+    //   this.accordionGiocatori = false;
+    // }
   }
 
-    //Teams
-    isLoadingTeams: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-    isLoadedTeams:boolean = false;
-    //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
-    loadingTeams() {
-      if(this.isLoadedTeams == false && sessionStorage.getItem('token')){
+  //Teams
+  isLoadingTeams: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedTeams: boolean = false;
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingTeams() {
+    if (this.isLoadedTeams == false && sessionStorage.getItem('token')) {
       this.apiService.getFavoriteTeam().subscribe({
         next: (response: FavoriteTeam[]) => {
           this.favoriteTeams = response;
         },
         error: (error) => console.error('Error fetching players', error),
-        complete: () => {return this.isLoadingTeams = false, this.isLoadedTeams = true}
+        complete: () => {
+          return (this.isLoadingTeams = false), (this.isLoadedTeams = true);
+        },
       });
     }
+  }
 
-  ngOnInit(){
-
-    if(localStorage.getItem('token')?.length){
-      this.tokenVerify = true;
-    }
-    
-    //Player
-    isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-    isLoadedPlayer:boolean = false;
-    //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
-    loadingPlayers() {
-      if(this.isLoadedPlayer == false && sessionStorage.getItem('token')){
+  //Player
+  isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedPlayer: boolean = false;
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingPlayers() {
+    if (this.isLoadedPlayer == false && sessionStorage.getItem('token')) {
       this.apiService.getFavoritePlayer().subscribe({
         next: (response: FavoritePlayer[]) => {
           this.favoritePlayers = response;
         },
         error: (error) => console.error('Error fetching players', error),
-        complete: () => {return this.isLoadingPlayers = false, this.isLoadedPlayer = true}
+        complete: () => {
+          return (this.isLoadingPlayers = false), (this.isLoadedPlayer = true);
+        },
       });
-    };};
+    }
+  }
 
-    ngOnInit(){
-
-      if(sessionStorage.getItem('token')?.length){
-        this.tokenVerify = true;
-      }
-
-      this.loadingTeams();
-
+  ngOnInit() {
+    if (localStorage.getItem('token')?.length) {
+      this.tokenVerify = true;
     }
 
+    this.loadingTeams();
+  }
 }
