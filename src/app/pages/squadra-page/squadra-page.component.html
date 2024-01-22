@@ -192,7 +192,7 @@
                     </div>
                 </div>
                 <div class="w-fit flex items-center">
-                    <button (click)="setFavorite()">
+                    <button (click)="setFavoritePlayer(player.idPlayer)">
             <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
             <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
           </button>
@@ -208,5 +208,4 @@
     </div>
     <div *ngIf="nextGame.length"></div>
     <div></div>
-</section>
 </section>

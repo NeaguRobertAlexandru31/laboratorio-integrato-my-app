@@ -108,6 +108,17 @@ export class ApiService {
         );
     }
   
+    //Utilizzata in Classifiche Est
+    getFavoriteTeam(token:string) {
+      return this.http
+        .get(this.baseUrl + 'fav/get/team' + token)
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as any[];
+          })
+        );
+    }
     //Chiamata non funzionante ne collegata
     getNextGame(idTeam:number){
       return this.http
@@ -131,7 +142,6 @@ export class ApiService {
           })
         );
     }
-    
     //Utilizzata in Classifiche Est
     getRankingOvest() {
       return this.http
@@ -143,73 +153,25 @@ export class ApiService {
           })
         );
     }
-    
-    //Utilizzata in Classifiche Est
-    getFavoriteTeam(token:string) {
+    // Utilizzata in Player Page , aggiornare season
+    getPlayerStat(idPlayer:number){
       return this.http
-        .get(this.baseUrl + 'fav/get/team' + token)
-        .pipe(
-          map((response: any) => {
-            console.log(response);
-            return response as any[];
-          })
-        );
+      .get(this.baseUrl + '/team/season/player/' + idPlayer + '/' + 2023)
+      .pipe(
+        map((response:any)=>{
+          console.log(response);
+          return response as PlayerStat;
+      })
+      );
+    }
+    getPlayerPan(idPlayer:number){
+      return this.http
+      .get(this.baseUrl + '/player/pan/' + idPlayer + '/' + 2021)
+      .pipe(
+        map((response:any)=>{
+          console.log(response);
+          return response as PlayerPan;
+      })
+      );
     }
   }
-
-  //Chiamata non funzionante ne collegata
-  getNextGame(idTeam:number){
-    return this.http
-      .get(this.baseUrl + 'game/team/prog/' + idTeam)
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Game[];
-        })
-      );
-  }
-
-  //Utilizzata in Classifiche Est
-  getRankingEast() {
-    return this.http
-      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Ranking;
-        })
-      );
-  }
-  //Utilizzata in Classifiche Est
-  getRankingOvest() {
-    return this.http
-      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
-      .pipe(
-        map((response: any) => {
-          console.log(response);
-          return response as Ranking;
-        })
-      );
-  }
-  // Utilizzata in Player Page , aggiornare season
-  getPlayerStat(idPlayer:number){
-    return this.http
-    .get(this.baseUrl + '/team/season/player/' + idPlayer + '/' + 2023)
-    .pipe(
-      map((response:any)=>{
-        console.log(response);
-        return response as PlayerStat;
-    })
-    );
-  }
-  getPlayerPan(idPlayer:number){
-    return this.http
-    .get(this.baseUrl + '/player/pan/' + idPlayer + '/' + 2021)
-    .pipe(
-      map((response:any)=>{
-        console.log(response);
-        return response as PlayerPan;
-    })
-    );
-  }
-}
