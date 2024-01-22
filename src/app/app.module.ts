@@ -36,6 +36,7 @@ import { ApiService } from './_service/api.service';
 import { DateTime } from 'luxon';
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
+import { ProfiloDetailComponent } from './pages/profilo-detail/profilo-detail.component';
 //Calendar
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -43,13 +44,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { ListComponent } from './list/list.component';
 //Squadra
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 import { FilterPipe } from './_hooks/filter.pipe';
 import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
 import { FavoriteApiService } from './_service/favoriteApi.service';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,8 @@ import { FavoriteApiService } from './_service/favoriteApi.service';
     CalendarComponent,
     FilterPipe,
     FilterPipePlayers,
+    ProfiloDetailComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
