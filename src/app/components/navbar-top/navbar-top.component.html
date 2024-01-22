@@ -14,7 +14,7 @@
 
     <!-- Links -->
     <div class="flex justify-end w-2/12 md:pr-4">
-      <a routerLink="/profilo"
+      <a [routerLink]="getProfileLink()"
         class="text-white hover:text-gray-300 flex justify-center items-center bg-gray-400  rounded-full p-1">
         <img class="w-[30px] h-[30px] md:w-[40px] md:h-[40px]" src="../../../assets/img/iconamoon_profile-fill.svg"
           width="50" height="50" alt="">

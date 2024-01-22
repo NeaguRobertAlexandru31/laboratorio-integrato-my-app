@@ -13,24 +13,32 @@ import { OvestPageComponent } from './pages/ovest-page/ovest-page.component';
 import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { RegistrazionePageComponent } from './pages/registrazione-page/registrazione-page.component';
 import { AccessoPageComponent } from './pages/accesso-page/accesso-page.component';
+import { ProfiloDetailComponent } from './pages/profilo-detail/profilo-detail.component';
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
 
 const routes: Routes = [
+  /* Partite svolte, programmate e statistiche */
   { path: 'partite', component: PartitePageComponent },
-  { path: 'partita/:idGame', component: PartitaDetailPageComponent},
-  { path: 'classifiche', component: OvestPageComponent },
-  { path: 'preferiti', component: PreferitiPageComponent },
-  { path: 'news', component: NewsPageComponent },
   { path: 'partite/risultati', component: RisultatiPageComponent },
   { path: 'partite/programmate', component: ProgrammatePageComponent },
+  { path: 'partita/:idGame', component: PartitaDetailPageComponent},
+  /* Classifiche ovest & est */
+  { path: 'classifiche', component: OvestPageComponent },
   { path: 'classifiche/ovest', component: OvestPageComponent },
   { path: 'classifiche/est', component: EstPageComponent },
+  /* Squadre e giocatori preferiti */
+  { path: 'preferiti', component: PreferitiPageComponent },
+  /* News e blog */
+  { path: 'news', component: NewsPageComponent },
+  /* Signup, Signin e Profilo Detail */
   { path: 'profilo', component: ProfiloComponent },
+  { path: 'profilo/detail', component: ProfiloDetailComponent },
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
   { path: 'squadra/:teamName', component: SquadraPageComponent },
+  /* Reindirizzamento */
   { path: '**', component: RisultatiPageComponent },
 ];
 

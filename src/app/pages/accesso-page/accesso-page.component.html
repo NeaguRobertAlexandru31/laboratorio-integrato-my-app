@@ -18,4 +18,10 @@
       LOGIN
     </button>
   </form>
+
+  <!-- Errore credenziali -->
+  <div *ngIf="errorMessage" class="">
+    {{ errorMessage }}
+  </div>
+
 </div>

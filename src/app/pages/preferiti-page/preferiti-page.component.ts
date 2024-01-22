@@ -54,6 +54,11 @@ export class PreferitiPageComponent implements OnInit {
         complete: () => {return this.isLoadingTeams = false, this.isLoadedTeams = true}
       });
     }
+
+  ngOnInit(){
+
+    if(localStorage.getItem('token')?.length){
+      this.tokenVerify = true;
     }
     
     //Player

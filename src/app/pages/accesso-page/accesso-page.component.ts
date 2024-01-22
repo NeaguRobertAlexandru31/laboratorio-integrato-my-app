@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../_service/auth.service';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-accesso-page',
@@ -8,21 +11,25 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AccessoPageComponent {
   
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
-  tokenVerify:boolean = false;
+  tokenVerify: boolean = false;
+  // Variabile per memorizzare il messaggio di errore
+  errorMessage: string = '';
 
   signin() {
+    /* Manda mail e password */
     const formData = {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value,
     };
 
+    // Esegui la richiesta di login al server
     fetch('http://localhost:8045/user/signin', {
       method: 'POST',
       headers: {
@@ -30,18 +37,26 @@ export class AccessoPageComponent {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((response) => {
         console.log('Accesso avvenuto con successo:', response);
-        // Puoi aggiungere qui il reindirizzamento o altre azioni dopo l'accesso.
-
-        if(!this.tokenVerify){
+        if (!this.tokenVerify) {
           this.tokenVerify = true;
-          sessionStorage.setItem('token', response.token)
+          localStorage.setItem('token', response.token);
+          // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
+          this.router.navigate(['/preferiti']);
         }
       })
       .catch((error) => {
         console.error("Errore durante l'accesso:", error);
+        // Mostriamo un messaggio di errore quando le credenziali sono sbagliate
+        this.errorMessage = 'Credenziali non valide. Riprova.';
       });
   }
+
 }
