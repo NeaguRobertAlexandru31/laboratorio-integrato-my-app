@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 
+import FavoriteGame from 'src/app/_models/favorite.model';
 import FavoriteTeam from 'src/app/_models/favorite.model';
 import FavoritePlayer from 'src/app/_models/favorite.model';
 
@@ -10,6 +11,7 @@ import FavoritePlayer from 'src/app/_models/favorite.model';
   styleUrls: ['./preferiti-page.component.scss'],
 })
 export class PreferitiPageComponent implements OnInit {
+  favoriteGames: FavoriteGame[] = [];
   favoriteTeams: FavoriteTeam[] = [];
   favoritePlayers: FavoritePlayer[] = [];
 
@@ -19,24 +21,42 @@ export class PreferitiPageComponent implements OnInit {
 
   tokenVerify: boolean = false;
 
-  // accordionPartite:boolean = true;
-  accordionSquadre: boolean = true;
+  accordionPartite:boolean = true;
+  accordionSquadre: boolean = false;
   accordionGiocatori: boolean = false;
 
   accordionFavorite(section: string) {
     if (section == 'squadre') {
-      //this.accordionPartite = false;
+      this.accordionPartite = false;
       this.accordionSquadre = true;
       this.accordionGiocatori = false;
     } else if (section == 'giocatori') {
-      //this.accordionPartite = false;
+      this.accordionPartite = false;
       this.accordionSquadre = false;
       this.accordionGiocatori = true;
-    } //else if(section == 'partite'){
-    //   this.accordionPartite = true;
-    //   this.accordionSquadre = false;
-    //   this.accordionGiocatori = false;
-    // }
+    } else if(section == 'partite'){
+      this.accordionPartite = true;
+      this.accordionSquadre = false;
+      this.accordionGiocatori = false;
+    }
+  }
+
+  //Games
+  isLoadingGames: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  isLoadedGames: boolean = false;
+  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  loadingGames() {
+    if (this.isLoadedGames == false && localStorage.getItem('token')) {
+      this.apiService.getFavoriteGames().subscribe({
+        next: (response: FavoriteGame[]) => {
+          this.favoriteGames = response;
+        },
+        error: (error) => console.error('Error fetching games', error),
+        complete: () => {
+          return (this.isLoadingGames = false), (this.isLoadedGames = true);
+        },
+      });
+    }
   }
 
   //Teams
@@ -78,9 +98,8 @@ export class PreferitiPageComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('token')?.length) {
       this.tokenVerify = true;
-      console.log('sono qua')
     }
 
-    this.loadingTeams();
+    this.loadingGames();
   }
 }

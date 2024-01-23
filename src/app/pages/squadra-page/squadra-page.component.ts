@@ -4,8 +4,8 @@ import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 import { ActivatedRoute } from '@angular/router';
 
 import Team from '../../_models/team.model';
+import TeamStats from '../../_models/team.model';
 import Player from 'src/app/_models/player.model';
-
 import Game from 'src/app/_models/game.model';
 
 @Component({
@@ -15,9 +15,10 @@ import Game from 'src/app/_models/game.model';
 })
 export class SquadraPageComponent implements OnInit{
 
-  constructor(private apiService: ApiService, private favoriteApiService: FavoriteApiService , private activatedRoute: ActivatedRoute){  }
+  constructor(private apiService: ApiService, private favoriteApiService: FavoriteApiService, private activatedRoute: ActivatedRoute){  }
 
   teams: Team[] = [];
+  teamStats: TeamStats[] = [];
   players: Player[] = [];
   prevoiusGame: Game[] = [];
   nextGame: Game[] = [];
@@ -25,6 +26,8 @@ export class SquadraPageComponent implements OnInit{
   teamName: string = '';
 
   idTeam: number = 0;
+
+  year:number = (new Date().getFullYear())-1
 
   sectionPanoramica: boolean = true; //impostare come primo
   sectionPartite: boolean = false;
@@ -59,23 +62,45 @@ export class SquadraPageComponent implements OnInit{
     }
   }
 
-  favorite: boolean = false;
+  isVisible = false;
 
+  openStats() {
+    this.isVisible = !this.isVisible;
+  }
+
+  //Gestione dei Favorite
+  favorite: boolean = false;
+  //Aggiunge e Rimuove i Team preferiti
   setFavoriteTeam(nameTeam:string){
     this.favoriteApiService.addFavoriteTeam(nameTeam)
   }
+  //Aggiunge e Rimuove i Giocatori preferiti
   setFavoritePlayer(id:number){
     this.favoriteApiService.addFavoritePlayer(id)
   }
 
   //Team
   isLoadingTeam: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  //Funzione di caricamento e ricevuta dei dati, controlla lo stato della chiamata se restituisce o meno
   loadingTeam(teamName: string) {
     this.apiService.getThisTeam(teamName).subscribe({
       next: (response:Team[]) => {
         this.teams = response;
         this.idTeam = this.teams[0].idTeam;
+        this.loadingTeamStats(this.idTeam); //Chiamata API statistiche stagionali squadra
+      },
+      error: (error) => console.error('Error fetching team', error),
+      complete: () => this.isLoadingTeam = false
+    });
+  }
+
+  //TeamStatiscs
+  isLoadingTeamStats: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
+  //Funzione di caricamento e ricevuta dei dati, controlla lo stato della chiamata se restituisce o meno
+  loadingTeamStats(idTeam: number) {
+    this.apiService.getThisTeamStats(idTeam,this.year).subscribe({
+      next: (response:any[]) => {
+        this.teamStats = response;
       },
       error: (error) => console.error('Error fetching team', error),
       complete: () => this.isLoadingTeam = false
@@ -85,7 +110,7 @@ export class SquadraPageComponent implements OnInit{
   //PreviousGame
   isLoadingPreviousGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
   isLoadedPrevoius:boolean = false; // Flag per indicare se l'array e gia stato caricato
-  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  //Funzione di caricamento e ricevuta dei dati, controlla lo stato della chiamata se restituisce o meno
   loadingPreviousGame(idTeam: number) {
     if(this.isLoadedPrevoius == false){
     this.apiService.getPreviousGame(idTeam).subscribe({
@@ -103,7 +128,7 @@ export class SquadraPageComponent implements OnInit{
   //NextGame
   isLoadingNextGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
   isLoadedNext:boolean = false; // Flag per indicare se l'array e gia stato caricato
-  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  //Funzione di caricamento e ricevuta dei dati controlla lo stato della chiamata se restituisce o meno
   loadingNextGame(idTeam: number) {
     if(this.isLoadedNext == false){
     this.apiService.getNextGame(idTeam).subscribe({
@@ -119,7 +144,7 @@ export class SquadraPageComponent implements OnInit{
   //Player
   isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
   isLoadedPlayer:boolean = false;
-  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  //Funzione di caricamento e ricevuta dei dati controlla lo stato della chiamata se restituisce o meno
   loadingPlayers(teamId: number) {
     if(this.isLoadedPlayer == false){
     this.apiService.getGiocatoriSquadra(teamId,2023).subscribe({
@@ -132,6 +157,10 @@ export class SquadraPageComponent implements OnInit{
   }
   }
 
+  //Calcola la media di due valori di tipo number
+  calculateRoundedAverage(aNumber:number, bMedia:number){
+    return Math.round(aNumber / bMedia);
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
@@ -149,7 +178,7 @@ export class SquadraPageComponent implements OnInit{
       this.isLoadedPlayer = false;
       this.isLoadedNext = false;
 
-      this.loadingTeam(this.teamName); //Chiamata API
+      this.loadingTeam(this.teamName); //Chiamata API squadra
     })
   }
 
