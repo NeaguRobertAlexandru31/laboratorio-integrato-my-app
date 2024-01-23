@@ -148,4 +148,17 @@ export class ApiService {
         })
       );
   }
+
+  /* Modifica dati profilo DA FINIRE */
+  updateUserData(user: any): Observable<any> {
+    const url = this.baseUrl + 'user/update';  // Assumi che ci sia un endpoint 'user/update' per l'aggiornamento dei dati utente
+
+    // Effettua una richiesta HTTP di tipo PUT per aggiornare i dati dell'utente
+    return this.http.put(url, user).pipe(
+      map((response: any) => {
+        console.log(response); // Log di controllo tramite console
+        return response;  // Puoi personalizzare il ritorno a seconda delle tue esigenze
+      })
+    );
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/_service/api.service';
 import { AuthService, User } from 'src/app/_service/auth.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profilo-detail',
@@ -12,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class ProfiloDetailComponent implements OnInit {
 
   user: User | null = null;
+  apiService: any;
 
   constructor(public authService: AuthService) {}
 
@@ -20,4 +22,13 @@ export class ProfiloDetailComponent implements OnInit {
       this.user = user;
     });
   }
-}
+
+  saveUserData(): void {
+    // Qui puoi implementare la logica per inviare i dati al server e salvarli nel database
+    if (this.user) {
+      this.apiService.updateUserData(this.user).subscribe((response: any) => {
+        // Aggiorna l'interfaccia utente o gestisci eventuali risposte dal server
+        console.log('Dati utente aggiornati con successo:', response);
+      });
+    }
+}}
