@@ -50,6 +50,14 @@ export class AccessoPageComponent {
         if (!this.tokenVerify) {
           this.tokenVerify = true;
           localStorage.setItem('token', response.token);
+          // Aggiungi questa parte per impostare i dati dell'utente nel servizio AuthService
+          this.authService.setUserAuthenticated(true);
+          this.authService.setUserData({
+            firstname: response.firstname,
+            lastname: response.lastname,
+            email: response.email,
+            isUserAuthenticated: true,
+          });
           // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
           this.router.navigate(['/preferiti']);
         }

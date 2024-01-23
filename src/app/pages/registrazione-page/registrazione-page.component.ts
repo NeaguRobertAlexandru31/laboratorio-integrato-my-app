@@ -68,25 +68,6 @@ export class RegistrazionePageComponent {
     }
   }
 
-  
-  // Aggiorna il metodo getFormControl per utilizzare FormGroupDirective
-  getFormControl(form: FormGroupDirective, field: string): FormControl {
-    return form.control.get(field) as FormControl;
-  }
-
-  // Aggiorna il metodo isFieldValid per utilizzare FormGroupDirective
-  isFieldValid(form: FormGroupDirective, field: string): boolean {
-    const control = this.getFormControl(form, field);
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  // Aggiorna il metodo getValidationClass per utilizzare FormGroupDirective
-  getValidationClass(form: FormGroupDirective, field: string): any {
-    return {
-      'is-invalid': this.isFieldValid(form, field),
-    };
-  }
-
   FirstForm: boolean = true;
   SecondForm: boolean = false;
 }

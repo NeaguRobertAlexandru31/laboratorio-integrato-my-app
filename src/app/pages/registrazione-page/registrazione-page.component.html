@@ -7,7 +7,6 @@
       <!-- NOME -->
       <input
         formControlName="firstname"
-        [ngClass]="getValidationClass(formGroup, 'firstname')"
         type="text"
         id="nome"
         name="nome"
@@ -22,7 +21,6 @@
       <!-- COGNOME -->
       <input
         formControlName="lastname"
-        [ngClass]="getValidationClass(formGroup, 'lastname')"
         type="text"
         id="cognome"
         name="cognome"
@@ -50,7 +48,6 @@
       <!-- MAIL -->
       <input
         formControlName="email"
-        [ngClass]="getValidationClass(formGroup, 'email')"
         type="email"
         name="email"
         placeholder="Email"
@@ -64,7 +61,6 @@
       <!-- PASSWORD -->
       <input
         formControlName="password"
-        [ngClass]="getValidationClass(formGroup, 'password')"
         type="password"
         name="password"
         placeholder="Password"

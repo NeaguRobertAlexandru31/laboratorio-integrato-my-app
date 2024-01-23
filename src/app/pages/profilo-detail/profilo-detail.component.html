@@ -1,3 +1,12 @@
 <div class="h-[70vh] mb-0">
-    <app-logout></app-logout>
+
+    <div *ngIf="user && user.isUserAuthenticated" class="">
+        <h2>Benvenuto, {{ user.firstname }} {{ user.lastname }} !</h2>
+        <p>Email: {{ user.email }}</p>
+    </div>
+
+    <div>
+        <app-logout></app-logout>
+    </div>
+
 </div>
