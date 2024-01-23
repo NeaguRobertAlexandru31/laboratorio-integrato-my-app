@@ -34,6 +34,7 @@ export class PartitaDetailPageComponent implements OnInit {
     this.isVisible = !this.isVisible;
   }
 
+  //Calcola la percentuale sulla base di due valori di tipo number
   calcolaPercentuale(colore: string, a: number, b:number ) {
     const sommaPercentuali = a + b;
 
@@ -43,8 +44,8 @@ export class PartitaDetailPageComponent implements OnInit {
     };
   }
 
+  //Calcola la percentuale sulla base di due valori di tipo string
   calcolaPercentualeString(colore: string, a: string, b: string) {
-    // Converte le stringhe in numeri
     const valoreA = parseFloat(a);
     const valoreB = parseFloat(b);
   

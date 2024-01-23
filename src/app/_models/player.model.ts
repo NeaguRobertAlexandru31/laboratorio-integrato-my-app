@@ -6,6 +6,7 @@ export default interface Player{
     height: number,
     shirtNumber: number
     country: string,
+    logoCountry: string,
     nameTeam: string,
     logo: string,
     pos: string,

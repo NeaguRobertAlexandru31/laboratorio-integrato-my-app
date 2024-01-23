@@ -10,7 +10,7 @@
     <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md"
       [ngStyle]="{'background': team.colour+'B3'}">
       <div class="w-3/12">
-        <img class="h-20" [src]="team.logo" alt="">
+        <img class="h-20 drop-shadow-md" [src]="team.logo" alt="">
       </div>
       <div class="w-7/12 text-center text-md text-white font-bold">
         <h1 class="drop-shadow">{{team.nameTeam}}</h1>
@@ -39,117 +39,213 @@
   </section>
 
   <section *ngIf="sectionPanoramica == true" id="panoramica">
-    <div
-      class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
-      [ngStyle]="{'background': team.colour+'B3'}">
-      <table class=" w-full">
-        <thead>
-          <th class="text-start">
-            Generali
-          </th>
-          <th class="text-start">
-            Valore
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Punti segnati per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Punti subiti per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Assist per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Rapporto assist per turnover</td>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div
-      class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
-      [ngStyle]="{'background': team.colour+'B3'}">
-      <table class="w-full">
-        <thead>
-          <th class="text-start">
-            Attacco
-          </th>
-          <th class="text-start">
-            Valore
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Punti segnati per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Punti subiti per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Assist per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Rapporto assist per turnover</td>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow"
-        [ngStyle]="{'color': team.colour+'B3'}">Bottone</button>
-    </div>
-
-    <div
-      class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
-      [ngStyle]="{'background': team.colour+'B3'}">
-      <table class="w-full">
-        <thead>
-          <th class="text-start">
-            Rimbalzi
-          </th>
-          <th class="text-start">
-            Valore
-          </th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Punti segnati per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Punti subiti per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Assist per partita</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Rapporto assist per turnover</td>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow"
-        [ngStyle]="{'color': team.colour+'B3'}">Bottone</button>
-    </div>
-
-    <div
-      class="flex flex-row justify-center items-center bg-[#94A3B8] rounded-full text-white text-center mb-3 drop-shadow-md py-2 px-4"
-      [ngStyle]="{'background': team.colour+'B3'}">
-      <div class="w-full">
-        <p class="truncate">City: {{team.city}}</p>
+    <div *ngFor="let stat of teamStats">
+      <div
+        class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <table class=" w-full">
+          <thead>
+            <th class="text-start">
+              Generali
+            </th>
+            <th class="text-start">
+              Valore
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-[269px]">Punti segnati per partita</td>
+              <td>{{ calculateRoundedAverage(stat.points,stat.gamesPlayed) }}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Punti subiti per partita</td>
+              <td>NA</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Assist per partita</td>
+              <td>{{ calculateRoundedAverage(stat.assist,stat.gamesPlayed) }}
+              </td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Rapporto assist per turnover</td>
+              <td>{{ calculateRoundedAverage(stat.turnovers,stat.gamesPlayed) }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="w-full">
-        <p>League: {{team.league.nameLeague}}</p>
+
+      <div
+        class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <table class="w-full">
+          <thead>
+            <th class="text-start">
+              Attacco
+            </th>
+            <th class="text-start">
+              Valore
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-[269px]">Tiri dal campo segnati a partita:</td>
+              <td>{{stat.fieldGoalsMade}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Tiri dal campo tentati a partita:</td>
+              <td>{{stat.fieldGoalsAttempted}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Percentuale di tiri dal campo segnati:</td>
+              <td>{{stat.fieldGoalPercentage}}%</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Tiri liberi realizzati a partita:</td>
+              <td>{{stat.freeThrowsMade}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Tiri liberi tentati a partita:</td>
+              <td>{{stat.freeThrowsAttempted}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Percentuale di tiri liberi:</td>
+              <td>{{stat.freeThrowPercentage}}%</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="isVisible">
+            <tr>
+              <td class="w-[269px]">Triple tentati a partita:
+              </td>
+              <td>{{stat.threePointersAttempted}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Triple realizzate a partita:
+              </td>
+              <td>{{stat.threePointersMade}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Percentuale da tre punti:</td>
+              <td>{{stat.threePointPercentage}}%</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Efficacia dei tiri dal campo:</td>
+              <td>{{ (stat.fieldGoalsMade / stat.fieldGoalsAttempted * 100) | number:'1.0-0' }}%</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Percentuale di realizzazione totale:</td>
+              <td>{{stat.pointsInPaint}}%</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Punti da seconde opportunità a partita:</td>
+              <td>{{stat.secondChancePoints}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Punti segnati in area:</td>
+              <td>{{stat.fieldGoalsMade + stat.threePointersMade}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Punti in contropiede a partita:</td>
+              <td>{{calculateRoundedAverage(stat.fastBreakPoints,stat.gamesPlayed)}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="openStats()"
+          class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow"
+          [ngStyle]="{'color': team.colour+'B3'}">{{ isVisible ? 'Mostra meno' : 'Mostra altro'}}</button>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <table class="w-full">
+          <thead>
+            <th class="text-start">
+              Difesa
+            </th>
+            <th class="text-start">
+              Valore
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-[269px]">Blocchi a partita:</td>
+              <td>{{calculateRoundedAverage(stat.blocks,stat.gamesPlayed)}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Rubate a partita:</td>
+              <td>{{calculateRoundedAverage(stat.defensiveRebounds,stat.gamesPlayed)}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Falli a partita:</td>
+              <td>{{calculateRoundedAverage(stat.personalFouls, stat.gamesPlayed)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <table class="w-full">
+          <thead>
+            <th class="text-start">
+              Rimbalzi
+            </th>
+            <th class="text-start">
+              Valore
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-[269px]">Offensivi a partita:</td>
+              <td>{{stat.offensiveRebounds}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Difensivi a partita:</td>
+              <td>{{stat.defensiveRebounds}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Totali a partita:</td>
+              <td>{{stat.totalRebounds}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <table class="w-full">
+          <thead>
+            <th class="text-start">
+              Altro
+            </th>
+            <th class="text-start">
+              Valore
+            </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-[269px]">Perdite di palla a partita:</td>
+              <td>{{calculateRoundedAverage(stat.steals, stat.gamesPlayed)}}</td>
+            </tr>
+            <tr>
+              <td class="w-[269px]">Falli tecnici totali:</td>
+              <td>{{calculateRoundedAverage(stat.personalFouls, stat.gamesPlayed)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="flex flex-row justify-center items-center bg-[#94A3B8] rounded-full text-white text-center mb-3 drop-shadow-md py-2 px-4"
+        [ngStyle]="{'background': team.colour+'B3'}">
+        <div class="w-full">
+          <p class="truncate">City: {{team.city}}</p>
+        </div>
+        <div class="w-full">
+          <p>League: {{team.league.nameLeague}}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -237,7 +333,7 @@
           <p class="min-w-[40px]">{{player.pos}}</p>
           <p class="w-full">{{player.eta}} anni</p>
           <div class="min-w-[80px] flex flex-row items-center justify-end">
-            <img class="rounded-full w-[20px] h-[20px] mr-2" [src]="player.logo" alt="">
+            <img class="rounded-full w-[20px] h-[20px] mr-2" [src]="player.logoCountry" alt="">
             <p class="truncate w-full">{{player.country}}</p>
           </div>
         </div>

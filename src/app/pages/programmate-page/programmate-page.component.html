@@ -10,7 +10,13 @@
 
 <app-calendar></app-calendar>
 
-<div class="h-[80vh]" *ngIf="!nextGames.length">
+<div *ngIf="isLoadingNext" class="w-full h-[70vh] flex items-center justify-center">
+  <p class="text-center">
+    Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+  </p>
+</div>
+
+<div class="h-[80vh]" *ngIf="!nextGames.length && !isLoadingNext">
   <p class="rounded-md p-3 m-4 bg-hoops-primary text-white text-center"> Nessuna partita programmata trovata. Riprova
     più tardi </p>
 </div>
