@@ -25,16 +25,16 @@ export class ProfiloDetailComponent implements OnInit {
     });
   }
 
-  saveUserData(): void {
+  saveUserFirsname(): void {
     // Qui puoi implementare la logica per inviare i dati al server e salvarli nel database
     if (this.user) {
       // Chiamata al servizio UserService per aggiornare i dati dell'utente
       this.userService
-        .updateUser(this.user.firstname, this.user.lastname, this.user.email)
+        .updateUserFirstname(this.user.firstname)
         .subscribe(
           (response: any) => {
             // Aggiorna l'interfaccia utente o gestisci eventuali risposte dal server
-            console.log('Dati utente aggiornati con successo:', response);
+            console.log('Nome utente aggiornati con successo:', response);
           },
           (error: any) => {
             console.error(
@@ -45,4 +45,68 @@ export class ProfiloDetailComponent implements OnInit {
         );
     }
   }
-}
+
+  saveUserLastname(): void {
+    // Qui puoi implementare la logica per inviare i dati al server e salvarli nel database
+    if (this.user) {
+      // Chiamata al servizio UserService per aggiornare i dati dell'utente
+      this.userService
+        .updateUserLastname(this.user.lastname)
+        .subscribe(
+          (response: any) => {
+            // Aggiorna l'interfaccia utente o gestisci eventuali risposte dal server
+            console.log('Cognome utente aggiornato con successo:', response);
+          },
+          (error: any) => {
+            console.error(
+              "Errore durante l'aggiornamento dei dati utente:",
+              error
+            );
+          }
+        );
+    }
+  }
+
+  saveUserEmail(): void {
+    // Qui puoi implementare la logica per inviare i dati al server e salvarli nel database
+    if (this.user) {
+      // Chiamata al servizio UserService per aggiornare i dati dell'utente
+      this.userService
+        .updateUserEmail(this.user.email)
+        .subscribe(
+          (response: any) => {
+            // Aggiorna l'interfaccia utente o gestisci eventuali risposte dal server
+            console.log('Email utente aggiornata con successo:', response);
+          },
+          (error: any) => {
+            console.error(
+              "Errore durante l'aggiornamento dei dati utente:",
+              error
+            );
+          }
+        );
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = (e) => {
+        // Leggi l'immagine come Base64
+        const base64Image = e.target?.result as string;
+  
+        // Esegui l'upload del file al server, se necessario
+        // Dopo l'upload, ottieni l'URL del file dal server
+        const imageUrl = 'data:image/png;base64,' + base64Image; // Aggiungi il prefisso Base64
+  
+        // Aggiorna l'URL dell'immagine nel tuo oggetto user
+        if (this.user) {
+          this.user.profileImageUrl = imageUrl;
+        }
+      };
+  
+      reader.readAsDataURL(file);
+    }
+}}

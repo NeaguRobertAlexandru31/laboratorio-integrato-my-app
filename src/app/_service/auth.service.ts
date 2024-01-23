@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface User {
+  profileImageUrl: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -13,7 +14,6 @@ export interface User {
 })
 
 export class AuthService {
-
   
   /* Stato autenticazione utente = False */
   private isUserAuthenticatedSubject = new BehaviorSubject<boolean>(false);
