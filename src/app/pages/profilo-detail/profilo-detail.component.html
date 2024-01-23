@@ -1,12 +1,16 @@
-<div class="h-[70vh] mb-0">
+<div class="flex flex-col h-[70vh]">
 
-    <div *ngIf="user && user.isUserAuthenticated" class="">
-        <h2>Benvenuto, {{ user.firstname }} {{ user.lastname }} !</h2>
-        <p>Email: {{ user.email }}</p>
+    <div *ngIf="user && user.isUserAuthenticated" class="flex flex-col justify-center">
+        <h2>Benvenuto!</h2>
+        <h2>Da qui potrai modificare i tuoi dati:</h2>
+        <h3>Nome: {{ user.firstname }}</h3>
+        <h3>Cognome: {{ user.lastname }}</h3>
+        <h3>Email: {{ user.email }}</h3>
     </div>
 
-    <div>
-        <app-logout></app-logout>
+    <div class="flex flex-row justify-center mt-auto">
+        <app-logout class="mr-5"></app-logout>
+        <app-delete-account class="ml-5"></app-delete-account>
     </div>
 
 </div>

@@ -51,6 +51,7 @@ import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
 import { FavoriteApiService } from './_service/favoriteApi.service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     FilterPipePlayers,
     ProfiloDetailComponent,
     LogoutComponent,
+    DeleteAccountComponent,
   ],
   imports: [
     BrowserModule,
