@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 
 import FavoriteTeam from '../_models/favorite.model';
 import FavoritePlayer from '../_models/favorite.model';
+import FavoriteGame from '../_models/favorite.model';
 
 // Model
 
@@ -15,10 +16,24 @@ export class FavoriteApiService {
   
   constructor(private http: HttpClient) {}
 
-  baseUrl = 'http://localhost:8045/';
-  //baseUrl = 'http://hoopsdata.ddns.net:8045/';
+  //baseUrl = 'http://localhost:8045/';
+  baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   tokenVerify:boolean = false;
+
+  //Prende le squadre preferite
+  getFavoriteGames(): Observable<FavoriteGame[]> {
+    const formData = {
+      token: localStorage.getItem('token')
+    };
+  
+    return this.http.post<FavoriteGame[]>(this.baseUrl + 'fav/get/game', formData).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as FavoriteGame[];
+      })
+    );;
+  }
 
   //Prende le squadre preferite
   getFavoriteTeam(): Observable<FavoriteTeam[]> {
@@ -47,6 +62,27 @@ export class FavoriteApiService {
       })
     );;
   };
+
+  //Aggiunge e rimuove i game 
+  addFavoriteGame(id:number) {
+    const formData = {
+      token: localStorage.getItem('token'),
+      idGame: id,
+    };
+
+    fetch(this.baseUrl + 'fav/new/game', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+      mode: 'cors',
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('Aggiunto:', response);
+      })
+  }
 
   //Aggiunge e rimuove le squadre 
   addFavoriteTeam(teamName:string) {

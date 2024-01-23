@@ -4,7 +4,7 @@
   </p>
 </div>
 
-<div class="h-[80vh]" *ngIf="!partite.length">
+<div class="h-[80vh]" *ngIf="!partite.length && !isLoadingGame">
   <p class="rounded-md p-3 m-4 bg-hoops-primary text-white text-center"> Non sono presenti statistiche.</p>
 </div>
 
@@ -50,7 +50,7 @@
               <th>Q2</th>
               <th>Q3</th>
               <th>Q4</th>
-              <th *ngIf="">Q5</th>
+              <th *ngIf="partita.p5Home">Q5</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +60,7 @@
               <td>{{partita.p2Home}}</td>
               <td>{{partita.p3Home}}</td>
               <td>{{partita.p4Home}}</td>
-              <td *ngIf="partita.p5Home>0">{{partita.p5Home}}</td>
+              <td *ngIf="partita.p5Home >= 0">{{partita.p5Home}}</td>
             </tr>
             <tr class="text-center h-20">
               <td><img [src]="partita.visitorTeamLogo" alt=""></td>
@@ -68,7 +68,7 @@
               <td>{{partita.p2Visitors}}</td>
               <td>{{partita.p3Visitors}}</td>
               <td>{{partita.p4Visitors}}</td>
-              <td *ngIf="">{{partita}}</td>
+              <td *ngIf="partita.p5Visitors >= 0">{{partita.p5Visitors}}</td>
             </tr>
           </tbody>
         </table>
@@ -190,7 +190,7 @@
 
             <div class="w-full" *ngIf="isVisible">
               <div class=" w-full text-center px-8 py-2">
-                <h3>TPA</h3>
+                <h3>Triple tentate</h3>
                 <div class="flex w-full">
                   <div class="w-full flex items-center">
                     <p class="drop-shadow">{{partita.tpa}}/{{partita.tpa+partita.visitorTpa}}</p>
@@ -208,7 +208,7 @@
               </div>
 
               <div class="w-full text-center px-8 py-2">
-                <h3>TPM</h3>
+                <h3>Triple realizzate</h3>
                 <div class="flex w-full">
                   <div class="w-full flex items-center">
                     <p class="drop-shadow">{{partita.tpm}}/{{partita.tpm+partita.visitorTpm}}</p>
@@ -226,7 +226,7 @@
               </div>
 
               <div class="w-full text-center px-8 py-2">
-                <h3>TPP</h3>
+                <h3>Percentuale da tre punti</h3>
                 <div class="flex w-full">
                   <div class="w-full flex items-center">
                     <p class="drop-shadow">{{partita.tpp}}%</p>
@@ -297,24 +297,6 @@
                 </div>
               </div>
 
-              <!-- <div class="w-full text-center px-8 py-2">
-                <h3>Plus Minus</h3>
-                <div class="flex w-full">
-                  <div class="w-full flex items-center">
-                    <p class="drop-shadow">{{partita.plusMinus}}/{{partita.plusMinus}}</p>
-                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                      <div class="py-1"
-                        [ngStyle]="calcolaPercentualeString(partita.colourHome, partita.plusMinus, partita.visitorPlusMinus)">
-                      </div>
-                      <div class="py-1"
-                        [ngStyle]="calcolaPercentualeString(partita.colourVisitor, partita.visitorPlusMinus, partita.plusMinus)">
-                      </div>
-                    </div>
-                    <p class="drop-shadow">{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
-                  </div>
-                </div>
-              </div> -->
-
               <div class="w-full text-center px-8 py-2">
                 <h3>Palle rubate</h3>
                 <div class="flex w-full">
@@ -371,35 +353,34 @@
                 </div>
               </div>
 
-              <div class="w-full text-center px-8 py-2">
-                <h3>Maggior Vantaggio</h3>
-                <div class="flex w-full">
-                  <div class="w-full flex items-center">
-                    <p class="drop-shadow">{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}
-                    </p>
-                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                      <div class="py-1"
-                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.biggestLead, partita.visitorBiggestLead)">
-                      </div>
-                      <div class="py-1"
-                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorBiggestLead, partita.biggestLead)">
-                      </div>
-                    </div>
-                    <p class="drop-shadow">
-                      {{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}
-                    </p>
-                  </div>
+              <div class="w-full text-center px-8 py-3">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.plusMinus}}/{{partita.plusMinus}}</p>
+                  <h3 class="w-full">Plus Minus</h3>
+                  <p class="drop-shadow">{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
                 </div>
               </div>
+
+              <div class="w-full text-center px-8 py-3">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
+                  <h3 class="w-full">Maggior Vantaggio</h3>
+                  <p class="drop-shadow">
+                    {{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="w-full flex justify-center">
             <button *ngIf="partita.fta > 0"
-              class="bg-hoops-primary text-center px-6 py-2 my-2 rounded-md text-white flex flex-col items-center"
-              (click)="openStats()">
-              <p class="drop-shadow">{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
-              <!-- <img class="rotate-180" *ngIf="isVisible" src="../../assets/img/Vector.svg" alt="">
-        <img *ngIf="!isVisible" src="../../assets/img/Vector.svg" alt=""> -->
+              class="bg-white text-center px-6 py-2 my-2 rounded-md flex flex-col items-center" (click)="openStats()">
+              <p class="drop-shadow-md" [ngStyle]="{
+                'background': 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)',
+                'color': 'transparent',
+                'background-clip': 'text',
+                'display': 'inline-block'
+              }">{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
             </button>
           </div>
         </div>
@@ -414,12 +395,5 @@
       </div>
     </section>
 
-    <section id="notizie">
-      <h2 class="text-xl text-black text-center font-bold">Notizie correlate</h2>
-      <div id="slider">
-
-      </div>
-    </section>
   </div>
-  <!-- <img src="https://via.placeholder.com/80x80" alt=""> -->
 </div>

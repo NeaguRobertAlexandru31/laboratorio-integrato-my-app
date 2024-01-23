@@ -14,3 +14,7 @@ export default interface FavoritePlayer{
     height: null,
     weight: null
 }
+
+export default interface FavoriteGame{
+
+}
