@@ -1,26 +1,28 @@
 <div class="relative flex flex-col items-center h-[100vh]">
-  <form *ngIf="FirstForm" class="mt-24" (ngSubmit)="showSecondForm()" [formGroup]="signUpForm">
+  <form *ngIf="FirstForm" class="mt-24" (ngSubmit)="showSecondForm()" [formGroup]="signUpForm" #formGroup="ngForm">
     <div class="relative mb-4">
-      <h3
-        class="mb-[44px] text-center text-black text-[28px] font-semibold font-Genera"
-      >
+      <h3 class="mb-[44px] text-center text-black text-[28px] font-semibold font-Genera">
         Lieto di conoscerti...
       </h3>
+      <!-- NOME -->
       <input
         formControlName="firstname"
+        [ngClass]="getValidationClass(formGroup, 'firstname')"
         type="text"
         id="nome"
         name="nome"
         placeholder="Nome"
         class="p-2 w-[300px] h-[35] rounded-[5px] border-b border-hoops-primary text-neutral-500 text-opacity-60 text-xl font-light font-Poppins"
-      />
-      <span
-        class="absolute bottom-0 left-0 right-0 h-[2px] bg-hoops-primary"
-      ></span>
+        />
+        <span
+          class="absolute bottom-0 left-0 right-0 h-[2px] bg-hoops-primary"
+        ></span>
     </div>
     <div class="relative mb-4">
+      <!-- COGNOME -->
       <input
         formControlName="lastname"
+        [ngClass]="getValidationClass(formGroup, 'lastname')"
         type="text"
         id="cognome"
         name="cognome"
@@ -39,14 +41,16 @@
     </button>
   </form>
 
-  <form *ngIf="SecondForm" class="mt-24" [formGroup]="signUpForm">
+  <form *ngIf="SecondForm" class="mt-24" [formGroup]="signUpForm" #formGroup="ngForm">
     <h3 class="mb-[44px] text-black text-[28px] font-semibold font-Genera">
       Completa la registrazione
     </h3>
     <!-- Controllare perché allarga tutto il div dell'input  -->
     <div class="relative mb-4">
+      <!-- MAIL -->
       <input
         formControlName="email"
+        [ngClass]="getValidationClass(formGroup, 'email')"
         type="email"
         name="email"
         placeholder="Email"
@@ -57,8 +61,10 @@
       ></span>
     </div>
     <div class="relative mb-4">
+      <!-- PASSWORD -->
       <input
         formControlName="password"
+        [ngClass]="getValidationClass(formGroup, 'password')"
         type="password"
         name="password"
         placeholder="Password"
@@ -75,4 +81,5 @@
       Registrati
     </button>
   </form>
+
 </div>

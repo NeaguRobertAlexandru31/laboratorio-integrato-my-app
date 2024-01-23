@@ -30,6 +30,8 @@ export class AccessoPageComponent {
     };
 
     // Esegui la richiesta di login al server
+    /* http://hoopsdata.ddns.net:8045/user/signin -> DIST per deploy 
+        http://localhost:8045/user/signin */
     fetch('http://localhost:8045/user/signin', {
       method: 'POST',
       headers: {
