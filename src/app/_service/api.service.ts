@@ -48,7 +48,7 @@ export class ApiService {
   getGames(date: string) {
     return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
-        console.log(response); //Log di controllo tramite console
+        /* console.log(response); */ //Log di controllo tramite console
         return response as Game[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
@@ -58,7 +58,7 @@ export class ApiService {
   getPartita(idGame: string) {
     return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
-        console.log(response); //Log di controllo tramite console
+        /* console.log(response); */ //Log di controllo tramite console
         return response as GameDetail[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
@@ -70,7 +70,7 @@ export class ApiService {
       .get(this.baseUrl + 'team/season/' + team + '/' + season) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
-          console.log(response); //Log di controllo tramite console
+          /* console.log(response); */ //Log di controllo tramite console
           return response as Player[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
@@ -82,7 +82,7 @@ export class ApiService {
       .get(this.baseUrl + 'team/teamById/' + teamName) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
-          console.log(response); //Log di controllo tramite console
+          /* console.log(response); */ //Log di controllo tramite console
           return response as Team[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
@@ -95,7 +95,7 @@ export class ApiService {
       .get(this.baseUrl + 'team/season/stats/' + idTeam + '/' + season) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
-          console.log(response); //Log di controllo tramite console
+          /* console.log(response); */ //Log di controllo tramite console
           return response as TeamStats[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
@@ -107,7 +107,7 @@ export class ApiService {
       .get(this.baseUrl + 'game/team/pass/' + idTeam) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
-          console.log(response); //Log di controllo tramite console
+          /* console.log(response); */ //Log di controllo tramite console
           return response as Game[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
@@ -140,11 +140,11 @@ export class ApiService {
     //Utilizzata in Classifiche Est
     getRankingEast() {
       return this.http
-        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east') //Chiamata utilizzando il protocollo http get
         .pipe(
           map((response: any) => {
-            console.log(response);
-            return response as Ranking;
+            /* console.log(response); */ //Log di controllo tramite console
+            return response as Ranking; //Restituisce i valori con il tipo correlato di dati
           })
       );
     }
@@ -175,7 +175,7 @@ export class ApiService {
       .get(this.baseUrl + 'player/pan/' + idPlayer + '/' + 2023)
       .pipe(
         map((response:any)=>{
-          console.log(response);
+          /* console.log(response); */
           return response as PlayerPan;
       })
       );

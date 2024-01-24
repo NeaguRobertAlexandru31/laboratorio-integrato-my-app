@@ -55,10 +55,6 @@ export class CalendarComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const page = params[''];
 
-      console.log(page)
-    });
   }
 }
