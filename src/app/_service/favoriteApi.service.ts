@@ -7,6 +7,10 @@ import FavoriteTeam from '../_models/favorite.model';
 import FavoritePlayer from '../_models/favorite.model';
 import FavoriteGame from '../_models/favorite.model';
 
+import ListFavGame from '../_models/favorite.model';
+import ListFavTeam from '../_models/favorite.model';
+import ListFavPlayer from '../_models/favorite.model';
+
 // Model
 
 @Injectable({
@@ -57,14 +61,14 @@ export class FavoriteApiService {
   
     return this.http.post<FavoritePlayer[]>(this.baseUrl + 'fav/get/player', formData).pipe(
       map((response: any) => {
-        console.log(response);
+        console.log('Questa',  response);
         return response as FavoritePlayer[];
       })
     );;
   };
 
   //Aggiunge e rimuove i game 
-  addFavoriteGame(id:number) {
+  async addFavoriteGame(id:number) {
     const formData = {
       token: localStorage.getItem('token'),
       idGame: id,
@@ -78,14 +82,13 @@ export class FavoriteApiService {
       body: JSON.stringify(formData),
       mode: 'cors',
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('Aggiunto:', response);
-      })
+    .then((response) => {
+      console.log('Aggiunto:', response);
+    })
   }
 
   //Aggiunge e rimuove le squadre 
-  addFavoriteTeam(teamName:string) {
+  async addFavoriteTeam(teamName:string) {
     const formData = {
       token: localStorage.getItem('token'),
       nameTeam: teamName,
@@ -98,14 +101,13 @@ export class FavoriteApiService {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('Aggiunto:', response);
-      })
+    .then((response) => {
+      console.log('Aggiunto:', response);
+    })
   }
 
   //Aggiunge e rimuove i giocatori 
-  addFavoritePlayer(id:number) {
+  async addFavoritePlayer(id:number) {
     const formData = {
       token: localStorage.getItem('token'),
       idPlayer: id,
@@ -118,48 +120,47 @@ export class FavoriteApiService {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
       .then((response) => {
         console.log('Aggiunto:', response);
       })
   }
 
   //Prende la lista dei game preferiti
-  getListFavoriteGames(): Observable<any[]> {
+  getListFavoriteGames(): Observable<ListFavGame[]> {
     const formData = {
       token: localStorage.getItem('token')
     };
   
-    return this.http.post<any[]>(this.baseUrl + 'fav/get/idGame', formData).pipe(
+    return this.http.post<ListFavGame[]>(this.baseUrl + 'fav/get/idGame', formData).pipe(
       map((response: any) => {
         console.log('Game',response);
-        return response as any[];
+        return response as ListFavGame[];
       })
     );;
   }
   //Prende la lista dei game preferiti
-  getListFavoriteTeams(): Observable<any[]> {
+  getListFavoriteTeams(): Observable<ListFavTeam[]> {
     const formData = {
       token: localStorage.getItem('token')
     };
   
-    return this.http.post<any[]>(this.baseUrl + 'fav/get/idTeam', formData).pipe(
+    return this.http.post<ListFavTeam[]>(this.baseUrl + 'fav/get/idTeam', formData).pipe(
       map((response: any) => {
         console.log('Team',response);
-        return response as any[];
+        return response as ListFavTeam[];
       })
     );;
   }
   //Prende la lista dei game preferiti
-  getListFavoritePlayers(): Observable<any[]> {
+  getListFavoritePlayers(): Observable<ListFavPlayer[]> {
     const formData = {
       token: localStorage.getItem('token')
     };
   
-    return this.http.post<any[]>(this.baseUrl + 'fav/get/idPlayer', formData).pipe(
+    return this.http.post<ListFavPlayer[]>(this.baseUrl + 'fav/get/idPlayer', formData).pipe(
       map((response: any) => {
         console.log('Player',response);
-        return response as any[];
+        return response as ListFavPlayer[];
       })
     );;
   }

@@ -61,7 +61,7 @@
             <p class="text-base font-semibold">{{ i + 1 }}</p>
           </td>
           <!-- riga image / name team-->
-          <td class="w-5/12 flex flex-row items-center">
+          <td class="w-5/12 flex flex-row items-center" [routerLink]="'/squadra/'+this.rank.teamName">
             <img class="h-fit w-full max-w-[40px] lg:h-[15%] lg:w-[15%]" [src]="rank.teamLogo"
               alt="rank.teamName logo" />
             <p class="min-w-[100px] w-full text-sm px-2">{{ rank.teamName }}</p>

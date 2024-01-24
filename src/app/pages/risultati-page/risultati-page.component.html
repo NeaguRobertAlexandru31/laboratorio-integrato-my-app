@@ -1,3 +1,4 @@
+  <!-- Codice mantenuto per future ipmlementazioni
   <div class="flex flex-row px-2">
     <button routerLink="/partite/risultati" class="w-full py-1 rounded-full bg-hoops-primary text-white font-bold">
       Risultati
@@ -6,12 +7,12 @@
     <button routerLink="/partite/programmate" class="w-full py-1 rounded-full">
       Programmate
     </button>
-  </div>
+  </div> -->
 
   <!-- Calendario -->
-  <app-calendar (sendDateEvent)="loadingTeams($event)"></app-calendar>
+  <app-calendar (sendDateEvent)="loadingGames($event)"></app-calendar>
 
-  <div *ngIf="isLoading" class="w-full h-[70vh] flex items-center justify-center">
+  <div *ngIf="isLoading" class="w-full min-h-[80vh] flex items-center justify-center">
     <p class="text-center">
       Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
     </p>
@@ -25,20 +26,21 @@
     <table *ngIf="!isLoading && games && games.length" class="h-[80vh] w-full border-none text-white md:w-[60vh]">
       <tbody class="text-center">
         <tr *ngFor="let game of games"
-          class="w-full h-[152px] flex flex-col ps-6 pb-5 mb-2 rounded-2xl shadow-md text-xs"
+          class="w-full h-[152px] flex flex-col ps-6 pb-5 my-4 rounded-2xl shadow-md text-xs"
           [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
-          <td class="flex justify-end pt-2 h-[2px]">
-            <button class="absolute w-fit flex justify-end items-end pr-2" (click)="setFavoriteGame(game.gameId)">
-              <img class="w-[28px] h-[28px]" src="../../../assets/img/icone-preferiti/Fav outline.png"
-                alt="Stella preferiti vuota">
-              <!-- <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Stella preferiti piena"> -->
+          <td class="flex justify-end pt-2 pr-2">
+            <button class="w-[26px]" (click)="setFavoriteGame(game.gameId)">
+              <img class="absolute" *ngIf="!isTeamInFavorites(game.gameId)"
+                src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+              <img class="absolute" *ngIf="isTeamInFavorites(game.gameId)"
+                src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
             </button>
           </td>
           <td class="h-full max-h-[123px] flex fle-row pt-3 pr-6 justify-center items-center">
             <div class="w-full flex justify-center items-center">
               <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                <img [src]="game.homeTeamLogo" alt="Logo {{game.homeTeamName}}"
-                  class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                <img [routerLink]="'/squadra/'+this.game.homeTeamName" [src]="game.homeTeamLogo"
+                  alt="Logo {{game.homeTeamName}}" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                 <p class="drop-shadow">{{ game.homeTeamName }}</p>
               </div>
             </div>
@@ -48,15 +50,15 @@
                 {{ game.risultato != '0 - 0' ? game.risultato : formatData(game.start) }}</p>
               <!-- Formattazione dell'ora -->
               <button [routerLink]="'/partita/' + this.game.gameId"
-                class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full disabled:bg-opacity-60 disabled:text-opacity-60 "
+                class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full drop-shadow disabled:bg-opacity-60 disabled:text-opacity-60 disabled:drop-shadow-none"
                 [disabled]="game.risultato == '0 - 0'">
                 Preview
               </button>
             </div>
             <div class="w-full flex justify-center items-center">
               <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                <img [src]="game.visitorTeamLogo" alt="Logo {{game.visitorTeamName}}"
-                  class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                <img [routerLink]="'/squadra/'+this.game.visitorTeamName" [src]="game.visitorTeamLogo"
+                  alt="Logo {{game.visitorTeamName}}" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                 <p class="drop-shadow">{{ game.visitorTeamName }}</p>
               </div>
             </div>

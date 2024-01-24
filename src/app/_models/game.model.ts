@@ -1,4 +1,4 @@
-export default interface Game {      
+export default interface Game {    
     gameId: number,
     homeColour: string,
     homeTeamLogo: string,

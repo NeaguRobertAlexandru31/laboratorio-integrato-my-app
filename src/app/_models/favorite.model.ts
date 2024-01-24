@@ -35,6 +35,7 @@ export default interface FavoriteGame{
     visitorTeamLogo: string,
     visitorTeamName: string,
     visitorsColour: string,
+    img: string
 }
 export default interface ListFavGames{      
     idGame: number;
