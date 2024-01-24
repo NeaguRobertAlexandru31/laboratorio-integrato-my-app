@@ -1,4 +1,4 @@
-<div class="flex flex-col h-[100vh] items-center justify-center mt-[30px]">
+<div class="flex flex-col h-[100vh] items-center justify-center">
 
     <div *ngIf="user && user.isUserAuthenticated" class="flex flex-col justify-center">
         <div class="text-black text-lg font-semibold font-Poppins">
@@ -38,6 +38,7 @@
         <div
             class="w-80 h-16 px-[18px] py-[17px] bg-hoops-primary rounded-[10px] shadow mb-4 inline-flex items-center gap-[129px]">
             <input [(ngModel)]="user.password" (keyup.enter)="saveUserPassword()"
+            type="password"
                 class="text-white text-[15px] font-normal font-Poppins outline-none bg-transparent flex flex-grow">
         </div>
         <div class="flex flex-row justify-center mt-auto">
