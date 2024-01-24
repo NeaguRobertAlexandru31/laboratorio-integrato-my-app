@@ -24,41 +24,42 @@ export class ApiService {
   /* baseUrl = 'http://localhost:8045/'; */
 
   constructor(private http: HttpClient) {}
-  //Search bar - Squadre 
+
+  //Search bar - Chiamata API per ottenere l'array di tutte le squadre
   getAllTeams() {
-    return this.http.get(this.baseUrl + 'team/all').pipe(
+    return this.http.get(this.baseUrl + 'team/all').pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
         // console.log(response); //Log di controllo tramite console
-        return response as Team[];
+        return response as Team[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
   }
   //Search bar - Giocatori
   getAllPlayer() {
-    return this.http.get(this.baseUrl + 'player/all ').pipe(
+    return this.http.get(this.baseUrl + 'player/all ').pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
         // console.log(response); //Log di controllo tramite console
-        return response as Game[];
+        return response as Game[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
   }
 
   //Utilizzata in Risultati
   getGames(date: string) {
-    return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
+    return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
         console.log(response); //Log di controllo tramite console
-        return response as Game[];
+        return response as Game[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
   }
 
   //Utilizzata in Partita-Detail -
   getPartita(idGame: string) {
-    return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe(
+    return this.http.get(this.baseUrl + 'game/stats/' + idGame).pipe( //Chiamata utilizzando il protocollo http get
       map((response: any) => {
         console.log(response); //Log di controllo tramite console
-        return response as GameDetail[];
+        return response as GameDetail[]; //Restituisce i valori con il tipo correlato di dati
       })
     );
   }
@@ -66,28 +67,75 @@ export class ApiService {
   //Utilizzata in Squadra - carica i giocatori di una squadra
   getGiocatoriSquadra(team: number, season: number) {
     return this.http
-      .get(this.baseUrl + 'team/season/' + team + '/' + season)
+      .get(this.baseUrl + 'team/season/' + team + '/' + season) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
           console.log(response); //Log di controllo tramite console
-          return response as Player[];
+          return response as Player[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
   }
   
-  //Utilizzata in Classifiche Est
-  getFavoriteTeam(token:string) {
+  //Utilizzata in Squadra - carica il team in un array
+  getThisTeam(teamName:string){
     return this.http
-      .get(this.baseUrl + 'fav/get/team' + token)
+      .get(this.baseUrl + 'team/teamById/' + teamName) //Chiamata utilizzando il protocollo http get
       .pipe(
         map((response: any) => {
-          console.log(response);
-          return response as any[];
+          console.log(response); //Log di controllo tramite console
+          return response as Team[]; //Restituisce i valori con il tipo correlato di dati
         })
       );
   }
     
+  
+  //Utilizzata in Squadra - carica le statistiche stagionali del team
+  getThisTeamStats(idTeam:number, season:number){
+    return this.http
+      .get(this.baseUrl + 'team/season/stats/' + idTeam + '/' + season) //Chiamata utilizzando il protocollo http get
+      .pipe(
+        map((response: any) => {
+          console.log(response); //Log di controllo tramite console
+          return response as TeamStats[]; //Restituisce i valori con il tipo correlato di dati
+        })
+      );
+  }
     
+  //Utilizzata in Squadra - carica le partite precedentemente giocate
+  getPreviousGame(idTeam:number){
+    return this.http
+      .get(this.baseUrl + 'game/team/pass/' + idTeam) //Chiamata utilizzando il protocollo http get
+      .pipe(
+        map((response: any) => {
+          console.log(response); //Log di controllo tramite console
+          return response as Game[]; //Restituisce i valori con il tipo correlato di dati
+        })
+      );
+  }
+
+  //Utilizzata in Squadra - carica le partite programmate
+  getNextGame(idTeam:number){
+    return this.http
+      .get(this.baseUrl + 'game/team/prog/' + idTeam) //Chiamata utilizzando il protocollo http get
+      .pipe(
+        map((response: any) => {
+          //console.log(response); //Log di controllo tramite console
+          return response as Game[]; //Restituisce i valori con il tipo correlato di dati
+        })
+      );
+  }
+
+  //Utilizzata in Classifiche Est
+  getFavoriteTeam(token:string) {
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east') //Chiamata utilizzando il protocollo http get
+      .pipe(
+        map((response: any) => {
+          //console.log(response); //Log di controllo tramite console
+          return response as Ranking; //Restituisce i valori con il tipo correlato di dati
+        })
+      );
+  } 
   
     //Utilizzata in Classifiche Est
     getRankingEast() {
@@ -98,19 +146,20 @@ export class ApiService {
             console.log(response);
             return response as Ranking;
           })
-        );
+      );
     }
-    //Utilizzata in Classifiche Est
+    //Utilizzata in Classifiche Ovest
     getRankingOvest() {
-      return this.http
-        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
-        .pipe(
-          map((response: any) => {
-            console.log(response);
-            return response as Ranking;
-          })
-        );
+    return this.http
+      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west') //Chiamata utilizzando il protocollo http get
+      .pipe(
+        map((response: any) => {
+          //console.log(response); //Log di controllo tramite console
+          return response as Ranking; //Restituisce i valori con il tipo correlato di dati
+        })
+      );
     }
+    
     // Utilizzata in Player Page , aggiornare season
     getPlayerStat(idPlayer:number){
       return this.http
@@ -118,9 +167,9 @@ export class ApiService {
       .pipe(
         map((response:any)=>{
           return response as PlayerStat;
-      })
-      );
+      }));
     }
+
     getPlayerPan(idPlayer:number){
       return this.http
       .get(this.baseUrl + 'player/pan/' + idPlayer + '/' + 2023)
@@ -130,52 +179,6 @@ export class ApiService {
           return response as PlayerPan;
       })
       );
-    }
-    //Utilizzata in Squadra - carica il team in un array
-    getThisTeam(teamName:string){
-      return this.http
-        .get(this.baseUrl + 'team/teamById/' + teamName)
-        .pipe(
-          map((response: any) => {
-            console.log(response); //Log di controllo tramite console
-            return response as Team[];
-          })
-        );
-    }
-      
-    
-    //Utilizzata in Squadra - carica le statistiche stagionali del team
-    getThisTeamStats(idTeam:number, season:number){
-      return this.http
-        .get(this.baseUrl + 'team/season/stats/' + idTeam + '/' + season)
-        .pipe(
-          map((response: any) => {
-            console.log(response); //Log di controllo tramite console
-            return response as TeamStats[];
-          })
-        );
-    }
-    getPreviousGame(idTeam:number){
-      return this.http
-        .get(this.baseUrl + 'game/team/pass/' + idTeam)
-        .pipe(
-          map((response: any) => {
-            console.log(response); //Log di controllo tramite console
-            return response as Game[];
-          })
-        );
-    }
-  
-    //Utilizzata in Squadra - carica le partite programmate
-    getNextGame(idTeam:number){
-      return this.http
-        .get(this.baseUrl + 'game/team/prog/' + idTeam)
-        .pipe(
-          map((response: any) => {
-            //console.log(response); //Log di controllo tramite console
-            return response as Game[];
-          })
-        );
     }
   }
 

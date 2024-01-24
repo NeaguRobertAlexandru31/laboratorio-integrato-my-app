@@ -163,6 +163,7 @@ export class SquadraPageComponent implements OnInit{
       error: (error) => console.error('Error fetching favorite game', error),
     });}}  
     // Gestisci l'aggiunta e rimozione dei player
+    // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
     setFavoriteGame(data: number, idGame: number) {
       try {
         this.favoriteApiService.addFavoriteGame(data);
@@ -189,6 +190,7 @@ export class SquadraPageComponent implements OnInit{
       error: (error) => console.error('Error fetching favorite teams', error),
     });}}
     //Gestische l'aggiunta e rimozione dei game
+    // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
     async setFavoriteTeam(data: string) {
       try {
         await this.favoriteApiService.addFavoriteTeam(data);
@@ -214,6 +216,7 @@ export class SquadraPageComponent implements OnInit{
       error: (error) => console.error('Error fetching favorite players', error),
     });}}  
     // Gestisci l'aggiunta e rimozione dei player
+    // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
     setFavoritePlayer(data: number, idTeam: number) {
       try {
         this.favoriteApiService.addFavoritePlayer(data);

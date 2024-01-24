@@ -14,22 +14,22 @@ import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
   styleUrls: ['./risultati-page.component.scss'],
 })
 export class RisultatiPageComponent implements OnInit {
-  games: Game[] = [];
-  currentDate: Date = new Date();
-  idGame: number = 0;
+  games: Game[] = []; //Array dei game
+  currentDate: Date = new Date(); //Data attuale
+  idGame: number = 0; //Id game per la comunicazione tramite Route
 
-  sectionResult: boolean = true;
-  listFavGames: ListFavGames[] = [];
+  sectionResult: boolean = true;//Stato della sezione
+  listFavGames: ListFavGames[] = [];//Array di id dei game preferiti
   
   constructor(private apiService: ApiService, private favoriteApiService: FavoriteApiService) {}
 
   //Games
   isLoading: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
+  //Funzione di caricamento dei dati tramite chiamata API
   loadingGames(date: Date) {
     this.apiService.getGames(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')).subscribe({
       next: (response: Game[]) => {
-        this.games = response;
+        this.games = response; //Inizzializza l'array con i valori ricevuti dalla chiamata
       },
       error: (error) => console.error('Error fetching games', error),
       complete: () => {return this.isLoading = false}
@@ -44,26 +44,28 @@ export class RisultatiPageComponent implements OnInit {
     return `${formattedDate}\n${formattedTime}`;
   }
 
+  //Funzione di chiamata API per ottenere la lista aggiornata dei preferiti
   updateListGame() {
     if (localStorage.getItem('token')) {
       this.favoriteApiService.getListFavoriteGames().subscribe({
         next: (response: ListFavGames[]) => {
-          this.listFavGames = response;
+          this.listFavGames = response; //Inizzializza l'array con i valori ricevuti dalla chiamata
         },
         error: (error) => console.error('Error fetching favorite games', error),
   });}}
     //Gestische l'aggiunta e rimozione dei game
+    // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
     setFavoriteGame(data: number) {
       try {
-        this.favoriteApiService.addFavoriteGame(data);
+        this.favoriteApiService.addFavoriteGame(data); // Chiamata al servizio API per aggiungere o rimuovere un gioco dai preferiti
       } finally {
         try {
-          setTimeout(() => {
-          this.updateListGame(); // Attendiamo che updateListPlayer sia completato
+          setTimeout(() => { 
+            this.updateListGame(); // La funzione viene lanciata non prima di 1secondo 
           },1000)
         } finally {
           setTimeout(() => {
-          this.loadingGames(this.currentDate);
+          this.loadingGames(this.currentDate); // La funzione viene lanciata non prima di 1.2 secondi
         },1200)
         }
       }

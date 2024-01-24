@@ -19,3 +19,5 @@ describe('RisultatiPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+[routerLink]="'/player/'+ player.idPlayer + '/' + 2023"

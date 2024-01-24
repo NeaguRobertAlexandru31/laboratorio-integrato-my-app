@@ -19,29 +19,26 @@ export class SearchBarComponent implements OnInit{
   searchbar!: ElementRef;
   searchText = '';
 
-  listTeam: AllTeams[] = [];
-  listPlayer: AllPlayers[] = [];
+  listTeam: AllTeams[] = []; //Lista di tutti i team
+  listPlayer: AllPlayers[] = []; //Lista di tutti i player
 
 
   constructor(private apiService: ApiService, private router:Router ,private route: ActivatedRoute) {}
 
-  toggleSearch: boolean = false;
 
-  teamName: string = '';
-
-  isVisible:boolean = false;
+  isVisible:boolean = false; //Stato di visibilita della sezione correlata(lista)
 
   //Funzione per la chiusura della lista search bar
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: Event): void {
-    if (!this.searchbar.nativeElement.contains(event.target)) {
-      this.isVisible = false;
+    if (!this.searchbar.nativeElement.contains(event.target)) {// Verifica che l'elemento cliccato non sia la searchbar
+      this.isVisible = false; // Se l'elemento cliccato è al di fuori del campo di ricerca cambia il valore a false
     }
   }
 
   //Funzione per la gestione dell'apertura della lista di squadre e giocatori
   showList(){
-    this.isVisible = !this.isVisible;
+    this.isVisible = !this.isVisible; //Cambia il valore tra true e false
   }
 
   ngOnInit(): void{
