@@ -52,10 +52,20 @@ export class PlayerPageComponent implements OnInit{
       stat.avgMinutes = Math.floor(stat.avgMinutes);
     })
   }
-  playerInfo:[]=[]
-  // prendo le informazioni dal localStorage(Img Giocatore,Nome,Cognome,Colore squadra)
-  getInfoLocalStorage(){
-    // this.playerInfo = localStorage.getItem('object');
+  playerInfo:any;
+  // prendo le informazioni dal sessionStorage(Img Giocatore,Nome,Cognome,Colore squadra)
+  getInfoSessionStorage(){
+    this.playerInfo = sessionStorage.getItem('playerInfo');
+    
+  // Verifica se 'playerInfo' non è nullo
+  if (this.playerInfo !== null) {
+    // Esegue il parsing solo se 'playerInfo' non è nullo
+    this.playerInfo = JSON.parse(this.playerInfo);
+    console.log(this.playerInfo);
+    
+  } else {
+    console.log('Nessun dato trovato nel sessionStorage per la chiave "playerInfo".');
+  }
   }
   ngOnInit(): void {
     // prendo dal router idPlayer 
@@ -73,6 +83,7 @@ export class PlayerPageComponent implements OnInit{
       this.playerPan = response;
       // console.log(this.playerPan);
     })
+    this.getInfoSessionStorage();
   }
 
 }

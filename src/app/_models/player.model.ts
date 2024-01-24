@@ -8,7 +8,7 @@ export default interface Player{
     country: string,
     logoCountry: string,
     nameTeam: string,
-    imgGiocatore:string,
+    img:string,
     logo: string,//img bandiera nazionalità
     pos: string,//posizione
 }

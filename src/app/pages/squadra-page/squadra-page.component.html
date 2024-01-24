@@ -322,7 +322,7 @@
         <div *ngIf="nextGame.length"></div>
         <div></div>
     </section>
-    </section>
+
 
     <section id="giocatori" *ngIf="sectionGiocatori == true">
         <div *ngIf="isLoadingPlayers" class="w-full h-[70vh] flex items-center justify-center">
@@ -330,11 +330,10 @@
                 Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
             </p>
         </div>
-        <div *ngFor="let player of players"
-            class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-3 px-4 rounded-md"
-            [ngStyle]="{'background': team.colour+'B3'}">
+        <a></a>
+        <div *ngFor="let player of players" class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-3 px-4 rounded-md" [ngStyle]="{'background': team.colour+'B3'}" [routerLink]="'/player/'+ player.idPlayer + '/' + 2022" (click)="fetchData(player.idPlayer)">
             <div class="w-fit">
-                <img class="w-[44px] h-[40px]" [src]="player.img" alt="">
+                <img class="w-[44px] h-[40px]" [src]="player.img" alt="player.firsname ">
             </div>
             <div class="w-full px-3">
                 <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
