@@ -64,7 +64,7 @@ export class RegistrazionePageComponent {
             localStorage.setItem('token', response.token);
             this.authService.setUserAuthenticated(true);
             console.log('reindirizzamente in corso');
-            this.router.navigate(['/preferiti']);
+            this.router.navigate(['/accesso']);
             console.log('reindirizzamento completo');
           }
         })
