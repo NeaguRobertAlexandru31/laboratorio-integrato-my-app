@@ -38,7 +38,7 @@ export class RegistrazionePageComponent {
   }
 
   signup() {
-    if (this.signUpForm.valid) {
+    if (this.signUpForm) {
       const formData = this.signUpForm.value;
       console.log('Dati inviati correttamente al server');
 
