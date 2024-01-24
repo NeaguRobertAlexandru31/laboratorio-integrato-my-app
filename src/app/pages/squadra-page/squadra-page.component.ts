@@ -11,6 +11,7 @@ import Game from 'src/app/_models/game.model';
 import ListFavGames from 'src/app/_models/favorite.model';
 import ListFavTeams from 'src/app/_models/favorite.model';
 import ListFavPlayers from 'src/app/_models/favorite.model';
+import FavoriteTeam from 'src/app/_models/favorite.model';
 
 @Component({
   selector: 'squadra-page',
@@ -106,20 +107,17 @@ export class SquadraPageComponent implements OnInit{
 
   //PreviousGame
   isLoadingPreviousGame: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  isLoadedPrevoius:boolean = false; // Flag per indicare se l'array e gia stato caricato
   //Funzione di caricamento e ricevuta dei dati, controlla lo stato della chiamata se restituisce o meno
   loadingPreviousGame(idTeam: number) {
-    if(this.isLoadedPrevoius == false){
     this.apiService.getPreviousGame(idTeam).subscribe({
       next: (response:Game[]) => {
         this.prevoiusGame = response;
       },
       error: (error) => console.error('Error fetching prevoius game', error),
       complete: () => {
-        return this.isLoadingPreviousGame = false, this.isLoadedPrevoius = true;
+        return this.isLoadingPreviousGame = false;
       }
     });
-  }
   }
 
   //NextGame
@@ -140,18 +138,15 @@ export class SquadraPageComponent implements OnInit{
 
   //Player
   isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  isLoadedPlayer:boolean = false;
   //Funzione di caricamento e ricevuta dei dati controlla lo stato della chiamata se restituisce o meno
-  loadingPlayers(teamId: number) {
-    if(this.isLoadedPlayer == false){
+  async loadingPlayers(teamId: number) {
     this.apiService.getGiocatoriSquadra(teamId,2023).subscribe({
       next: (response:Player[]) => {
         this.players = response;
       },
       error: (error) => console.error('Error fetching players', error),
-      complete: () => {return this.isLoadingPlayers = false, this.isLoadedPlayer = true}
+      complete: () => {return this.isLoadingPlayers = false}
     });
-  }
   }
 
   //Calcola la media di due valori di tipo number
@@ -159,21 +154,94 @@ export class SquadraPageComponent implements OnInit{
     return Math.round(aNumber / bMedia);
   }
 
-  //Gestione dei Favorite
-  //Aggiunge e Rimuove i Team preferiti
-  setFavorite(type:string, data:any){
-    if(type === 'game'){
-      this.favoriteApiService.addFavoriteGame(data)
-    } else if(type === 'team'){
-      this.favoriteApiService.addFavoriteTeam(data)
-    } else if(type === 'player'){
-      this.favoriteApiService.addFavoritePlayer(data)
+  updateListGame() {
+    if (localStorage.getItem('token')) {
+    this.favoriteApiService.getListFavoriteGames().subscribe({
+      next: (response: ListFavPlayers[]) => {
+        this.listFavGames = response;
+      },
+      error: (error) => console.error('Error fetching favorite game', error),
+    });}}  
+    // Gestisci l'aggiunta e rimozione dei player
+    setFavoriteGame(data: number, idGame: number) {
+      try {
+        this.favoriteApiService.addFavoriteGame(data);
+      } finally {
+        try {
+          setTimeout(() => {
+          this.updateListGame(); // Attendiamo che updateLiupdateListGamestPlayer sia completato
+          },1000)
+        } finally {
+          setTimeout(() => {
+          this.loadingPreviousGame(idGame);
+          },1200)
+        }
+      }
     }
-  }
+
+  //Funzione di caricamento e aggiornamento della lista preferiti
+  updateListTeam() {
+    if (localStorage.getItem('token')) {
+    this.favoriteApiService.getListFavoriteTeams().subscribe({
+      next: (response: ListFavTeams[]) => {
+        this.listFavTeams = response;
+      },
+      error: (error) => console.error('Error fetching favorite teams', error),
+    });}}
+    //Gestische l'aggiunta e rimozione dei game
+    async setFavoriteTeam(data: string) {
+      try {
+        await this.favoriteApiService.addFavoriteTeam(data);
+      } finally {
+        try {
+          setTimeout(() => {
+            this.updateListTeam();
+        }, 1000); // Attendiamo che updateListTeam sia completato
+        } finally {
+          setTimeout(() => {
+            this.loadingTeam(data);
+        }, 1200);
+        }
+      }
+    }
+
+  updateListPlayer() {
+    if (localStorage.getItem('token')) {
+    this.favoriteApiService.getListFavoritePlayers().subscribe({
+      next: (response: ListFavPlayers[]) => {
+        this.listFavPlayers = response;
+      },
+      error: (error) => console.error('Error fetching favorite players', error),
+    });}}  
+    // Gestisci l'aggiunta e rimozione dei player
+    setFavoritePlayer(data: number, idTeam: number) {
+      try {
+        this.favoriteApiService.addFavoritePlayer(data);
+      } finally {
+        try {
+          setTimeout(() => {
+          this.updateListPlayer();
+          },1000) // Attendiamo che updateListPlayer sia completato
+        } finally {
+          setTimeout(() => {
+          this.loadingPlayers(idTeam);
+          },1200)
+        }
+      }
+    }
 
   //Cerca l'elemento all'interno dell'array
-  isTeamInFavorites(type:string, id: number){
-      return this.listFavTeams && this.listFavTeams.some(favTeam => favTeam.idTeam === id);
+  isTeamInFavorites(id:number, array:FavoriteTeam[]) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].idGame === id) {
+        return true;
+      } else if (array[i].idTeam === id) {
+        return true;
+      } else if (array[i].idPlayer === id) {
+        return true;
+      }
+    }
+    return false;
   }
   
   ngOnInit(): void {
@@ -188,11 +256,11 @@ export class SquadraPageComponent implements OnInit{
       this.players.splice(0, this.players.length);
 
       this.isLoadingTeam = false;
-      this.isLoadedPrevoius = false;
-      this.isLoadedPlayer = false;
       this.isLoadedNext = false;
 
       this.loadingTeam(this.teamName); //Chiamata API squadra
+      this.updateListTeam();
+      this.updateListPlayer();
     })
   }
 

@@ -59,12 +59,6 @@ export class CalendarComponent implements OnInit{
       const page = params[''];
 
       console.log(page)
-
-      // if(page === '/partite/risultati') {
-
-      // } else if (page === '2') {
-
-      // }
     });
   }
 }

@@ -17,9 +17,6 @@ import Ranking from '../_models/ranking.model';
   providedIn: 'root',
 })
 export class ApiService {
-  search(searchTerm: string) {
-    throw new Error('Method not implemented.');
-  }
 
   baseUrl = 'http://hoopsdata.ddns.net:8045/' /* -> DIST per deploy ; */
   /* baseUrl = 'http://localhost:8045/'; */

@@ -7,7 +7,7 @@
 <div *ngFor="let team of teams" class="min-h-[90vh] px-2">
   <section id="header">
     <!--  *ngFor="let team of teams -->
-    <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md"
+    <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md drop-shadow"
       [ngStyle]="{'background': team.colour+'B3'}">
       <div class="w-3/12">
         <img class="h-20 drop-shadow-md" [src]="team.logo" alt="">
@@ -16,31 +16,27 @@
         <h1 class="drop-shadow">{{team.nameTeam}}</h1>
       </div>
       <div class="w-2/12 flex items-center justify-center">
-        <!-- <button (click)="setFavorite('team', teamName)">
-          <img *ngIf="teamName" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
-        </button> -->
-        <button (click)="setFavorite('team', teamName)">
-          <img *ngIf="!isTeamInFavorites('team', team.idTeam)" src="../../../assets/img/icone-preferiti/Fav outline.png"
-            alt="Icona Preferiti">
-          <img *ngIf="isTeamInFavorites('team',  team.idTeam)" src="../../../assets/img/icone-preferiti/Fav Filled.png"
-            alt="Icona Preferiti">
+        <button (click)="setFavoriteTeam(team.nameTeam)">
+          <img *ngIf="!isTeamInFavorites(team.idTeam, listFavTeams)"
+            src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+          <img *ngIf="isTeamInFavorites(team.idTeam, listFavTeams)"
+            src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
         </button>
       </div>
     </div>
 
     <!-- Provare ad utilizzare gli ngClass o ngStyle con la condizionale true o false per le classi -->
-    <div class="flex flex-row justify-center items-center my-3">
+    <div class="flex flex-row justify-center items-center my-3 drop-shadow">
       <button (click)="accordionTeam('panoramica')"
         [ngStyle]="{'background': sectionPanoramica ? team.colour+'B3' : '','color': sectionPanoramica ? 'white' : 'black'}"
-        class="w-full py-1 px-4 rounded-full">Panoramica</button>
+        class="w-full py-1 px-4 rounded-full drop-shadow">Panoramica</button>
       <button (click)="accordionTeam('partite')" (click)="loadingPreviousGame(this.idTeam)"
         [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}"
-        class="w-full py-1 px-4 rounded-full">Partite</button>
+        class="w-full py-1 px-4 rounded-full drop-shadow">Partite</button>
       <button (click)="accordionTeam('giocatori')" (click)="loadingPlayers(this.idTeam)"
         [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}"
         class=" w-full py-1 px-4
-        rounded-full">Giocatori</button>
+        rounded-full drop-shadow">Giocatori</button>
     </div>
   </section>
 
@@ -257,14 +253,14 @@
   </section>
 
   <section id="partite" *ngIf="sectionPartite == true">
-    <div class="flex flex-row">
+    <div class="flex flex-row drop-shadow">
       <button (click)="accordionGame('risultati')"
         [ngStyle]="{'background': sectionRisultati ? team.colour+'B3' : '','color': sectionRisultati ? 'white' : 'black'}"
-        class="w-full py-1 px-4 rounded-full">Risultati</button>
+        class="w-full py-1 px-4 rounded-full drop-shadow">Risultati</button>
       <button (click)="accordionGame('programmate')" (click)="loadingNextGame(this.idTeam)"
         [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}"
         class=" w-full py-1 px-4
-        rounded-full">Programmate</button>
+        rounded-full drop-shadow">Programmate</button>
     </div>
 
     <section *ngIf="sectionRisultati == true" id="risultati">
@@ -345,9 +341,11 @@
         </div>
       </div>
       <div class="w-fit flex items-center">
-        <button (click)="setFavorite('player', player.idPlayer)">
-          <img *ngIf="player.idPlayer" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        <button (click)="setFavoritePlayer(player.idPlayer, team.idTeam)">
+          <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == false"
+            src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+          <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == true"
+            src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
         </button>
       </div>
     </div>

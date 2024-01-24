@@ -52,17 +52,17 @@ export class PreferitiPageComponent implements OnInit {
 
   //Games
   isLoadingGames: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  isLoadedGames: boolean = false;
   //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
   loadingGames() {
-    if (this.isLoadedGames == false && localStorage.getItem('token')) {
+    this.updateListGame()
+    if (localStorage.getItem('token')) {
       this.favoriteApiService.getFavoriteGames().subscribe({
         next: (response: FavoriteGame[]) => {
           this.favoriteGames = response;
         },
         error: (error) => console.error('Error fetching games', error),
         complete: () => {
-          return (this.isLoadingGames = false), (this.isLoadedGames = true);
+          return (this.isLoadingGames = false);
         },
       });
     }
@@ -70,17 +70,17 @@ export class PreferitiPageComponent implements OnInit {
 
   //Teams
   isLoadingTeams: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  isLoadedTeams: boolean = false;
   //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
   loadingTeams() {
-    if (this.isLoadedTeams == false && localStorage.getItem('token')) {
+    this.updateListTeam()
+    if (localStorage.getItem('token')) {
       this.favoriteApiService.getFavoriteTeam().subscribe({
         next: (response: FavoriteTeam[]) => {
           this.favoriteTeams = response;
         },
-        error: (error) => console.error('Error fetching players', error),
+        error: (error) => console.error('Error fetching team', error),
         complete: () => {
-          return (this.isLoadingTeams = false), (this.isLoadedTeams = true);
+          return (this.isLoadingTeams = false);
         },
       });
     }
@@ -88,17 +88,17 @@ export class PreferitiPageComponent implements OnInit {
 
   //Player
   isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
-  isLoadedPlayer: boolean = false;
   //Funzione di caricamento controlla lo stato della chiamata se restituisce o meno
   loadingPlayers() {
-    if (this.isLoadedPlayer == false && localStorage.getItem('token')) {
+    this.updateListPlayer()
+    if (localStorage.getItem('token')) {
       this.favoriteApiService.getFavoritePlayer().subscribe({
-        next: (response: FavoritePlayer[]) => {
+        next: (response: FavoriteTeam[]) => {
           this.favoritePlayers = response;
         },
         error: (error) => console.error('Error fetching players', error),
         complete: () => {
-          return (this.isLoadingPlayers = false), (this.isLoadedPlayer = true);
+          return (this.isLoadingPlayers = false);
         },
       });
     }
@@ -114,61 +114,94 @@ export class PreferitiPageComponent implements OnInit {
   }
 
   //Funzione di caricamento e aggiornamento della lista preferiti
-  // updateList() {
-  //   if (localStorage.getItem('token')) {
-  //     this.favoriteApiService.getListFavoriteGames().subscribe({
-  //       next: (response: ListFavGames[]) => {
-  //         this.listFavGames = response;
-  //       },
-  //       error: (error) => console.error('Error fetching favorite games', error),
-  //     });
-  //     this.favoriteApiService.getListFavoriteTeams().subscribe({
-  //       next: (response: ListFavTeams[]) => {
-  //         this.listFavPlayers = response;
-  //       },
-  //       error: (error) => console.error('Error fetching favorite teams', error),
-  //     });
-  //     this.favoriteApiService.getListFavoritePlayers().subscribe({
-  //       next: (response: ListFavPlayers[]) => {
-  //         this.listFavPlayers = response;
-  //       },
-  //       error: (error) => console.error('Error fetching favorite players', error),
-  //     });
-  //   }
-  // }
+  updateListGame() {
+    if (localStorage.getItem('token')) {
+      this.favoriteApiService.getListFavoriteGames().subscribe({
+        next: (response: ListFavGames[]) => {
+          this.listFavGames = response;
+        },
+        error: (error) => console.error('Error fetching favorite games', error),
+  });}}
+    //Gestische l'aggiunta e rimozione dei game
+    setFavoriteGame(data: number) {
+      try {
+        this.favoriteApiService.addFavoriteGame(data);
+      } finally {
+        try {
+          setTimeout(() => {
+          this.updateListGame(); // Attendiamo che updateListPlayer sia completato
+        },1000)
+        } finally {
+          setTimeout(() => {
+          this.loadingGames();
+        },1200)
+        }
+      }
+    }
 
-  // //Gestische l'aggiunta e rimozione dei preferiti
-  // setFavorite(type:string, data:any){
-  //   if(type === 'game'){
-  //     this.favoriteApiService.addFavoriteGame(data);
-  //     this.updateList();
-  //     this.loadingGames()
-  //   } else if(type === 'team'){
-  //     this.favoriteApiService.addFavoriteTeam(data);
-  //     this.updateList();
-  //     this.isLoadedTeams = false;
-  //     this.loadingTeams()
-  //   } else if(type === 'player'){
-  //     this.favoriteApiService.addFavoritePlayer(data);
-  //     this.updateList();
-  //     this.isLoadedPlayer = false;
-  //     this.loadingPlayers()
-  //   }
-  // }
+  updateListTeam() {
+    if (localStorage.getItem('token')) {
+      this.favoriteApiService.getListFavoriteTeams().subscribe({
+        next: (response: ListFavTeams[]) => {
+          this.listFavTeams = response;
+        },
+        error: (error) => console.error('Error fetching favorite teams', error),
+      });}}
+  //Gestische l'aggiunta e rimozione dei team
+  setFavoriteTeam(data: string) {
+    try {
+      this.favoriteApiService.addFavoriteTeam(data);
+    } finally {
+      try {
+        setTimeout(() => {
+        this.updateListTeam(); // Attendiamo che updateListPlayer sia completato
+      },1000)
+      } finally {
+        setTimeout(() => {
+        this.loadingTeams();
+      },1200)
+      }
+    }
+  }
 
-  // //Cerca l'elemento all'interno dell'array
-  // isTeamInFavorites(type:string, id: number){
-  //   let result;
+  updateListPlayer() {
+    if (localStorage.getItem('token')) {
+    this.favoriteApiService.getListFavoritePlayers().subscribe({
+      next: (response: ListFavPlayers[]) => {
+        this.listFavPlayers = response;
+      },
+      error: (error) => console.error('Error fetching favorite players', error),
+    });}}
+  //Gestische l'aggiunta e rimozione dei game
+  setFavoritePlayers(data: number) {
+    try {
+      this.favoriteApiService.addFavoritePlayer(data);
+    } finally {
+      try {
+        setTimeout(() => {
+        this.updateListPlayer(); // Attendiamo che updateListPlayer sia completato
+        },1000)
+      } finally {
+        setTimeout(() => {
+        this.loadingPlayers();
+      },1200)
+      }
+    }
+  }
 
-  //   if(type === 'game'){
-  //     return result = this.listFavGames && this.listFavGames.some(favGame => favGame.idGame === id);
-  //   } else if(type === 'team'){
-  //     return result = this.listFavTeams && this.listFavTeams.some(favTeam => favTeam.idTeam === id);
-  //   } else if(type === 'player'){
-  //     return result = this.listFavPlayers && this.listFavPlayers.some(favPlayer => favPlayer.idPlayer === id);
-  //   }
-  //   return result
-  // }
+  //Cerca l'elemento all'interno dell'array
+  isTeamInFavorites(type:string, id: number){
+  let result;
+
+  if(type === 'game'){
+    return result = this.listFavGames && this.listFavGames.some(favGame => favGame.idGame === id);
+  } else if(type === 'team'){
+    return result = this.listFavTeams && this.listFavTeams.some(favTeam => favTeam.idTeam === id);
+  } else if(type === 'player'){
+    return result = this.listFavPlayers && this.listFavPlayers.some(favPlayer => favPlayer.idPlayer === id);
+  }
+  return result
+  }
 
   ngOnInit() {
     if (localStorage.getItem('token')?.length) {
@@ -176,6 +209,5 @@ export class PreferitiPageComponent implements OnInit {
     }
 
     this.loadingGames();
-    /* this.updateList(); */
   }
 }
