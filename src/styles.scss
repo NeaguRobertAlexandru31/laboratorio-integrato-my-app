@@ -74,19 +74,3 @@ body {
 /* styles.scss */
 
 @import '~@fortawesome/fontawesome-free/css/all.css';
-
-.star-container {
-  font-size: 24px;
-  display: inline-block;
-  position: relative;
-}
-
-.star {
-  display: inline-block;
-  color: #ffd700; /* colore giallo, puoi personalizzare */
-  transition: color 0.5s ease; /* effetto di transizione */
-}
-
-.star:hover {
-  color: #ffac00; /* colore giallo più scuro al passaggio del mouse, puoi personalizzare */
-}
