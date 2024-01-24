@@ -45,7 +45,7 @@ export class RegistrazionePageComponent {
       /*  http://hoopsdata.ddns.net:8045/user/signup -> DIST per deploy
           http://localhost:8045/user/signup   */
 
-      fetch('http://localhost:8045/user/signup', {
+      fetch('http://hoopsdata.ddns.net:8045/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
