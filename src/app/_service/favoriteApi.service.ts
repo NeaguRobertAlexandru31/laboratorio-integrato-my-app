@@ -28,9 +28,9 @@ export class FavoriteApiService {
   //Prende le squadre preferite
   getFavoriteGames(): Observable<FavoriteGame[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
-  
+    // Esegue una richiesta all'API per prendere la lista preferiti
     return this.http.post<FavoriteGame[]>(this.baseUrl + 'fav/get/game', formData).pipe(
       map((response: any) => {
         console.log(response);
@@ -42,7 +42,7 @@ export class FavoriteApiService {
   //Prende le squadre preferite
   getFavoriteTeam(): Observable<FavoriteTeam[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
   
     return this.http.post<FavoriteTeam[]>(this.baseUrl + 'fav/get/team', formData).pipe(
@@ -56,7 +56,7 @@ export class FavoriteApiService {
   //Prende i giocatori preferiti
   getFavoritePlayer(): Observable<FavoritePlayer[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
   
     return this.http.post<FavoritePlayer[]>(this.baseUrl + 'fav/get/player', formData).pipe(
@@ -70,30 +70,30 @@ export class FavoriteApiService {
   //Aggiunge e rimuove i game 
   async addFavoriteGame(id:number) {
     const formData = {
-      token: localStorage.getItem('token'),
-      idGame: id,
+      token: localStorage.getItem('token'), // Estrae il token dall'archivio locale
+      idGame: id, // id del game da aggiungere ai preferiti
     };
-
+    // Esegue una richiesta post all'API per aggiungere il gioco ai preferiti
     fetch(this.baseUrl + 'fav/new/game', {
-      method: 'POST',
+      method: 'POST', // Metodo della richiesta http
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', // Tipo di contenuto della richiesta
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formData),  // Converte l'oggetto formData in una stringa json e lo invia come corpo della richiesta
       mode: 'cors',
     })
     .then((response) => {
-      console.log('Aggiunto:', response);
+      console.log('Aggiunto:', response); // Stampa nella console il risultato della richiesta (utile per un controllo)
     })
   }
 
   //Aggiunge e rimuove le squadre 
   async addFavoriteTeam(teamName:string) {
     const formData = {
-      token: localStorage.getItem('token'),
-      nameTeam: teamName,
+      token: localStorage.getItem('token'), // Estrae il token dall'archivio locale
+      nameTeam: teamName, // nome del team da aggiungere ai preferiti
     };
-
+    // Esegue una richiesta post all'API per aggiungere il team ai preferiti
     fetch(this.baseUrl + 'fav/new/team', {
       method: 'POST',
       headers: {
@@ -109,10 +109,10 @@ export class FavoriteApiService {
   //Aggiunge e rimuove i giocatori 
   async addFavoritePlayer(id:number) {
     const formData = {
-      token: localStorage.getItem('token'),
-      idPlayer: id,
+      token: localStorage.getItem('token'), // Estrae il token dall'archivio locale
+      idPlayer: id, // id del player da aggiungere ai preferiti
     };
-
+    // Esegue una richiesta post all'API per aggiungere il player ai preferiti
     fetch(this.baseUrl + 'fav/new/player', {
       method: 'POST',
       headers: {
@@ -128,9 +128,9 @@ export class FavoriteApiService {
   //Prende la lista dei game preferiti
   getListFavoriteGames(): Observable<ListFavGame[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
-  
+    // Esegue una richiesta all'API per prendere la lista preferiti
     return this.http.post<ListFavGame[]>(this.baseUrl + 'fav/get/idGame', formData).pipe(
       map((response: any) => {
         console.log('Game',response);
@@ -141,9 +141,9 @@ export class FavoriteApiService {
   //Prende la lista dei game preferiti
   getListFavoriteTeams(): Observable<ListFavTeam[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
-  
+    // Esegue una richiesta all'API per prendere la lista preferiti
     return this.http.post<ListFavTeam[]>(this.baseUrl + 'fav/get/idTeam', formData).pipe(
       map((response: any) => {
         console.log('Team',response);
@@ -154,9 +154,9 @@ export class FavoriteApiService {
   //Prende la lista dei game preferiti
   getListFavoritePlayers(): Observable<ListFavPlayer[]> {
     const formData = {
-      token: localStorage.getItem('token')
+      token: localStorage.getItem('token') // Estrae il token dall'archivio locale
     };
-  
+    // Esegue una richiesta all'API per prendere la lista preferiti
     return this.http.post<ListFavPlayer[]>(this.baseUrl + 'fav/get/idPlayer', formData).pipe(
       map((response: any) => {
         console.log('Player',response);

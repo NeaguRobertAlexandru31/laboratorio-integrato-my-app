@@ -7,12 +7,13 @@
 <div *ngFor="let team of teams" class="min-h-[90vh] px-2">
   <section id="header">
     <!--  *ngFor="let team of teams -->
-    <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md drop-shadow"
+    <div
+      class="flex flex-row justify-center min-h-[120px] max-h-[120px] bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md drop-shadow"
       [ngStyle]="{'background': team.colour+'B3'}">
-      <div class="w-3/12">
-        <img class="h-20 drop-shadow-md" [src]="team.logo" alt="">
+      <div class="w-full max-w-[110px] flex justify-center items-center">
+        <img class="h-fit w-fit max-h-[90px] drop-shadow-md" [src]="team.logo" alt="">
       </div>
-      <div class="w-7/12 text-center text-md text-white font-bold">
+      <div class="w-full text-center text-md text-white font-bold">
         <h1 class="drop-shadow">{{team.nameTeam}}</h1>
       </div>
       <div class="w-2/12 flex items-center justify-center">

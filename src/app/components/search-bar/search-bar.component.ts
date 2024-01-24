@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, ElementRef, OnInit, HostListener } from '@angular/core';
 import { ApiService } from '../../_service/api.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import AllPlayers from 'src/app/_models/all.model';
 })
 export class SearchBarComponent implements OnInit{
   @ViewChild('searchbar')
+  
   searchbar!: ElementRef;
   searchText = '';
 
@@ -30,16 +31,27 @@ export class SearchBarComponent implements OnInit{
 
   isVisible:boolean = false;
 
+  //Funzione per la chiusura della lista search bar
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event): void {
+    if (!this.searchbar.nativeElement.contains(event.target)) {
+      this.isVisible = false;
+    }
+  }
+
+  //Funzione per la gestione dell'apertura della lista di squadre e giocatori
   showList(){
     this.isVisible = !this.isVisible;
   }
 
   ngOnInit(): void{
+    //Chiamata API per la lista di tutti i team
     this.apiService.getAllTeams().subscribe((response: any) => {
-    this.listTeam = response;
+    this.listTeam = response; //Inserisce i dati ricevuti all'interno dell'array listTeam 
   });
+    //Chiamata API per la lista di tutti i player
     this.apiService.getAllPlayer().subscribe((response: any) => {
-    this.listPlayer = response;
+    this.listPlayer = response; //Inserisce i dati ricevuti all'interno dell'array listPlayer
   });
   }
 }

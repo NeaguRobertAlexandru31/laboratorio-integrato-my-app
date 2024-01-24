@@ -1,4 +1,4 @@
-<div class="min-h-[90vh] px-2">
+<div class="min-h-[90vh] px-2 pt-2">
   <div class="flex flex-row">
     <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')" (click)="loadingGames()"
       (click)="updateListGame()" [ngClass]="accordionPartite ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
@@ -56,8 +56,8 @@
             <td class="h-full max-h-[123px] flex fle-row pr-6 mt-5 justify-center items-center">
               <div class="w-full flex justify-center items-center">
                 <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                  <img [src]="game.homeTeamLogo" alt="Loog {{game.homeTeamName}}"
-                    class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                  <img [routerLink]="'/squadra/'+this.game.homeTeamName" [src]="game.homeTeamLogo"
+                    alt="Loog {{game.homeTeamName}}" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                   <p class="drop-shadow">{{ game.homeTeamName }}</p>
                 </div>
               </div>
@@ -74,8 +74,8 @@
               </div>
               <div class="w-full flex justify-center items-center">
                 <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                  <img [src]="game.visitorTeamLogo" alt="Logo {{game.visitorTeamName}}"
-                    class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                  <img [routerLink]="'/squadra/'+this.game.visitorTeamName" [src]="game.visitorTeamLogo"
+                    alt="Logo {{game.visitorTeamName}}" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                   <p class="drop-shadow">{{ game.visitorTeamName }}</p>
                 </div>
               </div>
@@ -95,12 +95,14 @@
         <p class="rounded-md p-3 m-4 bg-hoops-primary text-white text-center"> Non hai registrato nessuna squadra.</p>
       </div>
       <div *ngFor="let team of favoriteTeams">
-        <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-4 ps-4 pr-7 my-4 rounded-md drop-shadow"
+        <div
+          class="flex flex-row justify-center min-h-[120px] max-h-[120px] bg-[#94A3B8] items-center py-4 ps-4 pr-7 my-4 rounded-md drop-shadow"
           [ngStyle]="{'background': team.colour+'B3'}">
-          <div class="w-3/12 flex justify-center items-center">
-            <img class="h-[72px] w-full" [src]="team.logo" alt="">
+          <div class="w-4/12 flex justify-center items-center">
+            <img [routerLink]="'/squadra/'+this.team.nameTeam" class="h-fit w-fit max-h-[90px] " [src]="team.logo"
+              alt="">
           </div>
-          <div class="w-7/12 text-center text-lg text-white">
+          <div class="w-6/12 text-center text-lg text-white">
             <h1 class="drop-shadow">{{team.nameTeam}}</h1>
           </div>
 
