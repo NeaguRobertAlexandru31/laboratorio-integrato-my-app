@@ -55,6 +55,7 @@ export class PlayerPageComponent implements OnInit{
   playerInfo:any;
   // prendo le informazioni dal sessionStorage(Img Giocatore,Nome,Cognome,Colore squadra)
   getInfoSessionStorage(){
+    
     this.playerInfo = sessionStorage.getItem('playerInfo');
     
   // Verifica se 'playerInfo' non è nullo
@@ -63,11 +64,16 @@ export class PlayerPageComponent implements OnInit{
     this.playerInfo = JSON.parse(this.playerInfo);
     console.log(this.playerInfo);
     
-  } else {
-    console.log('Nessun dato trovato nel sessionStorage per la chiave "playerInfo".');
+  } else {console.log('Nessun dato trovato nel sessionStorage per la chiave "playerInfo".');
+  }}
+  clearSessionStorage(){
+    sessionStorage.clear();
   }
-  }
+  
+  
+
   ngOnInit(): void {
+    this.getInfoSessionStorage();
     // prendo dal router idPlayer 
     this.activatedRoute.params.subscribe((params) => {
       this.idPlayer = params['idPlayer'];
@@ -83,7 +89,6 @@ export class PlayerPageComponent implements OnInit{
       this.playerPan = response;
       // console.log(this.playerPan);
     })
-    this.getInfoSessionStorage();
   }
 
 }

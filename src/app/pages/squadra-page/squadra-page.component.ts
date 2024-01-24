@@ -154,12 +154,14 @@ export class SquadraPageComponent implements OnInit{
   setFavoritePlayer(id:number){
     this.favoriteApiService.addFavoritePlayer(id)
   }
+  playerID:number=0;
   listsPlayer:Player[]=[];
   imgPlayer:string="";
   firstName:string="";
   lastName:string="";
   colourTeam:string="";
   isGSquadra:boolean=false;
+  
   fetchData(selectPlayer:any){
     this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe((response)=>{
       this.listsPlayer = response;
@@ -169,7 +171,7 @@ export class SquadraPageComponent implements OnInit{
           this.imgPlayer = player.img;
           this.firstName = player.firsname;
           this.lastName = player.lastname;
-          
+          this.playerID = player.idPlayer;
           console.log('Nome:'+player.firsname,'','Cognome:'+player.lastname,' ','Img:'+player.img)
         }else{
           console.log('Player non trovaro. Riprovo');
@@ -180,17 +182,20 @@ export class SquadraPageComponent implements OnInit{
   })}
   // Salva i dati dentro il local storage così da poterli usare in player-detail
   saveInfoSessionStorage(){
+    
     if(this.isGSquadra){
       console.log('Ready to fetch data')
-      let playerInfo={
+      let data={
         "img" : this.imgPlayer,
         "firstName" : this.firstName,
         "lastName" : this.lastName,
         "color": this.colourTeam,
-        "nameTeam": this.teamName
+        "nameTeam": this.teamName,
+        "playerID": this.playerID
       }
-      console.log('playerInfo:', playerInfo)
-      sessionStorage.setItem('playerInfo',JSON.stringify(playerInfo));
+      
+      console.log('playerInfo:', data)
+      sessionStorage.setItem('playerInfo',JSON.stringify(data));
     }else{
       console.log('Not ready yet');
     }
