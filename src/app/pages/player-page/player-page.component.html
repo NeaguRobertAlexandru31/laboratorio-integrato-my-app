@@ -3,7 +3,7 @@
     <div class="h-32 flex flex-row justify-center bg-hoops-primary items-center drop-shadow-md text-white mr-2 my-4  px-4 ml-2 rounded-md" [ngStyle]="{'background': playerInfo.color+'B3'}">
         <div class="w-1/4 ">
             <div class="h-[110px] flex justify-center items-center ">
-                <a [routerLink]="'/squadra/' + playerInfo.nameTeam" (click)="clearSessionStorage()">
+                <a [routerLink]="'/squadra/' + playerInfo.nameTeam">
                     <img class="w-fit h-fit my-2 rounded-full" [src]="playerInfo.img" alt="playerInfo.firstName playerInfo.lastName image">
                 </a>
             </div>

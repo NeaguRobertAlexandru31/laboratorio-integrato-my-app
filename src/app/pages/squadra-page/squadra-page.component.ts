@@ -184,7 +184,6 @@ export class SquadraPageComponent implements OnInit{
   saveInfoSessionStorage(){
     
     if(this.isGSquadra){
-      console.log('Ready to fetch data')
       let data={
         "img" : this.imgPlayer,
         "firstName" : this.firstName,

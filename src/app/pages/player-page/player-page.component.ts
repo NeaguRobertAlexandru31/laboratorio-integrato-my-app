@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // File Per Chiamata APi
@@ -15,7 +15,7 @@ import Team from 'src/app/_models/team.model';
   templateUrl: './player-page.component.html',
   styleUrls: ['./player-page.component.scss']
 })
-export class PlayerPageComponent implements OnInit{
+export class PlayerPageComponent implements OnInit, OnDestroy{
 
   constructor(private apiService: ApiService , private activatedRoute: ActivatedRoute,private favoriteApiService: FavoriteApiService){  }
 
@@ -53,6 +53,7 @@ export class PlayerPageComponent implements OnInit{
     })
   }
   playerInfo:any;
+  playerInfoPrev:any;
   // prendo le informazioni dal sessionStorage(Img Giocatore,Nome,Cognome,Colore squadra)
   getInfoSessionStorage(){
     
@@ -63,24 +64,26 @@ export class PlayerPageComponent implements OnInit{
     // Esegue il parsing solo se 'playerInfo' non è nullo
     this.playerInfo = JSON.parse(this.playerInfo);
     console.log(this.playerInfo);
-    
+    this.playerInfoPrev = this.playerInfo
   } else {console.log('Nessun dato trovato nel sessionStorage per la chiave "playerInfo".');
   }}
-  clearSessionStorage(){
+
+  
+  ngOnDestroy(): void {
     sessionStorage.clear();
   }
-  
-  
 
   ngOnInit(): void {
-    this.getInfoSessionStorage();
     // prendo dal router idPlayer 
     this.activatedRoute.params.subscribe((params) => {
       this.idPlayer = params['idPlayer'];
+      this.getInfoSessionStorage();
+      
     })
     // prendo le Statische del player
     this.apiService.getPlayerStat(this.idPlayer).subscribe((response:any)=>{
       this.playerStat = response;
+      console.log(response)
       // modifico il valore di avgMinuts perchè mi serve in int 
       this.modifyAvgMinuts();
     })

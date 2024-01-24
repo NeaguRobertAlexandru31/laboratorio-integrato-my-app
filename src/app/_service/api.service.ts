@@ -117,7 +117,7 @@ export class ApiService {
     // Utilizzata in Player Page , aggiornare season
     getPlayerStat(idPlayer:number){
       return this.http
-      .get(this.baseUrl + 'team/season/player/' + idPlayer + '/' + 2023)
+      .get(this.baseUrl + 'team/season/player/' + idPlayer + '/' + 2021)
       .pipe(
         map((response:any)=>{
           return response as PlayerStat;
