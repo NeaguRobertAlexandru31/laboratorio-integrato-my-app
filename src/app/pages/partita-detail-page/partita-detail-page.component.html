@@ -1,29 +1,38 @@
-<div class="h-[90vh]" *ngIf="!partite.length">
-
+<div *ngIf="isLoadingGame" class="w-full h-[90vh] flex items-center justify-center">
+  <p class="text-center text-black">
+    Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+  </p>
 </div>
-<div *ngIf="partite.length">
+
+<div class="h-[80vh]" *ngIf="!partite.length && !isLoadingGame">
+  <p class="rounded-md p-3 m-4 bg-hoops-primary text-white text-center"> Non sono presenti statistiche.</p>
+</div>
+
+<div class="min-h-[90vh]" *ngIf="partite.length">
   <div *ngFor="let partita of partite" class="px-3 text-white">
 
     <section id="head">
-      <div class="container flex rounded-xl drop-shadow-md"
+      <div class="w-full flex rounded-xl drop-shadow-md"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
         <div class="w-full text-center px-6 py-3">
           <h3 class="h-fit drop-shadow">Home</h3>
-          <div class="h-[110px] flex items-center">
+          <div class="h-[110px] flex justify-center items-center">
             <a [routerLink]="'/squadra/'+this.partita.homeTeamName">
-              <img class="w-full h-fit my-2" [src]="partita.homeTeamLogo" alt="">
+              <img class="w-full h-[85px] my-2" [src]="partita.homeTeamLogo" alt="">
             </a>
           </div>
           <p class="h-fit text-[16px] align-bottom drop-shadow">{{partita.homeTeamName}}</p>
         </div>
         <div class="w-full text-center flex flex-col justify-center">
-          <h2 class="text-[22px] font-semibold py-2 drop-shadow">{{partita.points}} - {{partita.visitorPoints}}</h2>
+          <h2 class="text-[22px] font-semibold py-2 drop-shadow">
+            {{ partita.points + '-' + partita.visitorPoints }}
+          </h2>
         </div>
         <div class="w-full text-center px-6 py-3">
           <h3 class="h-fit drop-shadow">Visitors</h3>
-          <div class="h-[110px] flex items-center">
+          <div class="h-[110px] flex justify-center items-center">
             <a [routerLink]="'/squadra/'+this.partita.visitorTeamName">
-              <img class="w-full h-fit my-2" [src]="partita.visitorTeamLogo" alt="">
+              <img class="w-full h-[85px] my-2" [src]="partita.visitorTeamLogo" alt="">
             </a>
           </div>
           <p class="h-fit text-[16px] align-bottom drop-shadow">{{partita.visitorTeamName}}</p>
@@ -32,7 +41,7 @@
     </section>
 
     <section id="punteggi-quarti">
-      <div class="container rounded-xl my-2 py-3 px-6 drop-shadow-md"
+      <div class="w-full rounded-xl my-2 py-4 px-6 drop-shadow-md"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
         <h2 class="text-xl text-center font-semibold mb-[8px]">Punteggi per quarti</h2>
         <table class="w-full">
@@ -43,7 +52,7 @@
               <th>Q2</th>
               <th>Q3</th>
               <th>Q4</th>
-              <th *ngIf="">Q5</th>
+              <th *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">Q5</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +62,7 @@
               <td>{{partita.p2Home}}</td>
               <td>{{partita.p3Home}}</td>
               <td>{{partita.p4Home}}</td>
-              <td *ngIf="partita.p5Home>0">{{partita.p5Home}}</td>
+              <td *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">{{partita.p5Home}}</td>
             </tr>
             <tr class="text-center h-20">
               <td><img [src]="partita.visitorTeamLogo" alt=""></td>
@@ -61,7 +70,7 @@
               <td>{{partita.p2Visitors}}</td>
               <td>{{partita.p3Visitors}}</td>
               <td>{{partita.p4Visitors}}</td>
-              <td *ngIf="">{{partita}}</td>
+              <td *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">{{partita.p5Visitors}}</td>
             </tr>
           </tbody>
         </table>
@@ -72,319 +81,321 @@
       <div class="flex flex-col justify-center items-center rounded-xl pt-2 drop-shadow-md"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
         <h2 class="text-xl text-center font-bold">Statistiche</h2>
+        <p *ngIf="partita.fta == null" class="absolute px-12 text-center">Le statistiche non sono ancora disponibili
+          riprova piu tardi</p>
 
-        <div class="w-full text-center px-8 py-2">
-          <h3>Tiri liberi tentati</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.fta}}/{{partita.fta+partita.visitorFta}}</p>
-              <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fta, partita.visitorFta)">
+        <div class="w-full" [ngClass]="partita.fta > 0? '' : 'blur-sm h-[140px] overflow-auto overscroll-y-none'">
+          <div class="w-full text-center px-8 py-2">
+            <h3>Tiri liberi tentati</h3>
+            <div class="flex w-full">
+              <div class="w-full flex items-center">
+                <p class="drop-shadow">{{partita.fta}}/{{partita.fta+partita.visitorFta}}</p>
+                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                  <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fta, partita.visitorFta)">
+                  </div>
+                  <div class="py-1"
+                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFta, partita.fta)">
+                  </div>
                 </div>
-                <div class="py-1"
-                  [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFta, partita.fta)">
+                <p class="drop-shadow">{{partita.visitorFta}}/{{partita.fta+partita.visitorFta}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full text-center px-8 py-2">
+            <h3>Tiri liberi realizzati</h3>
+            <div class="flex w-full">
+              <div class="w-full flex items-center">
+                <p class="drop-shadow">{{partita.ftm}}/{{partita.ftm+partita.visitorFtm}}</p>
+                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                  <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.ftm, partita.visitorFtm)">
+                  </div>
+                  <div class="py-1"
+                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFtm, partita.ftm)">
+                  </div>
+                </div>
+                <p class="drop-shadow">{{partita.visitorFtm}}/{{partita.ftm+partita.visitorFtm}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex flex-col justify-center" *ngIf="partita.fta > 0">
+            <div class="w-full text-center px-8 py-2">
+              <h3>Percentuale dei tiri liberi</h3>
+              <div class="flex w-full">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.ftp}}%</p>
+                  <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentualeString(partita.colourHome, partita.ftp, partita.visitorFtp)">
+                    </div>
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentualeString(partita.colourVisitor, partita.visitorFtp, partita.ftp)">
+                    </div>
+                  </div>
+                  <p class="drop-shadow">{{partita.visitorFtp}}%</p>
                 </div>
               </div>
-              <p class="drop-shadow">{{partita.visitorFta}}/{{partita.fta+partita.visitorFta}}</p>
             </div>
+
+            <div class="w-full text-center px-8 py-2">
+              <h3>Tiri dal campo tentati</h3>
+              <div class="flex w-full">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.fga}}/{{partita.fga+partita.visitorFga}}</p>
+                  <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fga, partita.visitorFga)">
+                    </div>
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFga, partita.fga)">
+                    </div>
+                  </div>
+                  <p class="drop-shadow">{{partita.visitorFga}}/{{partita.fga+partita.visitorFga}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full text-center px-8 py-2">
+              <h3>Tiri dal campo realizzati</h3>
+              <div class="flex w-full">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.fgm}}/{{partita.fgm+partita.visitorFgm}}</p>
+                  <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fgm, partita.visitorFgm)">
+                    </div>
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFgm, partita.fgm)">
+                    </div>
+                  </div>
+                  <p class="drop-shadow">{{partita.visitorFgm}}/{{partita.fgm+partita.visitorFgm}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full text-center px-8 py-2">
+              <h3>Percentuale dal campo</h3>
+              <div class="flex w-full">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.fgp}}%</p>
+                  <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentualeString(partita.colourHome, partita.fgp, partita.visitorFgp)">
+                    </div>
+                    <div class="py-1"
+                      [ngStyle]="calcolaPercentualeString(partita.colourVisitor, partita.visitorFgp, partita.fgp)">
+                    </div>
+                  </div>
+                  <p class="drop-shadow">{{partita.visitorFgp}}%</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full" *ngIf="isVisible">
+              <div class=" w-full text-center px-8 py-2">
+                <h3>Triple tentate</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.tpa}}/{{partita.tpa+partita.visitorTpa}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.tpa, partita.visitorTpa)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTpa, partita.tpa)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTpa}}/{{partita.tpa+partita.visitorTpa}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Triple realizzate</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.tpm}}/{{partita.tpm+partita.visitorTpm}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.tpm, partita.visitorTpm)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTpm, partita.tpm)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTpm}}/{{partita.tpm+partita.visitorTpm}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Percentuale da tre punti</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.tpp}}%</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentualeString(partita.colourHome, partita.tpp, partita.visitorTpp)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentualeString(partita.colourVisitor, partita.visitorTpp, partita.tpp)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTpp}}%</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Rimbalzi offensivi</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.offReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.offReb, partita.visitorOffReb)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorOffReb, partita.offReb)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorOffReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Rimbalzi totali</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.totReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.totReb, partita.visitorTotReb)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTotReb, partita.totReb)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Falli fatti</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.pfouls}}/{{partita.pfouls+partita.visitorPFouls}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.pfouls, partita.visitorPFouls)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorPFouls, partita.pfouls)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Palle rubate</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex itepms-center">
+                    <p class="drop-shadow">{{partita.steals}}/{{partita.steals+partita.visitorSteals}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.steals, partita.visitorSteals)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorSteals, partita.steals)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorSteals}}/{{partita.steals+partita.visitorSteals}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Palle perse</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.turnovers}}/{{partita.turnovers+partita.visitorTurnovers}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.turnovers, partita.visitorTurnovers)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTurnovers, partita.turnovers)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorTurnovers}}/{{partita.turnovers+partita.visitorTurnovers}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-2">
+                <h3>Palle stoppate</h3>
+                <div class="flex w-full">
+                  <div class="w-full flex items-center">
+                    <p class="drop-shadow">{{partita.blocks}}/{{partita.blocks+partita.visitorBlocks}}</p>
+                    <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourHome, partita.blocks, partita.visitorBlocks)">
+                      </div>
+                      <div class="py-1"
+                        [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorBlocks, partita.blocks)">
+                      </div>
+                    </div>
+                    <p class="drop-shadow">{{partita.visitorBlocks}}/{{partita.blocks+partita.visitorBlocks}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-3">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.plusMinus}}/{{partita.plusMinus}}</p>
+                  <h3 class="w-full">Plus Minus</h3>
+                  <p class="drop-shadow">{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
+                </div>
+              </div>
+
+              <div class="w-full text-center px-8 py-3">
+                <div class="w-full flex items-center">
+                  <p class="drop-shadow">{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
+                  <h3 class="w-full">Maggior Vantaggio</h3>
+                  <p class="drop-shadow">
+                    {{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="w-full flex justify-center">
+            <button *ngIf="partita.fta > 0"
+              class="bg-white text-center px-6 py-2 my-2 rounded-md flex flex-col items-center" (click)="openStats()">
+              <p class="drop-shadow-md" [ngStyle]="{
+                'background': 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)',
+                'color': 'transparent',
+                'background-clip': 'text',
+                'display': 'inline-block'
+              }">{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
+            </button>
           </div>
         </div>
-        <div class="w-full text-center px-8 py-2">
-          <h3>Tiri liberi realizzati</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.ftm}}/{{partita.ftm+partita.visitorFtm}}</p>
-              <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.ftm, partita.visitorFtm)">
-                </div>
-                <div class="py-1"
-                  [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFtm, partita.ftm)">
-                </div>
-              </div>
-              <p class="drop-shadow">{{partita.visitorFtm}}/{{partita.ftm+partita.visitorFtm}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="w-full text-center px-8 py-2">
-          <h3>Percentuale dei tiri liberi</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.ftp}}%</p>
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-            </div>
-            <div class="w-full flex items-center">
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p class="drop-shadow">{{partita.visitorFtp}}%</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full text-center px-8 py-2">
-          <h3>Tiri dal campo tentati</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.fga}}/{{partita.fga+partita.visitorFga}}</p>
-              <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fga, partita.visitorFga)">
-                </div>
-                <div class="py-1"
-                  [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFga, partita.fga)">
-                </div>
-              </div>
-              <p class="drop-shadow">{{partita.visitorFga}}/{{partita.fga+partita.visitorFga}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full text-center px-8 py-2">
-          <h3>Tiri dal campo realizzati</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.fgm}}/{{partita.fgm+partita.visitorFgm}}</p>
-              <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.fgm, partita.visitorFgm)">
-                </div>
-                <div class="py-1"
-                  [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorFgm, partita.fgm)">
-                </div>
-              </div>
-              <p class="drop-shadow">{{partita.visitorFgm}}/{{partita.fgm+partita.visitorFgm}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full text-center px-8 py-2">
-          <h3>Percentuale dal campo</h3>
-          <div class="flex w-full">
-            <div class="w-full flex items-center">
-              <p class="drop-shadow">{{partita.fgp}}%</p>
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-            </div>
-            <div class="w-full flex items-center">
-              <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              <p class="drop-shadow">{{partita.visitorFgp}}%</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full" *ngIf="isVisible">
-          <div class=" w-full text-center px-8 py-2">
-            <h3>TPA</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.tpa}}/{{partita.tpa+partita.visitorTpa}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.tpa, partita.visitorTpa)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTpa, partita.tpa)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorTpa}}/{{partita.tpa+partita.visitorTpa}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>TPM</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.tpm}}/{{partita.tpm+partita.visitorTpm}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1" [ngStyle]="calcolaPercentuale(partita.colourHome, partita.tpm, partita.visitorTpm)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTpm, partita.tpm)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorTpm}}/{{partita.tpm+partita.visitorTpm}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>TPP</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.tpp}}%</p>
-                <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              </div>
-              <div class="w-full flex items-center">
-                <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p class="drop-shadow">{{partita.visitorTpp}}%</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Rimbalzi offensivi</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.offReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.offReb, partita.visitorOffReb)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorOffReb, partita.offReb)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorOffReb}}/{{partita.offReb+partita.visitorOffReb}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Rimbalzi totali</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.totReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.totReb, partita.visitorTotReb)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTotReb, partita.totReb)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Falli fatti</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.pfouls}}/{{partita.pfouls+partita.visitorPFouls}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.pfouls, partita.visitorPFouls)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorPFouls, partita.pfouls)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorTotReb}}/{{partita.totReb+partita.visitorTotReb}}</p>
-              </div>
-            </div>
-          </div>
-          <!--
-        TODO:  Da rivedere 
-      -->
-          <div class="w-full text-center px-8 py-2">
-            <h3>Plus Minus</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.plusMinus}}/{{partita.plusMinus}}</p>
-                <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-              </div>
-              <div class="w-full flex items-center">
-                <div class="w-full bg-hoops-secondary h-2 mx-2 rounded-md"></div>
-                <p class="drop-shadow">{{partita.visitorPlusMinus}}/{{partita.plusMinus}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Palle rubate</h3>
-            <div class="flex w-full">
-              <div class="w-full flex itepms-center">
-                <p class="drop-shadow">{{partita.steals}}/{{partita.steals+partita.visitorSteals}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.steals, partita.visitorSteals)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorSteals, partita.steals)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorSteals}}/{{partita.steals+partita.visitorSteals}}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Palle perse</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.turnovers}}/{{partita.turnovers+partita.visitorTurnovers}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.turnovers, partita.visitorTurnovers)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorTurnovers, partita.turnovers)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorTurnovers}}/{{partita.turnovers+partita.visitorTurnovers}}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Palle stoppate</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.blocks}}/{{partita.blocks+partita.visitorBlocks}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.blocks, partita.visitorBlocks)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorBlocks, partita.blocks)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorBlocks}}/{{partita.blocks+partita.visitorBlocks}}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full text-center px-8 py-2">
-            <h3>Maggior Vantaggio</h3>
-            <div class="flex w-full">
-              <div class="w-full flex items-center">
-                <p class="drop-shadow">{{partita.biggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}</p>
-                <div class="w-full flex justify-center items-center h-2 mx-2 py-1 rounded-full overflow-hidden">
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourHome, partita.biggestLead, partita.visitorBiggestLead)">
-                  </div>
-                  <div class="py-1"
-                    [ngStyle]="calcolaPercentuale(partita.colourVisitor, partita.visitorBiggestLead, partita.biggestLead)">
-                  </div>
-                </div>
-                <p class="drop-shadow">{{partita.visitorBiggestLead}}/{{partita.biggestLead+partita.visitorBiggestLead}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button class="bg-hoops-primary px-6 py-2 my-2 rounded-md text-white flex flex-col items-center"
-          (click)="openStats()">
-          <p class="drop-shadow">{{ isVisible ? 'Chiudi' : 'Statische avanzate'}}</p>
-          <!-- <img class="rotate-180" *ngIf="isVisible" src="../../assets/img/Vector.svg" alt="">
-        <img *ngIf="!isVisible" src="../../assets/img/Vector.svg" alt=""> -->
-        </button>
       </div>
     </section>
 
     <section id="arena">
-      <div class="flex flex-row justify-between items-center my-4 px-10 py-4 rounded-full drop-shadow-md"
+      <div class="flex flex-row justify-between items-center my-4 px-10 py-4 rounded-full drop-shadow-md text-sm"
         [ngStyle]="{background: 'linear-gradient(0.25turn,' + partita.colourHome + 'B3 ,' + partita.colourVisitor + 'B3)'}">
         <p class="drop-shadow">Arena: {{partita.arenaName}}</p>
         <p class="drop-shadow">City: {{partita.city}}</p>
       </div>
     </section>
 
-    <section id="notizie">
-      <h2 class="text-xl text-black text-center font-bold">Notizie correlate</h2>
-      <div id="slider">
-
-      </div>
-    </section>
   </div>
-  <!-- <img src="https://via.placeholder.com/80x80" alt=""> -->
 </div>

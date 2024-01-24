@@ -6,6 +6,7 @@ export default interface Player{
     height: number,
     shirtNumber: number
     country: string,
+    logoCountry: string,
     nameTeam: string,
     imgGiocatore:string,
     logo: string,//img bandiera nazionalità

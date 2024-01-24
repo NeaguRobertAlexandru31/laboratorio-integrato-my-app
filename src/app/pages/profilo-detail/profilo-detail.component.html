@@ -1,0 +1,44 @@
+<div class="flex flex-col h-[80vh] items-center justify-center mt-[30px]">
+
+    <div *ngIf="user && user.isUserAuthenticated" class="flex flex-col justify-center">
+        <div class="text-black text-lg font-semibold font-Poppins">
+            Benvenuto, {{ user.firstname }} !
+        </div>
+        <label for="profileImage" class="cursor-pointer">
+            <!-- Utilizza l'URL dinamico del profilo -->
+            <img [src]="user.profileImageUrl || 'https://i.pravatar.cc'" alt="Immagine Profilo"
+                class="w-32 h-32 rounded-full mb-4">
+            <input type="file" id="profileImage" (change)="onFileSelected($event)" style="display: none;">
+        </label>
+
+        <h2>Da qui potrai modificare i tuoi dati:</h2>
+        <!-- NOME -->
+        <div class="text-black text-lg font-semibold font-Poppins mt-4">Nome:</div>
+        <div
+            class="w-80 h-16 px-[18px] py-[17px] bg-hoops-primary rounded-[10px] shadow mb-4 inline-flex items-center gap-[129px]">
+            <input [(ngModel)]="user.firstname" (keyup.enter)="saveUserFirsname()"
+                class="text-white text-[15px] font-normal font-Poppins outline-none bg-transparent flex flex-grow">
+        </div>
+        <!-- COGNOME -->
+        <div class="text-black text-lg font-semibold font-Poppins">Cognome:</div>
+        <div
+            class="w-80 h-16 px-[18px] py-[17px] bg-hoops-primary rounded-[10px] shadow mb-4 inline-flex items-center gap-[129px]">
+            <input [(ngModel)]="user.lastname" (keyup.enter)="saveUserLastname()"
+                class="text-white text-[15px] font-normal font-Poppins outline-none bg-transparent flex flex-grow">
+        </div>
+        <!-- MAIL -->
+        <div class="text-black text-lg font-semibold font-Poppins">Email:</div>
+        <div
+            class="w-80 h-16 px-[18px] py-[17px] bg-hoops-primary rounded-[10px] shadow mb-4 inline-flex items-center gap-[129px]">
+            <input [(ngModel)]="user.email" (keyup.enter)="saveUserEmail()"
+                class="text-white text-[15px] font-normal font-Poppins outline-none bg-transparent flex flex-grow">
+        </div>
+        <div class="flex flex-row justify-center mt-auto">
+            <app-logout class="mr-5"></app-logout>
+            <app-delete-account class="ml-5"></app-delete-account>
+        </div>
+    </div>
+
+    
+
+</div>

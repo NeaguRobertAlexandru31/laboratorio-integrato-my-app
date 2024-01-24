@@ -1,9 +1,6 @@
 import { Component, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
-import {
-  MatDatepickerInputEvent,
-  MatDatepicker,
-} from '@angular/material/datepicker';
-import {map} from 'rxjs/operators';
+import { MatDatepickerInputEvent,MatDatepicker } from '@angular/material/datepicker';
+import { map } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';

@@ -1,21 +1,29 @@
-<div *ngFor="let team of teams" class="min-h-[90vh] px-2">
+<div *ngIf="isLoadingTeam" class="w-full h-[90vh] flex items-center justify-center">
+    <p class="text-center text-black">
+        Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+    </p>
+</div>
 
+<div *ngFor="let team of teams" class="min-h-[90vh] px-2">
     <section id="header">
         <!--  *ngFor="let team of teams -->
         <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md" [ngStyle]="{'background': team.colour+'B3'}">
             <div class="w-3/12">
-                <img class="h-20" [src]="team.logo" alt="">
+                <img class="h-20 drop-shadow-md" [src]="team.logo" alt="">
             </div>
             <div class="w-7/12 text-center text-md text-white font-bold">
                 <h1 class="drop-shadow">{{team.nameTeam}}</h1>
             </div>
             <div class="w-2/12 flex items-center justify-center">
-                <!--
-          TODO: Settare correttamente i bottoni una volta collegato l'api favorite
-        -->
-                <button (click)="setFavoriteTeam(teamName)">
-          <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+                <!-- <button (click)="setFavorite('team', teamName)">
+          <img *ngIf="teamName" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
+          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        </button> -->
+                <button (click)="setFavorite('team', teamName)">
+          <img *ngIf="!isTeamInFavorites('team', team.idTeam)" src="../../../assets/img/icone-preferiti/Fav outline.png"
+            alt="Icona Preferiti">
+          <img *ngIf="isTeamInFavorites('team',  team.idTeam)" src="../../../assets/img/icone-preferiti/Fav Filled.png"
+            alt="Icona Preferiti">
         </button>
             </div>
         </div>
@@ -23,119 +31,225 @@
         <!-- Provare ad utilizzare gli ngClass o ngStyle con la condizionale true o false per le classi -->
         <div class="flex flex-row justify-center items-center my-3">
             <button (click)="accordionTeam('panoramica')" [ngStyle]="{'background': sectionPanoramica ? team.colour+'B3' : '','color': sectionPanoramica ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Panoramica</button>
-            <button (click)="accordionTeam('partite')" (click)="loadPreviousGame()" [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Partite</button>
-            <button (click)="accordionTeam('giocatori')" (click)="loadPlayers()" [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}" class=" w-full py-1 px-4
+            <button (click)="accordionTeam('partite')" (click)="loadingPreviousGame(this.idTeam)" [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Partite</button>
+            <button (click)="accordionTeam('giocatori')" (click)="loadingPlayers(this.idTeam)" [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}" class=" w-full py-1 px-4
         rounded-full">Giocatori</button>
         </div>
     </section>
 
     <section *ngIf="sectionPanoramica == true" id="panoramica">
-        <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
-            <table class=" w-full">
-                <thead>
-                    <th class="text-start">
-                        Generali
-                    </th>
-                    <th class="text-start">
-                        Valore
-                    </th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Punti segnati per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Punti subiti per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Assist per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Rapporto assist per turnover</td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div *ngFor="let stat of teamStats">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <table class=" w-full">
+                    <thead>
+                        <th class="text-start">
+                            Generali
+                        </th>
+                        <th class="text-start">
+                            Valore
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-[269px]">Punti segnati per partita</td>
+                            <td>{{ calculateRoundedAverage(stat.points,stat.gamesPlayed) }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Punti subiti per partita</td>
+                            <td>NA</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Assist per partita</td>
+                            <td>{{ calculateRoundedAverage(stat.assist,stat.gamesPlayed) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Rapporto assist per turnover</td>
+                            <td>{{ calculateRoundedAverage(stat.turnovers,stat.gamesPlayed) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
-            <table class="w-full">
-                <thead>
-                    <th class="text-start">
-                        Attacco
-                    </th>
-                    <th class="text-start">
-                        Valore
-                    </th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Punti segnati per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Punti subiti per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Assist per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Rapporto assist per turnover</td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow" [ngStyle]="{'color': team.colour+'B3'}">Bottone</button>
-        </div>
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <table class="w-full">
+                    <thead>
+                        <th class="text-start">
+                            Attacco
+                        </th>
+                        <th class="text-start">
+                            Valore
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-[269px]">Tiri dal campo segnati a partita:</td>
+                            <td>{{stat.fieldGoalsMade}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Tiri dal campo tentati a partita:</td>
+                            <td>{{stat.fieldGoalsAttempted}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Percentuale di tiri dal campo segnati:</td>
+                            <td>{{stat.fieldGoalPercentage}}%</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Tiri liberi realizzati a partita:</td>
+                            <td>{{stat.freeThrowsMade}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Tiri liberi tentati a partita:</td>
+                            <td>{{stat.freeThrowsAttempted}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Percentuale di tiri liberi:</td>
+                            <td>{{stat.freeThrowPercentage}}%</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isVisible">
+                        <tr>
+                            <td class="w-[269px]">Triple tentati a partita:
+                            </td>
+                            <td>{{stat.threePointersAttempted}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Triple realizzate a partita:
+                            </td>
+                            <td>{{stat.threePointersMade}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Percentuale da tre punti:</td>
+                            <td>{{stat.threePointPercentage}}%</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Efficacia dei tiri dal campo:</td>
+                            <td>{{ (stat.fieldGoalsMade / stat.fieldGoalsAttempted * 100) | number:'1.0-0' }}%</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Percentuale di realizzazione totale:</td>
+                            <td>{{stat.pointsInPaint}}%</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Punti da seconde opportunità a partita:</td>
+                            <td>{{stat.secondChancePoints}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Punti segnati in area:</td>
+                            <td>{{stat.fieldGoalsMade + stat.threePointersMade}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Punti in contropiede a partita:</td>
+                            <td>{{calculateRoundedAverage(stat.fastBreakPoints,stat.gamesPlayed)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="openStats()" class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow" [ngStyle]="{'color': team.colour+'B3'}">{{ isVisible ? 'Mostra meno' : 'Mostra altro'}}</button>
+            </div>
 
-        <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
-            <table class="w-full">
-                <thead>
-                    <th class="text-start">
-                        Rimbalzi
-                    </th>
-                    <th class="text-start">
-                        Valore
-                    </th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Punti segnati per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Punti subiti per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Assist per partita</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Rapporto assist per turnover</td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow" [ngStyle]="{'color': team.colour+'B3'}">Bottone</button>
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <table class="w-full">
+                    <thead>
+                        <th class="text-start">
+                            Difesa
+                        </th>
+                        <th class="text-start">
+                            Valore
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-[269px]">Blocchi a partita:</td>
+                            <td>{{calculateRoundedAverage(stat.blocks,stat.gamesPlayed)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Rubate a partita:</td>
+                            <td>{{calculateRoundedAverage(stat.defensiveRebounds,stat.gamesPlayed)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Falli a partita:</td>
+                            <td>{{calculateRoundedAverage(stat.personalFouls, stat.gamesPlayed)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <table class="w-full">
+                    <thead>
+                        <th class="text-start">
+                            Rimbalzi
+                        </th>
+                        <th class="text-start">
+                            Valore
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-[269px]">Offensivi a partita:</td>
+                            <td>{{stat.offensiveRebounds}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Difensivi a partita:</td>
+                            <td>{{stat.defensiveRebounds}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Totali a partita:</td>
+                            <td>{{stat.totalRebounds}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <table class="w-full">
+                    <thead>
+                        <th class="text-start">
+                            Altro
+                        </th>
+                        <th class="text-start">
+                            Valore
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-[269px]">Perdite di palla a partita:</td>
+                            <td>{{calculateRoundedAverage(stat.steals, stat.gamesPlayed)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-[269px]">Falli tecnici totali:</td>
+                            <td>{{calculateRoundedAverage(stat.personalFouls, stat.gamesPlayed)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-row justify-center items-center bg-[#94A3B8] rounded-full text-white text-center mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+                <div class="w-full">
+                    <p class="truncate">City: {{team.city}}</p>
+                </div>
+                <div class="w-full">
+                    <p>League: {{team.league.nameLeague}}</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="partite" *ngIf="sectionPartite == true">
         <div class="flex flex-row">
             <button (click)="accordionGame('risultati')" [ngStyle]="{'background': sectionRisultati ? team.colour+'B3' : '','color': sectionRisultati ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Risultati</button>
-            <button (click)="accordionGame('programmate')" (click)="loadNextGame()" [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}" class=" w-full py-1 px-4
+            <button (click)="accordionGame('programmate')" (click)="loadingNextGame(this.idTeam)" [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}" class=" w-full py-1 px-4
         rounded-full">Programmate</button>
         </div>
 
         <section *ngIf="sectionRisultati == true" id="risultati">
+            <div *ngIf="isLoadingPreviousGame" class="w-full h-[70vh] flex items-center justify-center">
+                <p class="text-center text-black">
+                    Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+                </p>
+            </div>
             <div *ngIf="!prevoiusGame.length">
-                Nessuna partita precedente trovata
+                <p class="rounded-md p-3 m-4 bg-hoops-primary text-white"> Nessuna partita precedente trovata </p>
             </div>
             <table *ngIf="prevoiusGame.length" class="w-full">
                 <tbody *ngFor="let game of prevoiusGame" class="text-center">
@@ -173,31 +287,48 @@
 
     </section>
 
+    <section *ngIf="sectionProgrammate == true" id="programmate">
+        <div *ngIf="isLoadingNextGame" class="w-full h-[70vh] flex items-center justify-center">
+            <p class="text-center text-black">
+                Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+            </p>
+        </div>
+        <div class="text-center" *ngIf="!nextGame.length">
+            <p class="rounded-md p-3 m-4 bg-hoops-primary text-white">Nessuna partita programmata</p>
+        </div>
+        <div *ngIf="nextGame.length"></div>
+        <div></div>
+    </section>
+    </section>
+
     <section id="giocatori" *ngIf="sectionGiocatori == true">
-        <div *ngFor="let player of players" class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-2 px-4 rounded-md" [ngStyle]="{'background': team.colour+'B3'}">
-            <a [routerLink]="'/player/'+ player.idPlayer + '/' + 2022" (click)="saveInfoLocalStorage(player.idPlayer)">
-                <div class="w-fit">
-                    <img class="rounded-full" src="https://via.placeholder.com/40x40" alt="">
-                </div>
-                <div class="w-full px-3">
-                    <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
-                    <div class="flex flex-row justify-between items-center text-sm pr-10">
-                        <p>{{player.shirtNumber}}</p>
-                        <p>{{player.pos}}</p>
-                        <p>{{player.eta}} anni</p>
-                        <div class="flex flex-row items-center">
-                            <img class="rounded-full" src="https://via.placeholder.com/20x20" alt="">
-                            <p>{{player.country}}</p>
-                        </div>
+        <div *ngIf="isLoadingPlayers" class="w-full h-[70vh] flex items-center justify-center">
+            <p class="text-center text-black">
+                Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+            </p>
+        </div>
+        <div *ngFor="let player of players" class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-3 px-4 rounded-md" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="w-fit">
+                <img class="w-[44px] h-[40px]" [src]="player.img" alt="">
+            </div>
+            <div class="w-full px-3">
+                <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
+                <div class="flex flex-row justify-center items-center text-center text-sm pr-2">
+                    <p class="min-w-[50px]">{{player.shirtNumber}}</p>
+                    <p class="min-w-[40px]">{{player.pos}}</p>
+                    <p class="w-full">{{player.eta}} anni</p>
+                    <div class="min-w-[80px] flex flex-row items-center justify-end">
+                        <img class="rounded-full w-[20px] h-[20px] mr-2" [src]="player.logoCountry" alt="">
+                        <p class="truncate w-full">{{player.country}}</p>
                     </div>
                 </div>
-                <div class="w-fit flex items-center">
-                    <button (click)="setFavoritePlayer(player.idPlayer)">
-            <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-            <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
-          </button>
-                </div>
-            </a>
+            </div>
+            <div class="w-fit flex items-center">
+                <button (click)="setFavorite('player', player.idPlayer)">
+          <img *ngIf="player.idPlayer" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
+          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        </button>
+            </div>
         </div>
     </section>
 </div>
