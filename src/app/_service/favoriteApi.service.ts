@@ -16,8 +16,8 @@ export class FavoriteApiService {
   
   constructor(private http: HttpClient) {}
 
-  baseUrl = 'http://localhost:8045/';
-  /* baseUrl = 'http://hoopsdata.ddns.net:8045/'; */
+  /* baseUrl = 'http://localhost:8045/'; */
+  baseUrl = 'http://hoopsdata.ddns.net:8045/';
 
   tokenVerify:boolean = false;
 
