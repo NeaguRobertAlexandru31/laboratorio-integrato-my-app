@@ -57,7 +57,8 @@ export class AccessoPageComponent {
             lastname: response.lastname,
             email: response.email,
             isUserAuthenticated: true,
-            profileImageUrl: "",
+            profileImageUrl: response.profileImageUrl,
+            password: response.password,
           });
           // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
           this.router.navigate(['/preferiti']);

@@ -52,6 +52,8 @@ import { CommonModule } from '@angular/common';
 import { FavoriteApiService } from './_service/favoriteApi.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
+import { HoopsdataComponent } from './pages/hoopsdata/hoopsdata.component';
+import { FeedbackComponent } from './pages/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,8 @@ import { DeleteAccountComponent } from './components/delete-account/delete-accou
     ProfiloDetailComponent,
     LogoutComponent,
     DeleteAccountComponent,
+    HoopsdataComponent,
+    FeedbackComponent,
   ],
   imports: [
     BrowserModule,

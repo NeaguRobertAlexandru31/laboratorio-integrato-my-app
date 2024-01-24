@@ -50,4 +50,17 @@ export class UserService {
     // Effettua una richiesta HTTP di tipo PUT o POST per aggiornare i dati dell'utente
     return this.http.put(url, userData);
   }
+
+  // Funzione per aggiornare i dati dell'utente nel database
+  updateUserPassword(password: string): Observable<any> {
+    const url = this.baseUrl + 'user/update/password';
+
+    // Crea un oggetto con i dati da inviare al server
+    const userData = {
+      password
+    };
+
+    // Effettua una richiesta HTTP di tipo PUT o POST per aggiornare i dati dell'utente
+    return this.http.put(url, userData);
+  }
 }
