@@ -4,8 +4,14 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
 
-    <input (click)="openPicker()" matInput [matDatepicker]="picker" class="text-center bg-hoops-primary" readonly
+    <!-- Input nascosto per il picker -->
+    <input (click)="openPicker()" matInput [matDatepicker]="picker" class="hidden" readonly
       (dateChange)="onChange($event)" [(ngModel)]="selectedDate" />
+
+    <!-- Visualizzazione formattata della data -->
+    <div class="text-center bg-hoops-primary" (click)="openPicker()">
+      {{ selectedDate | date: 'dd/MM/yyyy' }}
+    </div>
 
     <button [disabled]="" mat-icon-button (click)="incrementDate()" class="flex items-center justify-center w-10">
       <mat-icon>keyboard_arrow_right</mat-icon>
