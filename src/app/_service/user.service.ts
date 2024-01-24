@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = 'http://hoopsdata.ddns.net:8045/';
-  /* private baseUrl = 'http://localhost:8045/'; */
+  /* private baseUrl = 'http://hoopsdata.ddns.net:8045/'; */
+  private baseUrl = 'http://localhost:8045/';
 
   constructor(private http: HttpClient) {}
 

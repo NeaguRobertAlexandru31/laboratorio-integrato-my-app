@@ -21,8 +21,8 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
 
-  baseUrl = 'http://hoopsdata.ddns.net:8045/' /* -> DIST per deploy ; */
-  /* baseUrl = 'http://localhost:8045/'; */
+  /* baseUrl = 'http://hoopsdata.ddns.net:8045/' */ /* -> DIST per deploy ; */
+  baseUrl = 'http://localhost:8045/';
 
   constructor(private http: HttpClient) {}
   //Search bar - Squadre 
