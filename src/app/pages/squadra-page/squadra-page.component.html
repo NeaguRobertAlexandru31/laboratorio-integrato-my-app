@@ -7,7 +7,8 @@
 <div *ngFor="let team of teams" class="min-h-[90vh] px-2">
     <section id="header">
         <!--  *ngFor="let team of teams -->
-        <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md" [ngStyle]="{'background': team.colour+'B3'}">
+        <div class="flex flex-row justify-center bg-[#94A3B8] items-center py-2 ps-4 pr-7 rounded-md"
+            [ngStyle]="{'background': team.colour+'B3'}">
             <div class="w-3/12">
                 <img class="h-20 drop-shadow-md" [src]="team.logo" alt="">
             </div>
@@ -20,26 +21,33 @@
           <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
         </button> -->
                 <button (click)="setFavorite('team', teamName)">
-          <img *ngIf="!isTeamInFavorites('team', team.idTeam)" src="../../../assets/img/icone-preferiti/Fav outline.png"
-            alt="Icona Preferiti">
-          <img *ngIf="isTeamInFavorites('team',  team.idTeam)" src="../../../assets/img/icone-preferiti/Fav Filled.png"
-            alt="Icona Preferiti">
-        </button>
+                    <img *ngIf="!isTeamInFavorites('team', team.idTeam)"
+                        src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+                    <img *ngIf="isTeamInFavorites('team',  team.idTeam)"
+                        src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
+                </button>
             </div>
         </div>
 
         <!-- Provare ad utilizzare gli ngClass o ngStyle con la condizionale true o false per le classi -->
         <div class="flex flex-row justify-center items-center my-3">
-            <button (click)="accordionTeam('panoramica')" [ngStyle]="{'background': sectionPanoramica ? team.colour+'B3' : '','color': sectionPanoramica ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Panoramica</button>
-            <button (click)="accordionTeam('partite')" (click)="loadingPreviousGame(this.idTeam)" [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Partite</button>
-            <button (click)="accordionTeam('giocatori')" (click)="loadingPlayers(this.idTeam)" [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}" class=" w-full py-1 px-4
+            <button (click)="accordionTeam('panoramica')"
+                [ngStyle]="{'background': sectionPanoramica ? team.colour+'B3' : '','color': sectionPanoramica ? 'white' : 'black'}"
+                class="w-full py-1 px-4 rounded-full">Panoramica</button>
+            <button (click)="accordionTeam('partite')" (click)="loadingPreviousGame(this.idTeam)"
+                [ngStyle]="{'background': sectionPartite ? team.colour+'B3' : '','color': sectionPartite ? 'white' : 'black'}"
+                class="w-full py-1 px-4 rounded-full">Partite</button>
+            <button (click)="accordionTeam('giocatori')" (click)="loadingPlayers(this.idTeam)"
+                [ngStyle]="{'background': sectionGiocatori ? team.colour+'B3' : '','color': sectionGiocatori ? 'white' : 'black'}"
+                class=" w-full py-1 px-4
         rounded-full">Giocatori</button>
         </div>
     </section>
 
     <section *ngIf="sectionPanoramica == true" id="panoramica">
         <div *ngFor="let stat of teamStats">
-            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <table class=" w-full">
                     <thead>
                         <th class="text-start">
@@ -71,7 +79,8 @@
                 </table>
             </div>
 
-            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <table class="w-full">
                     <thead>
                         <th class="text-start">
@@ -144,10 +153,13 @@
                         </tr>
                     </tbody>
                 </table>
-                <button (click)="openStats()" class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow" [ngStyle]="{'color': team.colour+'B3'}">{{ isVisible ? 'Mostra meno' : 'Mostra altro'}}</button>
+                <button (click)="openStats()"
+                    class="w-fit px-6 py-1 mt-2 text-sm bg-white text-[#94A3B8] rounded-full drop-shadow"
+                    [ngStyle]="{'color': team.colour+'B3'}">{{ isVisible ? 'Mostra meno' : 'Mostra altro'}}</button>
             </div>
 
-            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <table class="w-full">
                     <thead>
                         <th class="text-start">
@@ -174,7 +186,8 @@
                 </table>
             </div>
 
-            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <table class="w-full">
                     <thead>
                         <th class="text-start">
@@ -201,7 +214,8 @@
                 </table>
             </div>
 
-            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <table class="w-full">
                     <thead>
                         <th class="text-start">
@@ -224,7 +238,8 @@
                 </table>
             </div>
 
-            <div class="flex flex-row justify-center items-center bg-[#94A3B8] rounded-full text-white text-center mb-3 drop-shadow-md py-2 px-4" [ngStyle]="{'background': team.colour+'B3'}">
+            <div class="flex flex-row justify-center items-center bg-[#94A3B8] rounded-full text-white text-center mb-3 drop-shadow-md py-2 px-4"
+                [ngStyle]="{'background': team.colour+'B3'}">
                 <div class="w-full">
                     <p class="truncate">City: {{team.city}}</p>
                 </div>
@@ -237,8 +252,12 @@
 
     <section id="partite" *ngIf="sectionPartite == true">
         <div class="flex flex-row">
-            <button (click)="accordionGame('risultati')" [ngStyle]="{'background': sectionRisultati ? team.colour+'B3' : '','color': sectionRisultati ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">Risultati</button>
-            <button (click)="accordionGame('programmate')" (click)="loadingNextGame(this.idTeam)" [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}" class=" w-full py-1 px-4
+            <button (click)="accordionGame('risultati')"
+                [ngStyle]="{'background': sectionRisultati ? team.colour+'B3' : '','color': sectionRisultati ? 'white' : 'black'}"
+                class="w-full py-1 px-4 rounded-full">Risultati</button>
+            <button (click)="accordionGame('programmate')" (click)="loadingNextGame(this.idTeam)"
+                [ngStyle]="{'background': sectionProgrammate ? team.colour+'B3' : '','color': sectionProgrammate ? 'white' : 'black'}"
+                class=" w-full py-1 px-4
         rounded-full">Programmate</button>
         </div>
 
@@ -253,21 +272,25 @@
             </div>
             <table *ngIf="prevoiusGame.length" class="w-full">
                 <tbody *ngFor="let game of prevoiusGame" class="text-center">
-                    <tr class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs text-white" [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
+                    <tr class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs text-white"
+                        [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
                         <td class="w-full">
-                            <a [routerLink]="'/squadra/'+ this.game.homeTeamName" class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
+                            <a [routerLink]="'/squadra/'+ this.game.homeTeamName"
+                                class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
                                 <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />
                                 <p class="drop-shadow">{{ game.homeTeamName }}</p>
                             </a>
                         </td>
                         <td class="w-full h-full flex flex-col justify-center items-center">
                             <p class="my-2 text-lg">{{ game.risultato }}</p>
-                            <a [routerLink]="'/partita/' + this.game.gameId" class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full">
-                Preview
-              </a>
+                            <a [routerLink]="'/partita/' + this.game.gameId"
+                                class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full">
+                                Preview
+                            </a>
                         </td>
                         <td class="w-full">
-                            <a [routerLink]="'/squadra/'+ this.game.visitorTeamName" class="w-[109px] h-full px-3 flex flex-col items-center">
+                            <a [routerLink]="'/squadra/'+ this.game.visitorTeamName"
+                                class="w-[109px] h-full px-3 flex flex-col items-center">
                                 <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2" />
                                 <p class="drop-shadow">{{ game.visitorTeamName }}</p>
                             </a>
@@ -325,9 +348,9 @@
             </div>
             <div class="w-fit flex items-center">
                 <button (click)="setFavorite('player', player.idPlayer)">
-          <img *ngIf="player.idPlayer" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
-        </button>
+                    <img *ngIf="player.idPlayer" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
+                    <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+                </button>
             </div>
         </div>
     </section>
