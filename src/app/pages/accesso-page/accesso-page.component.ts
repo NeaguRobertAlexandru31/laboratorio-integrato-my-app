@@ -32,7 +32,7 @@ export class AccessoPageComponent {
     // Esegui la richiesta di login al server
     /* http://hoopsdata.ddns.net:8045/user/signin -> DIST per deploy 
         http://localhost:8045/user/signin */
-    fetch('http://localhost:8045/user/signin', {
+    fetch('http://localhost:8045/user/signin ', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,6 +57,7 @@ export class AccessoPageComponent {
             lastname: response.lastname,
             email: response.email,
             isUserAuthenticated: true,
+            profileImageUrl: "",
           });
           // Reindirizza l'utente alla pagina /preferiti se correttamente loggato
           this.router.navigate(['/preferiti']);
