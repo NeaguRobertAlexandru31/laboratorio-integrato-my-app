@@ -1,0 +1,207 @@
+<!-- Section General Info Player -->
+<section class="w-full">
+    <div class="h-32 flex flex-row justify-center bg-hoops-primary items-center drop-shadow-md text-white mr-2 my-4  px-4 ml-2 rounded-md" [ngStyle]="{'background': colorTeam+'B3'}" *ngFor="let pan of playerPan">
+        <div class="w-1/4 ">
+            <div class="h-[110px] flex justify-center items-center ">
+                <a [routerLink]="'/squadra/' + pan.nameTeam">
+                    <img class="w-fit h-fit my-2 rounded-full" [src]="pan.img" alt="pan.firstname pan.lastname image">
+                </a>
+            </div>
+        </div>
+        <div class="w-2/4 px-4 lg:text-2xl text-base text-center">
+            <!-- <h3>{{ pan.firstname + pan.lastname}}</h3> -->
+            <p> {{pan.firstname + pan.lastname}} </p>
+        </div>
+        <div class="w-1/4 flex justify-center items-right">
+            <button>
+                <img  src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icon not favorite player" />
+                 <!-- <img  src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icon favorite player" />  -->
+            </button>
+        </div>
+    </div>
+</section>
+
+<div class="flex flex-row justify-center items-center my-3 ml-2 mr-2">
+    <button (click)="accordionPan('panoramica')" [ngStyle]="{'background': sectionPanoramica ? colorTeam+'B3' : 'white',
+     'color': sectionPanoramica ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">
+        Panoramica
+    </button>
+    <button (click)="accordionPan('stat')" [ngStyle]="{'background': sectionStat ? colorTeam+'B3' : 'white',
+    'color': sectionStat ? 'white' : 'black'}" class="w-full py-1 px-4 rounded-full">
+        Statistiche
+    </button>
+
+</div>
+<!-- Section Panoramica -->
+<section *ngIf="sectionPanoramica == true" id="panoramica">
+    <!-- Prima Scheda, Team Card -->
+    <div *ngFor="let pan of playerPan" class="flex flex-row justify-center bg-hoops-primary items-center drop-shadow-md text-white mr-2 my-4  px-4 ml-2 rounded-md" [ngStyle]="{'background': colorTeam+'B3'}">
+        <div class="w-fit">
+            <img class="w-[50px] h-[40px] rounded-full" [src]="pan.logoTeam" alt="pan.nameTeam logo">
+        </div>
+        <div class="w-full px-4 text-lg text-center">
+            <h3>{{ pan.nameTeam }}</h3>
+        </div>
+        <div class="w-fit flex items-center">
+            <button (click)="setFavoriteTeam(pan.nameTeam)">
+                <img *ngIf="!pan" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icon not favorite player" />
+                <img *ngIf="pan" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icon favorite player" />
+            </button>
+        </div>
+    </div>
+    <!-- Seconda Scheda, Generali -->
+    <div *ngFor="let pan of playerPan">
+        <div class="flex flex-col justify-center items-center bg-hoops-primary rounded-xl text-white mb-3 drop-shadow-md py-2 px-4 ml-2 mr-2" [ngStyle]="{'background': colorTeam+'B3'}">
+            <table class=" w-full">
+                <thead>
+                    <th class="text-start text-bald w-1/4">
+                        Generali
+                    </th>
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Nazionalita</h3>
+                        </td>
+                        <td class="w-2/4 text-center">
+                            <div class="flex flex-row justify-center items-center">
+                                <div class="w-1/4 ">
+                                    <img [src]="pan.flagCountry" alt="pan.nameCountry flag" class="h-5">
+                                </div>
+                                <div class="w-3/4">
+                                    <h3 class="text-left">{{ pan.nameCountry }}</h3>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Eta</h3>
+                        </td>
+                        <td class="w-2/4 text-left">
+                            <h3>{{ pan.eta}}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Altezza</h3>
+                        </td>
+                        <td class="w-2/4 text-left">
+                            <h3>{{ pan.height}}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Peso</h3>
+                        </td>
+                        <td class="w-2/4 text-left">
+                            <h3>{{ pan.weight}}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Ruolo Principale</h3>
+                        </td>
+                        <td class="w-2/4 text-left">
+                            <h3>{{ pan.pos}}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-2/4 text-left">
+                            <h3>Numero di Maglia</h3>
+                        </td>
+                        <td class="w-2/4 text-left">
+                            <h3>{{ pan.shirtNumber}}</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- Section Stat -->
+<section *ngIf="sectionStat == true" id="stat">
+    <div *ngFor="let stat of playerStat">
+        <!-- Prima scheda, Valori Generali -->
+        <div class="flex flex-col justify-center items-center bg-hoops-primary rounded-xl text-white mb-3 drop-shadow-md py-2 px-4 ml-2 mr-2" [ngStyle]="{'background': colorTeam+'B3'}">
+            <table class=" w-full">
+                <thead>
+                    <th class="text-start w-3/4">
+                        Partite
+                    </th>
+                    <th class="text-start w-1/4">
+                        Valore
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Partite Giocate</td>
+                        <td>{{stat.gamePlayed}}</td>
+                    </tr>
+                    <tr>
+                        <td>Minuti Giocati</td>
+                        <td>{{stat.totalMinutes}}</td>
+                    </tr>
+                    <tr>
+                        <td>Minuti per Partita</td>
+                        <td>{{stat.avgMinutes}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Seconda scheda, PRA con informazioni più specifiche-->
+        <div class="flex flex-col justify-center items-center bg-[#94A3B8] rounded-xl text-white mb-3 drop-shadow-md py-2 px-4 ml-2 mr-2" [ngStyle]="{'background': colorTeam+'B3'}">
+            <table class=" w-full">
+                <thead>
+                    <th class="text-start w-3/4">
+                        PRA
+                    </th>
+                    <th class="text-start w-1/4">
+                        Valore
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Punti</td>
+                        <td>{{stat.totalPoints}}</td>
+                    </tr>
+                    <tr>
+                        <td>Rimbalzi</td>
+                        <td>{{stat.totalRebounds}}</td>
+                    </tr>
+                    <tr>
+                        <td>Assist</td>
+                        <td>{{stat.totalAssists}}</td>
+                    </tr>
+                    <tr>
+                        <td>Blocchi</td>
+                        <td>{{stat.totalBlocks}}</td>
+                    </tr>
+                    <tr>
+                        <td>Palle Rubate</td>
+                        <td>{{stat.totalSteals}}</td>
+                    </tr>
+                    <th class="text-start w-3/4 text-bald">
+                        Percentuali Tiri a Segno
+                    </th>
+                    <th class="text-start w-1/4 text-bald">
+                        Valore
+                    </th>
+                    <tr>
+                        <td>3 Punti</td>
+                        <td>{{stat.threePointPercentage}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Tiri Liberi</td>
+                        <td>{{stat.freeThrowPercentage}} %</td>
+                    </tr>
+                    <tr>
+                        <td>Punti da Campo</td>
+                        <td>{{stat.fieldGoalsMade}} %</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

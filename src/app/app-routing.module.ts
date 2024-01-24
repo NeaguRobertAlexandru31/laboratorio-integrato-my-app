@@ -20,6 +20,7 @@ import { SquadraPageComponent } from './pages/squadra-page/squadra-page.componen
 /* Footer */
 import { HoopsdataComponent } from './pages/hoopsdata/hoopsdata.component';
 import { FeedbackComponent } from './pages/feedback/feedback.component';
+import { PlayerPageComponent } from './pages/player-page/player-page.component';
 
 const routes: Routes = [
   /* Partite svolte, programmate e statistiche */
@@ -44,6 +45,8 @@ const routes: Routes = [
   /* Footer */
   { path: 'hoopsdata', component: HoopsdataComponent },
   { path: 'feedback', component: FeedbackComponent },
+  { path: 'player/:idPlayer/:season', component: PlayerPageComponent },
+  { path: 'player', component: PlayerPageComponent },
   /* Reindirizzamento */
   { path: '**', component: RisultatiPageComponent },
 ];

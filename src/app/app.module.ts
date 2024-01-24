@@ -49,6 +49,7 @@ import { SquadraPageComponent } from './pages/squadra-page/squadra-page.componen
 import { FilterPipe } from './_hooks/filter.pipe';
 import { FilterPipePlayers } from './_hooks/filterPlayers.pipe';
 import { CommonModule } from '@angular/common';
+import { PlayerPageComponent } from './pages/player-page/player-page.component';
 import { FavoriteApiService } from './_service/favoriteApi.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
@@ -74,6 +75,7 @@ import { FeedbackComponent } from './pages/feedback/feedback.component';
     RegistrazionePageComponent,
     AccessoPageComponent,
     SquadraPageComponent,
+    PlayerPageComponent,
     //detail
     PartitaDetailPageComponent,
     CalendarComponent,

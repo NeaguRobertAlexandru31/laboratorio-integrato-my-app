@@ -13,6 +13,8 @@ import Team from '../_models/team.model';
 import TeamStats from '../_models/team.model';
 
 import Ranking from '../_models/ranking.model';
+import PlayerStat from '../_models/playerDetail.model';
+import PlayerPan from '../_models/playerPan.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -73,76 +75,112 @@ export class ApiService {
       );
   }
   
-  //Utilizzata in Squadra - carica il team in un array
-  getThisTeam(teamName:string){
-    return this.http
-      .get(this.baseUrl + 'team/teamById/' + teamName)
-      .pipe(
-        map((response: any) => {
-          console.log(response); //Log di controllo tramite console
-          return response as Team[];
-        })
-      );
-  }
-    
-  
-  //Utilizzata in Squadra - carica le statistiche stagionali del team
-  getThisTeamStats(idTeam:number, season:number){
-    return this.http
-      .get(this.baseUrl + 'team/season/stats/' + idTeam + '/' + season)
-      .pipe(
-        map((response: any) => {
-          console.log(response); //Log di controllo tramite console
-          return response as TeamStats[];
-        })
-      );
-  }
-    
-  //Utilizzata in Squadra - carica le partite precedentemente giocate
-  getPreviousGame(idTeam:number){
-    return this.http
-      .get(this.baseUrl + 'game/team/pass/' + idTeam)
-      .pipe(
-        map((response: any) => {
-          console.log(response); //Log di controllo tramite console
-          return response as Game[];
-        })
-      );
-  }
-
-  //Utilizzata in Squadra - carica le partite programmate
-  getNextGame(idTeam:number){
-    return this.http
-      .get(this.baseUrl + 'game/team/prog/' + idTeam)
-      .pipe(
-        map((response: any) => {
-          //console.log(response); //Log di controllo tramite console
-          return response as Game[];
-        })
-      );
-  }
-
   //Utilizzata in Classifiche Est
-  getRankingEast() {
+  getFavoriteTeam(token:string) {
     return this.http
-      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+      .get(this.baseUrl + 'fav/get/team' + token)
       .pipe(
         map((response: any) => {
-          //console.log(response); //Log di controllo tramite console
-          return response as Ranking;
+          console.log(response);
+          return response as any[];
         })
       );
   }
+    
+    
   
-  //Utilizzata in Classifiche Ovest
-  getRankingOvest() {
-    return this.http
-      .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
+    //Utilizzata in Classifiche Est
+    getRankingEast() {
+      return this.http
+        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'east')
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Ranking;
+          })
+        );
+    }
+    //Utilizzata in Classifiche Est
+    getRankingOvest() {
+      return this.http
+        .get(this.baseUrl + 'team/classifica/' + 2022 + '/' + 'west')
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            return response as Ranking;
+          })
+        );
+    }
+    // Utilizzata in Player Page , aggiornare season
+    getPlayerStat(idPlayer:number){
+      return this.http
+      .get(this.baseUrl + 'team/season/player/' + idPlayer + '/' + 2021)
       .pipe(
-        map((response: any) => {
-          //console.log(response); //Log di controllo tramite console
-          return response as Ranking;
-        })
+        map((response:any)=>{
+          return response as PlayerStat;
+      })
       );
+    }
+    getPlayerPan(idPlayer:number){
+      return this.http
+      .get(this.baseUrl + 'player/pan/' + idPlayer + '/' + 2023)
+      .pipe(
+        map((response:any)=>{
+          console.log(response);
+          return response as PlayerPan;
+      })
+      );
+    }
+    //Utilizzata in Squadra - carica il team in un array
+    getThisTeam(teamName:string){
+      return this.http
+        .get(this.baseUrl + 'team/teamById/' + teamName)
+        .pipe(
+          map((response: any) => {
+            console.log(response); //Log di controllo tramite console
+            return response as Team[];
+          })
+        );
+    }
+      
+    
+    //Utilizzata in Squadra - carica le statistiche stagionali del team
+    getThisTeamStats(idTeam:number, season:number){
+      return this.http
+        .get(this.baseUrl + 'team/season/stats/' + idTeam + '/' + season)
+        .pipe(
+          map((response: any) => {
+            console.log(response); //Log di controllo tramite console
+            return response as TeamStats[];
+          })
+        );
+    }
+    getPreviousGame(idTeam:number){
+      return this.http
+        .get(this.baseUrl + 'game/team/pass/' + idTeam)
+        .pipe(
+          map((response: any) => {
+            console.log(response); //Log di controllo tramite console
+            return response as Game[];
+          })
+        );
+    }
+  
+    //Utilizzata in Squadra - carica le partite programmate
+    getNextGame(idTeam:number){
+      return this.http
+        .get(this.baseUrl + 'game/team/prog/' + idTeam)
+        .pipe(
+          map((response: any) => {
+            //console.log(response); //Log di controllo tramite console
+            return response as Game[];
+          })
+        );
+    }
   }
-}
+
+
+  
+  
+  
+
