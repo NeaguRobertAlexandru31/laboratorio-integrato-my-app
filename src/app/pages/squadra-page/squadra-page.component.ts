@@ -234,9 +234,12 @@ export class SquadraPageComponent implements OnInit{
     }
 
   //Cerca l'elemento all'interno dell'array
+  //Questa funzione e stata scritta con l'utilizzo di if per compattare in una singola funzione e non averla frammentata
   isTeamInFavorites(id:number, array:FavoriteTeam[]) {
+    //Itera all'interno dell'array fino a che una condizione non viene soddisfatta bloccando il processo con un return
     for (let i = 0; i < array.length; i++) {
-      if (array[i].idGame === id) {
+      //Confronta i vari tipi di dati tramite una condizione
+      if (array[i].idGame === id) { 
         return true;
       } else if (array[i].idTeam === id) {
         return true;
@@ -244,26 +247,23 @@ export class SquadraPageComponent implements OnInit{
         return true;
       }
     }
-    return false;
+    return false; //In caso nessuna delle condizioni fosse soddisfatta
   }
   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
-      this.teamName = params['teamName'];
+      this.teamName = params['teamName']; //Viene recuperato il parametro trmaite activateRoute e inizzializzato nella varibile 
 
       this.accordionTeam('panoramica');
       this.accordionGame('risultati');
 
-      this.nextGame.splice(0, this.nextGame.length);
-      this.prevoiusGame.splice(0, this.prevoiusGame.length);
-      this.players.splice(0, this.players.length);
-
+      //I valori vengono riportati a quelli originali
       this.isLoadingTeam = false;
       this.isLoadedNext = false;
 
       this.loadingTeam(this.teamName); //Chiamata API squadra
-      this.updateListTeam();
-      this.updateListPlayer();
+      this.updateListTeam(); //Chiamata API per la lisa dei team preferiti
+      this.updateListPlayer();//Chiamata API per la lisa dei player preferiti
     })
   }
 

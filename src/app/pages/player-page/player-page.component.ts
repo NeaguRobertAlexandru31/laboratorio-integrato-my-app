@@ -8,7 +8,8 @@ import { FavoriteApiService } from 'src/app/_service/favoriteApi.service';
 import PlayerStat from 'src/app/_models/playerDetail.model';
 import PlayerPan from 'src/app/_models/playerPan.model';
 
-
+import FavoriteTeam from 'src/app/_models/favorite.model';
+import ListFavPlayers from 'src/app/_models/favorite.model';
 
 @Component({
   selector: 'player-page',
@@ -25,6 +26,8 @@ export class PlayerPageComponent implements OnInit{
   idPlayer: number = 0;
   sectionPanoramica: boolean = true; //impostare come primo
   sectionStat: boolean = false;
+
+  listFavPlayers: ListFavPlayers[] = [];
   
   //Funzione per cambiare tra i due bottoni
   accordionPan(section:string) {
@@ -37,9 +40,6 @@ export class PlayerPageComponent implements OnInit{
       this.sectionStat = false;
     } 
   }
-
-  
- 
   
   setFavoriteTeam(nameTeam:string){
         this.favoriteApiService.addFavoriteTeam(nameTeam);
@@ -50,11 +50,55 @@ export class PlayerPageComponent implements OnInit{
       stat.avgMinutes = Math.floor(stat.avgMinutes);
     })
   }
+
+  //In caso di future implementazioni
+  // updateListPlayer() {
+  //   if (localStorage.getItem('token')) {
+  //   this.favoriteApiService.getListFavoritePlayers().subscribe({
+  //     next: (response: ListFavPlayers[]) => {
+  //       this.listFavPlayers = response;
+  //     },
+  //     error: (error) => console.error('Error fetching favorite players', error),
+  //   });}}  
+
+  //   // Gestisci l'aggiunta e rimozione dei player
+  //   // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
+  //   setFavoritePlayer(data: number) {
+  //     try {
+  //       this.favoriteApiService.addFavoritePlayer(data);
+  //     } finally {
+  //       try {
+  //         setTimeout(() => {
+  //           this.updateListPlayer();
+  //         },1000) // Attendiamo che updateListPlayer sia completato
+  //       } finally {
+  //         setTimeout(() => {
+  //           location.reload()
+  //         },1500)
+  //       }
+  //     }
+  //   }
+
+  // //Cerca l'elemento all'interno dell'array
+  // isTeamInFavorites(id:number, array:FavoriteTeam[]) {
+  //   for (let i = 0; i < array.length; i++) {
+  //     if (array[i].idGame === id) {
+  //       return true;
+  //     } else if (array[i].idTeam === id) {
+  //       return true;
+  //     } else if (array[i].idPlayer === id) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+  
   ngOnInit(): void {
     // prendo dal router idPlayer 
     this.activatedRoute.params.subscribe((params) => {
       this.idPlayer = params['idPlayer'];      
     })
+    
     // prendo le Statische del player
     this.apiService.getPlayerStat(this.idPlayer).subscribe((response:any)=>{
       this.playerStat = response;

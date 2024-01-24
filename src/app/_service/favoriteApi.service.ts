@@ -83,7 +83,7 @@ export class FavoriteApiService {
       mode: 'cors',
     })
     .then((response) => {
-      /* console.log('Aggiunto:', response); */ // Stampa nella console il risultato della richiesta (utile per un controllo)
+      console.log('Aggiunto:', response); // Stampa nella console il risultato della richiesta (utile per un controllo)
     })
   }
 
@@ -161,7 +161,7 @@ export class FavoriteApiService {
     // Esegue una richiesta all'API per prendere la lista preferiti
     return this.http.post<ListFavPlayer[]>(this.baseUrl + 'fav/get/idPlayer', formData).pipe(
       map((response: any) => {
-/*         console.log('Player',response); */
+        console.log('Player',response);
         return response as ListFavPlayer[]; //Restituisce i valori
       })
     );;

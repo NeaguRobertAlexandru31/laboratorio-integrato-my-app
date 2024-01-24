@@ -128,10 +128,10 @@
       </div>
       <div *ngFor="let player of favoritePlayers"
         class="w-full flex flex-row justify-center bg-hoops-primary items-center drop-shadow-md text-white my-4 py-3 px-4 rounded-md">
-        <div class="w-fit">
+        <div [routerLink]="'/player/'+ player.idPlayer + '/' + 2023" class="w-fit">
           <img class="w-[50px] h-[40px]" [src]="player.img" alt="">
         </div>
-        <div class="w-full px-4 text-lg">
+        <div [routerLink]="'/player/'+ player.idPlayer + '/' + 2023" class="w-full px-4 text-lg">
           <h3>{{player.firstname + ' ' + player.lastname}}</h3>
         </div>
 

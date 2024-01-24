@@ -246,6 +246,11 @@
         <div class="w-full">
           <p class="truncate">City: {{team.city}}</p>
         </div>
+        <div class="w-full">
+          <p>League: {{team.league.nameLeague}}</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="partite" *ngIf="sectionPartite == true">
@@ -259,31 +264,91 @@
         rounded-full drop-shadow">Programmate</button>
     </div>
 
+    <section *ngIf="sectionRisultati == true" id="risultati">
+      <div *ngIf="isLoadingPreviousGame" class="w-full h-[70vh] flex items-center justify-center">
+        <p class="text-center text-black">
+          Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+        </p>
+      </div>
+      <div *ngIf="!prevoiusGame.length">
+        <p class="rounded-md p-3 m-4 bg-hoops-primary text-white"> Nessuna partita precedente trovata </p>
+      </div>
+      <table *ngIf="prevoiusGame.length" class="w-full">
+        <tbody *ngFor="let game of prevoiusGame" class="text-center">
+          <tr class="w-full h-[150px] flex p-5 my-2 rounded-2xl shadow-md text-xs text-white"
+            [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
+            <td class="w-full">
+              <a [routerLink]="'/squadra/'+ this.game.homeTeamName"
+                class="w-[109px] h-full px-3 flex flex-col items-center justify-center">
+                <img [src]="game.homeTeamLogo" alt="Team A" class="h-[65px] w-fit mb-2" />
+                <p class="drop-shadow">{{ game.homeTeamName }}</p>
+              </a>
+            </td>
+            <td class="w-full h-full flex flex-col justify-center items-center">
+              <p class="my-2 text-lg">{{ game.risultato }}</p>
+              <a [routerLink]="'/partita/' + this.game.gameId"
+                class="bg-white text-black my-2 w-fit px-2 font-thin rounded-full">
+                Preview
+              </a>
+            </td>
+            <td class="w-full">
+              <a [routerLink]="'/squadra/'+ this.game.visitorTeamName"
+                class="w-[109px] h-full px-3 flex flex-col items-center">
+                <img [src]="game.visitorTeamLogo" alt="Team B" class="h-16 w-fit mb-2" />
+                <p class="drop-shadow">{{ game.visitorTeamName }}</p>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section *ngIf="sectionProgrammate == true" id="programmate">
+      <div *ngIf="isLoadingNextGame" class="w-full h-[70vh] flex items-center justify-center">
+        <p class="text-center text-black">
+          Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
+        </p>
+      </div>
+      <div class="text-center" *ngIf="!nextGame.length">
+        <p class="rounded-md p-3 m-4 bg-hoops-primary text-white">Nessuna partita programmata</p>
+      </div>
+      <div *ngIf="nextGame.length"></div>
+      <div></div>
+    </section>
   </section>
 
-  <section *ngIf="sectionProgrammate == true" id="programmate">
-    <div *ngIf="isLoadingNextGame" class="w-full h-[70vh] flex items-center justify-center">
+  <section id="giocatori" *ngIf="sectionGiocatori == true">
+    <div *ngIf="isLoadingPlayers" class="w-full h-[70vh] flex items-center justify-center">
       <p class="text-center text-black">
         Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
       </p>
     </div>
+    <div *ngFor="let player of players"
+      class="w-full flex flex-row justify-center items-center drop-shadow-md text-white my-2 py-2 px-4 rounded-md"
+      [ngStyle]="{'background': team.colour+'B3'}">
+      <div [routerLink]="'/player/'+ player.idPlayer + '/' + 2023" class="w-[70px]">
+        <img class="w-[70px] h-[40px]" [src]="player.img" alt="">
+      </div>
+      <div [routerLink]="'/player/'+ player.idPlayer + '/' + 2023" class="w-full px-3">
+        <h3>{{player.firsname+ ' ' + player.lastname}}</h3>
+        <div class="flex flex-row justify-center items-center text-center text-sm pr-2">
+          <p class="min-w-[50px]">{{player.shirtNumber}}</p>
+          <p class="min-w-[40px]">{{player.pos}}</p>
+          <p class="w-full">{{player.eta}} anni</p>
+          <div class="min-w-[80px] flex flex-row items-center justify-end">
+            <img class="rounded-full w-[20px] h-[20px] mr-2" [src]="player.logoCountry" alt="">
+            <p class="truncate w-full">{{player.country}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-fit flex items-center">
+        <button (click)="setFavoritePlayer(player.idPlayer, team.idTeam)">
+          <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == false"
+            src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+          <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == true"
+            src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
+        </button>
+      </div>
+    </div>
+  </section>
 </div>
-<div class="w-fit flex items-center">
-  <button (click)="setFavoritePlayer(player.idPlayer, team.idTeam)">
-    <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == false"
-      src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
-    <img *ngIf="isTeamInFavorites(player.idPlayer, listFavPlayers) == true"
-      src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
-  </button>
-</div>
-</div>
-</section>
-</div>
-
-<section *ngIf="sectionProgrammate == true" id="programmate">
-  <div class="text-center" *ngIf="!nextGame.length">
-    Nessuna partita programmata
-  </div>
-  <div *ngIf="nextGame.length"></div>
-  <div></div>
-</section>
