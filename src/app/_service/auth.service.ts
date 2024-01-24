@@ -7,6 +7,7 @@ export interface User {
   lastname: string;
   email: string;
   isUserAuthenticated: boolean;
+  password: string,
 }
 
 @Injectable({

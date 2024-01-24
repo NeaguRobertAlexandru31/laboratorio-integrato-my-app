@@ -17,6 +17,9 @@ import { ProfiloDetailComponent } from './pages/profilo-detail/profilo-detail.co
 //Detail-pages
 import { PartitaDetailPageComponent } from './pages/partita-detail-page/partita-detail-page.component';
 import { SquadraPageComponent } from './pages/squadra-page/squadra-page.component';
+/* Footer */
+import { HoopsdataComponent } from './pages/hoopsdata/hoopsdata.component';
+import { FeedbackComponent } from './pages/feedback/feedback.component';
 
 const routes: Routes = [
   /* Partite svolte, programmate e statistiche */
@@ -38,6 +41,9 @@ const routes: Routes = [
   { path: 'registrazione', component: RegistrazionePageComponent },
   { path: 'accesso', component: AccessoPageComponent },
   { path: 'squadra/:teamName', component: SquadraPageComponent },
+  /* Footer */
+  { path: 'hoopsdata', component: HoopsdataComponent },
+  { path: 'feedback', component: FeedbackComponent },
   /* Reindirizzamento */
   { path: '**', component: RisultatiPageComponent },
 ];

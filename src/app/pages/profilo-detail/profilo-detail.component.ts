@@ -88,6 +88,27 @@ export class ProfiloDetailComponent implements OnInit {
     }
   }
 
+  saveUserPassword(): void {
+    // Qui puoi implementare la logica per inviare i dati al server e salvarli nel database
+    if (this.user) {
+      // Chiamata al servizio UserService per aggiornare i dati dell'utente
+      this.userService
+        .updateUserPassword(this.user.password)
+        .subscribe(
+          (response: any) => {
+            // Aggiorna l'interfaccia utente o gestisci eventuali risposte dal server
+            console.log('Password utente aggiornata con successo:', response);
+          },
+          (error: any) => {
+            console.error(
+              "Errore durante l'aggiornamento dei dati utente:",
+              error
+            );
+          }
+        );
+    }
+  }
+
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
