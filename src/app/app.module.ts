@@ -54,7 +54,6 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
 import { HoopsdataComponent } from './pages/hoopsdata/hoopsdata.component';
 import { FeedbackComponent } from './pages/feedback/feedback.component';
-import { TrustboxComponent } from './trustbox/trustbox.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +84,6 @@ import { TrustboxComponent } from './trustbox/trustbox.component';
     DeleteAccountComponent,
     HoopsdataComponent,
     FeedbackComponent,
-    TrustboxComponent,
   ],
   imports: [
     BrowserModule,
