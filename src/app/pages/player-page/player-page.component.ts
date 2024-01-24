@@ -37,10 +37,6 @@ export class PlayerPageComponent implements OnInit{
       this.sectionStat = false;
     } 
   }
-
-  
- 
-  
   setFavoriteTeam(nameTeam:string){
         this.favoriteApiService.addFavoriteTeam(nameTeam);
   }
