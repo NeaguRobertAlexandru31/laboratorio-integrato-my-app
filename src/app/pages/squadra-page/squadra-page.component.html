@@ -16,9 +16,15 @@
         <h1 class="drop-shadow">{{team.nameTeam}}</h1>
       </div>
       <div class="w-2/12 flex items-center justify-center">
-        <button (click)="setFavoriteTeam(teamName)">
-          <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        <!-- <button (click)="setFavorite('team', teamName)">
+          <img *ngIf="teamName" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
+          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        </button> -->
+        <button (click)="setFavorite('team', teamName)">
+          <img *ngIf="!isTeamInFavorites('team', team.idTeam)" src="../../../assets/img/icone-preferiti/Fav outline.png"
+            alt="Icona Preferiti">
+          <img *ngIf="isTeamInFavorites('team',  team.idTeam)" src="../../../assets/img/icone-preferiti/Fav Filled.png"
+            alt="Icona Preferiti">
         </button>
       </div>
     </div>
@@ -339,9 +345,9 @@
         </div>
       </div>
       <div class="w-fit flex items-center">
-        <button (click)="setFavoritePlayer(player.idPlayer)">
-          <img *ngIf="favorite == false" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-          <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
+        <button (click)="setFavorite('player', player.idPlayer)">
+          <img *ngIf="player.idPlayer" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
+          <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
         </button>
       </div>
     </div>

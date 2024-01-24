@@ -8,6 +8,10 @@ import TeamStats from '../../_models/team.model';
 import Player from 'src/app/_models/player.model';
 import Game from 'src/app/_models/game.model';
 
+import ListFavGames from 'src/app/_models/favorite.model';
+import ListFavTeams from 'src/app/_models/favorite.model';
+import ListFavPlayers from 'src/app/_models/favorite.model';
+
 @Component({
   selector: 'squadra-page',
   templateUrl: './squadra-page.component.html',
@@ -22,6 +26,10 @@ export class SquadraPageComponent implements OnInit{
   players: Player[] = [];
   prevoiusGame: Game[] = [];
   nextGame: Game[] = [];
+
+  listFavGames: ListFavGames[] = [];
+  listFavTeams: ListFavTeams[] = [];
+  listFavPlayers: ListFavPlayers[] = [];
 
   teamName: string = '';
 
@@ -66,17 +74,6 @@ export class SquadraPageComponent implements OnInit{
 
   openStats() {
     this.isVisible = !this.isVisible;
-  }
-
-  //Gestione dei Favorite
-  favorite: boolean = false;
-  //Aggiunge e Rimuove i Team preferiti
-  setFavoriteTeam(nameTeam:string){
-    this.favoriteApiService.addFavoriteTeam(nameTeam)
-  }
-  //Aggiunge e Rimuove i Giocatori preferiti
-  setFavoritePlayer(id:number){
-    this.favoriteApiService.addFavoritePlayer(id)
   }
 
   //Team
@@ -162,6 +159,23 @@ export class SquadraPageComponent implements OnInit{
     return Math.round(aNumber / bMedia);
   }
 
+  //Gestione dei Favorite
+  //Aggiunge e Rimuove i Team preferiti
+  setFavorite(type:string, data:any){
+    if(type === 'game'){
+      this.favoriteApiService.addFavoriteGame(data)
+    } else if(type === 'team'){
+      this.favoriteApiService.addFavoriteTeam(data)
+    } else if(type === 'player'){
+      this.favoriteApiService.addFavoritePlayer(data)
+    }
+  }
+
+  //Cerca l'elemento all'interno dell'array
+  isTeamInFavorites(type:string, id: number){
+      return this.listFavTeams && this.listFavTeams.some(favTeam => favTeam.idTeam === id);
+  }
+  
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
       this.teamName = params['teamName'];

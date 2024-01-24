@@ -123,4 +123,45 @@ export class FavoriteApiService {
         console.log('Aggiunto:', response);
       })
   }
+
+  //Prende la lista dei game preferiti
+  getListFavoriteGames(): Observable<any[]> {
+    const formData = {
+      token: localStorage.getItem('token')
+    };
+  
+    return this.http.post<any[]>(this.baseUrl + 'fav/get/idGame', formData).pipe(
+      map((response: any) => {
+        console.log('Game',response);
+        return response as any[];
+      })
+    );;
+  }
+  //Prende la lista dei game preferiti
+  getListFavoriteTeams(): Observable<any[]> {
+    const formData = {
+      token: localStorage.getItem('token')
+    };
+  
+    return this.http.post<any[]>(this.baseUrl + 'fav/get/idTeam', formData).pipe(
+      map((response: any) => {
+        console.log('Team',response);
+        return response as any[];
+      })
+    );;
+  }
+  //Prende la lista dei game preferiti
+  getListFavoritePlayers(): Observable<any[]> {
+    const formData = {
+      token: localStorage.getItem('token')
+    };
+  
+    return this.http.post<any[]>(this.baseUrl + 'fav/get/idPlayer', formData).pipe(
+      map((response: any) => {
+        console.log('Player',response);
+        return response as any[];
+      })
+    );;
+  }
+
 }

@@ -48,7 +48,7 @@ export class ApiService {
   getGames(date: string) {
     return this.http.get(this.baseUrl + 'home/gameday/' + date).pipe(
       map((response: any) => {
-        // console.log(response); //Log di controllo tramite console
+        console.log(response); //Log di controllo tramite console
         return response as Game[];
       })
     );

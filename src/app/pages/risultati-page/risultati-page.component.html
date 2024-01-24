@@ -29,28 +29,34 @@
           [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
           <td class="flex justify-end pt-2 h-[2px]">
             <button class="absolute w-fit flex justify-end items-end pr-2" (click)="setFavoriteGame(game.gameId)">
-              <img class="w-[28px] h-[28px]" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-              <!-- <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt=""> -->
+              <img class="w-[28px] h-[28px]" src="../../../assets/img/icone-preferiti/Fav outline.png"
+                alt="Stella preferiti vuota">
+              <!-- <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Stella preferiti piena"> -->
             </button>
           </td>
           <td class="h-full max-h-[123px] flex fle-row pt-3 pr-6 justify-center items-center">
             <div class="w-full flex justify-center items-center">
               <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                <img [src]="game.homeTeamLogo" alt="Team A" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                <img [src]="game.homeTeamLogo" alt="Logo {{game.homeTeamName}}"
+                  class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                 <p class="drop-shadow">{{ game.homeTeamName }}</p>
               </div>
             </div>
             <div class="w-full h-fit flex flex-col justify-center items-center">
-              <p class="h-full my-2 text-lg text-center flex justify-center items-center">{{ game.risultato }}</p>
+              <p class="h-full my-2 text-lg text-center flex justify-center items-center drop-shadow-md"
+                [ngClass]="game.risultato != '0 - 0' ? '' : 'text-sm' ">
+                {{ game.risultato != '0 - 0' ? game.risultato : formatData(game.start) }}</p>
               <!-- Formattazione dell'ora -->
-              <a [routerLink]="'/partita/' + this.game.gameId"
-                class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full">
+              <button [routerLink]="'/partita/' + this.game.gameId"
+                class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full disabled:bg-opacity-60 disabled:text-opacity-60 "
+                [disabled]="game.risultato == '0 - 0'">
                 Preview
-              </a>
+              </button>
             </div>
             <div class="w-full flex justify-center items-center">
               <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                <img [src]="game.visitorTeamLogo" alt="Team B" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                <img [src]="game.visitorTeamLogo" alt="Logo {{game.visitorTeamName}}"
+                  class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
                 <p class="drop-shadow">{{ game.visitorTeamName }}</p>
               </div>
             </div>

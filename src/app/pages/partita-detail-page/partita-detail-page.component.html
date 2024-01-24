@@ -24,7 +24,9 @@
           <p class="h-fit text-[16px] align-bottom drop-shadow">{{partita.homeTeamName}}</p>
         </div>
         <div class="w-full text-center flex flex-col justify-center">
-          <h2 class="text-[22px] font-semibold py-2 drop-shadow">{{partita.points}} - {{partita.visitorPoints}}</h2>
+          <h2 class="text-[22px] font-semibold py-2 drop-shadow">
+            {{ partita.points + '-' + partita.visitorPoints }}
+          </h2>
         </div>
         <div class="w-full text-center px-6 py-3">
           <h3 class="h-fit drop-shadow">Visitors</h3>
@@ -50,7 +52,7 @@
               <th>Q2</th>
               <th>Q3</th>
               <th>Q4</th>
-              <th *ngIf="partita.p5Home">Q5</th>
+              <th *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">Q5</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +62,7 @@
               <td>{{partita.p2Home}}</td>
               <td>{{partita.p3Home}}</td>
               <td>{{partita.p4Home}}</td>
-              <td *ngIf="partita.p5Home >= 0">{{partita.p5Home}}</td>
+              <td *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">{{partita.p5Home}}</td>
             </tr>
             <tr class="text-center h-20">
               <td><img [src]="partita.visitorTeamLogo" alt=""></td>
@@ -68,7 +70,7 @@
               <td>{{partita.p2Visitors}}</td>
               <td>{{partita.p3Visitors}}</td>
               <td>{{partita.p4Visitors}}</td>
-              <td *ngIf="partita.p5Visitors >= 0">{{partita.p5Visitors}}</td>
+              <td *ngIf="partita.p5Home > 0 || partita.p5Visitors > 0 ">{{partita.p5Visitors}}</td>
             </tr>
           </tbody>
         </table>

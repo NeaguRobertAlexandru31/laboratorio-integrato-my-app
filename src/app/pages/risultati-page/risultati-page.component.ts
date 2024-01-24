@@ -40,6 +40,14 @@ export class RisultatiPageComponent implements OnInit {
     });
   }
 
+  formatData(start:string) {
+    const dateTimeObject = DateTime.fromISO(start);
+    const formattedDate = dateTimeObject.toFormat("dd-MM-yyyy");
+    const formattedTime = dateTimeObject.toFormat("HH:mm");
+
+    return `${formattedDate}\n${formattedTime}`;
+  }
+
   ngOnInit(){
     this.loadingTeams(this.currentDate);
   }

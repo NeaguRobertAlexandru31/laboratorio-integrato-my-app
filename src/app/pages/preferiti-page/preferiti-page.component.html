@@ -1,4 +1,4 @@
-<div class="h-[90vh] px-2">
+<div class="min-h-[90vh] px-2">
   <div class="flex flex-row">
     <button class="w-full rounded-full py-1" (click)="accordionFavorite('partite')"
       [ngClass]="accordionPartite ? 'bg-[#8D66B7] text-white font-semibold' : 'bg-white'">
@@ -30,7 +30,7 @@
   <div *ngIf="tokenVerify == true">
 
     <section id="accordionPartite" *ngIf="accordionPartite == true">
-      <div *ngIf="isLoadedGames" class="w-full h-[70vh] flex items-center justify-center">
+      <div *ngIf="isLoadingGames" class="w-full min-h-[70vh] flex items-center justify-center">
         <p class="text-center">
           Stiamo preparando il tiro da 3... <i class="fas fa-spinner fa-spin"></i>
         </p>
@@ -41,33 +41,40 @@
       <table *ngIf="!isLoadingGames && favoriteGames.length" class="h-[80vh] w-full border-none text-white md:w-[60vh]">
         <tbody class="text-center">
           <tr *ngFor="let game of favoriteGames"
-            class="w-full h-[152px] flex flex-col ps-6 pb-5 mb-2 rounded-2xl shadow-md text-xs"
-            [ngStyle]="{background: 'linear-gradient(0.25turn,' + game + 'B3 ,' + game + 'B3 )'}">
+            class="w-full h-[152px] flex flex-col ps-6 pb-5 my-4 rounded-2xl shadow-md text-xs"
+            [ngStyle]="{background: 'linear-gradient(0.25turn,' + game.homeColour + 'B3 ,' + game.visitorsColour + 'B3 )'}">
             <td class="flex justify-end pt-2 h-[2px]">
-              <button class="absolute w-fit flex justify-end items-end pr-2">
-                <img class="w-[28px] h-[28px]" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-                <!-- <img *ngIf="favorite == true" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt=""> -->
-              </button>
+              <!--               <button (click)="setFavorite('game', game.idGame)">
+                <img *ngIf="isTeamInFavorites('game', game.idGame)"
+                  src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+                <img *ngIf="!isTeamInFavorites('game', game.idGame)"
+                  src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
+              </button> -->
             </td>
             <td class="h-full max-h-[123px] flex fle-row pt-3 pr-6 justify-center items-center">
               <div class="w-full flex justify-center items-center">
                 <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                  <img [src]="game" alt="Team A" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
-                  <p class="drop-shadow">{{ game }}</p>
+                  <img [src]="game.homeTeamLogo" alt="Loog {{game.homeTeamName}}"
+                    class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                  <p class="drop-shadow">{{ game.homeTeamName }}</p>
                 </div>
               </div>
               <div class="w-full h-fit flex flex-col justify-center items-center">
-                <p class="h-full my-2 text-lg text-center flex justify-center items-center">{{ game }}</p>
+                <p class="h-full my-2 text-lg text-center flex justify-center items-center drop-shadow-md"
+                  [ngClass]="game.risultato != '0 - 0' ? '' : 'text-sm' ">
+                  {{ game.risultato != '0 - 0' ? game.risultato : formatData(game.start) }}</p>
                 <!-- Formattazione dell'ora -->
-                <a [routerLink]="'/partita/' + this.game"
-                  class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full">
+                <button [routerLink]="'/partita/' + this.game.gameId"
+                  class="bg-white text-black w-fit my-1 py-1 px-4 font-thin rounded-full disabled:bg-opacity-60 disabled:text-opacity-60 "
+                  [disabled]="game.risultato == '0 - 0'">
                   Preview
-                </a>
+                </button>
               </div>
               <div class="w-full flex justify-center items-center">
                 <div class="w-[109px] h-full flex flex-col items-center justify-center">
-                  <img [src]="game" alt="Team B" class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
-                  <p class="drop-shadow">{{ game }}</p>
+                  <img [src]="game.visitorTeamLogo" alt="Logo {{game.visitorTeamName}}"
+                    class="max-h-[78px] h-fit w-fit mb-2 drop-shadow-md" />
+                  <p class="drop-shadow">{{ game.visitorTeamName }}</p>
                 </div>
               </div>
             </td>
@@ -98,10 +105,12 @@
           <!--
           TODO: Settare correttamente i bottoni una volta collegato l'api favorite (click)="setFavoriteTeam(teamName)
         -->
-          <button>
-            <img *ngIf="team" src="../../../assets/img/icone-preferiti/Fav outline.png" alt="">
-            <img *ngIf="" src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="">
-          </button>
+          <!--           <button (click)="setFavorite('team', team.idTeam)">
+            <img *ngIf="isTeamInFavorites('team', team.idTeam)"
+              src="../../../assets/img/icone-preferiti/Fav outline.png" alt="Icona Preferiti">
+            <img *ngIf="!isTeamInFavorites('team', team.idTeam)"
+              src="../../../assets/img/icone-preferiti/Fav Filled.png" alt="Icona Preferiti">
+          </button> -->
         </div>
       </div>
     </section>
