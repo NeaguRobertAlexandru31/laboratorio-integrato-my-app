@@ -85,9 +85,6 @@ export class SquadraPageComponent implements OnInit{
         this.teams = response;
         this.idTeam = this.teams[0].idTeam;
         this.loadingTeamStats(this.idTeam); //Chiamata API statistiche stagionali squadra
-        response.forEach((res)=>{
-          this.colourTeam  =res.colour;
-        })
       },
       error: (error) => console.error('Error fetching team', error),
       complete: () => this.isLoadingTeam = false
@@ -144,9 +141,7 @@ export class SquadraPageComponent implements OnInit{
   //Player
   isLoadingPlayers: boolean = true; // Flag per indicare se le partite sono in fase di caricamento
   isLoadedPlayer:boolean = false;
-  
-  
-  
+
 
   setFavoriteTeam(nameTeam:string){
     this.favoriteApiService.addFavoriteTeam(nameTeam)
@@ -154,52 +149,8 @@ export class SquadraPageComponent implements OnInit{
   setFavoritePlayer(id:number){
     this.favoriteApiService.addFavoritePlayer(id)
   }
-  playerID:number=0;
-  listsPlayer:Player[]=[];
-  imgPlayer:string="";
-  firstName:string="";
-  lastName:string="";
-  colourTeam:string="";
-  isGSquadra:boolean=false;
   
-  fetchData(selectPlayer:any){
-    this.apiService.getGiocatoriSquadra(this.idTeam,2023).subscribe((response)=>{
-      this.listsPlayer = response;
-      console.log(this.listsPlayer)
-      this.listsPlayer.forEach((player:Player)=>{
-        if(selectPlayer === player.idPlayer){
-          this.imgPlayer = player.img;
-          this.firstName = player.firsname;
-          this.lastName = player.lastname;
-          this.playerID = player.idPlayer;
-          console.log('Nome:'+player.firsname,'','Cognome:'+player.lastname,' ','Img:'+player.img)
-        }else{
-          console.log('Player non trovaro. Riprovo');
-        }
-      })
-      this.isGSquadra = true;
-      this.saveInfoSessionStorage();
-  })}
-  // Salva i dati dentro il local storage così da poterli usare in player-detail
-  saveInfoSessionStorage(){
-    
-    if(this.isGSquadra){
-      let data={
-        "img" : this.imgPlayer,
-        "firstName" : this.firstName,
-        "lastName" : this.lastName,
-        "color": this.colourTeam,
-        "nameTeam": this.teamName,
-        "playerID": this.playerID
-      }
-      
-      console.log('playerInfo:', data)
-      sessionStorage.setItem('playerInfo',JSON.stringify(data));
-    }else{
-      console.log('Not ready yet');
-    }
-  
-  }
+
   //Funzione di caricamento e ricevuta dei dati controlla lo stato della chiamata se restituisce o meno
   loadingPlayers(teamId: number) {
     if(this.isLoadedPlayer == false){
