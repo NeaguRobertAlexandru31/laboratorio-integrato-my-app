@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar-down.component.scss']
 })
 export class NavbarDownComponent {
-  buttonPartite: boolean = true;
-  buttonClassifiche: boolean = false;
-  buttonPreferiti: boolean = false;
-  buttonBlog: boolean = false;
+  buttonPartite: boolean = true; //Stato del bottone partite
+  buttonClassifiche: boolean = false; //Stato del bottone classifiche
+  buttonPreferiti: boolean = false; //Stato del bottone preferiti
+  buttonBlog: boolean = false; //Stato del bottone blog
 
+  //Gestore dell'accordion delle sezioni del menu
   activePage(page:string){
     if(page == 'partite'){
       this.buttonPartite = true;

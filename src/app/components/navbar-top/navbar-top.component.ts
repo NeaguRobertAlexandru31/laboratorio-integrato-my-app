@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarTopComponent implements OnInit {
 
-  isUserAuthenticated: boolean = false;
+  isUserAuthenticated: boolean = false; //Stato dell'autenticazione
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,11 +19,13 @@ export class NavbarTopComponent implements OnInit {
     });
   }
 
+  //Funzione per il logout 
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/partite/risultati']);
   }
 
+  //Funzione per il collegamento alla pagina profilo
   getProfileLink(): string {
     return this.authService.hasToken() ? '/profilo/detail' : '/profilo';
   }

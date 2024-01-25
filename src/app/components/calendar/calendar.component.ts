@@ -25,29 +25,34 @@ export class CalendarComponent implements OnInit{
     this.selectedDate = new Date();
   }
 
+  //Funzione per la gestione dei cambiamenti della data
   onDateInput(event: MatDatepickerInputEvent<DateTime>): void {
-    this.currentDate = event.value || DateTime.now();
+    this.currentDate = event.value || DateTime.now(); //Inizzializza la data con il dato inserito o genera la data attuale
   }
   
+  //Funzione per la gestione dei cambiamenti generici 
   onChange(event: any) {
-    this.currentDate = DateTime.fromJSDate(event.value);
-    this.sendDateEvent.emit(this.selectedDate);
+    this.currentDate = DateTime.fromJSDate(event.value); // Converte il valore dell'input in Luxon DateTime
+    this.sendDateEvent.emit(this.selectedDate); // Emette il dato all'esterno
   }
 
+  //Funzione per l'incremento della data
   incrementDate() {
-    let currentDate = this.selectedDate || new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    this.selectedDate = new Date(currentDate);
-    this.sendDateEvent.emit(this.selectedDate);
+    let currentDate = this.selectedDate || new Date(); //Seleziona la data attuale o la genera 
+    currentDate.setDate(currentDate.getDate() + 1); //Incrementa la data
+    this.selectedDate = new Date(currentDate); //Inizzializza la data precedentemente creata con il valore incrementato
+    this.sendDateEvent.emit(this.selectedDate); //La data viene emessa all'esterno del componente
   }
 
+  //Funzione per il decremento della data
   reduceDate() {
-    let currentDate = this.selectedDate || new Date();
-    currentDate.setDate(currentDate.getDate() - 1);
-    this.selectedDate = new Date(currentDate);
-    this.sendDateEvent.emit(this.selectedDate);
+    let currentDate = this.selectedDate || new Date(); //Seleziona la data attuale o la genera 
+    currentDate.setDate(currentDate.getDate() - 1); //Decrementa la data
+    this.selectedDate = new Date(currentDate); //Inizzializza la data precedentemente creata con il valore decrementato
+    this.sendDateEvent.emit(this.selectedDate); //La data viene emessa all'esterno del componente
   }
 
+  //Funzione per quando si seleziona una data dal calendario
   openPicker() {
     if (this.picker) {
       this.picker.open();

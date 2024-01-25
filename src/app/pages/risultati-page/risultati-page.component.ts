@@ -36,23 +36,25 @@ export class RisultatiPageComponent implements OnInit {
     });
   }
 
+  //Formattazione della data
   formatData(start:string) {
-    const dateTimeObject = DateTime.fromISO(start);
-    const formattedDate = dateTimeObject.toFormat("dd-MM-yyyy");
-    const formattedTime = dateTimeObject.toFormat("HH:mm");
+    const dateTimeObject = DateTime.fromISO(start); //Converte il dato di tipo string in un valore di tipo DateTime di Luxon
+    const formattedDate = dateTimeObject.toFormat("dd-MM-yyyy"); //Formatta la data
+    const formattedTime = dateTimeObject.toFormat("HH:mm"); //Formatta l'orario
 
-    return `${formattedDate}\n${formattedTime}`;
+    return `${formattedDate}\n${formattedTime}`;//Restituisce il valore finale
   }
 
   //Funzione di chiamata API per ottenere la lista aggiornata dei preferiti
   updateListGame() {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) { //Viene fatto il controllo della presenza del token
       this.favoriteApiService.getListFavoriteGames().subscribe({
         next: (response: ListFavGames[]) => {
           this.listFavGames = response; //Inizzializza l'array con i valori ricevuti dalla chiamata
-        },
+        },//Quando il tutto viene completato viene cambiato lo stato di isLoadingGames
         error: (error) => console.error('Error fetching favorite games', error),
   });}}
+
     //Gestische l'aggiunta e rimozione dei game
     // Questa funzione utilizza dei setTimeout per mantenere una gerarchia di caricamento per non sovrapporre le chiamate che vanno eseguite una dopo l'altra
     setFavoriteGame(data: number) {
